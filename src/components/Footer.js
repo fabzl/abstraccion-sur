@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
 import logo from "../img/logo_footer.svg";
 import translations from "../translations";
 import { colors } from "../styles/globals";
@@ -142,11 +140,6 @@ export const smoothScroll = () => {
 
 const Footer = props => (
   <Wrap>
-    <Router>
-      <Route to="/">
-        <Logo src={logo} />
-      </Route>
-    </Router>
     <Content>
       <Social />
       <General>

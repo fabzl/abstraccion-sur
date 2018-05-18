@@ -1,9 +1,9 @@
-import { PLAY_VIDEO, STOP_VIDEO } from '../types';
+import { PLAY_VIDEO, STOP_VIDEO } from "../types";
 
 const initialState = {
   showVideo: false,
   scrollY: 0,
-  url: ''
+  url: ""
 };
 
 export default (state = initialState, action) => {

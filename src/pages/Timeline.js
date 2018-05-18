@@ -30,7 +30,7 @@ const LinkTo = styled(Link)`
 const Timeline = props => (
   <div>
     {console.log(props)};
-    <H3>1900 - {props.timeline}</H3>
+    <H3>1900</H3>
   </div>
 );
 
@@ -40,7 +40,7 @@ const mapStateToProps = state => {
     dataHome: state.data.pages[3].acf,
     dataContact: state.data.pages[0].acf,
     language: state.data.language,
-    timeline: state.data.timeline
+    timeline: state.data
   };
 };
 
