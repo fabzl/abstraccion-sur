@@ -12,12 +12,14 @@ export const startTimeline = () => {
 };
 
 export const increaseYear = () => {
+  console.log("increaseYear");
   return {
     type: INCREASE_YEAR
   };
 };
 
 export const decreaseYear = () => {
+  console.log("decreaseYear");
   return {
     type: DECREASE_YEAR
   };

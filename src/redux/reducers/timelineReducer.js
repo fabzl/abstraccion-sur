@@ -18,13 +18,19 @@ export default (state = initialState, action) => {
     case INCREASE_YEAR: {
       return {
         ...state,
-        currentYear: state.currentYear + 1
+        currentYear:
+          state.currentYear < state.maxYear
+            ? state.currentYear + 1
+            : state.currentYear
       };
     }
     case DECREASE_YEAR: {
       return {
         ...state,
-        currentYear: state.currentYear - 1
+        currentYear:
+          state.currentYear > state.minYear
+            ? state.currentYear - 1
+            : state.currentYear
       };
     }
     default:
