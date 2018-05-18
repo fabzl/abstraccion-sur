@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'base';
+  src: url('./fonts/base400.woff') format('woff');
+  font-weight: 400;
+  font-style: normal
+}
+
+@font-face {
+  font-family: 'base';
+  src: url('./fonts/base400i.woff') format('woff');
+  font-weight: 400;
+  font-style: italic
+}
+
+@font-face {
+  font-family: 'base';
+  src: url('./fonts/base500.woff') format('woff');
+  font-weight: 500;
+  font-style: normal
+}
+
+@font-face {
+  font-family: 'base';
+  src: url('./fonts/base500i.woff') format('woff');
+  font-weight: 500;
+  font-style: italic
+}
+
+@font-face {
+  font-family: 'base';
+  src: url('./fonts/base700i.woff') format('woff');
+  font-weight: 700;
+  font-style: italic
+}
+
+body {
+  margin: 0; 
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* font: 400 1.4em/1.4 Helvetica, Arial, sans-serif; */
+  font-family: 'base', sans-serif !important;
+  font: 400 1.4em/1.4 Helvetica, Arial, sans-serif;
+}
+
+html {
+  font-size: 10px;
+}
+
+*, :after, :before {
+  /* position: relative; */
+  box-sizing: border-box;
+  /* margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline; */
+
+}
+
+h2 {
+  font-size: 3.6rem;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
+
+
+
+
+/* 
+html, body, #root {
+  height: 100%;
+} */

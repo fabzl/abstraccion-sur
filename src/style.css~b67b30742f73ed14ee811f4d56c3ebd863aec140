@@ -1,0 +1,1298 @@
+@charset "UTF-8";
+body {
+  display: none; }
+
+/**
+
+ * Project dependencies
+ * =================================
+ * - Mixins, helpers and functions
+ * - Core variables
+ * - CSS resets
+ * - Typography styles
+ * - Components
+ * - Partials
+ * - Views
+ * - Global styles
+ * - Helper/utility classes
+ * - Print styles
+ *
+
+/*
+ * Mixins, helpers and functions
+//  */
+/**
+ * Core variables
+ * Edit your color palette and app vars before your begin
+ */
+/**
+ * Global color palette
+ * =================================
+ * - Generic colors
+ * - Color scheme
+ * - Common colors
+ * - Links
+ * - Text selection
+ * - <hr>
+ * - Any others..
+ */
+/**
+ * Variables
+ * =================================
+ * - Typography
+ * - bp
+ * - Paths
+ * - Layout & Grid
+ * - App-specific
+ */
+/* stylelint-disable indentation */
+/**
+ * Typography
+ * =================================
+ *
+ * Base sizes:
+ * Set this in pixels (but do not add px),
+ * the font-size mixin will convert to REMS
+ */
+/**
+ * meet the breapoints 
+ * =================================
+ * There are no common bp so these are just a suggestions
+ * You'll need to define your own bp to suit your design
+ * Add your bp to this Sass map
+ */
+/**
+ * Path variables
+ * =================================
+ */
+/**
+ * Z-index variables
+ * =================================
+ */
+/**
+ * App-specific variables
+ * =================================
+ */
+/**
+ * CSS resets
+ */
+/**
+ * Typography styles
+ * See https://trykickoff.com/demos/typography.html for more info
+ */
+/**
+ * Typography
+ * =================================
+ * - Base
+ * - Paragraphs
+ * - Headings
+ * - Type sizes
+ * - Misc
+ * - Utilities
+ *
+ * Body font size, leadings etc have been set in _variables.scss
+ *
+ * See http://modularscale.com for
+ *
+ */
+html {
+  font-size: 18px;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.4;
+  color: #444;
+  font-feature-settings: "liga", "dlig", "hist";
+  font-variant-ligatures: common-ligatures discretionary-ligatures historical-ligatures;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  font-smooth: always; }
+
+/**
+ * Paragraphs
+ */
+p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  margin-top: 0;
+  margin-bottom: 28px; }
+
+/**
+ * Headings
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  line-height: 1.1;
+  text-rendering: optimizelegibility;
+  margin-top: 0;
+  margin-bottom: 28px; }
+  h1 small,
+  h2 small,
+  h3 small,
+  h4 small,
+  h5 small,
+  h6 small {
+    font-weight: normal; }
+
+h1,
+.h1,
+.alpha {
+  margin-bottom: 56px;
+  font-family: "Quantify-Bold";
+  letter-spacing: 0.1em; }
+
+h5,
+.h5,
+.epsilon,
+h6,
+.h6,
+.zeta {
+  margin-bottom: 0; }
+
+* + h1,
+* + .h1,
+* + .alpha,
+* + h2,
+* + .h2,
+* + .beta,
+* + h3,
+* + .h3,
+* + .gamma,
+* + h4,
+* + .h4,
+* + .delta {
+  margin-top: 28px; }
+
+small {
+  font-size: 80%; }
+
+/**
+ * Miscellaneous
+ */
+strong,
+b {
+  font-weight: bold; }
+
+em,
+i {
+  font-style: italic; }
+
+abbr[title] {
+  border-bottom: 1px dotted #ddd;
+  cursor: help; }
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  padding-left: 10px;
+  margin: 28px;
+  border-left: 4px solid #cccccc; }
+  blockquote p {
+    margin-bottom: 0;
+    font-weight: 300; }
+  blockquote small {
+    display: block;
+    color: #b3b3b3; }
+    blockquote small::before {
+      content: '\2014 \00A0'; }
+
+q::before, q::after,
+blockquote::before,
+blockquote::after {
+  content: ""; }
+
+cite {
+  font-style: normal; }
+
+dfn {
+  font-style: italic; }
+
+mark {
+  background: #feef6d;
+  padding: 2px 4px;
+  border-radius: 3px; }
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+samp {
+  font-family: Menlo, Monaco, "Courier New", monospace; }
+
+/**
+ * Utilities
+ */
+.text-centre,
+.text-center {
+  text-align: center; }
+
+.text-left {
+  text-align: left; }
+
+.text-right {
+  text-align: right; }
+
+hr {
+  margin: 28px 0;
+  border: 0;
+  height: 1px;
+  background-color: #b3b3b3; }
+
+.hyphenate {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto; }
+
+/**
+ * Components
+
+ * Note: place all 3rd party components at the top of the list
+ */
+/**
+ * Forms
+ * =================================
+ * Kickoff's forms has support for themes. See below for info about them.
+ *
+ * The styles here are base styles that apply to both themes,
+ * they are more of a reset before you make stylistic amends to form fields
+ *
+ */
+/**
+ * Form themes
+ * This file contains the base form styles and each theme file contains
+ * overrides and additions.
+ *
+ * Choose from:
+ * - `standard`: the original Kickoff form theme
+ * - `material`: basic version of Google's Material design forms
+ *
+ * Usage: (choose from)
+ * @import "form-theme-standard";
+ * @import "form-theme-material";
+ */
+/**
+ * Kickoff forms: Standard theme
+ * ================================= *
+ * Demo: http://trykickoff.com/demos/forms.html#layout-example-labels-above
+ * Code: https://gist.github.com/mrmartineau/6712577#file-labels-above-inputs-html
+ * Usage:
+  	<div class="form-controlGroup">
+  		<label for="name" class="form-label">Name</label>
+  		<div class="form-controlGroup-inputWrapper">
+  			<input type="text" id="name" placeholder="Zander Martineau" class="form-input"/>
+  		</div>
+  	</div>
+ *
+ * Contents:
+ * - Theme variables
+ * - Theme styles
+ */
+/**
+ * Generic form styles
+ * =================================
+ * Demo: http://trykickoff.com/demos/forms.html#layout-example-labels-above
+ * Code: https://gist.github.com/mrmartineau/6712577#file-labels-above-inputs-html
+ * Usage:
+  	<div class="form-controlGroup">
+  		<label for="name" class="form-label">Name</label>
+  		<div class="form-controlGroup-inputWrapper">
+  			<input type="text" id="name" placeholder="Zander Martineau" class="form-input"/>
+  		</div>
+  	</div>
+ */
+.form {
+  margin: 0 0 28px; }
+
+.form-fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0; }
+
+.form-legend {
+  padding: 0;
+  margin-bottom: 28px;
+  line-height: 1.4;
+  color: #444;
+  border: 0;
+  border-bottom: 1px solid #eee;
+  white-space: normal; }
+  .form-legend small {
+    color: #b3b3b3; }
+
+/**
+ * Form inputs and groups
+ */
+.form-controlGroup {
+  margin-top: ko-multiply(28px, 1.5);
+  margin-bottom: ko-multiply(28px, 1.5); }
+
+.form-legend + .form-controlGroup {
+  margin-top: 28px; }
+
+.form-label {
+  color: #444; }
+  .form-label small {
+    font-weight: normal;
+    color: #919191; }
+
+.form-input {
+  height: 2.5em;
+  padding: .5em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.4;
+  color: #444;
+  font-weight: normal;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-clip: padding-box;
+  transition: border 200ms ease-in-out; }
+  .form-input:focus {
+    border-color: #1e1814; }
+  .form-input[type="image"], .form-input[type="checkbox"], .form-input[type="radio"], .form-input[type="range"] {
+    margin: 3px 0; }
+  .form-input[type="file"] {
+    background-color: #fff; }
+  .form-input[type="color"] {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    padding: 2px; }
+  .form-input[disabled], .form-input[readonly] {
+    cursor: not-allowed; }
+
+.form-input--select {
+  background-color: #fff; }
+
+/**
+ * Form actions
+ */
+.form-actions {
+  padding: 28px 20px;
+  margin-top: 28px;
+  margin-bottom: 28px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd; }
+  .form-actions .btn {
+    margin-right: 10px; }
+    .form-actions .btn:last-child {
+      margin-right: 0; }
+
+/**
+ * Form validation messages
+ */
+.form-controlGroup .form-message {
+  padding-top: 0.5em;
+  padding-left: 0.5em; }
+
+.form-actions .form-message {
+  padding: 0.5em; }
+
+/**
+ * Form field feedback states
+ */
+.has-warning {
+  color: #f4aa47; }
+
+.has-error {
+  color: #B94A4D; }
+
+.has-success {
+  color: #16c98d; }
+
+.has-info {
+  color: #288ad6; }
+
+/**
+ * Custom controls
+ * - Radios/checkboxes
+ * - Select element
+ * - File upload
+ */
+/**
+ * Custom Checkboxes and radios
+ * =================================
+ * IE9+
+ *
+ * --------------------------------
+ *
+ * Checkbox button example HTML
+ *
+ *	<label class="control control--custom" for="checkbox1">
+		<input class="control--custom-input" type="checkbox" id="checkbox1" name="myCheckbox" value="A value"/>
+			<span class="control-indicator control-indicator--checkbox"></span>
+			My Checkbox Label Text
+		</label>
+ *
+ * -------------------------------
+ *
+ * Radio button example HTML
+ *
+ *	<label class="control control--custom" for="radio1">
+ *		<input class="control--custom-input" type="radio" id="radio1" name="myRadioBtn" value="A value"/>
+ *		<span class="control-indicator control-indicator--radio"></span>
+ *		My Radio Button Label Text
+ * 	</label>
+ *
+ * ================================= */
+.control--custom {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+  padding-left: 2.3em;
+  height: 1.3em;
+  line-height: 1.3em !important; }
+
+.control--custom--inline {
+  display: inline-block;
+  padding-right: 2em; }
+
+.control--custom-input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1; }
+
+.control-indicator {
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  width: 1.3em;
+  height: 1.3em;
+  transition: all 300ms cubic-bezier(0.77, 0, 0.175, 1);
+  border: 1px solid #ccc;
+  background-color: #ccc;
+  vertical-align: middle;
+  margin-top: 0;
+  box-shadow: 0 0 0 2px transparent, 0 0 0 0 transparent; }
+
+.control--custom-input:focus ~ .control-indicator {
+  box-shadow: 0 0 0 2px #f1f1f1, 0 0 0 3px #1e1814; }
+
+.control-indicator--checkbox,
+.control-indicator--tickbox {
+  border-radius: .2em; }
+  .control-indicator--checkbox:before, .control-indicator--checkbox:after,
+  .control-indicator--tickbox:before,
+  .control-indicator--tickbox:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    display: block;
+    opacity: 0;
+    transition: all 250ms ease-in-out; }
+
+.control-indicator--checkbox:before, .control-indicator--checkbox:after {
+  top: 50%;
+  width: 90%;
+  height: 0.1em;
+  background-color: #f1f1f1; }
+
+.control-indicator--checkbox:before {
+  transform: translate(-50%, -50%) rotate(45deg) scale(0); }
+
+.control-indicator--checkbox:after {
+  transform: translate(-50%, -50%) rotate(-45deg) scale(0); }
+
+.control-indicator--tickbox:before {
+  top: 0;
+  transform: translateX(-50%) rotate(45deg) scale(0);
+  border: 0.1em solid #f1f1f1;
+  background-color: transparent;
+  width: 40%;
+  height: 80%;
+  border-top: 0;
+  border-left: 0; }
+
+.control-indicator--tickbox:after {
+  display: none; }
+
+.control--custom-input:checked ~ .control-indicator--checkbox,
+.control--custom-input:checked ~ .control-indicator--tickbox {
+  background-color: #1e1814;
+  border: 0.1em solid #1e1814; }
+  .control--custom-input:checked ~ .control-indicator--checkbox:before, .control--custom-input:checked ~ .control-indicator--checkbox:after,
+  .control--custom-input:checked ~ .control-indicator--tickbox:before,
+  .control--custom-input:checked ~ .control-indicator--tickbox:after {
+    opacity: 1; }
+
+.control--custom-input:checked ~ .control-indicator--tickbox:before, .control--custom-input:checked ~ .control-indicator--tickbox:after {
+  transform: translateX(-50%) rotate(45deg) scale(1); }
+
+.control--custom-input:checked ~ .control-indicator--checkbox:before {
+  transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+
+.control--custom-input:checked ~ .control-indicator--checkbox:after {
+  transform: translate(-50%, -50%) rotate(-45deg) scale(1); }
+
+.control-indicator--radio {
+  border-radius: 50%; }
+
+.control--custom-input:checked ~ .control-indicator--radio {
+  background-color: #f1f1f1;
+  border: 0.3em solid #1e1814; }
+
+/**
+ * Custom select element
+ * =================================
+ * Firefox 39+, IE10+
+ *
+ *	<div class="form-controlGroup">
+			<label for="cs-choice" class="form-label">Custom select</label>
+			<div class="form-controlGroup-inputWrapper form-controlGroup-inputWrapper--select">
+				<select id="cs-choice" name="cs-choice" class="form-input form-input--select">
+					<option value="--">Select title</option>
+					<option value="Mr">Mr</option>
+					<option value="Mrs">Mrs</option>
+				</select>
+			</div>
+	</div>
+ */
+.form-controlGroup-inputWrapper--select {
+  position: relative;
+  display: block;
+  padding: 0;
+  /* Custom arrow sits on top of the select - could be an image, SVG, icon font, etc. or the arrow could just baked into the bg image on the select */ }
+  .form-controlGroup-inputWrapper--select:after {
+    color: #1e1814;
+    content: "\25BC";
+    font-size: .7em;
+    padding: 0;
+    position: absolute;
+    right: 1.2em;
+    top: 1.2em;
+    z-index: 2;
+    /* These hacks make the select behind the arrow clickable in some browsers */
+    -ms-pointer-events: none;
+    pointer-events: none;
+    background: url(#); }
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .form-controlGroup-inputWrapper--select:after {
+      display: none; } }
+  .form-controlGroup-inputWrapper--select .form-input--select {
+    appearance: none; }
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      .form-controlGroup-inputWrapper--select .form-input--select:focus::-ms-value {
+        background: transparent;
+        color: #222; } }
+
+option {
+  font-weight: normal; }
+
+/**
+ * Custom file input
+ * =================================
+ * <div class="form-controlGroup">
+		<label class="form-label" for="file">File upload</label>
+
+		<div class="form-controlGroup-inputWrapper">
+			<label class="form-input form-input--file">
+				<span class="form-input--file-text">Choose file..</span>
+				<span class="form-input--file-button">Browse</span>
+				<input class="form-input--file-input" type="file" id="file" accept="image/*" size="14" />
+			</label>
+		</div>
+	</div>
+ */
+/**
+ * Custom file input
+ */
+.form-input--file {
+  position: relative;
+  overflow: hidden;
+  padding-right: 120px;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.form-input--file-input {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.form-input--file-button {
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  padding: .44em 1em 0;
+  background-color: #d9d9d9; }
+  .form-input--file-button:hover {
+    background-color: #ccc; }
+
+/**
+ * Base form styles
+ * =================================
+ * Demo: http://trykickoff.com/demos/forms.html#layout-example-labels-above
+ * Code: https://gist.github.com/mrmartineau/6712577#file-labels-above-inputs-html
+ * Usage:
+  	<div class="form-controlGroup">
+  		<label for="name" class="form-label">Name</label>
+  		<div class="form-controlGroup-inputWrapper">
+  			<input type="text" id="name" placeholder="Zander Martineau" class="form-input"/>
+  		</div>
+  	</div>
+ */
+.form-legend {
+  display: block;
+  width: 100%; }
+
+/**
+ * Form inputs and groups
+ */
+.form-legend + .form-controlGroup {
+  -webkit-margin-top-collapse: separate; }
+
+.form-label {
+  display: block; }
+
+.form-input {
+  display: block;
+  width: 100%;
+  vertical-align: baseline; }
+  .form-input:focus {
+    outline: 0;
+    outline: thin dotted \9; }
+  .form-input[type="image"], .form-input[type="checkbox"], .form-input[type="radio"], .form-input[type="range"] {
+    width: auto;
+    height: auto;
+    padding: 0;
+    line-height: normal;
+    cursor: pointer;
+    border-radius: 0;
+    box-sizing: border-box; }
+  .form-input[type="image"] {
+    border: 0; }
+  .form-input[type="file"] {
+    width: auto;
+    height: 28px;
+    padding: initial;
+    line-height: initial;
+    border: initial;
+    background-color: initial; }
+  .form-input[type="hidden"] {
+    display: none; }
+  .form-input[type="password"] {
+    font-family: sans-serif; }
+  .form-input[type="range"] {
+    width: 100%; }
+  .form-input > .radio:first-child,
+  .form-input > .checkbox:first-child {
+    padding-top: 5px; }
+  .form-input[disabled], .form-input[readonly] {
+    cursor: not-allowed; }
+
+.form-input--textarea {
+  height: auto;
+  min-height: 5em;
+  resize: vertical; }
+
+.form-input--textarea--uneditable {
+  width: auto;
+  height: auto; }
+
+.form-input-file {
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  vertical-align: middle;
+  line-height: 1em; }
+  .form-input-file:focus {
+    outline: none; }
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  width: auto;
+  cursor: pointer;
+  -webkit-appearance: button; }
+
+/**
+ * Checkboxes:
+ * =================================
+	<label class="control">
+		<input type="checkbox" value="check1">
+		This is a checkbox
+	</label>
+	<label class="control control--inline">
+		<input type="checkbox" value="check1">
+		This is a checkbox
+	</label>
+
+ * Radios:
+ * =================================
+	<label class="control">
+		<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+		This is a radio
+	</label>
+	<label class="control control--inline">
+		<input type="radio" name="optionsRadios" id="optionsRadios1" value="option2" checked>
+		This is a radio
+	</label>
+ */
+.control {
+  display: block;
+  line-height: 1; }
+  .control + .control {
+    margin-top: ko-multiply(28px, 0.5); }
+  .control input {
+    vertical-align: top;
+    display: inline;
+    line-height: 1;
+    margin-right: 0.5em; }
+
+.control--inline {
+  display: inline-block;
+  vertical-align: middle; }
+  .control--inline + .control--inline {
+    margin-top: 0;
+    margin-left: 1.5em; }
+
+/**
+ * Form validation messages
+ */
+.form-controlGroup .form-message {
+  display: none; }
+
+/**
+ * Links
+ * =================================
+ */
+a {
+  transition: all 300ms cubic-bezier(0.77, 0, 0.175, 1); }
+  a, a:link {
+    color: #282828;
+    text-decoration: none; }
+  a:visited {
+    color: #282828;
+    text-decoration: none; }
+  a:hover, a:focus {
+    color: black; }
+  a:active {
+    color: black; }
+
+/**
+ * Buttons
+ * =================================
+ * - Associated Button Variables
+ * - Base button styling
+ * – Button Modifiers
+ * 	 – btn--primary
+ *   – btn--block
+ */
+/**
+ * Define associated Button variables
+ */
+/**
+ * Base button styles – Based on csswizardry.com/beautons
+ *
+ * 1. Allow us to better style box model properties.
+ * 2. Line different sized buttons up a little nicer.
+ * 3. Stop buttons wrapping and looking broken.
+ * 4. Make buttons inherit font styles.
+ * 5. Force all elements using beautons to appear clickable.
+ * 6. Normalise box model styles.
+ * 7. If the button’s text is 1em, and the button is (3 * font-size) tall, then
+ *    there is 1em of space above and below that text. We therefore apply 1em
+ *    of space to the left and right, as padding, to keep consistent spacing.
+ * 8. Fixes odd inner spacing in IE7.
+ * 9. Don’t allow buttons to have underlines; it kinda ruins the illusion.
+ *10. Prevents from inheriting default anchor styles.
+ */
+.btn {
+  display: inline-block;
+  /* [1] */
+  vertical-align: middle;
+  /* [2] */
+  white-space: nowrap;
+  /* [3] */
+  font-family: inherit;
+  /* [4] */
+  font-size: 100%;
+  /* [4] */
+  cursor: pointer;
+  /* [5] */
+  border: none;
+  /* [6] */
+  margin: 0;
+  /* [6] */
+  padding-top: 0;
+  /* [6] */
+  padding-bottom: 0;
+  /* [6] */
+  line-height: 2.5;
+  /* [7] */
+  height: 2.5em;
+  /* [7] */
+  padding-right: 1.5em;
+  /* [7] */
+  padding-left: 1.5em;
+  /* [7] */
+  overflow: visible;
+  /* [8] */
+  text-align: center;
+  border-radius: 5px;
+  user-select: none;
+  background-color: #95a5a6; }
+  .btn, .btn:link, .btn:visited {
+    color: #fff; }
+  .btn:hover, .btn:active, .btn:focus {
+    background-color: #798d8f; }
+  .btn, .btn:hover, .btn:active, .btn:focus, .btn:visited {
+    text-decoration: none; }
+  .btn:active, .btn:focus {
+    outline: none; }
+  .btn.disabled, .btn[disabled] {
+    cursor: default;
+    background-image: none;
+    opacity: .5; }
+
+.btn--primary {
+  background-color: #282828; }
+  .btn--primary, .btn--primary:link, .btn--primary:visited {
+    color: #fff; }
+  .btn--primary:hover, .btn--primary:active, .btn--primary:focus {
+    background-color: #0f0f0f; }
+
+.btn--block {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0; }
+  .btn--block + .btn--block {
+    margin-top: 10px; }
+
+input[type="submit"].btn--block,
+input[type="reset"].btn--block,
+input[type="button"].btn--block {
+  width: 100%; }
+
+/**
+ * Lists
+ * =================================
+ * - (Un)ordered lists
+ * - Unstyled lists
+ * - Definition lists
+ * - Centred lists
+ * - Floated lists
+ */
+ul {
+  list-style-type: disc; }
+
+ol {
+  list-style-type: decimal; }
+
+ul, ol {
+  padding: 0;
+  margin: 0 0 28px 28px; }
+  ul ul,
+  ul ol, ol ul,
+  ol ol {
+    margin-left: 56px; }
+  ul ul, ol ul {
+    list-style-type: circle; }
+    ul ul ul, ol ul ul {
+      list-style-type: square; }
+  ul ol, ol ol {
+    list-style-type: upper-roman; }
+    ul ol ol, ol ol ol {
+      list-style-type: lower-roman; }
+  ul ul, ul ol, ol ul, ol ol {
+    margin-bottom: 0; }
+
+/**
+ * Unstyled lists
+ */
+.unstyled {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  list-style-image: none; }
+
+/**
+ * Definition lists
+ */
+dl {
+  margin-bottom: 28px; }
+
+dt {
+  font-weight: bold; }
+
+dd {
+  margin-left: 28px; }
+
+/**
+ * Centred lists
+ *
+ * Usage:
+	<ul class="l-list--centred">
+		<li></li>
+	</ul>
+ */
+.l-list--centred, .l-list--centered {
+  text-align: center; }
+  .l-list--centred li, .l-list--centered li {
+    display: inline; }
+
+/**
+ * Floated lists
+ * Usage:
+	<ul class="l-list--floated">
+		<li></li>
+	</ul>
+ */
+.l-list--floated li {
+  float: left;
+  display: inline-block; }
+
+/**
+ * Embedded content
+ * =================================
+ */
+img {
+  font-style: italic;
+  color: #c00;
+  border: 0;
+  -ms-interpolation-mode: bicubic; }
+
+img,
+object,
+embed,
+video {
+  max-width: 100%; }
+
+/**
+ * Icons
+ * =================================
+ * For an example of how to use these, see
+ * https://gist.github.com/mrmartineau/314b01b300fa20a5a820a4d6889ffd42
+ * http://codepen.io/mrmartineau/pen/amkZBb?editors=1100
+ *
+ * SVG icon usage:
+   <svg title="Whatsapp" class="icon icon--whatsapp">
+     <use xlink:href="/assets/dist/img/icons.svg#logo-whatsapp"/>
+   </svg>
+ */
+[class*="icon"] {
+  speak: none; }
+
+.icon--large {
+  display: block;
+  width: 120px;
+  height: 120px; }
+
+.icon--small {
+  display: inline-block;
+  width: 25px;
+  height: 25px; }
+
+/**
+ * Included Social Media and other icons
+ */
+.icon--twitter {
+  color: #55acee; }
+
+.icon--facebook {
+  color: #3b5998; }
+
+.icon--instagram {
+  color: #e4405f; }
+
+.icon--pinterest {
+  color: #bd081c; }
+
+.icon--youtube {
+  color: #cd201f; }
+
+.icon--whatsapp {
+  color: #25d366; }
+
+.icon--email {
+  color: #288ad6; }
+
+.icon--kickoff {
+  fill: #181830;
+  color: #fe7c08; }
+
+.icon--tmw {
+  color: #ef7521;
+  fill: #8a8b8c; }
+
+/**
+ * Skip to main content link
+ * =================================
+ * <div class="skipToContent">
+	 	<a href="#mainContent" class="btn btn--primary">Skip to main content</a>
+	 </div>
+ */
+.skipToContent {
+  position: relative;
+  text-align: center;
+  height: 0; }
+  .skipToContent a {
+    position: relative;
+    top: -100px;
+    z-index: 100;
+    background-color: #fff;
+    transition: all 300ms cubic-bezier(0.77, 0, 0.175, 1); }
+    .skipToContent a:focus {
+      top: 5px; }
+
+/**
+ * Preformatted code
+ * =================================
+ * Code typography styles for the <code> and <pre> elements
+ */
+/**
+ * Define associated Code variables
+ */
+code,
+pre {
+  padding: 0 3px 2px;
+  font-family: Menlo, Monaco, "Courier New", monospace;
+  color: #444;
+  border-radius: 3px;
+  tab-size: 3; }
+
+code {
+  padding: 2px 4px;
+  color: #444;
+  background-color: #ddd; }
+
+pre {
+  display: block;
+  padding: 14px;
+  margin: 0 0 28px;
+  color: #444;
+  background-color: #ddd;
+  border-radius: 4px;
+  white-space: pre; }
+  pre code {
+    padding: 0;
+    color: #444;
+    background-color: #ddd;
+    border: 0; }
+
+.pre--scrollable {
+  max-height: 340px;
+  overflow-y: scroll; }
+
+/**
+ * Browser upgrade message
+ * =================================
+ */
+.browserupgrade {
+  margin: .2em 0;
+  background: #ccc;
+  color: #000;
+  padding: .2em 0; }
+
+/**
+ * Scrollbar styling (only in webkit)
+ * =================================
+ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: #d8d8d8; }
+
+::-webkit-scrollbar-thumb {
+  background: #8b8b8b;
+  cursor: pointer; }
+
+/**
+ * Print styles
+ */
+/**
+ * Print styles
+ * =================================
+ */
+@media print {
+  *,
+  *:before,
+  *:after,
+  *:first-letter {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster: http://www.sanbeiji.com/archives/953 */
+    box-shadow: none !important;
+    text-shadow: none !important; }
+  a:visited {
+    text-decoration: underline; }
+  a[href]:after {
+    content: " (" attr(href) ")"; }
+  abbr[title]:after {
+    content: " (" attr(title) ")"; }
+  /*
+	 * Don't show links for images, or javascript/internal links
+	 */
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: ""; }
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid; }
+  thead {
+    display: table-header-group;
+    /* h5bp.com/t */ }
+  tr,
+  img {
+    page-break-inside: avoid; }
+  img {
+    max-width: 100% !important; }
+  @page {
+    margin: .5cm; }
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3; }
+  h2, h3 {
+    page-break-after: avoid; } }
+
+/**
+ * Parts
+ */
+/**
+ * Global styles
+ */
+/**
+ * Global app/site styles
+ * =================================
+ */
+body {
+  background-color: #f1f1f1;
+  margin: 0 auto; }
+
+/**
+ * Default layout container
+ */
+.wrapper {
+  width: 100%; }
+
+/**
+ * Helper/utility classes
+ */
+/**
+ * Helper classes
+ * =================================
+ * Non-semantic helper classes
+ */
+/**
+ * Clearfix
+ * http://www.cssmojo.com/latest_new_clearfix_so_far/
+ * See mixins/_utility.scss for a mixin version of this
+ */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.ir {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: 0;
+  direction: ltr;
+  display: block;
+  overflow: hidden;
+  text-align: left;
+  text-indent: -999em; }
+  .ir br {
+    display: none; }
+
+.is-hidden {
+  display: none !important;
+  visibility: hidden !important; }
+
+.is-shown {
+  display: block; }
+
+.is-visuallyHidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+  .is-visuallyHidden.focusable:active, .is-visuallyHidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto; }
+
+.is-invisible {
+  visibility: hidden; }
+
+.l-floatLeft {
+  float: left; }
+
+.l-floatRight {
+  float: right; }
+
+.l-clear {
+  clear: both;
+  float: none; }
+
+.l-mb0 {
+  margin-bottom: 0 !important; }
+
+.l-mt0 {
+  margin-top: 0 !important; }
+
+* {
+  -webkit-tap-highlight-color: transparent !important; }
+
+/* A hack for HTML5 contenteditable attribute on mobile */
+textarea[contenteditable] {
+  -webkit-appearance: none; }
+
+.promote-layer {
+  /*
+	This may promote the layer to a composited
+	layer.
+
+	Replace with will-change when available
+
+	#perfmatters
+	*/
+  backface-visibility: hidden; }
+
+.transition {
+  transition: all 300ms cubic-bezier(0.77, 0, 0.175, 1); }
+
+a,
+area,
+button,
+input,
+label,
+select,
+textarea,
+[tabindex] {
+  touch-action: manipulation; }
