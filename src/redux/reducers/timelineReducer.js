@@ -6,15 +6,15 @@ import {
 } from "../types";
 
 const initialState = {
-  minYear: 1900,
-  maxYear: 1973,
-  currentYear: 1900
+  minYear: 1914,
+  maxYear: 1982,
+  currentYear: 1914
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case START_TIMELINE:
-      return { ...state }; 
+      return { ...state };
     case INCREASE_YEAR: {
       return {
         ...state,
