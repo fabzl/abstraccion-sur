@@ -14,7 +14,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case START_TIMELINE:
-      return { ...state };
+      return { ...state }; 
     case INCREASE_YEAR: {
       return {
         ...state,

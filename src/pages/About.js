@@ -13,7 +13,7 @@ const Wrap = styled.div`
   background: url(${props => props.src}) no-repeat center;
   background-size: cover;
 `;
-
+2
 const Acerca = styled.div`
   height: 50vh;
   display: flex;

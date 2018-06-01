@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import VideoHome from "../components/VideoHome";
+// import VideoHome from "../components/VideoHome";
 import Grid from "../components/Grid";
 import translations from "../translations";
 import { colors } from "../styles/globals";
@@ -41,13 +41,13 @@ const LinkTo = styled(Link)`
 
 const Home = props => (
   <div>
-    <VideoHome
+    {/* <VideoHome
       video={props.dataHome.videos}
       title={
         props.language === "es"
           ? props.dataHome.intro_text_español
           : props.dataHome.intro_text_english
-      }
+      } */}
     />
     <Grid data={props.data} language={props.language} />
     <AllWork>
