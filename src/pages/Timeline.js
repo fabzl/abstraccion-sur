@@ -34,9 +34,20 @@ const LinkTo = styled(Link)`
   }
 `;
 
+const timeGrid = styled.div`
+  margin-top: 10%;
+  font-weight: 700;
+
+  line-height: 1.2em;
+  font-size: 2.9rem;
+  font-family: "poppins";
+  text-transform: uppercase;
+  color: ${colors.white};
+`;
+
 const Timeline = props => (
   <div>
-    {/* {console.log(props)}; */}
+    {console.log(props)};
     <H3>{props.timeline.currentYear}</H3>
     <button onClick={props.increaseYear}>increase</button>
     <button onClick={props.decreaseYear}>decrease</button>
@@ -53,9 +64,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {
-  startTimeline,
-  increaseYear,
-  decreaseYear,
-  endTimeline
-})(Timeline);
+export default connect(
+  mapStateToProps,
+  {
+    startTimeline,
+    increaseYear,
+    decreaseYear,
+    endTimeline
+  }
+)(Timeline);

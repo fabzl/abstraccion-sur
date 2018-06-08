@@ -2,7 +2,8 @@ import {
   START_TIMELINE,
   INCREASE_YEAR,
   DECREASE_YEAR,
-  END_TIMELINE
+  END_TIMELINE,
+  TIMELINE_LENGTH
 } from "../types";
 
 const initialState = {
@@ -25,6 +26,15 @@ export default (state = initialState, action) => {
       };
     }
     case DECREASE_YEAR: {
+      return {
+        ...state,
+        currentYear:
+          state.currentYear > state.minYear
+            ? state.currentYear - 1
+            : state.currentYear
+      };
+    }
+    case TIMELINE_LENGTH: {
       return {
         ...state,
         currentYear:
