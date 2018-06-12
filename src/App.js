@@ -6,10 +6,11 @@ import { connect } from "react-redux";
 // Sections
 import Home from "./pages/Home";
 import Timeline from "./pages/Timeline";
-import Work from "./pages/Work";
+import Artistas from "./pages/Artistas";
 import ShowWork from "./pages/ShowWork";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+import Intro from "./pages/Intro";
+
+// import About from "./pages/About";
 
 // Components
 import Header from "./components/Header";
@@ -41,29 +42,29 @@ class App extends Component {
 
   setToDestroy = props => {
     this.props.contentLoaded();
+    console.log("loaded");
   };
 
   render() {
-    if (this.props.posts.length === 0) return <Loader />;
+    if (this.props.pages.length === 0) return <Loader />;
 
     return (
       <Wrap {...this.props}>
         {this.setToDestroy()}
         <Loader />
-        <Fade in={this.props.showVideo}>
+        {/* <Fade in={true}>
           <Modal />
-        </Fade>
+        </Fade> */}
         <Router>
           <div style={{ display: "flex", flex: 1 }}>
             <Header />
 
             <div style={{ flex: 1 }}>
+              <Route exact path="/intro" component={Intro} />
               <Route exact path="/timeline" component={Timeline} />
               <Route exact path="/" component={Home} />
-              <Route exact path="/work" component={Work} />
-              <Route exact path="/work/:link" component={ShowWork} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/contact" component={Contact} />
+              <Route exact path="/artistas" component={Artistas} />
+              <Route exact path="/astistas/:link" component={ShowWork} />
             </div>
           </div>
         </Router>
@@ -85,9 +86,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {
-  fetchData,
-  loaderLoading,
-  loaderVisible,
-  contentLoaded
-})(App);
+export default connect(
+  mapStateToProps,
+  {
+    fetchData,
+    loaderLoading,
+    loaderVisible,
+    contentLoaded
+  }
+)(App);

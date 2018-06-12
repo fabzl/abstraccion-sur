@@ -4,9 +4,9 @@ import VideoHome from "../components/VideoHome";
 
 // import translations from "../translations";
 
-const Contact = props => (
+const Intro = props => (
   <div>
-    <VideoHome
+    {/* <VideoHome
       video={props.dataContact.video}
       contact
       fontColor
@@ -15,7 +15,7 @@ const Contact = props => (
           ? props.dataContact.frase_contacto
           : props.dataContact.contact_phrase
       }
-    />
+    /> */}
   </div>
 );
 
@@ -27,4 +27,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Contact);
+export default connect(mapStateToProps)(Intro);
