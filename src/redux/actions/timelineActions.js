@@ -2,12 +2,19 @@ import {
   START_TIMELINE,
   INCREASE_YEAR,
   DECREASE_YEAR,
-  END_TIMELINE
+  END_TIMELINE,
+  TIMELINE_LENGTH
 } from "../types";
 
 export const startTimeline = () => {
   return {
     type: START_TIMELINE
+  };
+};
+
+export const timelineLenght = () => {
+  return {
+    type: TIMELINE_LENGTH
   };
 };
 
