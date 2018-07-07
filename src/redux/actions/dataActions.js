@@ -40,7 +40,8 @@ export const fetchData = dispatch => async dispatch => {
 
   let res = await axios.get(postsEndPoint);
   // Limpiar los datos
-  const posts = res.data.filter(item => item.acf.avatar_picture);
+  // const posts = res.data.filter(item => item.acf.avatar_picture);
+  const posts = res.data;
 
   res = await axios.get(pagesEndPoint);
   const pages = res.data;

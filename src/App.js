@@ -30,7 +30,7 @@ const Wrap = styled.div`
   flex-direction: column;
   height: 100%;
   top: 0;
-  background: ${colors.black};
+  background: ${colors.white};
 `;
 
 class App extends Component {

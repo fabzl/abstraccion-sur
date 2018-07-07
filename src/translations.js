@@ -4,22 +4,23 @@ const Translations = {
       es: "Home",
       en: "Home"
     },
+    timeline: {
+      en: "timeline",
+      es: "linea de tiempo"
+    },
+    start: {
+      en: "start",
+      es: "inicio"
+    },
 
-    reel: {
-      es: "Reel",
-      en: "Reel"
+    artists: {
+      en: "artists",
+      es: "artistas"
     },
-    work: {
-      en: "Work",
-      es: "Trabajos"
-    },
-    about: {
-      en: "About",
-      es: "Nosotros"
-    },
+
     contact: {
-      en: "Contact",
-      es: "Contacto"
+      en: "contact",
+      es: "contacto"
     }
   },
   home: {

@@ -7,7 +7,34 @@ import translations from "../translations";
 import { colors } from "../styles/globals";
 import Social from "./Social";
 
+import { Link, NavLink } from "react-router-dom";
+import LanguageSelector from "./LanguageSelector";
+
 // import { Link, NavLink } from "react-router-dom";
+
+const NavContainer = styled.div`
+  /* align-items: center;
+  justify-content: flex-end;
+  z-index: 900;
+  flex-direction: row;
+  display: flex;
+
+  @media (max-width: 740px) {
+    display: none;
+    &.active {
+      display: flex;
+      top: 0;
+      position: fixed;
+      width: 100vw;
+      height: 100%;
+      z-index: 3000;
+      background: rgba(0, 1, 40, 0.85);
+      flex-direction: column;
+      text-align: center;
+      justify-content: space-around;
+    }
+  } */
+`;
 
 const Logo = styled.img`
   width: 68%;
@@ -26,10 +53,10 @@ const Wrap = styled.footer`
   min-height: 150px;
   display: block;
   padding-bottom: 20px;
-
-  @media (max-width: 740px) {
-    padding-bottom: 40px;
-  }
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  background-color: ${colors.black};
 `;
 
 const Content = styled.div`
@@ -48,26 +75,6 @@ const General = styled.div`
   a > svg {
     vertical-align: middle;
     margin-right: 10px;
-  }
-`;
-
-// const H4 = styled.h4`
-//   font-weight: 500;
-//   margin: 0;
-//   font-size: 14px;
-//   font-style: italic;
-//   text-transform: uppercase;
-//   letter-spacing: 130%;
-//   white-space: nowrap;
-//   font-family: "poppins";
-// `;
-
-const BackToTop = styled.div`
-  flex: 1;
-  text-align: right;
-
-  @media (max-width: 740px) {
-    display: none;
   }
 `;
 
@@ -100,12 +107,6 @@ const LinkTo = styled.a`
   &:hover {
     color: ${colors.violet};
   }
-
-  @media (max-width: 740px) {
-    width: 100%;
-    display: block;
-    margin-bottom: 14px;
-  }
 `;
 
 const ToTop = styled.a`
@@ -130,6 +131,7 @@ const ToTop = styled.a`
 
 export const smoothScroll = () => {
   const scrollY = window.scrollY;
+
   if (scrollY > 0) {
     setTimeout(() => {
       window.scrollTo(0, scrollY - 30 >= 0 ? window.scrollY - 30 : 0);
@@ -141,34 +143,28 @@ export const smoothScroll = () => {
 const Footer = props => (
   <Wrap>
     <Content>
-      <Social />
+      {/* <Social /> */}
       <General>
-        <Links>
-          <LinkTo href={"tel:" + props.dataContact.telefono_de_contacto}>
-            <i className="fas fa-mobile-alt fa-2x" />
-            {props.dataContact.telefono_de_contacto}
+        <NavContainer>
+          <LinkTo onClick={this.checkMobileNav} to="/">
+            {translations.header.home[props.language]}
           </LinkTo>
-          <LinkTo
-            href={
-              "mailto:" +
-              props.dataContact.mail_de_contacto +
-              "?subject=Contacto%20desde%20" +
-              props.dataContact.mail_de_contacto
-            }
-          >
-            <i className="far fa-envelope fa-2x" />
-            {props.dataContact.mail_de_contacto}
+
+          <LinkTo onClick={this.checkMobileNav} to="/reel">
+            {translations.header.timeline[props.language]}
           </LinkTo>
-        </Links>
+
+          <LinkTo onClick={this.checkMobileNav} to="/work">
+            {translations.header.artists[props.language]}
+          </LinkTo>
+
+          <LinkTo onClick={this.checkMobileNav} to="/about">
+            {translations.header.contact[props.language]}
+          </LinkTo>
+
+          <LanguageSelector />
+        </NavContainer>
       </General>
-      <BackToTop>
-        <ToTop onClick={() => smoothScroll()}>
-          <span>
-            <i className="fas fa-angle-up fa-4x" />
-          </span>
-          {translations.footer.top[props.language]}
-        </ToTop>
-      </BackToTop>
     </Content>
   </Wrap>
 );

@@ -5,11 +5,9 @@ import { Link, NavLink } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
 
 import translations from "../translations";
-import logo from "../img/logo_main_white.svg";
+// import logo from "../img/logo_main_white.svg";
 
 import { colors } from "../styles/globals";
-
-import Social from "./Social";
 
 const Nav = styled.nav`
   position: fixed;
@@ -203,9 +201,7 @@ class Header extends React.Component {
     return (
       <Nav>
         <LogoContainer>
-          <Link to="/">
-            <Logo src={logo} />
-          </Link>
+          <Link to="/">{/* <Logo src={logo} /> */}</Link>
         </LogoContainer>
 
         <NavContainer className={this.state.openMenu && "active"}>
@@ -214,24 +210,18 @@ class Header extends React.Component {
           </LinkTo>
 
           <LinkTo onClick={this.checkMobileNav} to="/reel">
-            {translations.header.reel[language]}
+            {translations.header.timeline[language]}
           </LinkTo>
 
           <LinkTo onClick={this.checkMobileNav} to="/work">
-            {translations.header.work[language]}
+            {translations.header.artists[language]}
           </LinkTo>
 
           <LinkTo onClick={this.checkMobileNav} to="/about">
-            {translations.header.about[language]}
-          </LinkTo>
-
-          <LinkTo onClick={this.checkMobileNav} to="/contact">
             {translations.header.contact[language]}
           </LinkTo>
 
-          <Social header />
-
-          <BackToTop
+          {/* <BackToTop
             onClick={this.checkMobileNav}
             className={this.state.openMenu && "active"}
           >
@@ -241,7 +231,7 @@ class Header extends React.Component {
               </span>
               {translations.footer.top[this.props.language]}
             </ToTop>
-          </BackToTop>
+          </BackToTop> */}
 
           <LanguageSelector />
         </NavContainer>
