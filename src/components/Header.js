@@ -16,12 +16,6 @@ const Nav = styled.nav`
   z-index: 900;
   flex-direction: row;
   display: flex;
-
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 120, 0.3) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
 `;
 
 const LinkTo = styled(NavLink)`
@@ -55,20 +49,8 @@ const LinkTo = styled(NavLink)`
   }
 `;
 
-const LogoContainer = styled.div`
-  margin-right: auto;
-`;
-
-const Logo = styled.img`
-  width: 80%;
-
-  @media (min-width: 740px) {
-    min-width: 30px;
-  }
-`;
-
 const Burger = () => (
-  <svg width="30px" height="30px" fill={colors.white}>
+  <svg width="30px" height="30px" fill={colors.black}>
     <rect y="7" width="30" height="2" />
     <rect y="15" width="30" height="2" />
     <rect y="23" width="30" height="2" />
@@ -124,11 +106,12 @@ const BackToTop = styled.div`
 const BurgerLink = styled.a`
   z-index: 50000;
   color: ${colors.white};
-  margin: 0 20px;
+  margin: 30px 20px;
+  position: absolute;
 
-  @media (min-width: 740px) {
+  /* @media (min-width: 740px) {
     display: none;
-  }
+  } */
 
   rect {
     transition: 0.5s all;
@@ -174,6 +157,7 @@ class Header extends React.Component {
   state = {
     openMenu: false
   };
+
   componentDidMount() {
     // console.log(
     //   "soy component did mount y me gusta flotar : ",
@@ -200,40 +184,22 @@ class Header extends React.Component {
     const { language } = this.props;
     return (
       <Nav>
-        <LogoContainer>
-          <Link to="/">{/* <Logo src={logo} /> */}</Link>
-        </LogoContainer>
-
         <NavContainer className={this.state.openMenu && "active"}>
           <LinkTo onClick={this.checkMobileNav} to="/">
             {translations.header.home[language]}
           </LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/reel">
+          <LinkTo onClick={this.checkMobileNav} to="/timeline">
             {translations.header.timeline[language]}
           </LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/work">
+          <LinkTo onClick={this.checkMobileNav} to="/artists">
             {translations.header.artists[language]}
           </LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/about">
+          <LinkTo onClick={this.checkMobileNav} to="/contact">
             {translations.header.contact[language]}
           </LinkTo>
-
-          {/* <BackToTop
-            onClick={this.checkMobileNav}
-            className={this.state.openMenu && "active"}
-          >
-            <ToTop onClick={() => smoothScroll()}>
-              <span>
-                <i className="fas fa-angle-up fa-4x" />
-              </span>
-              {translations.footer.top[this.props.language]}
-            </ToTop>
-          </BackToTop> */}
-
-          <LanguageSelector />
         </NavContainer>
         <BurgerLink
           onClick={this.openMenu}
@@ -241,6 +207,7 @@ class Header extends React.Component {
         >
           <Burger />
         </BurgerLink>
+        <LanguageSelector />
       </Nav>
     );
   }

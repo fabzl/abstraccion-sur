@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import logo from "../img/logo_footer.svg";
 import translations from "../translations";
 import { colors } from "../styles/globals";
-import Social from "./Social";
 
 import { Link, NavLink } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
@@ -13,46 +12,26 @@ import LanguageSelector from "./LanguageSelector";
 // import { Link, NavLink } from "react-router-dom";
 
 const NavContainer = styled.div`
-  /* align-items: center;
+  align-items: center;
   justify-content: flex-end;
   z-index: 900;
   flex-direction: row;
   display: flex;
+`;
 
-  @media (max-width: 740px) {
-    display: none;
-    &.active {
-      display: flex;
-      top: 0;
-      position: fixed;
-      width: 100vw;
-      height: 100%;
-      z-index: 3000;
-      background: rgba(0, 1, 40, 0.85);
-      flex-direction: column;
-      text-align: center;
-      justify-content: space-around;
-    }
-  } */
+const LogoContainer = styled.div`
+  margin-right: auto;
 `;
 
 const Logo = styled.img`
-  width: 68%;
-  @media (min-width: 500px) {
-    min-width: 150px;
-    width: 50%;
-  }
-  margin: 0 auto;
-  display: flex;
-  max-width: 300px;
+  height: 100%;
+  max-width: 15vmax;
 `;
 
 const Wrap = styled.footer`
   z-index: 50;
-  padding: 3.5rem 4rem 2rem;
-  min-height: 150px;
+  padding: 0.4rem;
   display: block;
-  padding-bottom: 20px;
   position: fixed;
   width: 100vw;
   bottom: 0;
@@ -66,23 +45,15 @@ const Content = styled.div`
 
 const General = styled.div`
   flex: 3;
-  text-align: center;
+  text-align: left;
   color: ${colors.white};
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: left;
   flex-direction: column;
   a > svg {
     vertical-align: middle;
     margin-right: 10px;
-  }
-`;
-
-const Links = styled.div`
-  margin-top: 10px;
-  @media (max-width: 740px) {
-    flex-direction: column;
-    text-align: left;
   }
 `;
 
@@ -95,35 +66,17 @@ const Links = styled.div`
 // const Link = styled(NavLink)``;
 
 const LinkTo = styled.a`
+  cursor: pointer;
   font-weight: 500;
   color: ${colors.white};
   text-decoration: none;
-  font-size: 16px;
-  padding-left: 10px;
+  padding-left: 20px;
   padding-right: 10px;
-  font-size: 16px;
+  font-size: 10px;
+  margin-top: 10px;
   white-space: nowrap;
-  transition: 1s all;
-  &:hover {
-    color: ${colors.violet};
-  }
-`;
-
-const ToTop = styled.a`
-  color: ${colors.white};
-  font-size: 14px;
-  display: inline-block;
-  overflow: hidden;
-  text-align: center;
-  cursor: pointer;
-  margin: 20px 0;
-  text-decoration: none;
-
-  > span {
-    display: block;
-  }
-
-  transition: 1s all;
+  transition: 0.3s all;
+  text-transform: uppercase;
   &:hover {
     color: ${colors.violet};
   }
@@ -143,26 +96,27 @@ export const smoothScroll = () => {
 const Footer = props => (
   <Wrap>
     <Content>
-      {/* <Social /> */}
+      <LogoContainer>
+        <LinkTo to="/">
+          <Logo src={logo} />
+        </LinkTo>
+      </LogoContainer>
+
       <General>
         <NavContainer>
-          <LinkTo onClick={this.checkMobileNav} to="/">
-            {translations.header.home[props.language]}
-          </LinkTo>
+          <LinkTo to="/">{translations.header.home[props.language]}</LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/reel">
+          <LinkTo to="/timeline">
             {translations.header.timeline[props.language]}
           </LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/work">
+          <LinkTo to="/artists">
             {translations.header.artists[props.language]}
           </LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/about">
+          <LinkTo to="/contact">
             {translations.header.contact[props.language]}
           </LinkTo>
-
-          <LanguageSelector />
         </NavContainer>
       </General>
     </Content>

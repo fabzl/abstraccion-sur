@@ -22,6 +22,8 @@ import { colors, slideOut, colorsBGanimation } from "../styles/globals";
 import { growOld } from "../styles/globals";
 import { connect } from "react-redux";
 
+const LogoParts = styled.div``;
+
 const Loader = props => {
   // console.log("visible:", props.visible, "loaded", props.loaded);
   const LoaderContent = styled.div`

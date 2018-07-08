@@ -83,79 +83,31 @@ const Image = styled.div`
   background-size: cover;
 `;
 
-const Prizes = styled.div`
-  margin: 0 auto;
-  display: flex;
-  color: ${colors.white};
-  flex: 1;
-  flex-direction: row;
-`;
-
-const Box = styled.div`
-  flex-direction: row;
-  padding: 15px 0;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: linear-gradient(
-    45deg,
-    rgba(205, 73, 82, 1) 0%,
-    rgba(215, 56, 117, 1) 100%
-  );
-  padding-bottom: 100px;
-`;
-
-const Item = ({ item }) => <Laurel>{item}</Laurel>;
-
-const About = props => {
+const Contact = props => {
   const { data, language } = props;
-  const {
-    // about_image_big,
-    about_image_small_1,
-    about_image_small_2,
-    about_image_small_3,
-    about_image_small_4,
-    text_about,
-    about_us,
-    premios,
-    awards
-  } = data;
 
-  const premiosArray = {
-    es: premios.split(" // "),
-    en: awards.split(" // ")
-  };
+  const LogoParts = styled.div``;
 
   return (
     <div>
-      <Wrap src={props.data.about_image_big.url} />
-      <Acerca>
-        <H2 className="title-part line-1">
-          {language === "es" ? text_about : about_us}
-        </H2>
-      </Acerca>
-      <Images>
-        <Image src={about_image_small_1.url} />
-        <Image src={about_image_small_2.url} />
-        <Image src={about_image_small_3.url} />
-        <Image src={about_image_small_4.url} />
-      </Images>
-      <Prizes>
-        <Box>
-          <div>
-            <H2 className="dark">
-              {translations.about.prizes[props.language]}
-            </H2>
-            {premiosArray[props.language].map(item => (
-              <div className="premio" key={item}>
-                <Item item={item} />
-              </div>
-            ))}
-          </div>
-        </Box>
-      </Prizes>
+      <LogoParts>
+        <img src={Triangulo} alt="triangulo" />
+        <img src={Linea} alt="linea" />
+        <img src={A01} alt="a" />
+        <img src={B02} alt="b" />
+        <img src={S03} alt="s" />
+        <img src={T04} alt="t" />
+        <img src={R05} alt="r" />
+        <img src={A06} alt="a" />
+        <img src={C07} alt="c" />
+        <img src={C08} alt="c" />
+        <img src={I09} alt="i" />
+        <img src={O10} alt="o" />
+        <img src={N11} alt="n" />
+        <img src={S12} alt="s" />
+        <img src={U13} alt="u" />
+        <img src={R14} alt="r" />
+      </LogoParts>
     </div>
   );
 };

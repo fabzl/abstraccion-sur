@@ -4,9 +4,25 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 // import VideoHome from "../components/VideoHome";
-import Grid from "../components/Grid";
 import translations from "../translations";
 import { colors } from "../styles/globals";
+
+import A01 from "../img/01_a.svg";
+import B02 from "../img/02_b.svg";
+import S03 from "../img/03_s.svg";
+import T04 from "../img/04_t.svg";
+import R05 from "../img/05_r.svg";
+import A06 from "../img/06_a.svg";
+import C07 from "../img/07_c.svg";
+import C08 from "../img/08_c.svg";
+import I09 from "../img/09_i.svg";
+import O10 from "../img/10_o.svg";
+import N11 from "../img/11_n.svg";
+import S12 from "../img/12_s.svg";
+import U13 from "../img/13_u.svg";
+import R14 from "../img/14_r.svg";
+import Linea from "../img/linea.svg";
+import Triangulo from "../img/triangulo.svg";
 
 const H3 = styled.h3`
   margin: 0;
@@ -18,33 +34,65 @@ const H3 = styled.h3`
   text-transform: uppercase;
 `;
 
-const textDesc = styled.p`
-  color: ${colors.white};
+const HomeContainer = styled.p`
+  color: ${colors.black};
+  text-align: center;
+  margin: 0 auto;
+`;
+
+const TextDesc = styled.p`
+  color: ${colors.black};
+  width: 60%;
+  text-align: left;
+  margin: 30vmax auto 0 auto;
+  font-size: 1.2em;
+`;
+
+const LogoParts = styled.div`
+  position: fixed;
+  top: 50px;
+  width: 20vmax;
+
+  img {
+    top: 0;
+    position: absolute;
+  }
 `;
 
 const Button = styled.button`
   color: ${colors.gray};
   color: ${colors.black};
-  border-radius: 25%;
-  padding: 5px 20px;
+  border-radius: 25px;
+  padding: 12px 35px;
+  margin: 20px auto;
+  letter-spacing: 0.07em;
   font-family: "Futura";
   border: none;
-`;
-
-const LinkTo = styled(Link)`
-  color: ${colors.white};
-  text-decoration: none;
   display: block;
-  padding: 55px 0 45px;
-  transition: all 1s;
-  &:hover {
-    color: ${colors.black};
-  }
+  text-align: center;
 `;
 
 const Home = props => (
-  <div>
-    <textDesc>
+  <HomeContainer>
+    <LogoParts>
+      <img src={Triangulo} alt="triangulo" />
+      <img src={Linea} alt="linea" />
+      <img src={A01} alt="a" />
+      <img src={B02} alt="b" />
+      <img src={S03} alt="s" />
+      <img src={T04} alt="t" />
+      <img src={R05} alt="r" />
+      <img src={A06} alt="a" />
+      <img src={C07} alt="c" />
+      <img src={C08} alt="c" />
+      <img src={I09} alt="i" />
+      <img src={O10} alt="o" />
+      <img src={N11} alt="n" />
+      <img src={S12} alt="s" />
+      <img src={U13} alt="u" />
+      <img src={R14} alt="r" />
+    </LogoParts>
+    <TextDesc>
       Abstracción sur es un portal de información en torno a procesos
       intelectuales, creativos, acontecimientos, protagonistas y archivos
       implicados en la construcción nueva narrativa que hace visible y articula
@@ -63,10 +111,10 @@ const Home = props => (
       una obra se llega al artista, se avanza a una exposición y se llega a otro
       autor. Los documentos o las referencias duras sirven para situar las
       reflexiones y el contexto de época.
-    </textDesc>
-    <Button> explora la linea de tiempo </Button>
-    <Button> ver por artistas </Button>
-  </div>
+    </TextDesc>
+    <Button>Explora la linea de tiempo </Button>
+    <Button>Ver por artistas </Button>
+  </HomeContainer>
 );
 
 const mapStateToProps = state => {
