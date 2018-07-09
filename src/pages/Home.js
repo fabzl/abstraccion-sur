@@ -34,7 +34,7 @@ const H3 = styled.h3`
   text-transform: uppercase;
 `;
 
-const HomeContainer = styled.p`
+const HomeContainer = styled.div`
   color: ${colors.black};
   text-align: center;
   margin: 0 auto;

@@ -12,7 +12,7 @@ export const startTimeline = () => {
   };
 };
 
-export const timelineLenght = () => {
+export const timelineLength = () => {
   return {
     type: TIMELINE_LENGTH
   };

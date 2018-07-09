@@ -3,14 +3,14 @@ import {
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILED,
   CHANGE_LANG
-} from '../types';
+} from "../types";
 
 const initialState = {
   loading: false,
   pages: [],
   posts: [],
-  error: '',
-  language: 'es'
+  error: "",
+  language: "es"
 };
 
 export default (state = initialState, action) => {
@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
       return { ...state, loading: false, error: action.error };
     }
     case CHANGE_LANG: {
-      return { ...state, language: state.language === 'en' ? 'es' : 'en' };
+      return { ...state, language: state.language === "en" ? "es" : "en" };
     }
     default:
       return state;
