@@ -18,9 +18,12 @@ const H3 = styled.h3`
   font-weight: 700;
   line-height: 1.2em;
   font-size: 2.9rem;
-  font-family: "poppins";
+  font-family: "Futura";
   text-transform: uppercase;
   color: ${colors.black};
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(1, 1fr);
 `;
 
 const LinkTo = styled(Link)`
@@ -56,7 +59,6 @@ const TimeGrid = styled.div`
   text-transform: uppercase;
   color: ${colors.violet};
   display: grid;
-
   justify-content: center;
   align-content: center;
   grid-template-columns: repeat(${timelineLengthValue},${timelineCellWidth +

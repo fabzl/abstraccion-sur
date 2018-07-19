@@ -10,21 +10,21 @@ const H2 = styled.div`
   cursor: pointer;
   user-select: none;
   text-align: center;
-  color: ${colors.white};
-  border: 1px solid ${colors.white};
+  color: ${colors.black};
+  /* border: 1px solid ${colors.black}; */
   padding: 5px;
   min-width: 32px;
   padding-top: 8px;
   margin-right: 50px;
   transition: 0.7s all;
-  @media (max-width: 740px) {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-  }
+  
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  
   &:hover {
-    background-color: ${colors.white};
-    color: ${colors.black};
+    background-color: ${colors.black};
+    color: ${colors.white};
     border: none;
   }
   &:both {
@@ -35,7 +35,7 @@ const H2 = styled.div`
 // () => props.changeLang()
 const LanguageSelector = props => (
   <H2 onClick={() => props.changeLang()}>
-    {props.language === "en" ? "es" : "en"}
+    {props.language === "en" ? "español" : "english"}
   </H2>
 );
 
@@ -45,4 +45,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { changeLang })(LanguageSelector);
+export default connect(
+  mapStateToProps,
+  { changeLang }
+)(LanguageSelector);

@@ -31,9 +31,9 @@ const LinkTo = styled(NavLink)`
   transition: 1s all;
   background: transparent;
   font-weight: 750;
-  &:first-child {
+  /* &:first-child {
     display: none;
-  }
+  } */
 
   @media (max-width: 740px) {
     font-size: 2.4em;
@@ -134,22 +134,18 @@ const NavContainer = styled.div`
   justify-content: flex-end;
   z-index: 900;
   flex-direction: row;
-  display: flex;
-
-  @media (max-width: 740px) {
-    display: none;
-    &.active {
-      display: flex;
-      top: 0;
-      position: fixed;
-      width: 100vw;
-      height: 100%;
-      z-index: 3000;
-      background: rgba(0, 1, 40, 0.85);
-      flex-direction: column;
-      text-align: center;
-      justify-content: space-around;
-    }
+  display: none;
+  &.active {
+    display: flex;
+    top: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    z-index: 3000;
+    background: rgba(0, 1, 40, 0.85);
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
   }
 `;
 
