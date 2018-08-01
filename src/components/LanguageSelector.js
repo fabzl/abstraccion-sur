@@ -17,7 +17,6 @@ const H2 = styled.div`
   padding-top: 8px;
   margin-right: 50px;
   transition: 0.7s all;
-  
   position: fixed;
   top: 20px;
   right: 20px;
