@@ -22,7 +22,9 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         pages: action.payload.pages,
-        posts: action.payload.posts
+        posts: action.payload.posts,
+        artists: action.payload.artists,
+        artwork: action.payload.artwork
       };
     }
     case FETCH_DATA_FAILED: {
