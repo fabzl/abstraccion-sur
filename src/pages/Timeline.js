@@ -20,7 +20,7 @@ const CurrentYearHolder = styled.h3`
   font-family: "Futura";
   text-transform: uppercase;
   color: ${colors.black};
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   margin: 12px 60px;
@@ -38,8 +38,8 @@ const LinkTo = styled(Link)`
 `;
 
 const TimegridContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow: scroll-y;
   position: absolute;
   top: 0;
@@ -62,7 +62,8 @@ const TimeGrid = styled.li`
   font-family: "Futura";
   text-transform: uppercase;
   color: ${colors.violet};
-  display: inline-grid;
+  display: inline-block;
+  float:left;
   justify-content: center;
   align-content: center;
   flex-direction: row;
@@ -77,6 +78,30 @@ const TimeGrid = styled.li`
 
 `;
 
+const ArtHolder = styled.ul`
+    display:flex;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+}
+`;
+
+const ArtImg = styled.img`
+  margin-top:10vh;
+  height:50vh;
+  line-height: .4em;
+}
+`;
+
+const ArtDescription = styled.p`
+    font-size: 0.6rem;
+    margin: 0;
+    padding: 0;
+
+}
+
+`;
 /*
 
 ano
@@ -130,22 +155,22 @@ videovisita
 const Timeline = props => (
   <TimegridContainer>
     <CurrentYearHolder>{props.timeline.currentYear}</CurrentYearHolder>
-    <ul>
+    <ArtHolder>
       {props.dataArtwork.map(p => (
         <TimeGrid key={p.id}>
-          <img
+          <ArtImg
             src={p.acf.imagen_grande.sizes.large}
             alt=""
             className="img-responsive"
           />
-          <p>{p.acf.ano}</p>
-          <p>{p.acf.titulo}</p>
-          <p>{p.acf.artista}</p>
-          <p>{p.acf.tecnica}</p>
-          <p>{p.acf.dimensiones}</p>
+          <ArtDescription>{p.acf.ano}</ArtDescription>
+          <ArtDescription>{p.acf.titulo}</ArtDescription>
+          <ArtDescription>{p.acf.artista}</ArtDescription>
+          <ArtDescription>{p.acf.tecnica}</ArtDescription>
+          <ArtDescription>{p.acf.dimensiones}</ArtDescription>
         </TimeGrid>
       ))}
-    </ul>;
+    </ArtHolder>;
     <button onClick={props.increaseYear}>increase</button>
     <button onClick={props.decreaseYear}>decrease</button>
   </TimegridContainer>
