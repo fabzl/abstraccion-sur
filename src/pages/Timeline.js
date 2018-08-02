@@ -41,7 +41,7 @@ const TimegridContainer = styled.div`
   width: 100%;
   height: 100%;
   overflow: scroll-y;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   flex-direction: row;
@@ -52,7 +52,7 @@ const timelineCellWidth = 20;
 const timelineCellHeight = 12;
 
 const TimeGrid = styled.li`
-  /* margin-top: 10%; */
+  padding: 10%;
   font-weight: 700;
   border: 1px solid red;
   /* width: ${timelineLengthValue * timelineCellWidth + "vmin"}; */
@@ -63,7 +63,6 @@ const TimeGrid = styled.li`
   text-transform: uppercase;
   color: ${colors.violet};
   display: inline-block;
-  float:left;
   justify-content: center;
   align-content: center;
   flex-direction: row;
@@ -102,6 +101,19 @@ const ArtDescription = styled.p`
 }
 
 `;
+
+const ButtonYearIncrease = styled.button`
+    position:fixed;
+    top:50%;
+    left:50%;
+    background-color: ${colors.black};
+    padding:30px;
+    z-index:40;
+
+}
+
+`;
+
 /*
 
 ano
@@ -151,6 +163,10 @@ videovisita
 ""
 */
 
+const updateScrollPos = props => {
+  console.log("upd");
+};
+
 // <ul>{props.dataArtwork.map(p => <li key={p.id}>{p.name}</li>)}</ul>;
 const Timeline = props => (
   <TimegridContainer>
@@ -171,7 +187,9 @@ const Timeline = props => (
         </TimeGrid>
       ))}
     </ArtHolder>;
-    <button onClick={props.increaseYear}>increase</button>
+    <ButtonYearIncrease onClick={(props.increaseYear, updateScrollPos)}>
+      increase
+    </ButtonYearIncrease>
     <button onClick={props.decreaseYear}>decrease</button>
   </TimegridContainer>
 );

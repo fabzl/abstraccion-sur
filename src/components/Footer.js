@@ -11,7 +11,7 @@ import LanguageSelector from "./LanguageSelector";
 
 // import { Link, NavLink } from "react-router-dom";
 
-const NavContainer = styled.div`
+const Nav = styled.nav`
   align-items: center;
   justify-content: flex-end;
   z-index: 900;
@@ -65,7 +65,7 @@ const General = styled.div`
 
 // const Link = styled(NavLink)``;
 
-const LinkTo = styled.a`
+const LinkTo = styled(NavLink)`
   cursor: pointer;
   font-weight: 500;
   color: ${colors.white};
@@ -103,7 +103,7 @@ const Footer = props => (
       </LogoContainer>
 
       <General>
-        <NavContainer>
+        <Nav>
           <LinkTo to="/">{translations.header.home[props.language]}</LinkTo>
 
           <LinkTo to="/timeline">
@@ -117,7 +117,7 @@ const Footer = props => (
           <LinkTo to="/contact">
             {translations.header.contact[props.language]}
           </LinkTo>
-        </NavContainer>
+        </Nav>
       </General>
     </Content>
   </Wrap>
