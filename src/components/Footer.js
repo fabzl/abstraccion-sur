@@ -29,7 +29,7 @@ const Logo = styled.img`
 `;
 
 const Wrap = styled.footer`
-  z-index: 50;
+  z-index: 500;
   padding: 0.4rem;
   display: block;
   position: fixed;

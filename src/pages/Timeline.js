@@ -200,7 +200,7 @@ const mapStateToProps = state => {
     dataHome: state.data.pages[3].acf,
     dataContact: state.data.pages[0].acf,
     dataArtwork: state.data.artwork,
-    dataArtist: state.data.artists,
+    dataArtists: state.data.artists,
     language: state.data.language,
     timeline: state.timeline
   };

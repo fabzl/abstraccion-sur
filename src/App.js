@@ -58,7 +58,7 @@ class App extends Component {
         <Router>
           <div style={{ display: "flex", flex: 1 }}>
             <Header />
-
+            <Footer />
             <div style={{ flex: 1 }}>
               <Route exact path="/intro" component={Intro} />
               <Route exact path="/timeline" component={Timeline} />
@@ -68,7 +68,6 @@ class App extends Component {
             </div>
           </div>
         </Router>
-        <Footer />
       </Wrap>
     );
   }
