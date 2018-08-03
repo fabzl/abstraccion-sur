@@ -91,6 +91,7 @@ const ArtHolder = styled.ul`
     left: 0;
     padding: 0;
     margin: 0;
+    transition: all 0.3s;
 }
 `;
 
@@ -129,6 +130,8 @@ const SliderHolder = styled.div`
   position: fixed;
   top: 70%;
   width: 80%;
+  z-index: 500;
+  bac
 `;
 
 const updateScrollPos = props => {
@@ -142,17 +145,28 @@ const updateScrollPos = props => {
 
 class Timeline extends React.Component {
   state = {
-    openMenu: false
+    sliderSpeed: 100
   };
 
-  //   componentDidMount() {
-  //     // console.log(
-  //     //   "soy component did mount y me gusta flotar : ",
-  //     //   this.state.openMenu
-  //     // );
-  //   }
+  componentDidUpdate() {
+    console.log("soy component did update : ", this.props.timeline.currentYear);
+
+    // this.setState(
+    //   this.state.sliderSpeed,
+    //   100 * this.props.timeline.currentYear
+    // );
+    console.log(this.props);
+  }
 
   render() {
+    const style = {
+      transform:
+        "translateX(-" +
+        (this.props.timeline.currentYear - this.props.timeline.minYear) *
+          this.state.sliderSpeed +
+        "px)"
+    };
+
     return (
       // const  = props => (
       <TimegridContainer>
@@ -161,7 +175,7 @@ class Timeline extends React.Component {
           <Slider />
           <Range />
         </SliderHolder>
-        <ArtHolder>
+        <ArtHolder style={style}>
           {this.props.dataArtwork.map(p => (
             <TimeGrid key={p.id}>
               <ArtImg
