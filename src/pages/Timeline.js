@@ -5,6 +5,14 @@ import { Link } from "react-router-dom";
 
 import translations from "../translations";
 import { colors } from "../styles/globals";
+
+import ReactDOM from "react-dom";
+import Slider, { Range } from "rc-slider";
+// We can just import Slider or Range to reduce bundle size
+// import Slider from 'rc-slider/lib/Slider';
+// import Range from 'rc-slider/lib/Range';
+import "rc-slider/assets/index.css";
+
 import {
   startTimeline,
   timelineLength,
@@ -94,56 +102,91 @@ const ArtImg = styled.img`
 `;
 
 const ArtDescription = styled.p`
-    font-size: 0.6rem;
-    margin: 0;
-    padding: 0;
-
-}
-
+  font-size: 0.6rem;
+  margin: 0;
+  padding: 0;
 `;
 
 const ButtonYearIncrease = styled.button`
-    position:fixed;
-    top:50%;
-    left:50%;
-    background-color: ${colors.black};
-    padding:30px;
-    z-index:40;
+  position: fixed;
+  top: 50%;
+  right: 20%;
+  background-color: ${colors.black};
+  padding: 30px;
+  z-index: 40;
+`;
 
-}
+const ButtonYearDecrease = styled.button`
+  position: fixed;
+  top: 50%;
+  left: 20%;
+  background-color: ${colors.black};
+  padding: 30px;
+  z-index: 40;
+`;
 
+const SliderHolder = styled.div`
+  position: fixed;
+  top: 70%;
+  width: 80%;
 `;
 
 const updateScrollPos = props => {
   console.log("upd");
 };
 
+// const checkSliderPos = props => {
+//   console.log("check");
+// };
 // <ul>{props.dataArtwork.map(p => <li key={p.id}>{p.name}</li>)}</ul>;
-const Timeline = props => (
-  <TimegridContainer>
-    <CurrentYearHolder>{props.timeline.currentYear}</CurrentYearHolder>
-    <ArtHolder>
-      {props.dataArtwork.map(p => (
-        <TimeGrid key={p.id}>
-          <ArtImg
-            src={p.acf.imagen_grande.sizes.large}
-            alt=""
-            className="img-responsive"
-          />
-          <ArtDescription>{p.acf.ano}</ArtDescription>
-          <ArtDescription>{p.acf.titulo}</ArtDescription>
-          <ArtDescription>{p.acf.artista}</ArtDescription>
-          <ArtDescription>{p.acf.tecnica}</ArtDescription>
-          <ArtDescription>{p.acf.dimensiones}</ArtDescription>
-        </TimeGrid>
-      ))}
-    </ArtHolder>;
-    <ButtonYearIncrease onClick={(props.increaseYear, updateScrollPos)}>
-      increase
-    </ButtonYearIncrease>
-    <button onClick={props.decreaseYear}>decrease</button>
-  </TimegridContainer>
-);
+
+class Timeline extends React.Component {
+  state = {
+    openMenu: false
+  };
+
+  //   componentDidMount() {
+  //     // console.log(
+  //     //   "soy component did mount y me gusta flotar : ",
+  //     //   this.state.openMenu
+  //     // );
+  //   }
+
+  render() {
+    return (
+      // const  = props => (
+      <TimegridContainer>
+        <CurrentYearHolder>{this.props.timeline.currentYear}</CurrentYearHolder>
+        <SliderHolder>
+          <Slider />
+          <Range />
+        </SliderHolder>
+        <ArtHolder>
+          {this.props.dataArtwork.map(p => (
+            <TimeGrid key={p.id}>
+              <ArtImg
+                src={p.acf.imagen_grande.sizes.large}
+                alt=""
+                className="img-responsive"
+              />
+              <ArtDescription>{p.acf.ano}</ArtDescription>
+              <ArtDescription>{p.acf.titulo}</ArtDescription>
+              <ArtDescription>{p.acf.artista}</ArtDescription>
+              <ArtDescription>{p.acf.tecnica}</ArtDescription>
+              <ArtDescription>{p.acf.dimensiones}</ArtDescription>
+            </TimeGrid>
+          ))}
+        </ArtHolder>;
+        <ButtonYearIncrease onClick={this.props.increaseYear}>
+          increase
+        </ButtonYearIncrease>
+        <ButtonYearDecrease onClick={this.props.decreaseYear}>
+          decrease
+        </ButtonYearDecrease>
+      </TimegridContainer>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {

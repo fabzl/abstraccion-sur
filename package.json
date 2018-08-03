@@ -8,6 +8,7 @@
     "axios": "^0.18.0",
     "node-sass-chokidar": "^1.2.2",
     "npm-run-all": "^4.1.2",
+    "rc-slider": "^8.6.1",
     "react": "^16.2.0",
     "react-animations": "^1.0.0",
     "react-dom": "^16.2.0",
