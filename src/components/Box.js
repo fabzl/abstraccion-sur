@@ -105,7 +105,7 @@ const Middle = styled.div`
 `;
 
 const LinkTo = styled(Link)`
-  color: ${colors.white};
+  color: ${colors.black};
   text-decoration: none;
   display: block;
   height: 100%;

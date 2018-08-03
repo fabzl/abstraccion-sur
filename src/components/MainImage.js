@@ -9,7 +9,9 @@ import { colors } from "../styles/globals";
 const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 100vh;
+  height: 60vh;
+  width: 60%;
+  padding-top: 10vh;
   align-items: center;
   background: url(${props => props.src}) no-repeat center;
   background-size: cover;
@@ -96,10 +98,10 @@ const MainImage = props => (
     </Arrow>
 
     <Center>
-      <H1>{props.nombre_del_proyecto}</H1>
+      {/* <H1>{props.nombre_del_proyecto}</H1>
       <Play onClick={() => props.playVideo(props.videoUrl)}>
         <i className="far fa-play-circle fa-10x" />
-      </Play>
+      </Play> */}
     </Center>
 
     <Arrow to={props.nextLink}>
@@ -108,4 +110,7 @@ const MainImage = props => (
   </Wrap>
 );
 
-export default connect(null, { playVideo })(MainImage);
+export default connect(
+  null,
+  { playVideo }
+)(MainImage);

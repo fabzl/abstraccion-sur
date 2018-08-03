@@ -10,7 +10,7 @@ const Section = styled.div`
 const Container = styled.div`
   max-width: 600px;
   margin: 0 auto;
-  color: ${colors.white};
+  color: ${colors.black};
   text-align: center;
 `;
 
@@ -47,12 +47,12 @@ const Dd = styled.dd`
 
 const Desc = props => (
   <Section>
+    {console.log("obras:", props.obras)}
     <Container>
       <H2>{props.title}</H2>
       <Description>{props.desc}</Description>
       <Dl>
-        <Dt>{translations.item.client[props.language]}</Dt>
-        <Dd>{props.client}</Dd>
+        <Dd>{props.obras}</Dd>
       </Dl>
     </Container>
   </Section>

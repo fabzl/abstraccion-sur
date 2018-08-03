@@ -24,9 +24,8 @@ const ShowWork = props => {
         .replace(/ú/gi, "u")
         .replace(/ñ/gi, "n")
     )
-
     .indexOf(link);
-  // if (key < 0) return <Redirect to="/" />;
+  if (key < 0) return <Redirect to="/artists" />;
   const {
     biografia,
     biography,
@@ -38,7 +37,7 @@ const ShowWork = props => {
     videomain,
     videos
   } = items[key].acf;
-  console.log("element.acf.nombre :", " nombreURL: ", link);
+
   // const postContentData = items[key].content.rendered;
 
   // Sacar los Prev o nextLink
@@ -60,7 +59,6 @@ const ShowWork = props => {
       <Desc
         title={nombre}
         desc={language === "es" ? biografia : biography}
-        obras={obras}
         videomain={videomain}
         videos={videos}
       />
