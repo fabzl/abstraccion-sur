@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 // Sections
 import Home from "./pages/Home";
 import Timeline from "./pages/Timeline";
-import Artistas from "./pages/Artistas";
+import Artists from "./pages/Artists";
 import ShowWork from "./pages/ShowWork";
 import Intro from "./pages/Intro";
 
@@ -63,8 +63,8 @@ class App extends Component {
               <Route exact path="/intro" component={Intro} />
               <Route exact path="/timeline" component={Timeline} />
               <Route exact path="/" component={Home} />
-              <Route exact path="/artistas" component={Artistas} />
-              <Route exact path="/astistas/:link" component={ShowWork} />
+              <Route exact path="/artists" component={Artists} />
+              <Route exact path="/astists/:link" component={ShowWork} />
             </div>
           </div>
         </Router>

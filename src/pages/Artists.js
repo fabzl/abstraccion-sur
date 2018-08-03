@@ -6,50 +6,55 @@ import styled from "styled-components";
 import { colors } from "../styles/globals";
 
 const ArtistsHolder = styled.ul`
-    display:flex;
+    display:grid;
     top: 0;
     left: 0;
-    padding: 0;
+    padding: 10%;
     margin: 0;
+    grid-template-columns: 20% 20% 20% 20%;
+    grid-template-rows:  20% 20% 20% 20%; 
+    grid-column-gap: 5%;
+    grid-row-gap: 5%;
 }
 `;
 
 const ArtImg = styled.img`
-  margin-top:10vh;
-  height:50vh;
+
+  width:100%;  
   line-height: .4em;
+ 
 }
 `;
 
 const ArtDescription = styled.p`
-    font-size: 0.6rem;
+    font-size: 1.7rem;
     margin: 0;
     padding: 0;
-
+    color:${colors.white};
 }
 
 `;
 
-const TimegridContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow: scroll-y;
-  position: fixed;
+const ArtistsgridContainer = styled.div`
+  /* width: 100vw;
+  height: 100vh; */
+  overflow: hidden;
   top: 0;
   left: 0;
-  flex-direction: row;
+  bottom: 0;
+  right: 0;
+  /* flex-direction: row; */
 `;
 const timelineLengthValue = 50;
 const timelineHeight = 50;
 const timelineCellWidth = 20;
 const timelineCellHeight = 12;
 
-const TimeGrid = styled.li`
-  padding: 10%;
+const ArtistsGrid = styled.li`
+
   font-weight: 700;
-  border: 1px solid red;
+  background-color: ${colors.black};
   /* width: ${timelineLengthValue * timelineCellWidth + "vmin"}; */
-  height: 100vh;
   line-height: 1.2em;
   font-size: 2.9rem;
   font-family: "Futura";
@@ -59,37 +64,25 @@ const TimeGrid = styled.li`
   justify-content: center;
   align-content: center;
   flex-direction: row;
-  /* grid-template-columns: repeat(${timelineLengthValue},${timelineCellWidth +
-  "vmin"});
-  grid-template-rows: repeat(${timelineCellHeight},${timelineCellWidth +
-  "vmin"});
-  */
-  /* grid-column-gap: <line-size>;
-  grid-row-gap: <line-size>; */
 }
-
 `;
 
-const Artistas = props => (
+const Artists = props => (
   <div>
     {console.log("pio")}
     {smoothScroll()}
     <ArtistsHolder>
       {props.dataArtists.map(p => (
-        <TimeGrid key={p.id}>
+        <ArtistsGrid key={p.id}>
           <ArtImg
-            src={p.acf.imagen_grande.sizes.large}
+            src={p.acf.fotoartista.url}
             alt=""
             className="img-responsive"
           />
           <ArtDescription>{p.acf.nombre}</ArtDescription>
-          <ArtDescription>{p.acf.titulo}</ArtDescription>
-          <ArtDescription>{p.acf.artista}</ArtDescription>
-          <ArtDescription>{p.acf.tecnica}</ArtDescription>
-          <ArtDescription>{p.acf.dimensiones}</ArtDescription>
-        </TimeGrid>
+        </ArtistsGrid>
       ))}
-    </ArtistsHolder>;
+    </ArtistsHolder>
   </div>
 );
 
@@ -103,4 +96,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Artistas);
+export default connect(mapStateToProps)(Artists);

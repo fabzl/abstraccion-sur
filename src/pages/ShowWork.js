@@ -8,8 +8,8 @@ import Desc from "../components/Desc";
 const ShowWork = props => {
   // Filtrar a solamente los que tienen avatar_picture
   // const items = props.data.filter(item => item.acf.avatar_picture);
-  const { posts, language } = props;
-  const items = posts;
+  const { posts, dataArtists, dataArtwork, dataDocuments, language } = props;
+  const items = dataArtists;
 
   // Chequear item
   const { link } = props.match.params;
@@ -17,13 +17,15 @@ const ShowWork = props => {
   if (key < 0) return <Redirect to="/" />;
 
   const {
-    avatar_picture: { url },
-    nombre_del_proyecto,
-    project_name,
-    descripcion_del_proyecto,
-    project_description,
-    vimeourl,
-    cliente
+    biografia,
+    biography,
+    fecha_de_nacimiento,
+    fecha_de_fallecimiento,
+    foto_artista: { url },
+    nombre,
+    obras,
+    videomain,
+    videos
   } = items[key].acf;
 
   // const postContentData = items[key].content.rendered;
@@ -37,22 +39,19 @@ const ShowWork = props => {
   return (
     <div>
       <MainImage
-        nombre_del_proyecto={
-          language === "es" ? nombre_del_proyecto : project_name
-        }
+        nombre={nombre}
         url={url}
-        videoUrl={vimeourl}
+        videoUrl={videomain}
         prevLink={prevLink}
         nextLink={nextLink}
       />
 
       <Desc
-        title={language === "es" ? nombre_del_proyecto : project_name}
-        desc={
-          language === "es" ? descripcion_del_proyecto : project_description
-        }
-        client={cliente}
-        language={language}
+        title={nombre}
+        desc={language === "es" ? biografia : biography}
+        obras={obras}
+        videomain={videomain}
+        videos={videos}
       />
     </div>
   );
@@ -61,6 +60,9 @@ const ShowWork = props => {
 const mapStateToProps = state => {
   return {
     posts: state.data.posts,
+    dataArtwork: state.data.artwork,
+    dataArtists: state.data.artists,
+    dataDocuments: state.data.documents,
     language: state.data.language
   };
 };
