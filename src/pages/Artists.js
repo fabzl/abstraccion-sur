@@ -4,6 +4,32 @@ import Grid from "../components/Grid";
 import { smoothScroll } from "../components/Footer";
 import styled from "styled-components";
 import { colors } from "../styles/globals";
+import { Link } from "react-router-dom";
+
+import { Redirect } from "react-router-dom";
+// class MyComponent extends React.Component {
+//   state = {
+//     redirect: false
+//   }
+//   setRedirect = () => {
+//     this.setState({
+//       redirect: true
+//     })
+//   }
+//   renderRedirect = () => {
+//     if (this.state.redirect) {
+//       return <Redirect to='/target' />
+//     }
+//   }
+//   render () {
+//     return (
+//        <div>
+//         {this.renderRedirect()}
+//         <button onClick={this.setRedirect}>Redirect</button>
+//        </div>
+//     )
+//   }
+// }
 
 const ArtistsHolder = styled.ul`
     display:grid;
@@ -36,25 +62,16 @@ const ArtDescription = styled.p`
 `;
 
 const ArtistsgridContainer = styled.div`
-  /* width: 100vw;
-  height: 100vh; */
   overflow: hidden;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  /* flex-direction: row; */
 `;
-const timelineLengthValue = 50;
-const timelineHeight = 50;
-const timelineCellWidth = 20;
-const timelineCellHeight = 12;
 
 const ArtistsGrid = styled.li`
-
   font-weight: 700;
   background-color: ${colors.black};
-  /* width: ${timelineLengthValue * timelineCellWidth + "vmin"}; */
   line-height: 1.2em;
   font-size: 2.9rem;
   font-family: "Futura";
@@ -64,25 +81,27 @@ const ArtistsGrid = styled.li`
   justify-content: center;
   align-content: center;
   flex-direction: row;
-}
 `;
 
 const Artists = props => (
   <div>
-    {console.log("pio")}
+    {/* {console.log("pio")}
     {smoothScroll()}
     <ArtistsHolder>
       {props.dataArtists.map(p => (
         <ArtistsGrid key={p.id}>
-          <ArtImg
-            src={p.acf.fotoartista.url}
-            alt=""
-            className="img-responsive"
-          />
-          <ArtDescription>{p.acf.nombre}</ArtDescription>
+          <Link to={"/artists/" + p.acf.nombre}>
+            <ArtImg
+              src={p.acf.fotoartista.url}
+              alt=""
+              className="img-responsive"
+            />
+            <ArtDescription>{p.acf.nombre}</ArtDescription>
+          </Link>
         </ArtistsGrid>
       ))}
-    </ArtistsHolder>
+    </ArtistsHolder> */}
+    <Grid data={props.dataArtists} language={props.language} />
   </div>
 );
 

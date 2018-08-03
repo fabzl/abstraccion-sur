@@ -1,9 +1,36 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { playVideo } from '../redux/actions';
-import { Link } from 'react-router-dom';
-import { colors } from '../styles/globals';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import { playVideo } from "../redux/actions";
+import { Link } from "react-router-dom";
+import { colors } from "../styles/globals";
+
+const getStringCleaned = stringToReplace => {
+  // Definimos los caracteres que queremos eliminar
+  var specialChars = "!@#$^&%*()+=-[]/{}|:<>?,.";
+
+  // Los eliminamos todos
+  for (var i = 0; i < specialChars.length; i++) {
+    stringToReplace = stringToReplace.replace(
+      new RegExp("\\" + specialChars[i], "gi"),
+      ""
+    );
+  }
+  // Lo queremos devolver limpio en minusculas
+  stringToReplace = stringToReplace.toLowerCase();
+
+  // Quitamos espacios y los sustituimos por _ porque nos gusta mas asi
+  stringToReplace = stringToReplace.replace(/ /g, "-");
+
+  // Quitamos acentos y "ñ". Fijate en que va sin comillas el primer parametro
+  stringToReplace = stringToReplace.replace(/á/gi, "a");
+  stringToReplace = stringToReplace.replace(/é/gi, "e");
+  stringToReplace = stringToReplace.replace(/í/gi, "i");
+  stringToReplace = stringToReplace.replace(/ó/gi, "o");
+  stringToReplace = stringToReplace.replace(/ú/gi, "u");
+  stringToReplace = stringToReplace.replace(/ñ/gi, "n");
+  return stringToReplace;
+};
 
 const Wrap = styled.div`
   position: relative;
@@ -34,11 +61,10 @@ const Content = styled.div`
   padding: 20px;
   background: rgba(0, 1, 40, 0.85);
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.5s;
   text-align: center;
   user-select: none;
-  opacity: 0;
-  color: ${colors.white};
+  color: ${colors.black};
 
   h4 {
     margin: 0 0 10px;
@@ -46,8 +72,8 @@ const Content = styled.div`
     font-weight: 500;
     text-transform: uppercase;
     font-style: italic;
-    opacity: 0;
-    transform: translateX(-200px);
+    opacity: 1;
+    /* transform: translateX(-200px); */
   }
 
   h3 {
@@ -89,7 +115,8 @@ class Box extends Component {
   handleLink = e => {
     if (!this.props.link) {
       e.preventDefault();
-      this.props.playVideo(this.props.videoUrl);
+      console.log("handleLink");
+      // this.props.playVideo(this.props.videoUrl);
     }
   };
 
@@ -97,13 +124,16 @@ class Box extends Component {
     return (
       <Wrap src={this.props.image}>
         <LinkTo
-          to={this.props.link ? `/work/${this.props.link}` : '/'}
+          to={
+            this.props.link
+              ? `/artists/${getStringCleaned(this.props.link)}`
+              : "/"
+          }
           onClick={this.handleLink}
         >
           <Content>
             <Middle>
-              <h4>{this.props.client}</h4>
-              <h3>{this.props.title}</h3>
+              <h4>{this.props.nombre}</h4>
             </Middle>
           </Content>
         </LinkTo>
@@ -112,4 +142,7 @@ class Box extends Component {
   }
 }
 
-export default connect(null, { playVideo })(Box);
+export default connect(
+  null,
+  { playVideo }
+)(Box);

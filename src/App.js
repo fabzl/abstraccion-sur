@@ -64,7 +64,7 @@ class App extends Component {
               <Route exact path="/timeline" component={Timeline} />
               <Route exact path="/" component={Home} />
               <Route exact path="/artists" component={Artists} />
-              <Route exact path="/astists/:link" component={ShowWork} />
+              <Route exact path="/artists/:link" component={ShowWork} />
             </div>
           </div>
         </Router>

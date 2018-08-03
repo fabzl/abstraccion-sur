@@ -6,28 +6,39 @@ import MainImage from "../components/MainImage";
 import Desc from "../components/Desc";
 
 const ShowWork = props => {
-  // Filtrar a solamente los que tienen avatar_picture
-  // const items = props.data.filter(item => item.acf.avatar_picture);
   const { posts, dataArtists, dataArtwork, dataDocuments, language } = props;
   const items = dataArtists;
 
   // Chequear item
   const { link } = props.match.params;
-  const key = items.map(element => element.slug).indexOf(link);
-  if (key < 0) return <Redirect to="/" />;
 
+  console.log("link: ", props.match.params);
+  const key = items
+    .map(element =>
+      element.acf.nombre
+        .toLowerCase()
+        .replace(/ /g, "-")
+        .replace(/á/gi, "a")
+        .replace(/é/gi, "e")
+        .replace(/ó/gi, "o")
+        .replace(/ú/gi, "u")
+        .replace(/ñ/gi, "n")
+    )
+
+    .indexOf(link);
+  // if (key < 0) return <Redirect to="/" />;
   const {
     biografia,
     biography,
     fecha_de_nacimiento,
     fecha_de_fallecimiento,
-    foto_artista: { url },
+    fotoartista: { url },
     nombre,
     obras,
     videomain,
     videos
   } = items[key].acf;
-
+  console.log("element.acf.nombre :", " nombreURL: ", link);
   // const postContentData = items[key].content.rendered;
 
   // Sacar los Prev o nextLink
