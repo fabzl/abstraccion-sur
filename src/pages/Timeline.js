@@ -18,6 +18,7 @@ import {
   timelineLength,
   increaseYear,
   decreaseYear,
+  setYear,
   endTimeline
 } from "../redux/actions";
 
@@ -126,12 +127,13 @@ const ButtonYearDecrease = styled.button`
   z-index: 40;
 `;
 
+const Sliderboy = Slider;
+
 const SliderHolder = styled.div`
   position: fixed;
   top: 70%;
   width: 80%;
   z-index: 500;
-  bac
 `;
 
 const updateScrollPos = props => {
@@ -145,18 +147,19 @@ const updateScrollPos = props => {
 
 class Timeline extends React.Component {
   state = {
-    sliderSpeed: 100
+    sliderSpeed: 300,
+    value: 0
   };
 
   componentDidUpdate() {
     console.log("soy component did update : ", this.props.timeline.currentYear);
-
-    // this.setState(
-    //   this.state.sliderSpeed,
-    //   100 * this.props.timeline.currentYear
-    // );
-    console.log(this.props);
+    console.dir(Sliderboy);
   }
+
+  handleChange = sliderValues => {
+    // this.setState({ sliderValues });
+    console.log("I work", sliderValues);
+  };
 
   render() {
     const style = {
@@ -166,13 +169,19 @@ class Timeline extends React.Component {
           this.state.sliderSpeed +
         "px)"
     };
-
+    const { sliderValues } = this.state;
     return (
       // const  = props => (
       <TimegridContainer>
         <CurrentYearHolder>{this.props.timeline.currentYear}</CurrentYearHolder>
         <SliderHolder>
-          <Slider />
+          <Sliderboy
+            min={0}
+            max={this.props.timeline.timelineLength}
+            defaultValue={0}
+            onChange={this.handleChange}
+            className={"slido"}
+          />
           <Range />
         </SliderHolder>
         <ArtHolder style={style}>
@@ -220,6 +229,7 @@ export default connect(
     startTimeline,
     timelineLength,
     increaseYear,
+    setYear,
     decreaseYear,
     endTimeline
   }

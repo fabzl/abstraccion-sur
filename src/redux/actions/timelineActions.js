@@ -3,6 +3,7 @@ import {
   INCREASE_YEAR,
   DECREASE_YEAR,
   END_TIMELINE,
+  SET_YEAR,
   TIMELINE_LENGTH
 } from "../types";
 
@@ -15,6 +16,12 @@ export const startTimeline = () => {
 export const timelineLength = () => {
   return {
     type: TIMELINE_LENGTH
+  };
+};
+
+export const setYear = () => {
+  return {
+    type: SET_YEAR
   };
 };
 

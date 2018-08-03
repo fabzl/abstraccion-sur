@@ -16,3 +16,4 @@ export const INCREASE_YEAR = "INCREASE_TIMELINE";
 export const DECREASE_YEAR = "DECREASE_TIMELINE";
 export const END_TIMELINE = "END_TIMELINE";
 export const TIMELINE_LENGTH = "TIMELINE_LENGTH";
+export const SET_YEAR = "SET_YEAR";
