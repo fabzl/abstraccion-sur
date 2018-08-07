@@ -191,6 +191,7 @@ class Timeline extends React.Component {
           />
           <Range />
         </SliderHolder>
+
         <ArtHolder style={style}>
           {this.props.dataArtwork.map(p => (
             <TimeGrid key={p.id}>
@@ -206,7 +207,7 @@ class Timeline extends React.Component {
               <ArtDescription>{p.acf.dimensiones}</ArtDescription>
             </TimeGrid>
           ))}
-        </ArtHolder>;
+        </ArtHolder>
         <ButtonYearIncrease onClick={this.props.increaseYear}>
           increase
         </ButtonYearIncrease>

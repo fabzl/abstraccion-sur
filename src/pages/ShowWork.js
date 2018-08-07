@@ -6,6 +6,11 @@ import MainImage from "../components/MainImage";
 import Desc from "../components/Desc";
 import styled from "styled-components";
 import { colors } from "../styles/globals";
+import { GridArt } from "../components/GridArt";
+
+const Artgrid = styled.div`
+}
+`;
 
 const ArtHolder = styled.ul`
     display:flex;
@@ -124,26 +129,28 @@ const ShowWork = props => {
         prevLink={prevLink}
         nextLink={nextLink}
       />
-
       <Desc
         title={nombre}
         desc={language === "es" ? biografia : biography}
         videomain={videomain}
         videos={videos}
       />
-
-      {/* <ArtGrid key={p.id}>
-        <ArtImg
-          src={p.acf.imagen_grande.sizes.large}
-          alt=""
-          className="img-responsive"
-        />
-        <ArtTitle>{p.acf.titulo}</ArtTitle>
-        <ArtDescription>{p.acf.ano}</ArtDescription>
-        <ArtDescription>{p.acf.artista}</ArtDescription>
-        <ArtDescription>{p.acf.tecnica}</ArtDescription>
-        <ArtDescription>{p.acf.dimensiones}</ArtDescription>
-      </ArtGrid> */}
+      <ArtHolder>
+        {art.map(p => (
+          <Artgrid key={p.id}>
+            <ArtImg
+              src={p.acf.imagen_grande.sizes.large}
+              alt=""
+              className="img-responsive"
+            />
+            <ArtTitle>{p.acf.titulo}</ArtTitle>
+            <ArtDescription>{p.acf.ano}</ArtDescription>
+            <ArtDescription>{p.acf.artista}</ArtDescription>
+            <ArtDescription>{p.acf.tecnica}</ArtDescription>
+            <ArtDescription>{p.acf.dimensiones}</ArtDescription>
+          </Artgrid>
+        ))}
+      </ArtHolder>
     </div>
   );
 };
