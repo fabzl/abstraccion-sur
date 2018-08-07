@@ -104,9 +104,16 @@ const ArtImg = styled.img`
 `;
 
 const ArtDescription = styled.p`
-  font-size: 0.6rem;
+  font-size: 1.2rem;
   margin: 0;
   padding: 0;
+`;
+
+const ArtTitle = styled.p`
+  font-size: 1.6rem;
+  margin: 0;
+  padding: 0;
+  color: ${colors.black};
 `;
 
 const ButtonYearIncrease = styled.button`
@@ -192,8 +199,8 @@ class Timeline extends React.Component {
                 alt=""
                 className="img-responsive"
               />
+              <ArtTitle>{p.acf.titulo}</ArtTitle>
               <ArtDescription>{p.acf.ano}</ArtDescription>
-              <ArtDescription>{p.acf.titulo}</ArtDescription>
               <ArtDescription>{p.acf.artista}</ArtDescription>
               <ArtDescription>{p.acf.tecnica}</ArtDescription>
               <ArtDescription>{p.acf.dimensiones}</ArtDescription>
