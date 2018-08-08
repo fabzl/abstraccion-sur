@@ -9,9 +9,9 @@ import { colors } from "../styles/globals";
 const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 60vh;
-  width: 60%;
-  padding-top: 10vh;
+  height: 30vh;
+  width: 60vw;
+  margin: 60px;
   align-items: center;
   background: url(${props => props.src}) no-repeat center;
   background-size: cover;
@@ -91,24 +91,7 @@ const Play = styled.div`
   }
 `;
 
-const MainImage = props => (
-  <Wrap src={props.url}>
-    <Arrow to={props.prevLink}>
-      <i className="fas fa-chevron-left fa-4x" />
-    </Arrow>
-
-    <Center>
-      {/* <H1>{props.nombre_del_proyecto}</H1>
-      <Play onClick={() => props.playVideo(props.videoUrl)}>
-        <i className="far fa-play-circle fa-10x" />
-      </Play> */}
-    </Center>
-
-    <Arrow to={props.nextLink}>
-      <i className="fas fa-chevron-right fa-4x" />
-    </Arrow>
-  </Wrap>
-);
+const MainImage = props => <Wrap src={props.url} />;
 
 export default connect(
   null,

@@ -7,24 +7,76 @@ import Desc from "../components/Desc";
 import styled from "styled-components";
 import { colors } from "../styles/globals";
 import { GridArt } from "../components/GridArt";
+import { Link } from "react-router-dom";
 
-const Artgrid = styled.div`
-}
+const Arrow = styled(Link)`
+  &.arrow-white {
+    color: ${colors.white};
+  }
+  color: ${colors.black};
+  height: 100%;
+  align-items: top;
+  display: flex;
+  position: fixed;
+  width: 10%;
+  justify-content: center;
+  background: transparent;
+  & svg {
+    transition: all 0.3s;
+    transform: translateY(38vh);
+  }
+`;
+
+const ShowWorkWrap = styled(Link)`
+  display: flex;
+  flex-direction: row;
+`;
+
+// const Left = styled.span`
+//   &:hover {
+//     padding-left: 15px;
+//   }
+// `;
+
+// const Right = styled.span`
+//   &:hover {
+//     padding-right: 15px;
+//   }
+// `;
+
+const Center = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const Artgrid = styled.div``;
+
+const BlueSide = styled.div`
+  width: 33%;
+  height: 100vh;
+  display: inline-flex;
+  flex-direction: column;
+  background: ${colors.black};
+`;
+
+const BigSide = styled.div`
+  width: 60%;
+  display: inline-flex;
 `;
 
 const ArtHolder = styled.ul`
-    display:flex;
-    top: 0;
-    left: 0;
-    padding: 0;
-    margin: 0;
+    display:grid;
     transition: all 0.3s;
+    border:1px solid red;
+    padding-top: 35vh;
 }
 `;
 
 const ArtImg = styled.img`
-  margin-top:10vh;
-  height:50vh;
+  
+  height:10vh;
   line-height: .4em;
 }
 `;
@@ -41,6 +93,10 @@ const ArtTitle = styled.p`
   padding: 0;
   color: ${colors.black};
 `;
+
+const mainDivStyle = {
+  display: "flex"
+};
 
 const ShowWork = props => {
   const { posts, dataArtists, dataArtwork, language } = props;
@@ -92,7 +148,8 @@ const ShowWork = props => {
     return artpiece.acf.autor === nombre;
   }
   var art = artwork.filter(isSelectedArtist);
-  console.log(art);
+
+  // console.log(art);
 
   // const {
   //   // ano,
@@ -121,36 +178,56 @@ const ShowWork = props => {
     key === items.length - 1 ? items[0].slug : items[key + 1].slug;
 
   return (
-    <div>
-      <MainImage
-        nombre={nombre}
-        url={url}
-        videoUrl={videomain}
-        prevLink={prevLink}
-        nextLink={nextLink}
-      />
-      <Desc
-        title={nombre}
-        desc={language === "es" ? biografia : biography}
-        videomain={videomain}
-        videos={videos}
-      />
-      <ArtHolder>
-        {art.map(p => (
-          <Artgrid key={p.id}>
-            <ArtImg
-              src={p.acf.imagen_grande.sizes.large}
-              alt=""
-              className="img-responsive"
-            />
-            <ArtTitle>{p.acf.titulo}</ArtTitle>
-            <ArtDescription>{p.acf.ano}</ArtDescription>
-            <ArtDescription>{p.acf.artista}</ArtDescription>
-            <ArtDescription>{p.acf.tecnica}</ArtDescription>
-            <ArtDescription>{p.acf.dimensiones}</ArtDescription>
-          </Artgrid>
-        ))}
-      </ArtHolder>
+    <div style={mainDivStyle}>
+      <BlueSide>
+        <MainImage
+          nombre={nombre}
+          url={url}
+          videoUrl={videomain}
+          prevLink={prevLink}
+          nextLink={nextLink}
+        />
+
+        <Desc
+          title={nombre}
+          desc={language === "es" ? biografia : biography}
+          videomain={videomain}
+          videos={videos}
+        />
+
+        <Arrow className="arrow-white" to={prevLink}>
+          <i className="fas fa-chevron-left fa-4x" />
+        </Arrow>
+      </BlueSide>
+      <BigSide>
+        <Center>
+          {/* <H1>{props.nombre_del_proyecto}</H1>
+      <Play onClick={() => props.playVideo(props.videoUrl)}>
+        <i className="far fa-play-circle fa-10x" />
+      </Play> */}
+        </Center>
+
+        <Arrow to={nextLink}>
+          <i className="fas fa-chevron-right fa-4x" />
+        </Arrow>
+
+        <ArtHolder>
+          {art.map(p => (
+            <Artgrid key={p.id}>
+              <ArtImg
+                src={p.acf.imagen_grande.sizes.large}
+                alt=""
+                className="img-responsive"
+              />
+              <ArtTitle>{p.acf.titulo}</ArtTitle>
+              <ArtDescription>{p.acf.ano}</ArtDescription>
+              <ArtDescription>{p.acf.artista}</ArtDescription>
+              <ArtDescription>{p.acf.tecnica}</ArtDescription>
+              <ArtDescription>{p.acf.dimensiones}</ArtDescription>
+            </Artgrid>
+          ))}
+        </ArtHolder>
+      </BigSide>
     </div>
   );
 };
