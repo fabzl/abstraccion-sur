@@ -8,6 +8,8 @@ import styled from "styled-components";
 import { colors } from "../styles/globals";
 import { GridArt } from "../components/GridArt";
 import { Link } from "react-router-dom";
+import { playVideo } from "../redux/actions";
+import ReactPlayer from "react-player";
 
 const Arrow = styled(Link)`
   &.arrow-white {
@@ -24,6 +26,12 @@ const Arrow = styled(Link)`
   & svg {
     transition: all 0.3s;
     transform: translateY(38vh);
+  }
+`;
+
+const Play = styled.div`
+  &:hover {
+    opacity: 0.8;
   }
 `;
 
@@ -200,12 +208,20 @@ const ShowWork = props => {
         </Arrow>
       </BlueSide>
       <BigSide>
-        <Center>
-          {/* <H1>{props.nombre_del_proyecto}</H1>
-      <Play onClick={() => props.playVideo(props.videoUrl)}>
-        <i className="far fa-play-circle fa-10x" />
-      </Play> */}
-        </Center>
+        {/* <Center>
+          <Play onClick={() => props.playVideo(props.videomain)}>
+            <i className="far fa-play-circle fa-10x" />
+          </Play>
+        </Center> */}
+
+        <ReactPlayer
+          url={videomain}
+          playing={false}
+          controls
+          width="640px"
+          height="480px"
+          onEnded={this.videoEnd}
+        />
 
         <Arrow to={nextLink}>
           <i className="fas fa-chevron-right fa-4x" />
