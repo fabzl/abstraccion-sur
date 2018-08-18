@@ -46,7 +46,13 @@ const LinkTo = styled(Link)`
   }
 `;
 
-const TimegridContainer = styled.div`
+const YearContainer = styled.div`
+  width: 100vw;
+  border: 1px solid pink;
+  position: relative;
+`;
+
+const TimelineContainer = styled.div`
   width: 100%;
   height: 100%;
   overflow: scroll-y;
@@ -60,33 +66,15 @@ const timelineHeight = 50;
 const timelineCellWidth = 20;
 const timelineCellHeight = 12;
 
-const TimeGrid = styled.li`
-  padding: 10%;
-  font-weight: 700;
-  border: 1px solid red;
-  /* width: ${timelineLengthValue * timelineCellWidth + "vmin"}; */
-  height: 100vh;
-  line-height: 1.2em;
-  font-size: 2.9rem;
-  font-family: "Futura";
-  text-transform: uppercase;
-  color: ${colors.violet};
-  display: inline-block;
-  justify-content: center;
-  align-content: center;
-  flex-direction: row;
-  /* grid-template-columns: repeat(${timelineLengthValue},${timelineCellWidth +
-  "vmin"});
-  grid-template-rows: repeat(${timelineCellHeight},${timelineCellWidth +
-  "vmin"});
-  */
-  /* grid-column-gap: <line-size>;
-  grid-row-gap: <line-size>; */
-}
-
+const ArtWork = styled.div`
+  padding-top: 10vh;
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid red; */
+  display: flex;
 `;
 
-const ArtHolder = styled.ul`
+const YearHolder = styled.div`
     display:flex;
     top: 0;
     left: 0;
@@ -97,16 +85,22 @@ const ArtHolder = styled.ul`
 `;
 
 const ArtImg = styled.img`
-  margin-top:10vh;
-  height:50vh;
-  line-height: .4em;
-}
+  margin-top: 10vh;
+  height: 50vh;
+  line-height: 0.4em;
+`;
+
+const ArtObject = styled.div`
+  width: 100vw;
 `;
 
 const ArtDescription = styled.p`
   font-size: 1.2rem;
   margin: 0;
   padding: 0;
+`;
+const YearTitle = styled.h3`
+  color: ${colors.blue};
 `;
 
 const ArtTitle = styled.p`
@@ -139,12 +133,96 @@ const Sliderboy = Slider;
 const SliderHolder = styled.div`
   position: fixed;
   top: 70%;
-  width: 80%;
+  width: 100%;
+
+  &.rc-slider-rail {
+    opacity: 1;
+    background: solid ${colors.red}!important;
+  }
+  &.rc-slider-track {
+    height: 100vh;
+  }
+  &.rc-slider-handle {
+  }
+
+  &.rc-slider-step {
+    background: solid ${colors.red}!important;
+  }
   z-index: 500;
 `;
 
 const updateScrollPos = props => {
   console.log("upd");
+};
+
+let yearToIndex = 1912;
+
+const isCurrentYear = (props, key) => {
+  // hardcoded min Year (change if you change the min year .
+  //  dont do this at home .
+  let currentYear = yearToIndex;
+
+  // console.log(
+  //   key,
+  //   currentYear.toString() == props.acf.ano,
+  //   currentYear,
+  //   props.acf.ano
+  // );
+
+  return currentYear == props.acf.ano;
+};
+
+const createArtWorkForYear = props => {
+  // filter data and return an array called art with the selected art.
+
+  let art = props.dataArtwork.filter(isCurrentYear);
+
+  // and return mapped objects
+  let artObjects = art.map(p => (
+    <ArtObject key={p.id}>
+      <ArtImg
+        src={p.acf.imagen_grande.sizes.small}
+        alt=""
+        className="img-responsive"
+      />
+      <ArtTitle>{p.acf.titulo}</ArtTitle>
+      <ArtDescription>{p.acf.ano}</ArtDescription>
+      <ArtDescription>{p.acf.artista}</ArtDescription>
+      <ArtDescription>{p.acf.tecnica}</ArtDescription>
+      <ArtDescription>{p.acf.dimensiones}</ArtDescription>
+    </ArtObject>
+  ));
+
+  console.log("art:", artObjects);
+  return artObjects;
+};
+const createTimeline = props => {
+  console.log("timeLine", props.timeline.minYear, props.timeline.maxYear);
+
+  let years = [];
+
+  // Outer loop to create parent
+  for (let i = props.timeline.minYear; i <= props.timeline.maxYear; i++) {
+    let children = [];
+    //Inner loop to create children
+    // let artObj = props.dataArtwork[i - props.timeline.minYear];
+    let artObj = props.dataArtwork.map(p => p.acf.ano == i);
+
+    children.push(
+      <ArtWork key={i} className={i}>
+        {/* <YearTitle>{i}</YearTitle> */}
+        {(yearToIndex = i)}
+        {createArtWorkForYear(props)}
+      </ArtWork>
+    );
+    //Create the parent and add the children
+    years.push(
+      <YearContainer className="mainholder" key={i}>
+        {children}
+      </YearContainer>
+    );
+  }
+  return years;
 };
 
 // const checkSliderPos = props => {
@@ -155,17 +233,31 @@ const updateScrollPos = props => {
 class Timeline extends React.Component {
   state = {
     sliderSpeed: 300,
-    value: 0
+    value: 0,
+    startYear: this.props.timeline.minYear,
+    endYear: this.props.timeline.maxYear,
+    currentYear: this.props.timeline.currentYear,
+    timeLinePosition:
+      this.props.timeline.currentYear - this.props.timeline.minYear
   };
 
   componentDidUpdate() {
-    console.log("soy component did update : ", this.props.timeline.currentYear);
-    console.dir(Sliderboy);
+    // console.log("soy component did update : ", this.props.timeline.currentYear);
+    // console.dir(Sliderboy);
   }
 
-  handleChange = sliderValues => {
+  handleChange = (sliderValues, state) => {
     // this.setState({ sliderValues });
-    console.log("I work", sliderValues);
+    console.log(
+      "TESTER BOT",
+      sliderValues,
+      "currentYear",
+      this.props.timeline.currentYear,
+      "state"
+      // state
+    );
+
+    this.setState({ currentYear: sliderValues + this.props.timeline.minYear });
   };
 
   render() {
@@ -179,7 +271,7 @@ class Timeline extends React.Component {
     const { sliderValues } = this.state;
     return (
       // const  = props => (
-      <TimegridContainer>
+      <TimelineContainer>
         <CurrentYearHolder>{this.props.timeline.currentYear}</CurrentYearHolder>
         <SliderHolder>
           <Sliderboy
@@ -189,32 +281,19 @@ class Timeline extends React.Component {
             onChange={this.handleChange}
             className={"slido"}
           />
-          <Range />
+          {/* <Range /> */}
         </SliderHolder>
+        <YearHolder style={style}>
+          {createTimeline(this.props, style)}
+        </YearHolder>
 
-        <ArtHolder style={style}>
-          {this.props.dataArtwork.map(p => (
-            <TimeGrid key={p.id}>
-              <ArtImg
-                src={p.acf.imagen_grande.sizes.large}
-                alt=""
-                className="img-responsive"
-              />
-              <ArtTitle>{p.acf.titulo}</ArtTitle>
-              <ArtDescription>{p.acf.ano}</ArtDescription>
-              <ArtDescription>{p.acf.artista}</ArtDescription>
-              <ArtDescription>{p.acf.tecnica}</ArtDescription>
-              <ArtDescription>{p.acf.dimensiones}</ArtDescription>
-            </TimeGrid>
-          ))}
-        </ArtHolder>
         <ButtonYearIncrease onClick={this.props.increaseYear}>
           increase
         </ButtonYearIncrease>
         <ButtonYearDecrease onClick={this.props.decreaseYear}>
           decrease
         </ButtonYearDecrease>
-      </TimegridContainer>
+      </TimelineContainer>
     );
   }
 }
