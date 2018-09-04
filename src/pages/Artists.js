@@ -45,20 +45,15 @@ const ArtistsHolder = styled.ul`
 `;
 
 const ArtImg = styled.img`
-
-  width:100%;  
-  line-height: .4em;
- 
-}
+  width: 100%;
+  line-height: 0.4em;
 `;
 
 const ArtDescription = styled.p`
-    font-size: 1.7rem;
-    margin: 0;
-    padding: 0;
-    color:${colors.white};
-}
-
+  font-size: 1.7rem;
+  margin: 0;
+  padding: 0;
+  color: ${colors.white};
 `;
 
 const ArtistsgridContainer = styled.div`
