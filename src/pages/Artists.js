@@ -15,8 +15,48 @@ const ArtistsHolder = styled.ul`
   margin: 0;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  position: relative;
-  transition: all 0.5s;
+  transition: all 0.9s ease-in-out 0.1s;
+
+  &.moveRight {
+    &.moveUp {
+      transform: translate3d(-${circleSize}, -${circleSize}, 0)
+        rotate3d(1, 1, 0, -5deg);
+    }
+    &.moveCenterY {
+      transform: translate3d(-${circleSize}, 0, 0) rotate3d(1, 1, 0, -5deg);
+    }
+    &.moveDown {
+      transform: translate3d(-${circleSize}, ${circleSize}, 0)
+        rotate3d(1, 1, 0, -5deg);
+    }
+  }
+  &.moveCenter {
+    &.moveUp {
+      transform: perspective(500px) translate3d(0, -${circleSize}, 0)
+        rotate3d(1, 1, 0, 5deg);
+    }
+    &.moveCenterY {
+      transform: perspective(500px) translate3d(0, 0, 0) rotate3d(1, 1, 0, 5deg);
+    }
+    &.moveDown {
+      transform: perspective(500px) translate3d(0, ${circleSize}, 0)
+        rotate3d(1, 1, 0, 5deg);
+    }
+  }
+  &.moveLeft {
+    &.moveUp {
+      transform: perspective(500px)
+        translate3d(${circleSize}, -${circleSize}, 0) rotate3d(1, 1, 0, 5deg);
+    }
+    &.moveCenterY {
+      transform: perspective(500px) translate3d(${circleSize}, 0, 0)
+        rotate3d(1, 1, 0, 5deg);
+    }
+    &.moveDown {
+      transform: perspective(500px) translate3d(${circleSize}, ${circleSize}, 0)
+        rotate3d(1, 1, 0, 5deg);
+    }
+  }
 `;
 
 const ArtistsGrid = styled.li`
@@ -35,13 +75,16 @@ const ArtistsGrid = styled.li`
   align-content: center;
   flex-direction: row;
   transition: all 0.7s ease-in-out;
-  border: 1px solid red;
-  &.inactive {
+  /* border: 1px solid getRa; */
+  
+  &.passive {
     transform: perspective(500px) translate3d(0px,0px,-30vmax);
   }
   &.active {
     transform: perspective(500px) translate3d(0px,0px,-10vmax);
+    z-index: 10;
   }
+
 `;
 
 // translate3d(tx, ty, tz)
@@ -55,8 +98,12 @@ const ArtImg = styled.div`
   position: absolute;
   will-change: transform;
   transition: all 0.5s;
+
   &.active {
-    transform: translate3d(0, 30vw, 10vw);
+    transform: perspective(500px) translate3d(0px, 0px, 15vmax);
+  }
+  &.passive {
+    transform: perspective(500px) translate3d(0px, 0px, 0px);
   }
 `;
 
@@ -67,10 +114,13 @@ const PlayVideoCircle = styled.div`
   border-radius: 50%;
   position: absolute;
   transition: all 0.5s;
+  transform: scale3d(1, 0.7, 1);
 
   &.active {
-    transform: perspective(500px) translate3d(35vw, 0px, -30vmax);
-    opacity: 0.5;
+    transform: perspective(500px) translate3d(${circleSize}, 0px, -5vmax);
+  }
+  &.passive {
+    transform: perspective(500px) translate3d(0px, 0px, 5vmax);
   }
 `;
 
@@ -80,15 +130,14 @@ const GotoCaveCircle = styled.div`
   line-height: 0.4em;
   border-radius: 50%;
   will-change: transform;
-  position:absolute;
+  position: absolute;
   transition: all 0.5s;
 
-}
-  &.inactive {
-    transform: perspective(500px) translate3d(0px, 0px, -30vmax);
+  &.passive {
+    transform: perspective(500px) translate3d(0px, 0px, 3vmax);
   }
   &.active {
-    transform: perspective(500px) translate3d(-35vw, 0px, -10vmax);
+    transform: perspective(500px) translate3d(-${circleSize}, 0px, -5vmax);
   }
 `;
 
@@ -97,9 +146,9 @@ const ArtDescription = styled.p`
   margin: 0;
   padding: 0;
   text-align: center;
-  color: ${colors.white};
+  color: ${colors.black};
   transition: all 0.5s;
-  &.inactive {
+  &.passive {
     transform: perspective(500px) translate3d(0px, 0px, -30vmax);
   }
   &.active {
@@ -111,7 +160,9 @@ class Artists extends React.Component {
   state = {
     openArtist: false,
     activeKey: 0,
-    totalArtists: -1
+    totalArtists: -1,
+    holderPositionX: 1,
+    holderPositionY: 1
   };
 
   componentDidMount() {
@@ -121,11 +172,21 @@ class Artists extends React.Component {
   openArtist = key => {
     this.setState({ openArtist: !this.state.openArtist });
     this.setState({ activeKey: key });
+    this.centerElement(key);
+  };
+  centerElement = key => {
+    // position mainHolderPositionX.  0 1 2
+    let positionX = key % 3;
+    this.setState({ holderPositionX: positionX });
+
+    // this must be changed
+    let positionY = key >= 6 ? "moveUp" : key > 2 ? "moveCenterY" : "moveDown";
+    this.setState({ holderPositionY: positionY });
   };
 
   closeArtist = () => {
     this.setState({ openArtist: false });
-    console.log("close Menu");
+    // console.log("close Menu");
   };
 
   setTotalArtistAmount = () => {
@@ -145,7 +206,7 @@ class Artists extends React.Component {
     if (this.state.openArtist) {
       this.closeArtist(currentKeyArtist);
 
-      console.log("closeartist");
+      // console.log("closeartist");
     } else {
       this.openArtist(currentKeyArtist);
     }
@@ -154,7 +215,24 @@ class Artists extends React.Component {
   render() {
     return (
       <div>
-        <ArtistsHolder id="artistHolder">
+        <ArtistsHolder
+          id="artistHolder"
+          className={[
+            (this.state.openArtist && this.state.holderPositionX == 0
+              ? "moveLeft"
+              : "") +
+              " " +
+              (this.state.openArtist && this.state.holderPositionX == 1
+                ? "moveCenter"
+                : "") +
+              " " +
+              (this.state.openArtist && this.state.holderPositionX == 2
+                ? "moveRight"
+                : "") +
+              " " +
+              (this.state.openArtist && this.state.holderPositionY + "")
+          ]}
+        >
           {this.props.dataArtists.map((p, i) => (
             <ArtistsGrid
               key={p.id}
@@ -167,7 +245,7 @@ class Artists extends React.Component {
                   i +
                   " " +
                   (this.state.openArtist && this.state.activeKey != i
-                    ? "inactive"
+                    ? "passive"
                     : "")
               ]}
             >
@@ -175,19 +253,49 @@ class Artists extends React.Component {
               {/* {console.log(i)} */}
 
               <PlayVideoCircle
-                className="videoCircle"
+                className={[
+                  (this.state.openArtist && this.state.activeKey == i
+                    ? "active"
+                    : "") +
+                    " " +
+                    i +
+                    " " +
+                    (this.state.openArtist && this.state.activeKey != i
+                      ? "passive"
+                      : "")
+                ]}
                 style={{
                   background: colorRandomFromArray()
                 }}
               />
               <GotoCaveCircle
-                className="caveCircle"
+                className={[
+                  (this.state.openArtist && this.state.activeKey == i
+                    ? "active"
+                    : "") +
+                    " " +
+                    i +
+                    " " +
+                    (this.state.openArtist && this.state.activeKey != i
+                      ? "passive"
+                      : "")
+                ]}
                 style={{
                   background: colorRandomFromArray()
                 }}
               />
               <ArtImg
-                className="caveCircle"
+                className={[
+                  (this.state.openArtist && this.state.activeKey == i
+                    ? "active"
+                    : "") +
+                    " " +
+                    i +
+                    " " +
+                    (this.state.openArtist && this.state.activeKey != i
+                      ? "passive"
+                      : "")
+                ]}
                 style={{
                   backgroundImage: "url(" + p.acf.fotoartista.url + ")"
                 }}
