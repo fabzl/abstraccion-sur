@@ -107,7 +107,7 @@ const mainDivStyle = {
 };
 
 const ShowWork = props => {
-  const { posts, dataArtists, dataArtwork, language } = props;
+  const { dataArtists, dataArtwork, language } = props;
   const items = dataArtists;
   const artwork = dataArtwork;
 
@@ -139,6 +139,23 @@ const ShowWork = props => {
     videomain,
     videos
   } = items[key].acf;
+
+  //   ano: "2016"
+  // autor: "Alejandro Siña"
+  // coleccion: "Colección Privada"
+  // collection: "Private Collection"
+  // dimensiones: "170 x 20 x 50 cm "
+  // exhibition: "The forms revolution: 60 years of abstract art in Chile"
+  // exposicion: "La revolución de las formas: 60 años de arte abstracto en Chile"
+  // fotos: false
+  // imagen_grande: {ID: 303, id: 303, title: "AlejandroSiña_Móvil-Triple_Big", filename: "AlejandroSiña_Móvil-Triple_Big.jpg", filesize: 5071720, …}
+  // imagen_mediana: {ID: 304, id: 304, title: "AlejandroSiña_Móvil-Triple_Med", filename: "AlejandroSiña_Móvil-Triple_Med.jpg", filesize: 1489452, …}
+  // imagen_pequena: {ID: 305, id: 305, title: "AlejandroSiña_Móvil-Triple_Small", filename: "AlejandroSiña_Móvil-Triple_Small.jpg", filesize: 122912, …}
+  // tecnica: "Neón de electrodo"
+  // tecnique: "Neon electrode"
+  // titulo: "Móvil Triple"
+  // videovisita: ""
+  // __proto__: Object
 
   // const postContentData = items[key].content.rendered;
 
@@ -250,7 +267,6 @@ const ShowWork = props => {
 
 const mapStateToProps = state => {
   return {
-    posts: state.data.posts,
     dataArtwork: state.data.artwork,
     dataArtists: state.data.artists,
     language: state.data.language

@@ -117,11 +117,24 @@ const Home = props => (
   </HomeContainer>
 );
 
+function isSelectedPage(data, slug) {
+  // // console.log(data.slug, "data found", slug);
+  // if (data.slug === slug) {
+  //   console.log("isSelected: ", slug, data.slug === slug);
+  // }
+  return data.slug === slug;
+}
+
 const mapStateToProps = state => {
   return {
     data: state.data.posts,
-    dataHome: state.data.pages[3].acf,
-    dataContact: state.data.pages[0].acf,
+    dataHome: state.data.pages.filter(function(element) {
+      return isSelectedPage(element, "home");
+    }),
+    dataContact: state.data.pages.filter(function(element) {
+      return isSelectedPage(element, "contact");
+    }),
+
     language: state.data.language
   };
 };

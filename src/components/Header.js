@@ -5,8 +5,6 @@ import { Link, NavLink } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
 
 import translations from "../translations";
-// import logo from "../img/logo_main_white.svg";
-
 import { colors } from "../styles/globals";
 
 const Nav = styled.nav`

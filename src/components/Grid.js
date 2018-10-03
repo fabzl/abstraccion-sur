@@ -49,10 +49,10 @@ class Grid extends Component {
     const Wrap = styled.div`
       display: grid;
       padding: 10%;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       grid-column-gap: 5%;
       grid-row-gap: 5%;
-      grid-auto-rows: 430px;
+      grid-auto-rows: 30%;
     `;
 
     return <Wrap>{this.renderBoxes()}</Wrap>;

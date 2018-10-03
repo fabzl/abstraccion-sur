@@ -9,6 +9,29 @@ export const colors = {
   orange: "#fde53f"
 };
 
+const colorsForRandom = [
+  "#11383a",
+  "#660000",
+  "#fde53f",
+  "#444999",
+  "#ff00ff",
+  "#79D9DB",
+  "#D3DA91"
+];
+
+export function colorRandomFromArray() {
+  return colorsForRandom[Math.floor(Math.random() * colorsForRandom.length)];
+  // colorsForRandom
+}
+
+// export function getRandomColor() {
+//   function c() {
+//     var hex = Math.floor(Math.random() * 256).toString(16);
+//     return ("0" + String(hex)).substr(-2); // pad with zero
+//   }
+//   return "#" + c() + c() + c();
+// }
+
 // keyframes returns a unique name based on a hash of the contents of the keyframes
 export const rotate360 = keyframes`
   from {
