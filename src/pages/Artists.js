@@ -16,7 +16,7 @@ const ArtistsHolder = styled.ul`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   position: relative;
-  animation: all 0.5s;
+  transition: all 0.5s;
 `;
 
 const ArtistsGrid = styled.li`
@@ -34,7 +34,7 @@ const ArtistsGrid = styled.li`
   justify-content: center;
   align-content: center;
   flex-direction: row;
-  animation: all 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
   border: 1px solid red;
   &.inactive {
     transform: perspective(500px) translate3d(0px,0px,-30vmax);
@@ -54,7 +54,7 @@ const ArtImg = styled.div`
   background-size: cover;
   position: absolute;
   will-change: transform;
-}
+  transition: all 0.5s;
   &.active {
     transform: translate3d(0, 30vw, 10vw);
   }
@@ -66,6 +66,7 @@ const PlayVideoCircle = styled.div`
   line-height: 0.4em;
   border-radius: 50%;
   position: absolute;
+  transition: all 0.5s;
 
   &.active {
     transform: perspective(500px) translate3d(35vw, 0px, -30vmax);
@@ -80,6 +81,8 @@ const GotoCaveCircle = styled.div`
   border-radius: 50%;
   will-change: transform;
   position:absolute;
+  transition: all 0.5s;
+
 }
   &.inactive {
     transform: perspective(500px) translate3d(0px, 0px, -30vmax);
@@ -95,6 +98,7 @@ const ArtDescription = styled.p`
   padding: 0;
   text-align: center;
   color: ${colors.white};
+  transition: all 0.5s;
   &.inactive {
     transform: perspective(500px) translate3d(0px, 0px, -30vmax);
   }
@@ -135,7 +139,7 @@ class Artists extends React.Component {
     let currentKeyArtist = element.parentNode.className
       .toString()
       .replace(/\D+/g, "");
-    console.log(currentKeyArtist);
+    console.log("currentKeyArtist :", currentKeyArtist);
 
     // console.log(element);
     if (this.state.openArtist) {
@@ -155,31 +159,37 @@ class Artists extends React.Component {
             <ArtistsGrid
               key={p.id}
               onClick={this.onArtistClicked}
-              className={
-                (i + "",
-                this.state.openArtist && this.state.activeKey == i
+              className={[
+                (this.state.openArtist && this.state.activeKey == i
                   ? "active"
-                  : "",
-                this.state.openArtist && this.state.activeKey != i
-                  ? "inactive"
-                  : "")
-              }
+                  : "") +
+                  " " +
+                  i +
+                  " " +
+                  (this.state.openArtist && this.state.activeKey != i
+                    ? "inactive"
+                    : "")
+              ]}
             >
               {/* <Link  to={"/artists/" + p.acf.nombre}> */}
               {/* {console.log(i)} */}
-              <ArtImg
-                style={{
-                  backgroundImage: "url(" + p.acf.fotoartista.url + ")"
-                }}
-              />
+
               <PlayVideoCircle
+                className="videoCircle"
                 style={{
                   background: colorRandomFromArray()
                 }}
               />
               <GotoCaveCircle
+                className="caveCircle"
                 style={{
                   background: colorRandomFromArray()
+                }}
+              />
+              <ArtImg
+                className="caveCircle"
+                style={{
+                  backgroundImage: "url(" + p.acf.fotoartista.url + ")"
                 }}
               />
               <ArtDescription>{p.acf.nombre}</ArtDescription>
