@@ -10,8 +10,8 @@ export const colors = {
 };
 
 const colorsForRandom = [
-  "#11383a",
-  "#660000",
+  "#89ED80",
+  "#EA5C24",
   "#fde53f",
   "#444999",
   "#ff00ff",

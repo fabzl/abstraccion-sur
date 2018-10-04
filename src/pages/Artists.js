@@ -4,8 +4,12 @@ import Grid from "../components/Grid";
 import styled from "styled-components";
 import { colors, colorRandomFromArray } from "../styles/globals";
 import { Link } from "react-router-dom";
+import translations from "../translations";
 
 let circleSize = "25vw";
+let gridInitialDistance = "1";
+let gridFinalDistance = "3";
+let activeCirclesDistance = "45vw";
 
 const ArtistsHolder = styled.ul`
   display: grid;
@@ -16,6 +20,13 @@ const ArtistsHolder = styled.ul`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   transition: all 0.9s ease-in-out 0.1s;
+  grid-row-gap: ${gridInitialDistance + "vw"};
+  grid-column-gap: ${gridInitialDistance + "vw"};
+
+  &.active {
+    grid-row-gap: ${gridFinalDistance + "vw"};
+    grid-column-gap: ${gridFinalDistance + "vw"};
+  }
 
   &.moveRight {
     &.moveUp {
@@ -76,9 +87,16 @@ const ArtistsGrid = styled.li`
   flex-direction: row;
   transition: all 0.7s ease-in-out;
   /* border: 1px solid getRa; */
+  opacity: 1;
   
   &.passive {
-    transform: perspective(500px) translate3d(0px,0px,-30vmax);
+    transform: perspective(500px) translate3d(0px,0px,-30vmax)  rotate3d(
+        ${Math.random()},
+        ${Math.random()},
+        ${Math.random()},
+        ${Math.random() * 20}deg
+      );
+     opacity: 0.3;
   }
   &.active {
     transform: perspective(500px) translate3d(0px,0px,-10vmax);
@@ -100,24 +118,35 @@ const ArtImg = styled.div`
   transition: all 0.5s;
 
   &.active {
-    transform: perspective(500px) translate3d(0px, 0px, 15vmax);
+    transform: perspective(500px) translate3d(0px, 0px, 20vmax);
   }
   &.passive {
     transform: perspective(500px) translate3d(0px, 0px, 0px);
+    opacity: 0;
   }
 `;
 
 const PlayVideoCircle = styled.div`
   width: ${circleSize};
   height: ${circleSize};
-  line-height: 0.4em;
+  line-height: 1em;
   border-radius: 50%;
   position: absolute;
   transition: all 0.5s;
-  transform: scale3d(1, 0.7, 1);
+
+  will-change: transform;
+  position: absolute;
+  transition: all 0.5s 0.7s;
+  display: flex;
+  align-items: center;
+  color: transparent;
+  text-align: center;
+  padding: 2vw;
 
   &.active {
-    transform: perspective(500px) translate3d(${circleSize}, 0px, -5vmax);
+    transform: perspective(500px)
+      translate3d(${activeCirclesDistance}, 0px, -5vmax);
+    color: ${colors.black};
   }
   &.passive {
     transform: perspective(500px) translate3d(0px, 0px, 5vmax);
@@ -127,32 +156,43 @@ const PlayVideoCircle = styled.div`
 const GotoCaveCircle = styled.div`
   width: ${circleSize};
   height: ${circleSize};
-  line-height: 0.4em;
+  line-height: 1em;
   border-radius: 50%;
   will-change: transform;
   position: absolute;
-  transition: all 0.5s;
+  transition: all 0.5s 0.7s;
+  display: flex;
+  align-items: center;
+  color: transparent;
+  text-align: center;
+  padding: 2vw;
 
   &.passive {
     transform: perspective(500px) translate3d(0px, 0px, 3vmax);
   }
   &.active {
-    transform: perspective(500px) translate3d(-${circleSize}, 0px, -5vmax);
+    transform: perspective(500px)
+      translate3d(-${activeCirclesDistance}, 0px, -5vmax);
+    color: ${colors.black};
   }
 `;
 
 const ArtDescription = styled.p`
-  font-size: 1.7rem;
+  position: absolute;
+  font-size: 7rem;
+  line-height: 9rem;
   margin: 0;
   padding: 0;
-  text-align: center;
-  color: ${colors.black};
+  text-align: right;
+  color: ${colors.white};
   transition: all 0.5s;
-  &.passive {
-    transform: perspective(500px) translate3d(0px, 0px, -30vmax);
-  }
+  z-index: 11;
+
+  opacity: 0;
+
   &.active {
-    transform: perspective(500px) translate3d(0px, 0px, -10vmax);
+    transform: perspective(500px) translate3d(5vh, -30vh, 5vmax);
+    opacity: 1;
   }
 `;
 
@@ -200,7 +240,7 @@ class Artists extends React.Component {
     let currentKeyArtist = element.parentNode.className
       .toString()
       .replace(/\D+/g, "");
-    console.log("currentKeyArtist :", currentKeyArtist);
+    // console.log("currentKeyArtist :", currentKeyArtist);
 
     // console.log(element);
     if (this.state.openArtist) {
@@ -213,14 +253,26 @@ class Artists extends React.Component {
   };
 
   render() {
+    const { language } = this.props;
     return (
-      <div>
+      <div
+        style={{
+          alignItems: "center",
+          flexDirection: "row",
+          display: "flex",
+          background: colorRandomFromArray(),
+          transition: "background 5s",
+          height: "100vh"
+        }}
+      >
         <ArtistsHolder
           id="artistHolder"
           className={[
-            (this.state.openArtist && this.state.holderPositionX == 0
-              ? "moveLeft"
-              : "") +
+            (this.state.openArtist ? "active" : "") +
+              " " +
+              (this.state.openArtist && this.state.holderPositionX == 0
+                ? "moveLeft"
+                : "") +
               " " +
               (this.state.openArtist && this.state.holderPositionX == 1
                 ? "moveCenter"
@@ -249,9 +301,6 @@ class Artists extends React.Component {
                     : "")
               ]}
             >
-              {/* <Link  to={"/artists/" + p.acf.nombre}> */}
-              {/* {console.log(i)} */}
-
               <PlayVideoCircle
                 className={[
                   (this.state.openArtist && this.state.activeKey == i
@@ -267,7 +316,9 @@ class Artists extends React.Component {
                 style={{
                   background: colorRandomFromArray()
                 }}
-              />
+              >
+                {translations.artists.video[language]}
+              </PlayVideoCircle>
               <GotoCaveCircle
                 className={[
                   (this.state.openArtist && this.state.activeKey == i
@@ -283,7 +334,10 @@ class Artists extends React.Component {
                 style={{
                   background: colorRandomFromArray()
                 }}
-              />
+              >
+                {translations.artists.cave[language]}
+              </GotoCaveCircle>
+
               <ArtImg
                 className={[
                   (this.state.openArtist && this.state.activeKey == i
@@ -300,7 +354,21 @@ class Artists extends React.Component {
                   backgroundImage: "url(" + p.acf.fotoartista.url + ")"
                 }}
               />
-              <ArtDescription>{p.acf.nombre}</ArtDescription>
+              <ArtDescription
+                className={[
+                  (this.state.openArtist && this.state.activeKey == i
+                    ? "active"
+                    : "") +
+                    " " +
+                    i +
+                    " " +
+                    (this.state.openArtist && this.state.activeKey != i
+                      ? "passive"
+                      : "")
+                ]}
+              >
+                {p.acf.nombre}
+              </ArtDescription>
             </ArtistsGrid>
           ))}
         </ArtistsHolder>

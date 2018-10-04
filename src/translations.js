@@ -46,6 +46,16 @@ const Translations = {
       en: "Client",
       es: "Cliente"
     }
+  },
+  artists: {
+    cave: {
+      en: "Artist's cave",
+      es: "La caverna del artista"
+    },
+    video: {
+      en: "play capsule",
+      es: "ver capsula"
+    }
   }
 };
 
