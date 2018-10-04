@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import ReactPlayer from "react-player";
-
-// import { enableScroll, disableScroll } from "../helpers";
 import { stopVideo } from "../redux/actions";
+// import { enableScroll, disableScroll } from "../helpers";
+
 import { tvOn } from "../styles/globals";
 
 const Overlay = styled.div`
@@ -95,4 +95,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { stopVideo })(Modal);
+export default connect(
+  mapStateToProps,
+  { stopVideo }
+)(Modal);

@@ -1,15 +1,43 @@
 import React from "react";
 import { connect } from "react-redux";
-import Grid from "../components/Grid";
+// import Grid from "../components/Grid";
 import styled from "styled-components";
 import { colors, colorRandomFromArray } from "../styles/globals";
 import { Link } from "react-router-dom";
 import translations from "../translations";
+// import VideoPlayer from "../components/VideoPlayer";
 
-let circleSize = "25vw";
+import ReactPlayer from "react-player";
+import { stopVideo, playVideo } from "../redux/actions";
+
+let circleSize = "20vw";
 let gridInitialDistance = "1";
-let gridFinalDistance = "3";
+let gridFinalDistance = "0";
 let activeCirclesDistance = "45vw";
+
+const CloseButton = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: ${colors.white};
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
+const VideoHolder = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  transition: all 1s;
+  transform: translate3d(0, -100vh, 0);
+  &.active {
+    transform: translate3d(0, 0, 0);
+  }
+`;
 
 const ArtistsHolder = styled.ul`
   display: grid;
@@ -22,6 +50,7 @@ const ArtistsHolder = styled.ul`
   transition: all 0.9s ease-in-out 0.1s;
   grid-row-gap: ${gridInitialDistance + "vw"};
   grid-column-gap: ${gridInitialDistance + "vw"};
+  width: 100vw;
 
   &.active {
     grid-row-gap: ${gridFinalDistance + "vw"};
@@ -30,7 +59,11 @@ const ArtistsHolder = styled.ul`
 
   &.moveRight {
     &.moveUp {
-      transform: translate3d(-${circleSize}, -${circleSize}, 0)
+      transform: translate3d(
+          -${circleSize.toString().replace(/\D+/g, "") + "vh"},
+          -${circleSize},
+          0
+        )
         rotate3d(1, 1, 0, -5deg);
     }
     &.moveCenterY {
@@ -131,9 +164,6 @@ const PlayVideoCircle = styled.div`
   height: ${circleSize};
   line-height: 1em;
   border-radius: 50%;
-  position: absolute;
-  transition: all 0.5s;
-
   will-change: transform;
   position: absolute;
   transition: all 0.5s 0.7s;
@@ -142,11 +172,18 @@ const PlayVideoCircle = styled.div`
   color: transparent;
   text-align: center;
   padding: 2vw;
+  margin: 0 auto;
+  cursor: pointer;
 
   &.active {
     transform: perspective(500px)
       translate3d(${activeCirclesDistance}, 0px, -5vmax);
     color: ${colors.black};
+    &:hover {
+      transition: all 0.3s;
+      transform: perspective(500px)
+        translate3d(${activeCirclesDistance}, 0px, -5vmax) scale(1.4);
+    }
   }
   &.passive {
     transform: perspective(500px) translate3d(0px, 0px, 5vmax);
@@ -166,6 +203,7 @@ const GotoCaveCircle = styled.div`
   color: transparent;
   text-align: center;
   padding: 2vw;
+  cursor: pointer;
 
   &.passive {
     transform: perspective(500px) translate3d(0px, 0px, 3vmax);
@@ -174,13 +212,19 @@ const GotoCaveCircle = styled.div`
     transform: perspective(500px)
       translate3d(-${activeCirclesDistance}, 0px, -5vmax);
     color: ${colors.black};
+
+    &:hover {
+      transition: all 0.3s;
+      transform: perspective(500px)
+        translate3d(-${activeCirclesDistance}, 0px, -5vmax) scale(1.4);
+    }
   }
 `;
 
 const ArtDescription = styled.p`
   position: absolute;
-  font-size: 7rem;
-  line-height: 9rem;
+  font-size: 8rem;
+  line-height: 8.5rem;
   margin: 0;
   padding: 0;
   text-align: right;
@@ -191,7 +235,7 @@ const ArtDescription = styled.p`
   opacity: 0;
 
   &.active {
-    transform: perspective(500px) translate3d(5vh, -30vh, 5vmax);
+    transform: perspective(500px) translate3d(20vh, -35vh, 0);
     opacity: 1;
   }
 `;
@@ -199,6 +243,8 @@ const ArtDescription = styled.p`
 class Artists extends React.Component {
   state = {
     openArtist: false,
+    openVideo: false,
+    videoPlaying: "playing",
     activeKey: 0,
     totalArtists: -1,
     holderPositionX: 1,
@@ -229,12 +275,6 @@ class Artists extends React.Component {
     // console.log("close Menu");
   };
 
-  setTotalArtistAmount = () => {
-    var artistAmount =
-      document.getElementById("artistHolder").childElementCount - 1;
-    this.setState({ totalArtists: artistAmount });
-  };
-
   onArtistClicked = e => {
     let element = e.target;
     let currentKeyArtist = element.parentNode.className
@@ -250,6 +290,28 @@ class Artists extends React.Component {
     } else {
       this.openArtist(currentKeyArtist);
     }
+  };
+
+  ////// video
+
+  videoEnd = () => {
+    console.log("videoEND");
+    this.setState({ openVideo: false, videoPlaying: false });
+  };
+
+  closeVideo = () => {
+    console.log("closeVideo");
+    this.setState({ openVideo: false, videoPlaying: false });
+  };
+  displayVideo = () => {
+    console.log("displayVideo");
+    this.setState({ openVideo: true, videoPlaying: true });
+  };
+
+  setTotalArtistAmount = () => {
+    var artistAmount =
+      document.getElementById("artistHolder").childElementCount - 1;
+    this.setState({ totalArtists: artistAmount });
   };
 
   render() {
@@ -302,6 +364,7 @@ class Artists extends React.Component {
               ]}
             >
               <PlayVideoCircle
+                onClick={this.displayVideo}
                 className={[
                   (this.state.openArtist && this.state.activeKey == i
                     ? "active"
@@ -372,6 +435,28 @@ class Artists extends React.Component {
             </ArtistsGrid>
           ))}
         </ArtistsHolder>
+
+        <VideoHolder className={[this.state.openVideo ? "active" : ""]}>
+          <CloseButton onClick={this.closeVideo}>
+            <i className="fas fa-times fa-3x" />
+          </CloseButton>
+          <ReactPlayer
+            url={"https://vimeo.com/92830563"}
+            playing={this.props.videoPlaying}
+            true
+            controls
+            width="100%"
+            allow="autoplay; fullscreen"
+            height="100vh"
+            onEnded={this.videoEnd}
+            config={{
+              vimeo: {
+                onReady: true
+                // autoplay: true
+              }
+            }}
+          />
+        </VideoHolder>
       </div>
     );
   }
@@ -386,4 +471,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Artists);
+export default connect(
+  mapStateToProps,
+  { stopVideo, playVideo }
+)(Artists);
