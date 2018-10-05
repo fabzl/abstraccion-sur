@@ -30,7 +30,7 @@ const H3 = styled.h3`
   font-style: italic;
   line-height: 1.2em;
   font-size: 2.9rem;
-  font-family: "Futura";
+  font-family: "FuturaBold", "Futura", "Verdana";
   text-transform: uppercase;
 `;
 
@@ -46,6 +46,7 @@ const TextDesc = styled.p`
   text-align: left;
   margin: 30vmax auto 0 auto;
   font-size: 1.2em;
+  font-family: "FuturaBold", "Futura", "Verdana";
 `;
 
 const LogoParts = styled.div`
@@ -66,7 +67,7 @@ const Button = styled.button`
   padding: 12px 35px;
   margin: 20px auto;
   letter-spacing: 0.07em;
-  font-family: "Futura";
+  font-family: "FuturaBold", "Futura", "Verdana";
   border: none;
   display: block;
   text-align: center;

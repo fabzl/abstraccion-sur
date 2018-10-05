@@ -26,7 +26,7 @@ const CurrentYearHolder = styled.h3`
   font-weight: 700;
   line-height: 1.2em;
   font-size: 2.9rem;
-  font-family: "Futura";
+  font-family: "FuturaBold", "Futura", "Verdana";
   text-transform: uppercase;
   color: ${colors.black};
   position: fixed;

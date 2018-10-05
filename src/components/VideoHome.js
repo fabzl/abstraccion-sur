@@ -53,7 +53,7 @@ const Text = styled.div`
 `;
 
 const H2 = styled.h2`
-  font-family: "Poppins:800", "Futura";
+  font-family: "FuturaBold", "Futura", "Verdana";
   margin: 0 auto;
   padding: 0 20px;
   transform: translateX(-1px);

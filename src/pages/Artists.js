@@ -10,10 +10,10 @@ import translations from "../translations";
 import ReactPlayer from "react-player";
 import { stopVideo, playVideo } from "../redux/actions";
 
-let circleSize = "20vw";
+let circleSize = "25vmin";
 let gridInitialDistance = "1";
 let gridFinalDistance = "0";
-let activeCirclesDistance = "45vw";
+let activeCirclesDistance = "35vw";
 
 const CloseButton = styled.div`
   position: absolute;
@@ -34,6 +34,7 @@ const VideoHolder = styled.div`
   z-index: 1000;
   transition: all 1s;
   transform: translate3d(0, -100vh, 0);
+
   &.active {
     transform: translate3d(0, 0, 0);
   }
@@ -51,6 +52,7 @@ const ArtistsHolder = styled.ul`
   grid-row-gap: ${gridInitialDistance + "vw"};
   grid-column-gap: ${gridInitialDistance + "vw"};
   width: 100vw;
+  justify-content: center;
 
   &.active {
     grid-row-gap: ${gridFinalDistance + "vw"};
@@ -105,13 +107,13 @@ const ArtistsHolder = styled.ul`
 
 const ArtistsGrid = styled.li`
 
+  margin: 0 auto;
   width: ${circleSize};
   height: ${circleSize};
   font-weight: 700;
-  /* background-color: ${colors.black}; */
   line-height: 1.2em;
   font-size: 2.9rem;
-  font-family: "Futura";
+  font-family:  "FuturaBold", "Futura","Verdana";
   text-transform: uppercase;
   color: ${colors.violet};
   display: inline-block;
@@ -119,9 +121,12 @@ const ArtistsGrid = styled.li`
   align-content: center;
   flex-direction: row;
   transition: all 0.7s ease-in-out;
-  /* border: 1px solid getRa; */
   opacity: 1;
-  
+  cursor:pointer;
+  /* &:hover {
+    border: 10rem solid ${colors.violet};
+  } */
+
   &.passive {
     transform: perspective(500px) translate3d(0px,0px,-30vmax)  rotate3d(
         ${Math.random()},
@@ -174,15 +179,16 @@ const PlayVideoCircle = styled.div`
   padding: 2vw;
   margin: 0 auto;
   cursor: pointer;
+  justify-content: center;
 
   &.active {
     transform: perspective(500px)
-      translate3d(${activeCirclesDistance}, 0px, -5vmax);
+      translate3d(${activeCirclesDistance}, 0px, 0vmax);
     color: ${colors.black};
     &:hover {
       transition: all 0.3s;
       transform: perspective(500px)
-        translate3d(${activeCirclesDistance}, 0px, -5vmax) scale(1.4);
+        translate3d(${activeCirclesDistance}, 0px, 0vmax) scale(1.4);
     }
   }
   &.passive {
@@ -204,19 +210,21 @@ const GotoCaveCircle = styled.div`
   text-align: center;
   padding: 2vw;
   cursor: pointer;
+  justify-content: center;
 
   &.passive {
     transform: perspective(500px) translate3d(0px, 0px, 3vmax);
   }
   &.active {
     transform: perspective(500px)
-      translate3d(-${activeCirclesDistance}, 0px, -5vmax);
+      translate3d(-${activeCirclesDistance}, 0px, 0vmax);
     color: ${colors.black};
+    padding: 6vw;
 
     &:hover {
       transition: all 0.3s;
       transform: perspective(500px)
-        translate3d(-${activeCirclesDistance}, 0px, -5vmax) scale(1.4);
+        translate3d(-${activeCirclesDistance}, 0px, 0vmax) scale(1.4);
     }
   }
 `;
@@ -229,14 +237,16 @@ const ArtDescription = styled.p`
   padding: 0;
   text-align: right;
   color: ${colors.white};
-  transition: all 0.5s;
+  transition: all 2.5s;
   z-index: 11;
-
   opacity: 0;
+  width: 0;
+  overflow: hidden;
 
   &.active {
     transform: perspective(500px) translate3d(20vh, -35vh, 0);
     opacity: 1;
+    width: auto;
   }
 `;
 
@@ -244,15 +254,20 @@ class Artists extends React.Component {
   state = {
     openArtist: false,
     openVideo: false,
-    videoPlaying: "playing",
-    activeKey: 0,
+    videoPlaying: true,
+    activeKey: -1,
     totalArtists: -1,
     holderPositionX: 1,
-    holderPositionY: 1
+    holderPositionY: 1,
+    activeVideoToPlay: "null"
   };
 
   componentDidMount() {
     this.setTotalArtistAmount();
+    //var iframe = document.querySelector("iframe");
+    // var player = new Vimeo.Player(iframe);
+
+    // console.log(iframe, player);
   }
 
   openArtist = key => {
@@ -265,7 +280,7 @@ class Artists extends React.Component {
     let positionX = key % 3;
     this.setState({ holderPositionX: positionX });
 
-    // this must be changed
+    // this must be changed if artist num changes
     let positionY = key >= 6 ? "moveUp" : key > 2 ? "moveCenterY" : "moveDown";
     this.setState({ holderPositionY: positionY });
   };
@@ -296,22 +311,31 @@ class Artists extends React.Component {
 
   videoEnd = () => {
     console.log("videoEND");
-    this.setState({ openVideo: false, videoPlaying: false });
+    this.setState({ openVideo: false, videoPlaying: "" });
   };
 
   closeVideo = () => {
     console.log("closeVideo");
-    this.setState({ openVideo: false, videoPlaying: false });
+    this.setState({ openVideo: false, videoPlaying: "" });
   };
   displayVideo = () => {
     console.log("displayVideo");
     this.setState({ openVideo: true, videoPlaying: true });
+    this.selectVideoURL(this.state.activeKey);
   };
 
   setTotalArtistAmount = () => {
-    var artistAmount =
+    let artistAmount =
       document.getElementById("artistHolder").childElementCount - 1;
     this.setState({ totalArtists: artistAmount });
+  };
+
+  selectVideoURL = key => {
+    let videoURL = this.props.dataArtists[key].acf.videomain;
+    console.log(this.state.activeKey, "videoURL", videoURL);
+    this.setState({ activeVideoToPlay: "https://vimeo.com/92830563" });
+    ReactPlayer.canPlay("https://vimeo.com/92830563");
+    // return videoURL;
   };
 
   render() {
@@ -324,7 +348,8 @@ class Artists extends React.Component {
           display: "flex",
           background: colorRandomFromArray(),
           transition: "background 5s",
-          height: "100vh"
+          height: "100vh",
+          width: "100vw"
         }}
       >
         <ArtistsHolder
@@ -441,9 +466,8 @@ class Artists extends React.Component {
             <i className="fas fa-times fa-3x" />
           </CloseButton>
           <ReactPlayer
-            url={"https://vimeo.com/92830563"}
+            url={this.props.activeVideoToPlay}
             playing={this.props.videoPlaying}
-            true
             controls
             width="100%"
             allow="autoplay; fullscreen"
