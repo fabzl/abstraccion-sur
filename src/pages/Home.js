@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 // import VideoHome from "../components/VideoHome";
-import translations from "../translations";
+//import translations from "../translations";
 import { colors } from "../styles/globals";
 
 import HomePic from "../img/intro_pic.jpg";
@@ -54,7 +54,6 @@ const TextDesc = styled.p`
   line-height: 2em;
   font-family: "FuturaBold", "Futura", "Verdana";
   font-size: 2.8rem;
-
   top: 0;
   right: 0;
   width: 60%;
@@ -65,10 +64,13 @@ const TextDesc = styled.p`
     font-weight: 800;
     font-size: 8rem;
     text-transform: uppercase;
+    text-align: center;
   }
   &.italic {
     font-style: italic;
     font-weight: 500;
+    text-align: center;
+    font-size: 4rem;
   }
 `;
 
@@ -117,10 +119,10 @@ const Home = props => (
       <img src={R14} alt="r" />
     </LogoParts>
 
-    <TextDesc>NUEVE ENTREVISTAS</TextDesc>
-    <TextDesc>
-      {" "}
-      algunos de los protagonistas de La revolución de las formas
+    <TextDesc className="title">SELECCION DE 9 ARTISTAS </TextDesc>
+    <TextDesc className="italic">
+      conoce mas de algunos de los protagonistas de la vanguardia abstractas
+      Chilena de finales del siglo XX.
     </TextDesc>
     <ImageHome src={HomePic} />
     <TextDesc>
@@ -143,8 +145,9 @@ const Home = props => (
       autor. Los documentos o las referencias duras sirven para situar las
       reflexiones y el contexto de época.
     </TextDesc>
-    <Button>Artistas</Button>
-    <Button>Obras</Button>
+
+    <Button>Conoce mas de los 9 Artistas</Button>
+    <Button>Ve las Obras que realizaron</Button>
     <Button>Equipo</Button>
   </HomeContainer>
 );

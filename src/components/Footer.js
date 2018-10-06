@@ -7,7 +7,7 @@ import translations from "../translations";
 import { colors } from "../styles/globals";
 
 import { Link, NavLink } from "react-router-dom";
-import LanguageSelector from "./LanguageSelector";
+//import LanguageSelector from "./LanguageSelector";
 
 // import { Link, NavLink } from "react-router-dom";
 
@@ -34,6 +34,7 @@ const Wrap = styled.footer`
   display: block;
   position: fixed;
   width: 100vw;
+  height: 8vh;
   bottom: 0;
   background-color: ${colors.black};
 `;
@@ -56,14 +57,6 @@ const General = styled.div`
     margin-right: 10px;
   }
 `;
-
-// const H6 = styled.h6`
-//   @media (max-width: 740px) {
-//     font-size: 12px;
-//   }
-// `;
-
-// const Link = styled(NavLink)``;
 
 const LinkTo = styled(NavLink)`
   cursor: pointer;

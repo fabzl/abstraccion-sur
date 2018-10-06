@@ -445,7 +445,20 @@ class Artists extends React.Component {
               >
                 {translations.artists.video[language]}
               </PlayVideoCircle>
-              <LinkTo to="/about">
+              <LinkTo
+                to={
+                  "/artists/" +
+                  p.acf.nombre
+                    .toLowerCase()
+                    .replace(/ /g, "-")
+                    .replace(/á/gi, "a")
+                    .replace(/é/gi, "e")
+                    .replace(/í/gi, "i")
+                    .replace(/ó/gi, "o")
+                    .replace(/ú/gi, "u")
+                    .replace(/ñ/gi, "n")
+                }
+              >
                 <GotoCaveCircle
                   className={[
                     (this.state.openArtist && this.state.activeKey == i

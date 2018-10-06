@@ -7,6 +7,14 @@ import LanguageSelector from "./LanguageSelector";
 import translations from "../translations";
 import { colors } from "../styles/globals";
 
+const Circle = styled.div`
+  border-radius: 50%;
+  color: ${colors.violet};
+  position: fixed;
+  width: 10vw;
+  height: 10vw;
+`;
+
 const Nav = styled.nav`
   position: fixed;
   width: 100%;

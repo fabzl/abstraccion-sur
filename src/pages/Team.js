@@ -23,6 +23,16 @@ import R14 from "../img/14_r.svg";
 import Linea from "../img/linea.svg";
 import Triangulo from "../img/triangulo.svg";
 
+const ArtistList = styled.li`
+  list-style-type: none;
+`;
+
+const ArtistUl = styled.ul`
+  text-align: right;
+  padding: 10vh 30vw;
+  line-height: 7rem;
+`;
+
 const Wrap = styled.div`
   height: 50vh;
   background: url(${props => props.src}) no-repeat center;
@@ -31,11 +41,13 @@ const Wrap = styled.div`
 
 const H2 = styled.h2`
   font-weight: 700;
+  letter-spacing: 130%;
+  line-height: 1em;
   font-family: "FuturaBold", "Futura", "Verdana";
   text-transform: uppercase;
-  line-height: 1em;
+
   margin: 2rem 0 0.6em;
-  letter-spacing: 130%;
+
   text-align: center;
   font-size: 24px;
   color: ${colors.black};
@@ -65,11 +77,13 @@ const Image = styled.div`
 const Team = props => {
   const { data, language } = props;
 
-  const LogoParts = styled.div``;
+  const TeamParts = styled.div`
+    padding-bottom: 10vh;
+  `;
 
   return (
     <div>
-      <LogoParts>
+      <TeamParts>
         <img src={Triangulo} alt="triangulo" />
 
         <img src={Linea} alt="linea" />
@@ -94,40 +108,37 @@ const Team = props => {
         <H2>DISEÑO Y PROGRAMACIÓN. (Fabián Andrade)</H2>
         <img src={O10} alt="o" />
 
+        <H2>ARTISTAS: </H2>
         <H2>
-          ARTISTAS:
-          <ul>
-            <li>Alejandro Siña</li>
-            <li>Claudio Román</li>
-            <li>Elsa Bolívar</li>
-            <li>Federico Assler</li>
-            <li> Miguel Cosgrove</li>
-            <li> Paz Olea </li>
-            <li> Ricardo Yrarrázabal</li>
-            <li> Robinson Mora</li>
-            <li> Sergio Berthoud</li>
-          </ul>
+          <ArtistUl>
+            <ArtistList>Alejandro Siña</ArtistList>
+            <ArtistList>Claudio Román</ArtistList>
+            <ArtistList>Elsa Bolívar</ArtistList>
+            <ArtistList>Federico Assler</ArtistList>
+            <ArtistList> Miguel Cosgrove</ArtistList>
+            <ArtistList> Paz Olea </ArtistList>
+            <ArtistList> Ricardo Yrarrázabal</ArtistList>
+            <ArtistList> Robinson Mora</ArtistList>
+            <ArtistList> Sergio Berthoud</ArtistList>
+          </ArtistUl>
         </H2>
         <img src={N11} alt="n" />
 
         <H2>
-          {" "}
-          AGRADECIMIENTOS: Carlos Cruz Jonus Bartholdson Rita Hughes y David
+          AGRADECIMIENTOS: (Carlos Cruz) Jonus Bartholdson, Rita Hughes y David
           Huhhes *Gustavo Poblete (James Smith Rodriguez) *Carmen Piemonte
         </H2>
         <img src={S12} alt="s" />
+        <H2>(filmación taller) Centro Cultural Palacio La Moneda (CCPLM)</H2>
         <img src={U13} alt="u" />
-
+        <H2>Universidad Diego Portales (UDP)</H2>
         <img src={R14} alt="r" />
         <H2>
-          (filmación taller) Centro Cultural Palacio La Moneda (CCPLM)
-          Universidad Diego Portales (UDP) Proyecto financiado por Fondos de
-          Cultura Concursables Chile, (FONDART, 2018)s
+          Proyecto financiado por Fondos de Cultura Concursables Chile (FONDART,
+          2018)
         </H2>
-      </LogoParts>
-      <div>
-        <p />
-      </div>
+      </TeamParts>
+      <div />
     </div>
   );
 };

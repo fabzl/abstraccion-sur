@@ -5,27 +5,30 @@ import { connect } from "react-redux";
 import MainImage from "../components/MainImage";
 import Desc from "../components/Desc";
 import styled from "styled-components";
-import { colors } from "../styles/globals";
+import { colors, colorRandomFromArray } from "../styles/globals";
 import { GridArt } from "../components/GridArt";
 import { Link } from "react-router-dom";
 import { playVideo } from "../redux/actions";
 import ReactPlayer from "react-player";
 
+const LinkTo = styled(Link)``;
+
 const Arrow = styled(Link)`
-  &.arrow-white {
-    color: ${colors.white};
-  }
-  color: ${colors.black};
-  height: 100%;
-  align-items: top;
+  color: ${colors.white};
+  height: 92vh;
+  align-items: bottom;
   display: flex;
   position: fixed;
-  width: 10%;
+  width: 7vw;
   justify-content: center;
   background: transparent;
+
   & svg {
     transition: all 0.3s;
     transform: translateY(38vh);
+  }
+  &.next {
+    right: 0;
   }
 `;
 
@@ -59,34 +62,62 @@ const Center = styled.div`
   flex-direction: column;
 `;
 
-const Artgrid = styled.div``;
+const Artgrid = styled.div`
+  padding-left: 20vw;
+`;
 
 const BlueSide = styled.div`
-  width: 33%;
-  height: 100vh;
+  width: 35vw;
+  margin-right: 5vw;
+  height: 92vh;
   display: inline-flex;
   flex-direction: column;
   background: ${colors.black};
+  /* position: absolute; */
+  padding-right: 2rem;
 `;
 
 const BigSide = styled.div`
-  width: 60%;
+  /* width: 60%; */
   display: inline-flex;
+  flex-direction: row;
 `;
 
-const ArtHolder = styled.ul`
-    display:grid;
-    transition: all 0.3s;
-    border:1px solid red;
-    padding-top: 35vh;
-}
+export const ArtHolder = styled.ul`
+  display: flex;
+  transition: all 0.3s;
+  /* border: 1px solid red; */
+  padding-top: 10vh;
+`;
+
+const ArtistName = styled.h1`
+  color: ${colors.white};
+  font-weight: 700;
+  letter-spacing: 130%;
+  /* line-height: em; */
+  font-family: "FuturaBold", "Futura", "Verdana";
+  font-size: 7rem;
+  text-transform: uppercase;
+  word-spacing: 100vw;
+  text-align: right;
 `;
 
 const ArtImg = styled.img`
-  
-  height:10vh;
-  line-height: .4em;
-}
+  height: 60vmin;
+  width: auto;
+  object-fit: cover;
+`;
+
+const ArtistImage = styled.img`
+  object-fit: cover;
+  width: 50vw;
+  height: auto;
+`;
+
+export const ContainerCluster = styled.div`
+  height: 92vh;
+  padding: 0 10vw;
+  background: ${colors.white};
 `;
 
 const ArtDescription = styled.p`
@@ -204,46 +235,27 @@ const ShowWork = props => {
 
   return (
     <div style={mainDivStyle}>
+      <Arrow className="arrow-white next" to={nextLink}>
+        <i className="fas fa-chevron-right fa-4x" />
+      </Arrow>
+      <Arrow className="arrow-white" to={prevLink}>
+        <i className="fas fa-chevron-left fa-4x" />
+      </Arrow>
       <BlueSide>
-        <MainImage
-          nombre={nombre}
-          url={url}
-          videoUrl={videomain}
-          prevLink={prevLink}
-          nextLink={nextLink}
-        />
-
-        <Desc
-          title={nombre}
-          desc={language === "es" ? biografia : biography}
-          videomain={videomain}
-          videos={videos}
-        />
-
-        <Arrow className="arrow-white" to={prevLink}>
-          <i className="fas fa-chevron-left fa-4x" />
-        </Arrow>
+        <ArtistImage src={url} alt={nombre} />
+        <ArtistName>{nombre}</ArtistName>
       </BlueSide>
-      <BigSide>
-        {/* <Center>
+
+      {/* <Center>
           <Play onClick={() => props.playVideo(props.videomain)}>
             <i className="far fa-play-circle fa-10x" />
           </Play>
         </Center> */}
+      <ContainerCluster>
+        <Desc title={nombre} desc={language === "es" ? biografia : biography} />
+      </ContainerCluster>
 
-        <ReactPlayer
-          url={videomain}
-          playing={false}
-          controls
-          width="640px"
-          height="480px"
-          onEnded={this.videoEnd}
-        />
-
-        <Arrow to={nextLink}>
-          <i className="fas fa-chevron-right fa-4x" />
-        </Arrow>
-
+      <ContainerCluster>
         <ArtHolder>
           {art.map(p => (
             <Artgrid key={p.id}>
@@ -260,7 +272,17 @@ const ShowWork = props => {
             </Artgrid>
           ))}
         </ArtHolder>
-      </BigSide>
+      </ContainerCluster>
+      <ContainerCluster>
+        <ReactPlayer
+          url={videomain}
+          playing={false}
+          controls
+          width="auto"
+          height="92vh"
+          onEnded={this.videoEnd}
+        />
+      </ContainerCluster>
     </div>
   );
 };
@@ -273,4 +295,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ShowWork);
+export default connect(
+  mapStateToProps,
+  { ContainerCluster, ArtHolder }
+)(ShowWork);

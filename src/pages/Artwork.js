@@ -12,6 +12,7 @@ import Slider, { Range } from "rc-slider";
 // import Slider from 'rc-slider/lib/Slider';
 // import Range from 'rc-slider/lib/Range';
 import "rc-slider/assets/index.css";
+import { ContainerCluster, ArtHolder, Artgrid } from "../pages/ShowWork";
 
 import {
   startTimeline,
@@ -46,26 +47,14 @@ const LinkTo = styled(Link)`
   }
 `;
 
-const YearContainer = styled.div`
-  width: 100vw;
-  border: 1px solid pink;
-  position: relative;
-`;
-
 const TimelineContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow: scroll-y;
-  position: fixed;
+  width: auto;
+  height: 92vh;
   top: 0;
   left: 0;
   flex-direction: row;
+  display: flex;
 `;
-const timelineLengthValue = 50;
-const timelineHeight = 50;
-const timelineCellWidth = 20;
-const timelineCellHeight = 12;
-
 const ArtWork = styled.div`
   padding-top: 10vh;
   width: 100%;
@@ -91,13 +80,15 @@ const ArtImg = styled.img`
 `;
 
 const ArtObject = styled.div`
-  width: 100vw;
+  padding-right: 10vw;
+  display: inline-flex;
 `;
 
 const ArtDescription = styled.p`
   font-size: 1.2rem;
   margin: 0;
   padding: 0;
+  color: ${colors.black};
 `;
 const YearTitle = styled.h3`
   color: ${colors.blue};
@@ -172,22 +163,16 @@ const isCurrentYear = (props, key) => {
   return currentYear == props.acf.ano;
 };
 
-const createArtWorkForYear = props => {
+const createTimeline = props => {
   // filter data and return an array called art with the selected art.
 
-  let art = props.dataArtwork.filter(isCurrentYear);
-
   // and return mapped objects
-  let artObjects = art.map(p => (
+  let artObjects = props.dataArtwork.map(p => (
     <ArtObject key={p.id}>
-      <ArtImg
-        src={p.acf.imagen_grande.sizes.small}
-        alt=""
-        className="img-responsive"
-      />
-      <ArtTitle>{p.acf.titulo}</ArtTitle>
+      <ArtImg src={p.acf.imagen_grande.url} alt="" className="img-responsive" />
+      <ArtTitle>{p.acf.titulo + " - " + p.acf.autor}</ArtTitle>
       <ArtDescription>{p.acf.ano}</ArtDescription>
-      <ArtDescription>{p.acf.artista}</ArtDescription>
+      {/* <ArtDescription>{p.acf.autor}</ArtDescription> */}
       <ArtDescription>{p.acf.tecnica}</ArtDescription>
       <ArtDescription>{p.acf.dimensiones}</ArtDescription>
     </ArtObject>
@@ -196,39 +181,11 @@ const createArtWorkForYear = props => {
   console.log("art:", artObjects);
   return artObjects;
 };
-const createTimeline = props => {
-  console.log("timeLine", props.timeline.minYear, props.timeline.maxYear);
 
-  let years = [];
-
-  // Outer loop to create parent
-  for (let i = props.timeline.minYear; i <= props.timeline.maxYear; i++) {
-    let children = [];
-    //Inner loop to create children
-    // let artObj = props.dataArtwork[i - props.timeline.minYear];
-    let artObj = props.dataArtwork.map(p => p.acf.ano == i);
-
-    children.push(
-      <ArtWork key={i} className={i}>
-        {/* <YearTitle>{i}</YearTitle> */}
-        {(yearToIndex = i)}
-        {createArtWorkForYear(props)}
-      </ArtWork>
-    );
-    //Create the parent and add the children
-    years.push(
-      <YearContainer className="mainholder" key={i}>
-        {children}
-      </YearContainer>
-    );
-  }
-  return years;
-};
-
-// const checkSliderPos = props => {
-//   console.log("check");
-// };
-// <ul>{props.dataArtwork.map(p => <li key={p.id}>{p.name}</li>)}</ul>;
+//  const checkSliderPos = props => {
+//    console.log("check");
+//  };
+//  <ul>{props.dataArtwork.map(p => <li key={p.id}>{p.name}</li>)}</ul>;
 
 class Timeline extends React.Component {
   state = {
@@ -246,20 +203,6 @@ class Timeline extends React.Component {
     // console.dir(Sliderboy);
   }
 
-  handleChange = (sliderValues, state) => {
-    // this.setState({ sliderValues });
-    console.log(
-      "TESTER BOT",
-      sliderValues,
-      "currentYear",
-      this.props.timeline.currentYear,
-      "state"
-      // state
-    );
-
-    this.setState({ currentYear: sliderValues + this.props.timeline.minYear });
-  };
-
   render() {
     const style = {
       transform:
@@ -268,41 +211,29 @@ class Timeline extends React.Component {
           this.state.sliderSpeed +
         "px)"
     };
-    const { sliderValues } = this.state;
     return (
       // const  = props => (
-      <TimelineContainer>
-        <CurrentYearHolder>{this.props.timeline.currentYear}</CurrentYearHolder>
-        <SliderHolder>
-          <Sliderboy
-            min={0}
-            max={this.props.timeline.timelineLength}
-            defaultValue={0}
-            onChange={this.handleChange}
-            className={"slido"}
-          />
-          {/* <Range /> */}
-        </SliderHolder>
-        <YearHolder style={style}>
-          {createTimeline(this.props, style)}
-        </YearHolder>
-
-        <ButtonYearIncrease onClick={this.props.increaseYear}>
-          increase
-        </ButtonYearIncrease>
-        <ButtonYearDecrease onClick={this.props.decreaseYear}>
-          decrease
-        </ButtonYearDecrease>
-      </TimelineContainer>
+      <TimelineContainer>{createTimeline(this.props, style)}</TimelineContainer>
     );
   }
+}
+function isSelectedPage(data, slug) {
+  // // console.log(data.slug, "data found", slug);
+  // if (data.slug === slug) {
+  //   console.log("isSelected: ", slug, data.slug === slug);
+  // }
+  return data.slug === slug;
 }
 
 const mapStateToProps = state => {
   return {
     data: state.data.posts,
-    dataHome: state.data.pages[3].acf,
-    dataContact: state.data.pages[0].acf,
+    dataHome: state.data.pages.filter(function(element) {
+      return isSelectedPage(element, "home");
+    }),
+    dataContact: state.data.pages.filter(function(element) {
+      return isSelectedPage(element, "contact");
+    }),
     dataArtwork: state.data.artwork,
     dataArtists: state.data.artists,
     language: state.data.language,
