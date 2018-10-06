@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import translations from "../translations";
 // import VideoPlayer from "../components/VideoPlayer";
 
+import ReactDOM from "react-dom";
 import ReactPlayer from "react-player";
 import { stopVideo, playVideo } from "../redux/actions";
 
@@ -19,6 +20,7 @@ const CloseButton = styled.div`
   position: absolute;
   right: 10px;
   top: 10px;
+  z-index: 3000;
   color: ${colors.white};
   &:hover {
     opacity: 0.5;
@@ -31,12 +33,14 @@ const VideoHolder = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1000;
+  z-index: -10;
   transition: all 1s;
-  transform: translate3d(0, -100vh, 0);
+  /* transform: translate3d(0px, -100vh, 0); */
 
   &.active {
-    transform: translate3d(0, 0, 0);
+    top: 0vh;
+    /* transform: translate3d(0, 0, 0); */
+    z-index: 1000;
   }
 `;
 
@@ -156,7 +160,7 @@ const ArtImg = styled.div`
   transition: all 0.5s;
 
   &.active {
-    transform: perspective(500px) translate3d(0px, 0px, 20vmax);
+    transform: perspective(500px) translate3d(0px, 0px, 10vmax);
   }
   &.passive {
     transform: perspective(500px) translate3d(0px, 0px, 0px);
@@ -252,6 +256,7 @@ const ArtDescription = styled.p`
 
 class Artists extends React.Component {
   state = {
+    playerVisible: false,
     openArtist: false,
     openVideo: false,
     videoPlaying: true,
@@ -259,8 +264,10 @@ class Artists extends React.Component {
     totalArtists: -1,
     holderPositionX: 1,
     holderPositionY: 1,
-    activeVideoToPlay: "null"
+    activeVideoToPlay: "https://vimeo.com/168777320"
   };
+  // "https://vimeo.com/168777320"
+  //  https://www.youtube.com/watch?v=013lbJ-Iehg"
 
   componentDidMount() {
     this.setTotalArtistAmount();
@@ -311,16 +318,22 @@ class Artists extends React.Component {
 
   videoEnd = () => {
     console.log("videoEND");
-    this.setState({ openVideo: false, videoPlaying: "" });
+    this.setState({ openVideo: false, videoPlaying: false });
+  };
+
+  videoReady = () => {
+    console.log("videoReady");
   };
 
   closeVideo = () => {
     console.log("closeVideo");
-    this.setState({ openVideo: false, videoPlaying: "" });
+    this.setState({ openVideo: false, videoPlaying: false });
+    this.setState({ playerVisible: false });
   };
   displayVideo = () => {
     console.log("displayVideo");
-    this.setState({ openVideo: true, videoPlaying: true });
+    this.setState({ videoPlaying: true });
+    this.setState({ openVideo: true });
     this.selectVideoURL(this.state.activeKey);
   };
 
@@ -332,10 +345,30 @@ class Artists extends React.Component {
 
   selectVideoURL = key => {
     let videoURL = this.props.dataArtists[key].acf.videomain;
+    this.setState({ activeVideoToPlay: videoURL });
+
     console.log(this.state.activeKey, "videoURL", videoURL);
-    this.setState({ activeVideoToPlay: "https://vimeo.com/92830563" });
-    ReactPlayer.canPlay("https://vimeo.com/92830563");
+    // get player
+    let reactPlayer = document.getElementById("react-player");
+
+    this.setState({ playerVisible: true });
+
+    let reactHolder = document.getElementById("video-holder");
+    // force reload
+    console.log(reactPlayer, reactHolder);
+
     // return videoURL;
+
+    //   render() {
+    //     return (
+    //       <video ref="video">
+    //         {this.props.sources.map(function(srcUrl, index) {
+    //           return <source key={index} src={srcUrl} />;
+    //         })}
+    //       </video>
+    //     );
+    //   }
+    // });
   };
 
   render() {
@@ -461,25 +494,40 @@ class Artists extends React.Component {
           ))}
         </ArtistsHolder>
 
-        <VideoHolder className={[this.state.openVideo ? "active" : ""]}>
+        <VideoHolder
+          id="video-holder"
+          className={[this.state.openVideo ? "active" : ""]}
+        >
           <CloseButton onClick={this.closeVideo}>
             <i className="fas fa-times fa-3x" />
           </CloseButton>
-          <ReactPlayer
-            url={this.props.activeVideoToPlay}
-            playing={this.props.videoPlaying}
-            controls
-            width="100%"
-            allow="autoplay; fullscreen"
-            height="100vh"
-            onEnded={this.videoEnd}
-            config={{
-              vimeo: {
-                onReady: true
-                // autoplay: true
-              }
-            }}
-          />
+          {console.log(
+            "this.state.activeVideoToPlay",
+            this.state.activeVideoToPlay
+          )}
+
+          {!this.state.playerVisible ? (
+            ""
+          ) : (
+            <ReactPlayer
+              id="react-player"
+              url={this.state.activeVideoToPlay}
+              playing={this.state.videoPlaying}
+              controls
+              width="100%"
+              allow="autoplay; fullscreen"
+              height="100vh"
+              onReady={this.videoReady}
+              wrapper={VideoHolder}
+              onEnded={this.videoEnd}
+              config={{
+                vimeo: {
+                  onReady: true
+                  // autoplay: true
+                }
+              }}
+            />
+          )}
         </VideoHolder>
       </div>
     );

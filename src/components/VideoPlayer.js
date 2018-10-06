@@ -142,4 +142,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { stopVideo })(VideoPlayer);
+export default connect(
+  mapStateToProps,
+  { stopVideo }
+)(VideoPlayer);
