@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import translations from "../translations";
 import { colors } from "../styles/globals";
 
+import HomePic from "../img/intro_pic.jpg";
+
 import A01 from "../img/01_a.svg";
 import B02 from "../img/02_b.svg";
 import S03 from "../img/03_s.svg";
@@ -33,7 +35,11 @@ const H3 = styled.h3`
   font-family: "FuturaBold", "Futura", "Verdana";
   text-transform: uppercase;
 `;
-const ImageHome = styled.img``;
+const ImageHome = styled.img`
+  margin-top: 50vh;
+  width: 80vw;
+  margin-left: 20vw;
+`;
 
 const HomeContainer = styled.div`
   color: ${colors.black};
@@ -43,12 +49,10 @@ const HomeContainer = styled.div`
 
 const TextDesc = styled.p`
   color: ${colors.black};
-
   font-weight: 700;
   letter-spacing: 130%;
   line-height: 2em;
   font-family: "FuturaBold", "Futura", "Verdana";
-  /* text-transform: uppercase; */
   font-size: 2.8rem;
 
   top: 0;
@@ -57,6 +61,15 @@ const TextDesc = styled.p`
   margin-left: 30vw;
   text-align: right;
   /* margin: 30vmax auto 0 auto; */
+  &.title {
+    font-weight: 800;
+    font-size: 8rem;
+    text-transform: uppercase;
+  }
+  &.italic {
+    font-style: italic;
+    font-weight: 500;
+  }
 `;
 
 const LogoParts = styled.div`
@@ -103,6 +116,13 @@ const Home = props => (
       <img src={U13} alt="u" />
       <img src={R14} alt="r" />
     </LogoParts>
+
+    <TextDesc>NUEVE ENTREVISTAS</TextDesc>
+    <TextDesc>
+      {" "}
+      algunos de los protagonistas de La revolución de las formas
+    </TextDesc>
+    <ImageHome src={HomePic} />
     <TextDesc>
       Abstracción sur es un portal de información en torno a procesos
       intelectuales, creativos, acontecimientos, protagonistas y archivos
