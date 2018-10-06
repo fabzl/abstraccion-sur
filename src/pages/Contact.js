@@ -108,6 +108,22 @@ const Contact = props => {
         <img src={U13} alt="u" />
         <img src={R14} alt="r" />
       </LogoParts>
+      <div>
+        <h2> EQUIPO MICRO-DOCUMENTALES ABSTRACCIÓN SUR</h2>
+        <p>
+          DIRECCIÓN GENERAL (Ramón Castillo) PRODUCCIÓN. (Olivia Guasch)
+          GUIONES. (Ramón Castillo) CÁMARA. (Rodrigo Avilés y Juan Millán)
+          EDICIÓN Y MONTAJE. (Manuela Piña) SONIDO (Carlos Arias) TEMAS
+          MUSICALES. (Rodrigo Aros) DISEÑO GRÁFICO Y PROGRAMACIÓN. (Fabián
+          Andrade) ARTISTAS: Alejandro Siña Claudio Román Elsa Bolívar Federico
+          Assler Miguel Cosgrove Paz Olea Ricardo Yrarrázabal Robinson Mora
+          Sergio Berthoud AGRADECIMIENTOS: Carlos Cruz Jonus Bartholdson Rita
+          Hughes y David Huhhes *Gustavo Poblete (James Smith Rodriguez) *Carmen
+          Piemonte (filmación taller) Centro Cultural Palacio La Moneda (CCPLM)
+          Universidad Diego Portales (UDP) Proyecto financiado por Fondos de
+          Cultura Concursables Chile, (FONDART, 2018)s
+        </p>
+      </div>
     </div>
   );
 };

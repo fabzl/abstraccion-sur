@@ -42,10 +42,13 @@ const HomeContainer = styled.div`
 
 const TextDesc = styled.p`
   color: ${colors.black};
+  top: 0;
+  right: 0;
   width: 60%;
-  text-align: left;
-  margin: 30vmax auto 0 auto;
-  font-size: 1.2em;
+  margin-left: 30vw;
+  text-align: right;
+  /* margin: 30vmax auto 0 auto; */
+  font-size: 4rem;
   font-family: "FuturaBold", "Futura", "Verdana";
 `;
 
@@ -113,8 +116,8 @@ const Home = props => (
       autor. Los documentos o las referencias duras sirven para situar las
       reflexiones y el contexto de época.
     </TextDesc>
-    <Button>Explora la linea de tiempo </Button>
-    <Button>Ver por artistas </Button>
+    <Button>Artistas</Button>
+    <Button>Obras</Button>
   </HomeContainer>
 );
 

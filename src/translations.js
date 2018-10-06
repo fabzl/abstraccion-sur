@@ -5,8 +5,8 @@ const Translations = {
       en: "Home"
     },
     timeline: {
-      en: "timeline",
-      es: "linea de tiempo"
+      en: "artworks",
+      es: "obras"
     },
     start: {
       en: "start",
@@ -19,8 +19,8 @@ const Translations = {
     },
 
     contact: {
-      en: "contact",
-      es: "contacto"
+      en: "team",
+      es: "equipo"
     }
   },
   home: {

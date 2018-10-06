@@ -36,7 +36,6 @@ const VideoHolder = styled.div`
   z-index: -10;
   transition: all 1s;
   /* transform: translate3d(0px, -100vh, 0); */
-
   &.active {
     top: 0vh;
     /* transform: translate3d(0, 0, 0); */
