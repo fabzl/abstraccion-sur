@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 
 // Sections
 import Home from "./pages/Home";
-import Timeline from "./pages/Timeline";
+import Artwork from "./pages/Artwork";
 import Artists from "./pages/Artists";
 import ShowWork from "./pages/ShowWork";
-import Intro from "./pages/Intro";
+// import Intro from "./pages/Intro";
+import Team from "./pages/Team";
 
 // import About from "./pages/About";
 
@@ -60,11 +61,12 @@ class App extends Component {
             <Header />
             <Footer />
             <div style={{ flex: 1 }}>
-              <Route exact path="/intro" component={Intro} />
-              <Route exact path="/timeline" component={Timeline} />
               <Route exact path="/" component={Home} />
+              <Route exact path="/home" component={Home} />
               <Route exact path="/artists" component={Artists} />
+              <Route exact path="/artwork" component={Artwork} />
               <Route exact path="/artists/:link" component={ShowWork} />
+              <Route exact path="/team" component={Team} />
             </div>
           </div>
         </Router>

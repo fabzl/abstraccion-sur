@@ -106,7 +106,7 @@ const Footer = props => (
         <Nav>
           <LinkTo to="/">{translations.header.home[props.language]}</LinkTo>
 
-          <LinkTo to="/timeline">
+          <LinkTo to="/artwork">
             {translations.header.timeline[props.language]}
           </LinkTo>
 
@@ -114,7 +114,7 @@ const Footer = props => (
             {translations.header.artists[props.language]}
           </LinkTo>
 
-          <LinkTo to="/contact">
+          <LinkTo to="/team">
             {translations.header.contact[props.language]}
           </LinkTo>
         </Nav>

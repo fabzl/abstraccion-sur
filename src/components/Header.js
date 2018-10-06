@@ -183,15 +183,15 @@ class Header extends React.Component {
             {translations.header.home[language]}
           </LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/timeline">
-            {translations.header.timeline[language]}
-          </LinkTo>
-
           <LinkTo onClick={this.checkMobileNav} to="/artists">
             {translations.header.artists[language]}
           </LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/contact">
+          <LinkTo onClick={this.checkMobileNav} to="/artwork">
+            {translations.header.timeline[language]}
+          </LinkTo>
+
+          <LinkTo onClick={this.checkMobileNav} to="/team">
             {translations.header.contact[language]}
           </LinkTo>
         </NavContainer>

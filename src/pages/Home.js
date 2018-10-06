@@ -33,6 +33,7 @@ const H3 = styled.h3`
   font-family: "FuturaBold", "Futura", "Verdana";
   text-transform: uppercase;
 `;
+const ImageHome = styled.img``;
 
 const HomeContainer = styled.div`
   color: ${colors.black};
@@ -42,14 +43,20 @@ const HomeContainer = styled.div`
 
 const TextDesc = styled.p`
   color: ${colors.black};
+
+  font-weight: 700;
+  letter-spacing: 130%;
+  line-height: 2em;
+  font-family: "FuturaBold", "Futura", "Verdana";
+  /* text-transform: uppercase; */
+  font-size: 2.8rem;
+
   top: 0;
   right: 0;
   width: 60%;
   margin-left: 30vw;
   text-align: right;
   /* margin: 30vmax auto 0 auto; */
-  font-size: 4rem;
-  font-family: "FuturaBold", "Futura", "Verdana";
 `;
 
 const LogoParts = styled.div`
@@ -118,6 +125,7 @@ const Home = props => (
     </TextDesc>
     <Button>Artistas</Button>
     <Button>Obras</Button>
+    <Button>Equipo</Button>
   </HomeContainer>
 );
 

@@ -11,10 +11,16 @@ import ReactDOM from "react-dom";
 import ReactPlayer from "react-player";
 import { stopVideo, playVideo } from "../redux/actions";
 
+/////////////////// lets
+
 let circleSize = "25vmin";
 let gridInitialDistance = "1";
 let gridFinalDistance = "0";
 let activeCirclesDistance = "35vw";
+
+const LinkTo = styled(Link)`
+  text-decoration: none;
+`;
 
 const CloseButton = styled.div`
   position: absolute;
@@ -439,25 +445,26 @@ class Artists extends React.Component {
               >
                 {translations.artists.video[language]}
               </PlayVideoCircle>
-              <GotoCaveCircle
-                className={[
-                  (this.state.openArtist && this.state.activeKey == i
-                    ? "active"
-                    : "") +
-                    " " +
-                    i +
-                    " " +
-                    (this.state.openArtist && this.state.activeKey != i
-                      ? "passive"
-                      : "")
-                ]}
-                style={{
-                  background: colorRandomFromArray()
-                }}
-              >
-                {translations.artists.cave[language]}
-              </GotoCaveCircle>
-
+              <LinkTo to="/about">
+                <GotoCaveCircle
+                  className={[
+                    (this.state.openArtist && this.state.activeKey == i
+                      ? "active"
+                      : "") +
+                      " " +
+                      i +
+                      " " +
+                      (this.state.openArtist && this.state.activeKey != i
+                        ? "passive"
+                        : "")
+                  ]}
+                  style={{
+                    background: colorRandomFromArray()
+                  }}
+                >
+                  {translations.artists.cave[language]}
+                </GotoCaveCircle>
+              </LinkTo>
               <ArtImg
                 className={[
                   (this.state.openArtist && this.state.activeKey == i
@@ -536,7 +543,7 @@ const mapStateToProps = state => {
   return {
     data: state.data.posts,
     language: state.data.language,
-    dataArtwork: state.data.artwork,
+    // dataArtwork: state.data.artwork,
     dataArtists: state.data.artists,
     dataDocuments: state.data.documents
   };
