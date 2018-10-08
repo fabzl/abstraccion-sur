@@ -62,7 +62,6 @@ const ArtistsHolder = styled.ul`
   grid-column-gap: ${gridInitialDistance + "vw"};
   width: 100vw;
   justify-content: center;
-  height: 92vh;
 
   &.active {
     grid-row-gap: ${gridFinalDistance + "vw"};

@@ -17,7 +17,7 @@ const Circle = styled.div`
 
 const Nav = styled.nav`
   position: fixed;
-  width: 50%;
+  /* width: 50%; */
   align-items: center;
   z-index: 900;
   flex-direction: row;
