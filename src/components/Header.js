@@ -17,7 +17,6 @@ const Circle = styled.div`
 
 const Nav = styled.nav`
   position: fixed;
-  /* width: 50%; */
   align-items: center;
   z-index: 900;
   flex-direction: row;
@@ -112,7 +111,7 @@ const BackToTop = styled.div`
 const BurgerLink = styled.a`
   z-index: 50000;
   fill: ${colors.white};
-  margin: 3rem 2rem;
+  margin: 2rem 2rem;
   position: absolute;
   top: 0;
 

@@ -11,16 +11,14 @@ const H2 = styled.div`
   user-select: none;
   text-align: center;
   color: ${colors.black};
-  /* border: 1px solid ${colors.black}; */
-  padding: 5px;
-  min-width: 32px;
-  padding-top: 8px;
-  margin-right: 50px;
+  padding: 0.5rem;
+  font-size: 2rem;
+  padding-top: 0.8rem;
   transition: 0.7s all;
   position: fixed;
-  top: 20px;
-  right: 20px;
-  
+  top: 2rem;
+  right: 2rem;
+
   &:hover {
     background-color: ${colors.black};
     color: ${colors.white};

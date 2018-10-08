@@ -58,7 +58,7 @@ const Content = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 20px;
+  padding: 2rem;
   background: rgba(0, 1, 40, 0.85);
   opacity: 0;
   transition: opacity 0.5s;

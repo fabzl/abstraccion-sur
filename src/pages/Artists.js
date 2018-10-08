@@ -24,8 +24,8 @@ const LinkTo = styled(Link)`
 
 const CloseButton = styled.div`
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 2rem;
+  top: 2rem;
   z-index: 3000;
   color: ${colors.white};
   &:hover {

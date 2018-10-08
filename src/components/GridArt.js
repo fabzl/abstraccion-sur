@@ -52,7 +52,7 @@ class Grid extends Component {
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-column-gap: 5%;
       grid-row-gap: 5%;
-      grid-auto-rows: 430px;
+      grid-auto-rows: 43rem;
     `;
 
     return <Wrap>{this.renderBoxes()}</Wrap>;
