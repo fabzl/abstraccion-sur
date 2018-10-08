@@ -17,15 +17,18 @@ const Nav = styled.nav`
   z-index: 900;
   flex-direction: row;
   display: flex;
+  margin-right: 3rem;
+  height: 8vh;
 `;
 
 const LogoContainer = styled.div`
   margin-right: auto;
+  margin-top: 1vh;
 `;
 
 const Logo = styled.img`
-  height: 100%;
-  max-width: 15vmax;
+  height: 6vh;
+  /* max-width: 15vmax; */
 `;
 
 const Wrap = styled.footer`
@@ -54,7 +57,7 @@ const General = styled.div`
   flex-direction: column;
   a > svg {
     vertical-align: middle;
-    margin-right: 10px;
+    margin-right: 1rem;
   }
 `;
 
@@ -63,12 +66,14 @@ const LinkTo = styled(NavLink)`
   font-weight: 500;
   color: ${colors.white};
   text-decoration: none;
-  padding-left: 20px;
-  padding-right: 10px;
-  font-size: 10px;
-  margin-top: 10px;
+  padding-left: 2rem;
+  padding-right: 1rem;
+  align-self: center;
+  flex-direction: column;
+  font-size: 1.5rem;
   white-space: nowrap;
   transition: 0.3s all;
+  display: flex;
   text-transform: uppercase;
   &:hover {
     color: ${colors.violet};
@@ -118,8 +123,7 @@ const Footer = props => (
 
 const mapStateToProps = state => {
   return {
-    language: state.data.language,
-    dataContact: state.data.pages[0].acf
+    language: state.data.language
   };
 };
 

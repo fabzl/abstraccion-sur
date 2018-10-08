@@ -121,8 +121,8 @@ const Home = props => (
 
     <TextDesc className="title">SELECCION DE 9 ARTISTAS </TextDesc>
     <TextDesc className="italic">
-      conoce mas de algunos de los protagonistas de la vanguardia abstractas
-      Chilena de finales del siglo XX.
+      conoce más acerca de algunos de los protagonistas de la vanguardia
+      abstractas Chilenas del siglo XX.
     </TextDesc>
     <ImageHome src={HomePic} />
     <TextDesc>
@@ -145,10 +145,10 @@ const Home = props => (
       autor. Los documentos o las referencias duras sirven para situar las
       reflexiones y el contexto de época.
     </TextDesc>
-
+    {/*
     <Button>Conoce mas de los 9 Artistas</Button>
     <Button>Ve las Obras que realizaron</Button>
-    <Button>Equipo</Button>
+    <Button>Equipo</Button>*/}
   </HomeContainer>
 );
 

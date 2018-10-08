@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import translations from "../translations";
-import { colors } from "../styles/globals";
+import { colors, colorRandomFromArray } from "../styles/globals";
 
 import ReactDOM from "react-dom";
 import Slider, { Range } from "rc-slider";
@@ -54,6 +54,7 @@ const TimelineContainer = styled.div`
   left: 0;
   flex-direction: row;
   display: flex;
+  background: ${colors.white};
 `;
 const ArtWork = styled.div`
   padding-top: 10vh;
@@ -75,13 +76,15 @@ const YearHolder = styled.div`
 
 const ArtImg = styled.img`
   margin-top: 10vh;
+  margin-bottom: 5vh;
   height: 50vh;
   line-height: 0.4em;
 `;
 
 const ArtObject = styled.div`
   padding-right: 10vw;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ArtDescription = styled.p`
@@ -169,7 +172,14 @@ const createTimeline = props => {
   // and return mapped objects
   let artObjects = props.dataArtwork.map(p => (
     <ArtObject key={p.id}>
-      <ArtImg src={p.acf.imagen_grande.url} alt="" className="img-responsive" />
+      <ArtImg
+        style={{
+          background: colorRandomFromArray()
+        }}
+        src={p.acf.imagen_grande.url}
+        alt=""
+        className="img-responsive"
+      />
       <ArtTitle>{p.acf.titulo + " - " + p.acf.autor}</ArtTitle>
       <ArtDescription>{p.acf.ano}</ArtDescription>
       {/* <ArtDescription>{p.acf.autor}</ArtDescription> */}
