@@ -12,7 +12,7 @@ const H2 = styled.div`
   text-align: center;
   color: ${colors.black};
   padding: 0.5rem;
-  font-size: 2rem;
+  font-size: 1.7rem;
   padding-top: 0.8rem;
   transition: 0.7s all;
   position: fixed;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { keyframes } from "styled-components";
 
 export const colors = {
-  black: "#31387a",
+  black: "#999",
   gray: "#e3d7c4",
   white: "#f7f3ee",
   violet: "#ff0000",

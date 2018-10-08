@@ -84,68 +84,60 @@ const Team = props => {
   return (
     <div>
       <TeamParts>
-        <img src={Triangulo} alt="triangulo" />
-
-        <img src={Linea} alt="linea" />
-
-        <img src={A01} alt="a" />
         <H2>
           {props.language === "es"
             ? "EQUIPO MICRO-DOCUMENTALES ABSTRACCIÓN SUR"
             : "ABSTRACCIÓN SUR MICRO-DOCUMENTARIES TEAM"}
         </H2>
-        <img src={B02} alt="b" />
+
         <H2>
           {props.language === "es"
             ? "DIRECCIÓN GENERAL. (Ramón Castillo)"
             : "GENERAL DIRECTION. (Ramón Castillo)"}
         </H2>
-        <img src={S03} alt="s" />
+
         <H2>
           {props.language === "es"
             ? "PRODUCCIÓN. (Olivia Guasch)"
             : "PRODUCTION. (Olivia Guasch)"}
         </H2>
-        <img src={T04} alt="t" />
+
         <H2>
           {props.language === "es"
             ? "GUIONES. (Ramón Castillo)"
             : "SCRIPTS. (Ramón Castillo)"}
         </H2>
-        <img src={R05} alt="r" />
+
         <H2>
           {props.language === "es"
             ? "CÁMARA. (Rodrigo Avilés y Juan Millán)"
             : "CAMERA. (Rodrigo Avilés y Juan Millán)"}
         </H2>
-        <img src={A06} alt="a" />
+
         <H2>
           {props.language === "es"
             ? "EDICIÓN Y MONTAJE. (Manuela Piña)"
             : "VIDEO EDITING & POST PRODUCTION. (Manuela Piña)"}
         </H2>
-        <img src={C07} alt="c" />
+
         <H2>
           {props.language === "es"
             ? "SONIDO. (Carlos Arias)"
             : "SOUND. (Carlos Arias)"}
         </H2>
 
-        <img src={C08} alt="c" />
         <H2>
           {props.language === "es"
             ? "MÚSICA. (Rodrigo Aros)"
             : "MUSIC. (Rodrigo Aros)"}
         </H2>
-        <img src={I09} alt="i" />
+
         <H2>
           {props.language === "es"
             ? "DISEÑO Y PROGRAMACIÓN. (Fabián Andrade)"
             : "DESIGN & PROGRAMMING. (Fabián Andrade)"}
         </H2>
-        <img src={O10} alt="o" />
-
-        <H2>{props.language === "es" ? "ARTISTAS:" : "ARTISTS:"}</H2>
+        <H2>{language === "es" ? "ARTISTAS:" : "ARTISTS:"}</H2>
         <H2>
           <ArtistUl>
             <ArtistList>Alejandro Siña</ArtistList>
@@ -159,26 +151,24 @@ const Team = props => {
             <ArtistList> Sergio Berthoud</ArtistList>
           </ArtistUl>
         </H2>
-        <img src={N11} alt="n" />
-
         <H2>
           {props.language === "es"
             ? "AGRADECIMIENTOS: (Carlos Cruz) Jonus Bartholdson, Rita Hughes y David Huhhes *Gustavo Poblete (James Smith Rodriguez) *Carmen Piemonte"
             : "SPECIAL THANKS: (Carlos Cruz) Jonus Bartholdson, Rita Hughes y David Huhhes *Gustavo Poblete (James Smith Rodriguez) *Carmen Piemonte"}
         </H2>
-        <img src={S12} alt="s" />
+
         <H2>
           {props.language === "es"
             ? "(filmación taller) Centro Cultural Palacio La Moneda (CCPLM)"
             : "(Workshop filming) Centro Cultural Palacio La Moneda (CCPLM)"}
         </H2>
-        <img src={U13} alt="u" />
+
         <H2>
           {props.language === "es"
             ? "Universidad Diego Portales (UDP)"
             : "University Diego Portales (UDP)"}
         </H2>
-        <img src={R14} alt="r" />
+
         <H2>
           {props.language === "es"
             ? "Proyecto financiado por Fondos de Cultura Concursables Chile (FONDART, 2018)"

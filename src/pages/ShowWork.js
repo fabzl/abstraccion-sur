@@ -13,22 +13,33 @@ import ReactPlayer from "react-player";
 
 const LinkTo = styled(Link)``;
 
+let arrowSize = "8vh";
 const Arrow = styled(Link)`
   color: ${colors.white};
-  height: 92vh;
-  align-items: bottom;
+  height: ${arrowSize};
+  width: ${arrowSize};
+  align-items: center;
   display: flex;
   position: fixed;
-  width: 7vw;
+  cursor: pointer;
   justify-content: center;
-  background: transparent;
+  background: ${colorRandomFromArray()};
+  border-radius: 50%;
+  bottom: 10vh;
+  left: 2rem;
 
   & svg {
     transition: all 0.3s;
-    transform: translateY(38vh);
+    /* transform: translateY(38vh); */
+    display: flex;
   }
+
   &.next {
-    right: 0;
+    right: 2rem;
+    left: auto;
+  }
+  & i {
+    background-color: ${colors.black};
   }
 `;
 

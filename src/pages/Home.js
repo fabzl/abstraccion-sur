@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 //import translations from "../translations";
 import { colors } from "../styles/globals";
 
-import HomePic from "../img/intro_pic.jpg";
+import HomePic from "../img/james_smith.jpg";
+import EndPic from "../img/end_pic.jpg";
 
 import A01 from "../img/01_a.svg";
 import B02 from "../img/02_b.svg";
@@ -41,6 +42,12 @@ const ImageHome = styled.img`
   margin-left: 20vw;
 `;
 
+const ImageEnd = styled.img`
+  margin-top: 10vh;
+  width: 50vw;
+  margin-left: 20vw;
+`;
+
 const HomeContainer = styled.div`
   color: ${colors.black};
   text-align: center;
@@ -51,7 +58,7 @@ const TextDesc = styled.p`
   color: ${colors.black};
   font-weight: 700;
   letter-spacing: 130%;
-  line-height: 2em;
+  line-height: 1.5em;
   font-family: "FuturaBold", "Futura", "Verdana";
   font-size: 2.8rem;
   top: 0;
@@ -59,10 +66,10 @@ const TextDesc = styled.p`
   width: 60%;
   margin-left: 30vw;
   text-align: right;
-  /* margin: 30vmax auto 0 auto; */
+
   &.title {
     font-weight: 800;
-    font-size: 8rem;
+    font-size: 5rem;
     text-transform: uppercase;
     text-align: center;
   }
@@ -70,7 +77,8 @@ const TextDesc = styled.p`
     font-style: italic;
     font-weight: 500;
     text-align: center;
-    font-size: 4rem;
+    font-size: 2.5rem;
+    line-height: auto;
   }
 `;
 
@@ -119,10 +127,15 @@ const Home = props => (
       <img src={R14} alt="r" />
     </LogoParts>
 
-    <TextDesc className="title">SELECCION DE 9 ARTISTAS </TextDesc>
+    <TextDesc className="title">
+      {props.language === "es"
+        ? "ARTISTAS, PROCESOS, TALLERES Y PERSISTENCIA EN EL CONSTRUCTIVISMO Y LA ABSTRACCIÓN GEOMÉTRICA"
+        : "ARTISTS, PROCESS, STUDIOS Y PERSISTENCE IN CONSTRUCTIVISM & GEOMETRIC ABSTRACTION"}
+    </TextDesc>
     <TextDesc className="italic">
-      conoce más acerca de algunos de los protagonistas de la vanguardia
-      abstractas Chilenas del siglo XX.
+      {props.language === "es"
+        ? "Aproximación a la visualidad, pensamiento creativo e investigación material que formaron parte de la emergencia de la abstracción en Chile desde la segunda mitad del siglo XX."
+        : "Approach to visuality, creative thinking and material research that formed part of the emergence of abstraction in Chile since the second half of the 20th century."}
     </TextDesc>
     <ImageHome src={HomePic} />
     <TextDesc>
@@ -145,6 +158,8 @@ const Home = props => (
       autor. Los documentos o las referencias duras sirven para situar las
       reflexiones y el contexto de época.
     </TextDesc>
+
+    {/* <ImageEnd src={EndPic} /> */}
     {/*
     <Button>Conoce mas de los 9 Artistas</Button>
     <Button>Ve las Obras que realizaron</Button>

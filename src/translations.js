@@ -49,12 +49,12 @@ const Translations = {
   },
   artists: {
     cave: {
-      en: "Artist's cave",
-      es: "La caverna del artista"
+      en: "Visit artist's studio",
+      es: "Taller del artista"
     },
     video: {
-      en: "play capsule",
-      es: "ver capsula"
+      en: "play video",
+      es: "ver video"
     }
   }
 };
