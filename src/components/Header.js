@@ -17,7 +17,7 @@ const Circle = styled.div`
 
 const Nav = styled.nav`
   position: fixed;
-  width: 100%;
+  width: 50%;
   align-items: center;
   z-index: 900;
   flex-direction: row;
@@ -29,8 +29,8 @@ const LinkTo = styled(NavLink)`
   color: ${colors.white};
   text-decoration: none;
   display: inline-block;
-  font-size: 1.1em;
-  margin: 0 20px;
+  font-size: 2em;
+  margin: 0 2rem;
   align-items: center;
   line-height: 1em;
   text-transform: uppercase;
@@ -140,18 +140,23 @@ const NavContainer = styled.div`
   justify-content: flex-end;
   z-index: 900;
   flex-direction: row;
-  display: none;
+  /* display: none; */
+  top: 0;
+  left: 0;
+  transition: all 0.4s;
+  width: 0;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-around;
+  overflow: hidden;
+
   &.active {
-    display: flex;
-    top: 0;
     position: fixed;
-    width: 100vw;
-    height: 100%;
+    width: 40vw;
     z-index: 3000;
     background: rgba(0, 1, 40, 0.85);
-    flex-direction: column;
-    text-align: center;
-    justify-content: space-around;
   }
 `;
 

@@ -9,6 +9,10 @@ import { colors } from "../styles/globals";
 import { Link, NavLink } from "react-router-dom";
 //import LanguageSelector from "./LanguageSelector";
 
+import homeIcon from "../img/home_icon.svg";
+import squareIcon from "../img/square_icon.svg";
+import circleIcon from "../img/circle_icon.svg";
+import triangleIcon from "../img/triangle_icon.svg";
 // import { Link, NavLink } from "react-router-dom";
 
 const Nav = styled.nav`
@@ -69,7 +73,7 @@ const LinkTo = styled(NavLink)`
   padding-left: 2rem;
   padding-right: 1rem;
   align-self: center;
-  flex-direction: column;
+  flex-direction: row;
   font-size: 1.5rem;
   white-space: nowrap;
   transition: 0.3s all;
@@ -77,6 +81,13 @@ const LinkTo = styled(NavLink)`
   text-transform: uppercase;
   &:hover {
     color: ${colors.violet};
+  }
+  &span {
+    font-size: 0.5rem;
+    display: inline-flex;
+    &img {
+      height: 5vh;
+    }
   }
 `;
 
@@ -102,17 +113,31 @@ const Footer = props => (
 
       <General>
         <Nav>
-          <LinkTo to="/">{translations.header.home[props.language]}</LinkTo>
+          <LinkTo to="/">
+            <span>
+              <img src={homeIcon} className="menuIcon" />
+            </span>
+            {translations.header.home[props.language]}
+          </LinkTo>
 
           <LinkTo to="/artwork">
+            <span>
+              <img src={squareIcon} className="menuIcon" />
+            </span>
             {translations.header.timeline[props.language]}
           </LinkTo>
 
           <LinkTo to="/artists">
+            <span>
+              <img src={triangleIcon} className="menuIcon" />
+            </span>
             {translations.header.artists[props.language]}
           </LinkTo>
 
           <LinkTo to="/team">
+            <span>
+              <img src={circleIcon} className="menuIcon" />
+            </span>
             {translations.header.contact[props.language]}
           </LinkTo>
         </Nav>
