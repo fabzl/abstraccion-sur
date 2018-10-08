@@ -37,7 +37,7 @@ const H3 = styled.h3`
   text-transform: uppercase;
 `;
 const ImageHome = styled.img`
-  margin-top: 50vh;
+  margin-top: 25vh;
   width: 80vw;
   margin-left: 20vw;
 `;
@@ -67,6 +67,9 @@ const TextDesc = styled.p`
   margin-left: 30vw;
   text-align: right;
 
+  &.description {
+    margin-bottom: 20vh;
+  }
   &.title {
     font-weight: 800;
     font-size: 5rem;
@@ -138,8 +141,8 @@ const Home = props => (
         : "Approach to visuality, creative thinking and material research that formed part of the emergence of abstraction in Chile since the second half of the 20th century."}
     </TextDesc>
     <ImageHome src={HomePic} />
-    <TextDesc>
-      Abstracción sur es un portal de información en torno a procesos
+    <TextDesc className="description">
+      Abstracción Sur es un portal de información en torno a procesos
       intelectuales, creativos, acontecimientos, protagonistas y archivos
       implicados en la construcción nueva narrativa que hace visible y articula
       el capítulo de la abstracción en Chile. Veremos que hay varias

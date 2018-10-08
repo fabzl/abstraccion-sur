@@ -9,15 +9,7 @@ export const colors = {
   orange: "#fde53f"
 };
 
-const colorsForRandom = [
-  "#89ED80",
-  "#EA5C24",
-  "#fde53f",
-  "#444999",
-  "#ff00ff",
-  "#79D9DB",
-  "#D3DA91"
-];
+const colorsForRandom = ["#ebc1b0", "#fcef97", "#7a7c99", "#badbdb", "#bfd49f"];
 
 export function colorRandomFromArray() {
   return colorsForRandom[Math.floor(Math.random() * colorsForRandom.length)];

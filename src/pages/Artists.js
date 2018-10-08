@@ -243,7 +243,7 @@ const ArtDescription = styled.p`
   margin: 0;
   padding: 0;
   text-align: right;
-  color: ${colors.white};
+  color: ${colors.black};
   transition: all 2.5s;
   z-index: 11;
   opacity: 0;
