@@ -56,7 +56,7 @@ const LinkTo = styled(NavLink)`
 `;
 
 const Burger = () => (
-  <svg width="30px" height="30px" fill={colors.black}>
+  <svg width="3rem" height="3rem" fill={colors.black}>
     <rect y="7" width="30" height="2" />
     <rect y="15" width="30" height="2" />
     <rect y="23" width="30" height="2" />
@@ -65,7 +65,7 @@ const Burger = () => (
 
 const ToTop = styled.a`
   color: ${colors.white};
-  font-size: 14px;
+  font-size: 1.4rem;
   display: inline-block;
   overflow: hidden;
   text-align: center;
@@ -102,8 +102,8 @@ const BackToTop = styled.div`
     display: none;
     &.active {
       display: flex;
-      bottom: 10px;
-      right: 10px;
+      bottom: 1rem;
+      right: 1rem;
       position: fixed;
     }
   }
@@ -112,12 +112,9 @@ const BackToTop = styled.div`
 const BurgerLink = styled.a`
   z-index: 50000;
   fill: ${colors.white};
-  margin: 30px 20px;
+  margin: 3rem 2rem;
   position: absolute;
   top: 0;
-  /* @media (min-width: 740px) {
-    display: none;
-  } */
 
   rect {
     transition: 0.5s all;
@@ -127,13 +124,13 @@ const BurgerLink = styled.a`
       fill: ${colors.white};
     }
     rect:nth-child(1) {
-      transform: translate(10px, 0px) rotate(45deg);
+      transform: translate(1rem, 0) rotate(45deg);
     }
     rect:nth-child(2) {
       opacity: 0;
     }
     rect:nth-child(3) {
-      transform: translate(-13px, 10px) rotate(-45deg);
+      transform: translate(-1.3rem, 1rem) rotate(-45deg);
     }
   }
 `;
@@ -168,12 +165,7 @@ class Header extends React.Component {
     openMenu: false
   };
 
-  componentDidMount() {
-    // console.log(
-    //   "soy component did mount y me gusta flotar : ",
-    //   this.state.openMenu
-    // );
-  }
+  componentDidMount() {}
 
   openMenu = () => {
     this.setState({ openMenu: !this.state.openMenu });

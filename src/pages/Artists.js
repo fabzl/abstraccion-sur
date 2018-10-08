@@ -13,7 +13,7 @@ import { stopVideo, playVideo } from "../redux/actions";
 
 /////////////////// lets
 
-let circleSize = "25vmin";
+let circleSize = "22vmin";
 let gridInitialDistance = "1";
 let gridFinalDistance = "0";
 let activeCirclesDistance = "35vw";
@@ -62,6 +62,7 @@ const ArtistsHolder = styled.ul`
   grid-column-gap: ${gridInitialDistance + "vw"};
   width: 100vw;
   justify-content: center;
+  height: 92vh;
 
   &.active {
     grid-row-gap: ${gridFinalDistance + "vw"};
@@ -386,7 +387,7 @@ class Artists extends React.Component {
           display: "flex",
           background: colorRandomFromArray(),
           transition: "background 5s",
-          height: "100vh",
+          height: "92vh",
           width: "100vw"
         }}
       >

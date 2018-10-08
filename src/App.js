@@ -41,6 +41,15 @@ class App extends Component {
     // window.scrollTo(0, 0);
   }
 
+  generativeEngine = () => {
+    let interVal = 5000;
+    let eventAmount = 50;
+
+    setInterval(() => {
+      console.log("interval");
+    }, interVal);
+  };
+
   setToDestroy = props => {
     this.props.contentLoaded();
     console.log("loaded");
@@ -52,6 +61,7 @@ class App extends Component {
     return (
       <Wrap {...this.props}>
         {this.setToDestroy()}
+        {this.generativeEngine()}
         <Loader />
         {/* <Fade in={true}>
           <Modal />
