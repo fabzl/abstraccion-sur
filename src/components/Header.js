@@ -111,10 +111,10 @@ const BackToTop = styled.div`
 
 const BurgerLink = styled.a`
   z-index: 50000;
-  color: ${colors.white};
+  fill: ${colors.white};
   margin: 30px 20px;
   position: absolute;
-
+  top: 0;
   /* @media (min-width: 740px) {
     display: none;
   } */
@@ -123,6 +123,9 @@ const BurgerLink = styled.a`
     transition: 0.5s all;
   }
   &.open {
+    svg {
+      fill: ${colors.white};
+    }
     rect:nth-child(1) {
       transform: translate(10px, 0px) rotate(45deg);
     }
@@ -146,7 +149,7 @@ const NavContainer = styled.div`
   transition: all 0.4s;
   width: 0;
   display: flex;
-  height: 100vh;
+  height: 92vh;
   flex-direction: column;
   text-align: center;
   justify-content: space-around;
