@@ -191,13 +191,12 @@ const PlayVideoCircle = styled.div`
   justify-content: center;
 
   &.active {
-    transform: perspective(500px)
-      translate3d(${activeCirclesDistance}, 0px, 0vmax);
+    transform: perspective(500px) translate3d(${activeCirclesDistance}, 0, 0);
     color: ${colors.black};
     &:hover {
-      transition: all 0.3s;
-      transform: perspective(500px)
-        translate3d(${activeCirclesDistance}, 0px, 0vmax) scale(1.4);
+      transform: perspective(500px) translate3d(${activeCirclesDistance}, 0, 0);
+      color: ${colors.black};
+      padding: 6vw;
     }
   }
   &.passive {
@@ -222,18 +221,17 @@ const GotoCaveCircle = styled.div`
   justify-content: center;
 
   &.passive {
-    transform: perspective(500px) translate3d(0px, 0px, 3vmax);
+    transform: perspective(500px) translate3d(0, 0, 3vmax);
   }
   &.active {
-    transform: perspective(500px)
-      translate3d(-${activeCirclesDistance}, 0px, 0vmax);
+    transform: perspective(500px) translate3d(-${activeCirclesDistance}, 0, 0);
     color: ${colors.black};
     padding: 6vw;
 
     &:hover {
       transition: all 0.3s;
       transform: perspective(500px)
-        translate3d(-${activeCirclesDistance}, 0px, 0vmax) scale(1.4);
+        translate3d(-${activeCirclesDistance}, 0, 0vmax) scale(1.4);
     }
   }
 `;
