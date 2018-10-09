@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import { playVideo } from "../redux/actions";
 import { colors } from "../styles/globals";
+import Parser from "html-react-parser";
 
 const Wrap = styled.div`
   display: flex;

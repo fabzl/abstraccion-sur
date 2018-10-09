@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { colors } from "../styles/globals";
 
 import HomePic from "../img/james_smith.jpg";
-import EndPic from "../img/end_pic.jpg";
+// import EndPic from "../img/end_pic.jpg";
 
 import A01 from "../img/01_a.svg";
 import B02 from "../img/02_b.svg";
@@ -26,6 +26,8 @@ import U13 from "../img/13_u.svg";
 import R14 from "../img/14_r.svg";
 import Linea from "../img/linea.svg";
 import Triangulo from "../img/triangulo.svg";
+
+import Parser from "html-react-parser";
 
 const H3 = styled.h3`
   margin: 0;

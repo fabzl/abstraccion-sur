@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 //import translations from "../translations";
 
 import { colors } from "../styles/globals";
+import Parser from "html-react-parser";
 
 import A01 from "../img/01_a.svg";
 import B02 from "../img/02_b.svg";

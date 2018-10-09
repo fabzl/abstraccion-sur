@@ -12,7 +12,8 @@ import Slider, { Range } from "rc-slider";
 // import Slider from 'rc-slider/lib/Slider';
 // import Range from 'rc-slider/lib/Range';
 import "rc-slider/assets/index.css";
-import { ContainerCluster, ArtHolder, Artgrid } from "../pages/ShowWork";
+
+import Parser from "html-react-parser";
 
 import {
   startTimeline,

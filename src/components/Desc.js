@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import translations from "../translations";
 import { colors } from "../styles/globals";
+import Parser from "html-react-parser";
 
 const Section = styled.div``;
 
@@ -29,7 +30,7 @@ const Description = styled.p`
 const Desc = props => (
   <Section>
     <Container>
-      <Description>{props.desc}</Description>
+      <Description>{Parser(props.desc)}</Description>
     </Container>
   </Section>
 );

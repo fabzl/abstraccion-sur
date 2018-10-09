@@ -10,12 +10,14 @@ import { GridArt } from "../components/GridArt";
 import { Link } from "react-router-dom";
 import { playVideo } from "../redux/actions";
 import ReactPlayer from "react-player";
+import Parser from "html-react-parser";
 
 const LinkTo = styled(Link)``;
 
 let arrowSize = "8vh";
+
 const Arrow = styled(Link)`
-  color: ${colors.white};
+  color: ${colors.black};
   height: ${arrowSize};
   width: ${arrowSize};
   align-items: center;
@@ -23,10 +25,9 @@ const Arrow = styled(Link)`
   position: fixed;
   cursor: pointer;
   justify-content: center;
-  background: ${colorRandomFromArray()};
   border-radius: 50%;
-  bottom: 10vh;
   left: 2rem;
+  top: 100px;
 
   & svg {
     transition: all 0.3s;
@@ -51,7 +52,7 @@ const Play = styled.div`
 
 const ShowWorkWrap = styled(Link)`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 // const Left = styled.span`
@@ -74,14 +75,13 @@ const Center = styled.div`
 `;
 
 const Artgrid = styled.div`
-  padding-left: 20vw;
+  padding-top: 20vw;
 `;
 
 const BlueSide = styled.div`
-  width: 35vw;
-  margin-right: 5vw;
-  height: 92vh;
-  display: inline-flex;
+  /* width: 35vw; */
+  /* margin-right: 5vw; */
+
   flex-direction: column;
   background: ${colors.black};
   /* position: absolute; */
@@ -90,8 +90,7 @@ const BlueSide = styled.div`
 
 const BigSide = styled.div`
   /* width: 60%; */
-  display: inline-flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 export const ArtHolder = styled.ul`
@@ -109,7 +108,7 @@ const ArtistName = styled.h1`
   font-family: "FuturaBold", "Futura", "Verdana";
   font-size: 7rem;
   text-transform: uppercase;
-  word-spacing: 100vw;
+  /* word-spacing: 100vw; */
   text-align: right;
 `;
 
@@ -121,31 +120,31 @@ const ArtImg = styled.img`
 
 const ArtistImage = styled.img`
   object-fit: cover;
-  width: 50vw;
   height: auto;
 `;
 
 export const ContainerCluster = styled.div`
-  height: 92vh;
-  padding: 0 10vw;
+  padding: 10vw 0vw;
   background: ${colors.white};
 `;
 
 const ArtDescription = styled.p`
-  font-size: 1.2rem;
+  font-size: 2rem;
   margin: 0;
   padding: 0;
+  max-width: 60vw;
 `;
 
 const ArtTitle = styled.p`
-  font-size: 1.6rem;
+  font-size: 6rem;
   margin: 0;
   padding: 0;
   color: ${colors.black};
 `;
 
 const mainDivStyle = {
-  display: "flex"
+  display: "flex",
+  flexDirection: "column"
 };
 
 const ShowWork = props => {
@@ -209,8 +208,8 @@ const ShowWork = props => {
 
   function isSelectedArtist(artpiece) {
     if (artpiece.acf.autor === nombre) {
-      console.log("isSelectedArtist: ", artpiece.acf.autor === nombre);
-      console.log(artpiece, nombre);
+      // console.log("isSelectedArtist: ", artpiece.acf.autor === nombre);
+      // console.log(artpiece, nombre);
     }
     return artpiece.acf.autor === nombre;
   }
@@ -254,7 +253,7 @@ const ShowWork = props => {
       </Arrow>
       <BlueSide>
         <ArtistImage src={url} alt={nombre} />
-        <ArtistName>{nombre}</ArtistName>
+        <ArtistName> {Parser(nombre)}</ArtistName>
       </BlueSide>
 
       {/* <Center>
@@ -263,7 +262,10 @@ const ShowWork = props => {
           </Play>
         </Center> */}
       <ContainerCluster>
-        <Desc title={nombre} desc={language === "es" ? biografia : biography} />
+        <Desc
+          title={nombre}
+          desc={language === "es" ? Parser(biografia) : Parser(biography)}
+        />
       </ContainerCluster>
 
       <ContainerCluster>
@@ -275,11 +277,15 @@ const ShowWork = props => {
                 alt=""
                 className="img-responsive"
               />
-              <ArtTitle>{p.acf.titulo}</ArtTitle>
-              <ArtDescription>{p.acf.ano}</ArtDescription>
-              <ArtDescription>{p.acf.artista}</ArtDescription>
-              <ArtDescription>{p.acf.tecnica}</ArtDescription>
-              <ArtDescription>{p.acf.dimensiones}</ArtDescription>
+              <ArtTitle>{Parser(p.acf.titulo)}</ArtTitle>
+              <ArtDescription>{Parser(p.acf.ano)}</ArtDescription>
+              <ArtDescription>{Parser(p.acf.artista)}</ArtDescription>
+              <ArtDescription>
+                {language === "es"
+                  ? Parser(p.acf.tecnica)
+                  : Parser(p.acf.technique)}
+              </ArtDescription>
+              <ArtDescription>{Parser(p.acf.dimensiones)}</ArtDescription>
             </Artgrid>
           ))}
         </ArtHolder>
