@@ -4,11 +4,14 @@ import { connect } from "react-redux";
 //import { Link } from "react-router-dom";
 
 // import VideoHome from "../components/VideoHome";
-//import translations from "../translations";
+import translations from "../translations";
 import { colors } from "../styles/globals";
 
 import HomePic from "../img/james_smith.jpg";
-// import EndPic from "../img/end_pic.jpg";
+import ObrasPic from "../img/obras_artistas_placeholder.jpg";
+import ArtistasPic from "../img/obras_artistas_placeholder.jpg";
+
+import { Link, NavLink } from "react-router-dom";
 
 import A01 from "../img/01_a.svg";
 import B02 from "../img/02_b.svg";
@@ -29,6 +32,8 @@ import Triangulo from "../img/triangulo.svg";
 
 import Parser from "html-react-parser";
 
+const LinkTo = styled(NavLink)``;
+
 const H3 = styled.h3`
   margin: 0;
   font-weight: 700;
@@ -39,21 +44,44 @@ const H3 = styled.h3`
   text-transform: uppercase;
 `;
 const ImageHome = styled.img`
-  margin-top: 25vh;
   width: 80vw;
-  margin-left: 20vw;
+  margin: 20vw;
+  padding-right: 20vw;
 `;
 
-const ImageEnd = styled.img`
+const ImageBlock = styled.div`
   margin-top: 10vh;
-  width: 50vw;
-  margin-left: 20vw;
+  width: 30vw;
+  height: 30vw;
+  margin: 5vh;
+  background-position: cover;
+  align-items: center;
+  flex-direction: vertical;
 `;
 
 const HomeContainer = styled.div`
   color: ${colors.black};
   text-align: center;
   margin: 0 auto;
+`;
+
+const H1 = styled.h1`
+  color: ${colors.black};
+  font-weight: 700;
+  letter-spacing: 130%;
+  margin-top: 20vh;
+  line-height: 1.5em;
+  font-family: "FuturaBold", "Futura", "Verdana";
+  font-size: 2.8rem;
+  top: 0;
+  right: 0;
+  text-align: right;
+  font-weight: 800;
+  font-size: 5rem;
+  text-transform: uppercase;
+  text-align: center;
+  margin-left: 30vw;
+  margin-right: 30vw;
 `;
 
 const TextDesc = styled.p`
@@ -65,18 +93,13 @@ const TextDesc = styled.p`
   font-size: 2.8rem;
   top: 0;
   right: 0;
-  width: 60%;
+  max-width: 60%;
   margin-left: 30vw;
   text-align: right;
+  margin-right: 30vw;
 
   &.description {
-    margin-bottom: 20vh;
-  }
-  &.title {
-    font-weight: 800;
-    font-size: 5rem;
-    text-transform: uppercase;
-    text-align: center;
+    margin-bottom: 5vh;
   }
   &.italic {
     font-style: italic;
@@ -132,11 +155,11 @@ const Home = props => (
       <img src={R14} alt="r" />
     </LogoParts>
 
-    <TextDesc className="title">
+    <H1 className="title">
       {props.language === "es"
         ? "ARTISTAS, PROCESOS, TALLERES Y PERSISTENCIA EN EL CONSTRUCTIVISMO Y LA ABSTRACCIÓN GEOMÉTRICA"
         : "ARTISTS, PROCESS, STUDIOS Y PERSISTENCE IN CONSTRUCTIVISM & GEOMETRIC ABSTRACTION"}
-    </TextDesc>
+    </H1>
     <TextDesc className="italic">
       {props.language === "es"
         ? "Aproximación a la visualidad, pensamiento creativo e investigación material que formaron parte de la emergencia de la abstracción en Chile desde la segunda mitad del siglo XX."
@@ -144,31 +167,33 @@ const Home = props => (
     </TextDesc>
     <ImageHome src={HomePic} />
     <TextDesc className="description">
-      Abstracción Sur es un portal de información en torno a procesos
-      intelectuales, creativos, acontecimientos, protagonistas y archivos
-      implicados en la construcción nueva narrativa que hace visible y articula
-      el capítulo de la abstracción en Chile. Veremos que hay varias
-      orientaciones, desde los artistas adscritos a manifiestos, así como de
-      artistas que trabajan de manera independiente. La narrativa articula por
-      una parte actores que estaban invisibilizados, y por otra explicita las
-      relaciones de intercambio y trabajo colaborativo entre los artistas de
-      Chile, Argentina, Uruguay y Brasil. La presentación de los artistas en su
-      taller, contextualizado con su tiempo, nos permitirá ver su trabajo desde
-      si mismos. La idea de la visita guiada es en función de cada artista es
-      experto en su obra, y contienen las claves para iniciar una primera
-      aproximación a su trabajo. Esta narrativa audio visual será una estructura
-      relacional y circular, que irá del contexto, al artista, la obra, los
-      archivos, las fotografías, los documentos y las exposiciones. Se parte de
-      una obra se llega al artista, se avanza a una exposición y se llega a otro
-      autor. Los documentos o las referencias duras sirven para situar las
-      reflexiones y el contexto de época.
+      {props.language === "es"
+        ? Parser(
+            "Abstracción Sur es un portal de información en torno a procesos intelectuales, creativos, acontecimientos, protagonistas y archivos implicados en la construcción nueva narrativa que hace visible y articula el capítulo de la abstracción en Chile.</br> Veremos que hay varias  orientaciones, desde los artistas adscritos a manifiestos, así como de artistas que trabajan de manera independiente. La narrativa articula por una parte actores que estaban invisibilizados, y por otra explicita las relaciones de intercambio y trabajo colaborativo entre los artistas de Chile, Argentina, Uruguay y Brasil. La presentación de los artistas en su taller, contextualizado con su tiempo, nos permitirá ver su trabajo desde si mismos. La idea de la visita guiada es en función de cada artista es experto en su obra, y contienen las claves para iniciar una primera aproximación a su trabajo. Esta narrativa audio visual será una estructura relacional y circular, que irá del contexto, al artista, la obra, los archivos, las fotografías, los documentos y las exposiciones. Se parte de una obra se llega al artista, se avanza a una exposición y se llega a otro autor. Los documentos o las referencias duras sirven para situar las reflexiones y el contexto de época."
+          )
+        : Parser(
+            "Abstracción Sur is a portal of information about intellectual, creative processes, events, protagonists and files involved in the new narrative construction that makes visible and articulates the chapter of abstraction in Chile. </ Br> We will see that there are several orientations, from the artists attached to manifestos, as well as artists who work independently. The narrative articulates, on the one hand, actors who were invisible, and on the other, explicit relationships of exchange and collaborative work between artists from Chile, Argentina, Uruguay and Brazil. The presentation of the artists in their workshop, contextualized with their time, will allow us to see their work from themselves. The idea of ​​the guided tour is based on each artist is expert in his work, and contain the keys to start a first approach to his work. This audio visual narrative will be a relational and circular structure, which will go from the context, to the artist, the work, the archives, the photographs, the documents and the exhibitions. Be part of a work you get to the artist, you advance to an exhibition and you get to another author. The documents or the hard references serve to situate the reflections and the context of the period."
+          )}
     </TextDesc>
 
-    {/* <ImageEnd src={EndPic} /> */}
-    {/*
-    <Button>Conoce mas de los 9 Artistas</Button>
-    <Button>Ve las Obras que realizaron</Button>
-    <Button>Equipo</Button>*/}
+    <LinkTo onClick={this.checkMobileNav} to="/artwork">
+      <ImageBlock
+        style={{
+          backgroundImage: "url(" + ArtistasPic + ")"
+        }}
+      >
+        {props.language === "es" ? "Obras" : "Artwork"}
+      </ImageBlock>
+    </LinkTo>
+    <LinkTo onClick={this.checkMobileNav} to="/artists">
+      <ImageBlock
+        style={{
+          backgroundImage: "url(" + ArtistasPic + ")"
+        }}
+      >
+        {props.language === "es" ? "Artistas" : "Artists"}
+      </ImageBlock>
+    </LinkTo>
   </HomeContainer>
 );
 

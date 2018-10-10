@@ -1,14 +1,14 @@
 import React from "react";
-import { Redirect } from "react-router";
+// import { Redirect } from "react-router";
 
 import { connect } from "react-redux";
-import MainImage from "../components/MainImage";
+// import MainImage from "../components/MainImage";
 import Desc from "../components/Desc";
 import styled from "styled-components";
 import { colors, colorRandomFromArray } from "../styles/globals";
-import { GridArt } from "../components/GridArt";
+// import { GridArt } from "../components/GridArt";
 import { Link } from "react-router-dom";
-import { playVideo } from "../redux/actions";
+// import { playVideo } from "../redux/actions";
 import ReactPlayer from "react-player";
 import Parser from "html-react-parser";
 
@@ -246,10 +246,12 @@ const ShowWork = props => {
   return (
     <div style={mainDivStyle}>
       <Arrow className="arrow-white next" to={nextLink}>
+        previous artist
         <i className="fas fa-chevron-right fa-4x" />
       </Arrow>
       <Arrow className="arrow-white" to={prevLink}>
         <i className="fas fa-chevron-left fa-4x" />
+        next artist
       </Arrow>
       <BlueSide>
         <ArtistImage src={url} alt={nombre} />
@@ -279,7 +281,7 @@ const ShowWork = props => {
               />
               <ArtTitle>{Parser(p.acf.titulo)}</ArtTitle>
               <ArtDescription>{Parser(p.acf.ano)}</ArtDescription>
-              <ArtDescription>{Parser(p.acf.artista)}</ArtDescription>
+              <ArtDescription>{Parser(p.acf.artista + "")}</ArtDescription>
               <ArtDescription>
                 {language === "es"
                   ? Parser(p.acf.tecnica)

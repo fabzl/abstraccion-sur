@@ -4,7 +4,7 @@ import { keyframes } from "styled-components";
 export const colors = {
   black: "#999",
   gray: "#e3d7c4",
-  white: "#f7f3ee",
+  white: "#fff", //f7f3ee
   violet: "#ff0000",
   orange: "#fde53f"
 };

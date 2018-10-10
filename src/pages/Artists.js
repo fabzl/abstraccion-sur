@@ -11,6 +11,8 @@ import ReactDOM from "react-dom";
 import ReactPlayer from "react-player";
 import { stopVideo, playVideo } from "../redux/actions";
 
+import Parser from "html-react-parser";
+
 /////////////////// lets
 
 let circleSize = "22vmin";
@@ -382,7 +384,7 @@ class Artists extends React.Component {
           alignItems: "center",
           flexDirection: "row",
           display: "flex",
-          background: colorRandomFromArray(),
+          background: colors.white,
           transition: "background 5s",
           height: "92vh",
           width: "100vw"

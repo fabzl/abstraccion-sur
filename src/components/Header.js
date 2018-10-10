@@ -5,6 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
 
 import translations from "../translations";
+
 import { colors } from "../styles/globals";
 
 const Circle = styled.div`
