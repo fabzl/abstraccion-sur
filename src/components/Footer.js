@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import logo from "../img/logo_footer.svg";
 import translations from "../translations";
 import { colors } from "../styles/globals";
 
@@ -43,7 +42,7 @@ const Wrap = styled.footer`
   width: 100vw;
   height: 8vh;
   bottom: 0;
-  background-color: ${colors.black};
+  /* background-color: ${colors.black}; */
 `;
 
 const Content = styled.div`
@@ -68,7 +67,7 @@ const General = styled.div`
 const LinkTo = styled(NavLink)`
   cursor: pointer;
   font-weight: 500;
-  color: ${colors.white};
+  color: ${colors.violet};
   text-decoration: none;
   padding-left: 2rem;
   padding-right: 1rem;
@@ -105,11 +104,11 @@ export const smoothScroll = () => {
 const Footer = props => (
   <Wrap>
     <Content>
-      <LogoContainer>
+      {/* <LogoContainer>
         <LinkTo to="/">
           <Logo src={logo} />
         </LinkTo>
-      </LogoContainer>
+      </LogoContainer> */}
 
       <General>
         <Nav>

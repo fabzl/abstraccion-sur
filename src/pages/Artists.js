@@ -55,7 +55,7 @@ const ArtistsHolder = styled.ul`
   display: grid;
   top: 0;
   left: 0;
-  padding: 10%;
+  /* padding: 10%; */
   margin: 0;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -64,6 +64,7 @@ const ArtistsHolder = styled.ul`
   grid-column-gap: ${gridInitialDistance + "vw"};
   width: 100vw;
   justify-content: center;
+  background-color:${colors.deeoblackp}
 
   &.active {
     grid-row-gap: ${gridFinalDistance + "vw"};
@@ -160,11 +161,11 @@ const ArtImg = styled.div`
   width: ${circleSize};
   height: ${circleSize};
   line-height: 0.4em;
-  border-radius: 50%;
   background-size: cover;
   position: absolute;
   will-change: transform;
   transition: all 0.5s;
+  width: 50%;
 
   &.active {
     transform: perspective(500px) translate3d(0px, 0px, 10vmax);
@@ -280,7 +281,13 @@ class Artists extends React.Component {
     // var player = new Vimeo.Player(iframe);
 
     // console.log(iframe, player);
+
+    this.fadeIn();
   }
+
+  fadeIn = () => {
+    document.getElementById("main");
+  };
 
   openArtist = key => {
     this.setState({ openArtist: !this.state.openArtist });
@@ -380,6 +387,7 @@ class Artists extends React.Component {
     const { language } = this.props;
     return (
       <div
+        id="main"
         style={{
           alignItems: "center",
           flexDirection: "row",

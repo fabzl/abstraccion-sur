@@ -44,9 +44,7 @@ const H3 = styled.h3`
   text-transform: uppercase;
 `;
 const ImageHome = styled.img`
-  width: 80vw;
-  margin: 20vw;
-  padding-right: 20vw;
+  width: 100vw;
 `;
 
 const ImageBlock = styled.div`
@@ -54,9 +52,12 @@ const ImageBlock = styled.div`
   width: 30vw;
   height: 30vw;
   margin: 5vh;
+  font-size: 4rem;
+  display: flex;
+  color: ${colors.violet};
   background-position: cover;
   align-items: center;
-  flex-direction: vertical;
+  flex-direction: column;
 `;
 
 const HomeContainer = styled.div`
@@ -65,41 +66,45 @@ const HomeContainer = styled.div`
   margin: 0 auto;
 `;
 
+const Intro = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 20%;
+`;
+
 const H1 = styled.h1`
+  display: flex;
   color: ${colors.black};
   font-weight: 700;
   letter-spacing: 130%;
-  margin-top: 20vh;
   line-height: 1.5em;
   font-family: "FuturaBold", "Futura", "Verdana";
   font-size: 2.8rem;
-  top: 0;
-  right: 0;
-  text-align: right;
   font-weight: 800;
   font-size: 5rem;
   text-transform: uppercase;
   text-align: center;
-  margin-left: 30vw;
-  margin-right: 30vw;
+  margin: auto;
+  margin-bottom: 0;
 `;
 
 const TextDesc = styled.p`
+  margin-top: 0;
+  display: flex;
   color: ${colors.black};
   font-weight: 700;
   letter-spacing: 130%;
   line-height: 1.5em;
   font-family: "FuturaBold", "Futura", "Verdana";
   font-size: 2.8rem;
-  top: 0;
-  right: 0;
-  max-width: 60%;
-  margin-left: 30vw;
-  text-align: right;
-  margin-right: 30vw;
+  margin: auto;
 
   &.description {
-    margin-bottom: 5vh;
+    /* margin-bottom: 5vh; */
+    padding: 20%;
   }
   &.italic {
     font-style: italic;
@@ -107,17 +112,6 @@ const TextDesc = styled.p`
     text-align: center;
     font-size: 2.5rem;
     line-height: auto;
-  }
-`;
-
-const LogoParts = styled.div`
-  position: fixed;
-  top: 50px;
-  width: 20vmax;
-
-  img {
-    top: 0;
-    position: absolute;
   }
 `;
 
@@ -136,35 +130,18 @@ const Button = styled.button`
 
 const Home = props => (
   <HomeContainer>
-    <LogoParts>
-      <img src={Triangulo} alt="triangulo" />
-      <img src={Linea} alt="linea" />
-      <img src={A01} alt="a" />
-      <img src={B02} alt="b" />
-      <img src={S03} alt="s" />
-      <img src={T04} alt="t" />
-      <img src={R05} alt="r" />
-      <img src={A06} alt="a" />
-      <img src={C07} alt="c" />
-      <img src={C08} alt="c" />
-      <img src={I09} alt="i" />
-      <img src={O10} alt="o" />
-      <img src={N11} alt="n" />
-      <img src={S12} alt="s" />
-      <img src={U13} alt="u" />
-      <img src={R14} alt="r" />
-    </LogoParts>
-
-    <H1 className="title">
-      {props.language === "es"
-        ? "ARTISTAS, PROCESOS, TALLERES Y PERSISTENCIA EN EL CONSTRUCTIVISMO Y LA ABSTRACCIÓN GEOMÉTRICA"
-        : "ARTISTS, PROCESS, STUDIOS Y PERSISTENCE IN CONSTRUCTIVISM & GEOMETRIC ABSTRACTION"}
-    </H1>
-    <TextDesc className="italic">
-      {props.language === "es"
-        ? "Aproximación a la visualidad, pensamiento creativo e investigación material que formaron parte de la emergencia de la abstracción en Chile desde la segunda mitad del siglo XX."
-        : "Approach to visuality, creative thinking and material research that formed part of the emergence of abstraction in Chile since the second half of the 20th century."}
-    </TextDesc>
+    <Intro>
+      <H1 className="title">
+        {props.language === "es"
+          ? "ARTISTAS, PROCESOS, TALLERES Y PERSISTENCIA EN EL CONSTRUCTIVISMO Y LA ABSTRACCIÓN GEOMÉTRICA"
+          : "ARTISTS, PROCESS, STUDIOS Y PERSISTENCE IN CONSTRUCTIVISM & GEOMETRIC ABSTRACTION"}
+      </H1>
+      <TextDesc className="italic">
+        {props.language === "es"
+          ? "Aproximación a la visualidad, pensamiento creativo e investigación material que formaron parte de la emergencia de la abstracción en Chile desde la segunda mitad del siglo XX."
+          : "Approach to visuality, creative thinking and material research that formed part of the emergence of abstraction in Chile since the second half of the 20th century."}
+      </TextDesc>
+    </Intro>
     <ImageHome src={HomePic} />
     <TextDesc className="description">
       {props.language === "es"

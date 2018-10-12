@@ -5,8 +5,59 @@ import { Link, NavLink } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
 
 import translations from "../translations";
-
+import logo from "../img/logo_header.svg";
 import { colors } from "../styles/globals";
+
+import A01 from "../img/01_a.svg";
+import B02 from "../img/02_b.svg";
+import S03 from "../img/03_s.svg";
+import T04 from "../img/04_t.svg";
+import R05 from "../img/05_r.svg";
+import A06 from "../img/06_a.svg";
+import C07 from "../img/07_c.svg";
+import C08 from "../img/08_c.svg";
+import I09 from "../img/09_i.svg";
+import O10 from "../img/10_o.svg";
+import N11 from "../img/11_n.svg";
+import S12 from "../img/12_s.svg";
+import U13 from "../img/13_u.svg";
+import R14 from "../img/14_r.svg";
+import Linea from "../img/linea.svg";
+import Triangulo from "../img/triangulo.svg";
+
+const LogoParts = styled.div`
+  /* top: 50px; */
+  width: 20vmax;
+  margin: 0 auto;
+  opacity: 0;
+  z-index: 3001;
+
+  img {
+    top: 0;
+    position: absolute;
+  }
+  &.active {
+    opacity: 1;
+    transform: translate(50%, 50%, 0);
+  }
+`;
+const LogoContainer = styled.div`
+  margin-right: auto;
+  margin-top: 1vh;
+  position: absolute;
+  top: 0.5rem;
+  left: 3rem;
+  transition: all 1s;
+  &.passive {
+    transform: translate3d(-30vw, 0, 0);
+    opacity: 0;
+  }
+`;
+
+const Logo = styled.img`
+  /* max-width: 15vmax; */
+  height: 8rem;
+`;
 
 const Circle = styled.div`
   border-radius: 50%;
@@ -121,7 +172,7 @@ const BurgerLink = styled.a`
   }
   &.open {
     svg {
-      fill: ${colors.white};
+      fill: ${colors.black};
     }
     rect:nth-child(1) {
       transform: translate(1rem, 0) rotate(45deg);
@@ -146,7 +197,7 @@ const NavContainer = styled.div`
   transition: all 0.4s;
   width: 0;
   display: flex;
-  height: 92vh;
+  height: 50vh;
   flex-direction: column;
   text-align: center;
   justify-content: space-around;
@@ -154,9 +205,9 @@ const NavContainer = styled.div`
 
   &.active {
     position: fixed;
-    width: 40vw;
+    width: 100vw;
     z-index: 3000;
-    background: rgba(0, 1, 40, 0.85);
+    background: rgba(255, 255, 255, 0.85);
   }
 `;
 
@@ -186,6 +237,30 @@ class Header extends React.Component {
     const { language } = this.props;
     return (
       <Nav>
+        <LogoContainer className={this.state.openMenu ? "passive" : ""}>
+          <LinkTo to="/">
+            <Logo src={logo} />
+          </LinkTo>
+        </LogoContainer>
+
+        <LogoParts className={this.state.openMenu ? "active" : ""}>
+          <img src={Triangulo} alt="triangulo" />
+          <img src={Linea} alt="linea" />
+          <img src={A01} alt="a" />
+          <img src={B02} alt="b" />
+          <img src={S03} alt="s" />
+          <img src={T04} alt="t" />
+          <img src={R05} alt="r" />
+          <img src={A06} alt="a" />
+          <img src={C07} alt="c" />
+          <img src={C08} alt="c" />
+          <img src={I09} alt="i" />
+          <img src={O10} alt="o" />
+          <img src={N11} alt="n" />
+          <img src={S12} alt="s" />
+          <img src={U13} alt="u" />
+          <img src={R14} alt="r" />
+        </LogoParts>
         <NavContainer className={this.state.openMenu && "active"}>
           <LinkTo onClick={this.checkMobileNav} to="/">
             {translations.header.home[language]}
