@@ -6,6 +6,7 @@ import { changeLang } from "../redux/actions";
 import { colors } from "../styles/globals";
 
 const H2 = styled.div`
+  z-index: 3002;
   text-transform: uppercase;
   cursor: pointer;
   user-select: none;
