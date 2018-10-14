@@ -24,29 +24,40 @@ import U13 from "../img/13_u.svg";
 import R14 from "../img/14_r.svg";
 import Linea from "../img/linea.svg";
 import Triangulo from "../img/triangulo.svg";
+import Grid from "./GridArt";
+
+const MenuHolder = styled.div`
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+`;
 
 const LogoParts = styled.div`
-  /* top: 50px; */
-  width: 20vmax;
-  margin: 0 auto;
+  display: block;
+  position: relative;
+  width: 18vmax;
+  height: 0;
+  text-align: center;
   opacity: 0;
   z-index: 3001;
-
+  transform: translate3d(0, -100%, 0);
+  transition: all 0.5;
   img {
     top: 0;
     position: absolute;
+    transform: translateX(-50%);
   }
   &.active {
     opacity: 1;
-    transform: translate(50%, 50%, 0);
+    height: 20vmax;
+    transform: translate3d(0, 0, 0);
   }
 `;
 const LogoContainer = styled.div`
   margin-right: auto;
-  margin-top: 1vh;
-  position: absolute;
-  top: 0.5rem;
-  left: 3rem;
+  position: fixed;
+  top: 1.4rem;
+  left: 6rem;
   transition: all 1s;
   &.passive {
     transform: translate3d(-30vw, 0, 0);
@@ -71,38 +82,42 @@ const Nav = styled.nav`
   position: fixed;
   align-items: center;
   z-index: 900;
-  flex-direction: row;
+  flex-direction: column;
   display: flex;
+  width: 100vw;
 `;
 
 const LinkTo = styled(NavLink)`
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-indent: 0;
-  color: ${colors.white};
+  color: ${colors.black};
   text-decoration: none;
-  display: inline-block;
-  font-size: 2em;
-  margin: 0 2rem;
+  /* display: flex; */
+  /* flex-direction: row; */
+  font-size: 1.2em;
   align-items: center;
   line-height: 1em;
   text-transform: uppercase;
   transition: 1s all;
   background: transparent;
   font-weight: 750;
-  /* &:first-child {
-    display: none;
-  } */
+  width: 10vw;
+  padding: 1rem 2.5rem;
+  text-align: center;
+  font-family: "Helvetica";
 
-  @media (max-width: 740px) {
-    font-size: 2.4em;
-    margin: auto;
-    margin-top: 7vh;
-    &:first-child {
-      display: flex;
-    }
+  &.menu {
+    border-right: 2px solid ${colors.black};
+    box-sizing: border-box;
   }
+  &:last-child {
+    border-right: none;
+  }
+
   &.active,
   &:hover {
-    color: ${colors.white};
+    color: ${colors.black};
   }
 `;
 
@@ -166,6 +181,7 @@ const BurgerLink = styled.a`
   margin: 2rem 2rem;
   position: absolute;
   top: 0;
+  left: 2rem;
 
   rect {
     transition: 0.5s all;
@@ -192,18 +208,16 @@ const NavContainer = styled.div`
   z-index: 900;
   flex-direction: row;
   /* display: none; */
-  top: 0;
-  left: 0;
   transition: all 0.4s;
-  width: 0;
   display: flex;
-  height: 50vh;
+  height: 0;
   flex-direction: column;
   text-align: center;
   justify-content: space-around;
   overflow: hidden;
 
   &.active {
+    height: 50vh;
     position: fixed;
     width: 100vw;
     z-index: 3000;
@@ -243,40 +257,50 @@ class Header extends React.Component {
           </LinkTo>
         </LogoContainer>
 
-        <LogoParts className={this.state.openMenu ? "active" : ""}>
-          <img src={Triangulo} alt="triangulo" />
-          <img src={Linea} alt="linea" />
-          <img src={A01} alt="a" />
-          <img src={B02} alt="b" />
-          <img src={S03} alt="s" />
-          <img src={T04} alt="t" />
-          <img src={R05} alt="r" />
-          <img src={A06} alt="a" />
-          <img src={C07} alt="c" />
-          <img src={C08} alt="c" />
-          <img src={I09} alt="i" />
-          <img src={O10} alt="o" />
-          <img src={N11} alt="n" />
-          <img src={S12} alt="s" />
-          <img src={U13} alt="u" />
-          <img src={R14} alt="r" />
-        </LogoParts>
         <NavContainer className={this.state.openMenu && "active"}>
-          <LinkTo onClick={this.checkMobileNav} to="/">
-            {translations.header.home[language]}
-          </LinkTo>
+          <LogoParts className={this.state.openMenu ? "active" : ""}>
+            <img src={Triangulo} alt="triangulo" />
+            <img src={Linea} alt="linea" />
+            <img src={A01} alt="a" />
+            <img src={B02} alt="b" />
+            <img src={S03} alt="s" />
+            <img src={T04} alt="t" />
+            <img src={R05} alt="r" />
+            <img src={A06} alt="a" />
+            <img src={C07} alt="c" />
+            <img src={C08} alt="c" />
+            <img src={I09} alt="i" />
+            <img src={O10} alt="o" />
+            <img src={N11} alt="n" />
+            <img src={S12} alt="s" />
+            <img src={U13} alt="u" />
+            <img src={R14} alt="r" />
+          </LogoParts>
+          <MenuHolder>
+            <LinkTo className="menu" onClick={this.checkMobileNav} to="/">
+              {translations.header.home[language]}
+            </LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/artists">
-            {translations.header.artists[language]}
-          </LinkTo>
+            <LinkTo
+              className="menu"
+              onClick={this.checkMobileNav}
+              to="/artists"
+            >
+              {translations.header.artists[language]}
+            </LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/artwork">
-            {translations.header.timeline[language]}
-          </LinkTo>
+            <LinkTo
+              className="menu"
+              onClick={this.checkMobileNav}
+              to="/artwork"
+            >
+              {translations.header.timeline[language]}
+            </LinkTo>
 
-          <LinkTo onClick={this.checkMobileNav} to="/team">
-            {translations.header.contact[language]}
-          </LinkTo>
+            <LinkTo className="menu" onClick={this.checkMobileNav} to="/team">
+              {translations.header.contact[language]}
+            </LinkTo>
+          </MenuHolder>
         </NavContainer>
         <BurgerLink
           onClick={this.openMenu}

@@ -4,9 +4,10 @@ import { keyframes } from "styled-components";
 export const colors = {
   black: "#646464",
   gray: "#e3d7c4",
-  white: "#f7f3ee", //
+  white: "#f7f3ee",
   violet: "#ff0000",
-  orange: "#fde53f"
+  orange: "#fde53f",
+  deepblack: "#000"
 };
 
 const colorsForRandom = ["#ebc1b0", "#fcef97", "#7a7c99", "#badbdb", "#bfd49f"];

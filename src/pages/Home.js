@@ -12,6 +12,8 @@ import ObrasPic from "../img/obras_artistas_placeholder.jpg";
 import ArtistasPic from "../img/obras_artistas_placeholder.jpg";
 
 import { Link, NavLink } from "react-router-dom";
+import ReactPlayer from "react-player";
+import { stopVideo, playVideo } from "../redux/actions";
 
 import A01 from "../img/01_a.svg";
 import B02 from "../img/02_b.svg";
@@ -31,6 +33,22 @@ import Linea from "../img/linea.svg";
 import Triangulo from "../img/triangulo.svg";
 
 import Parser from "html-react-parser";
+
+const NavEnd = styled.div`
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const VideoHolder = styled.div`
+  position: relative;
+  width: 50vw;
+  height: auto;
+  z-index: 2000;
+  transition: all 1s;
+  /* transform: translate3d(0px, -100vh, 0); */
+`;
 
 const LinkTo = styled(NavLink)``;
 
@@ -65,6 +83,13 @@ const HomeContainer = styled.div`
   text-align: center;
   margin: 0 auto;
 `;
+const GridBG = styled.div`
+  /* background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  ); */
+`;
 
 const Intro = styled.div`
   width: 100vw;
@@ -75,6 +100,23 @@ const Intro = styled.div`
   padding: 0 20%;
 `;
 
+const H2 = styled.h2`
+  text-align: left;
+  display: flex;
+  color: ${colors.red};
+  font-weight: 700;
+  letter-spacing: 130%;
+  line-height: 1em;
+  font-family: "FuturaBold", "Futura", "Verdana";
+  font-size: 4rem;
+  font-weight: 800;
+  color: ${colors.violet};
+  text-transform: uppercase;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 0;
+`;
+
 const H1 = styled.h1`
   display: flex;
   color: ${colors.black};
@@ -82,15 +124,43 @@ const H1 = styled.h1`
   letter-spacing: 130%;
   line-height: 1.5em;
   font-family: "FuturaBold", "Futura", "Verdana";
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   font-weight: 800;
-  font-size: 5rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   text-transform: uppercase;
   text-align: center;
   margin: auto;
   margin-bottom: 0;
+  @media (min-width: 740px) {
+    font-size: 3.5rem;
+  }
+  @media (min-width: 1048px) {
+    font-size: 4rem;
+  }
+
+  @media (min-width: 1540px) {
+    font-size: 5rem;
+  }
+  @media (min-width: 2000px) {
+    font-size: 7rem;
+  }
 `;
 
+const Rev = styled.div`
+  margin-top: 10vh;
+  padding: 5vw;
+  margin: 0 3vw;
+  border-top: 2px solid ${colors.violet};
+  border-bottom: 2px solid ${colors.violet};
+  display: flex;
+  flex-direction: row;
+`;
+
+const RevContainer = styled.div`
+  width: 50vw;
+`;
 const TextDesc = styled.p`
   margin-top: 0;
   display: flex;
@@ -99,8 +169,10 @@ const TextDesc = styled.p`
   letter-spacing: 130%;
   line-height: 1.5em;
   font-family: "FuturaBold", "Futura", "Verdana";
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   margin: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   &.description {
     /* margin-bottom: 5vh; */
@@ -110,9 +182,36 @@ const TextDesc = styled.p`
     font-style: italic;
     font-weight: 500;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     line-height: auto;
+
+    @media (min-width: 740px) {
+      font-size: 2rem;
+    }
+    @media (min-width: 1048px) {
+      font-size: 2.5rem;
+    }
+
+    @media (min-width: 1748px) {
+      font-size: 3.5rem;
+    }
   }
+`;
+
+const TextReading = styled.p`
+  margin-top: 0;
+  display: flex;
+  color: ${colors.black};
+  font-weight: 400;
+  /* letter-spacing: 130%; */
+  line-height: 1em;
+  padding: 5vh;
+  font-family: "Helvetica", "HelveticaNeue", "Verdana";
+  font-size: 2rem;
+  margin: auto;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 `;
 
 const Button = styled.button`
@@ -138,8 +237,12 @@ const Home = props => (
       </H1>
       <TextDesc className="italic">
         {props.language === "es"
-          ? "Aproximación a la visualidad, pensamiento creativo e investigación material que formaron parte de la emergencia de la abstracción en Chile desde la segunda mitad del siglo XX."
-          : "Approach to visuality, creative thinking and material research that formed part of the emergence of abstraction in Chile since the second half of the 20th century."}
+          ? Parser(
+              "Aproximación a la visualidad, pensamiento creativo e investigación material que formaron parte de la emergencia de la abstracción en Chile desde la segunda mitad del siglo XX."
+            )
+          : Parser(
+              "Approach to visuality, creative thinking and material research that formed part of the emergence of abstraction in Chile since the second half of the 20th century."
+            )}
       </TextDesc>
     </Intro>
     <ImageHome src={HomePic} />
@@ -153,24 +256,64 @@ const Home = props => (
           )}
     </TextDesc>
 
-    <LinkTo onClick={this.checkMobileNav} to="/artwork">
-      <ImageBlock
-        style={{
-          backgroundImage: "url(" + ArtistasPic + ")"
+    <Rev>
+      <ReactPlayer
+        id="react-player"
+        url="https://www.youtube.com/watch?v=fuUhYr64Pqw"
+        playing={false}
+        controls
+        width="50%"
+        allow="autoplay; fullscreen"
+        height="28vw"
+        onReady={this.videoReady}
+        wrapper={VideoHolder}
+        onEnded={this.videoEnd}
+        config={{
+          vimeo: {
+            onReady: true
+            // autoplay: true
+          }
         }}
-      >
-        {props.language === "es" ? "Obras" : "Artwork"}
-      </ImageBlock>
-    </LinkTo>
-    <LinkTo onClick={this.checkMobileNav} to="/artists">
-      <ImageBlock
-        style={{
-          backgroundImage: "url(" + ArtistasPic + ")"
-        }}
-      >
-        {props.language === "es" ? "Artistas" : "Artists"}
-      </ImageBlock>
-    </LinkTo>
+      />
+
+      <RevContainer>
+        <H2 className="title">
+          {props.language === "es"
+            ? "La Revolucíon de las Formas"
+            : "The Shape Revolution"}
+        </H2>
+        <TextReading className="italic">
+          {props.language === "es"
+            ? Parser(
+                "La gran exposición de patrimonio nacional que exhibe 214 obras de 42 artistas, realizadas entre mediados del siglo XX y la primera década del siglo actual, da cuenta de una parte fundamental de la historia del arte en Chile y Latinoamérica. <br> Una exclusiva recopilación realizada entre colecciones privadas y públicas, chilenas y extranjeras, que incluye pinturas, dibujos, fotografías y esculturas que rescatan la expresión del movimiento de la abstracción en Chile desde sus inicios, con la simplificación de las formas, hasta el desarrollo de un arte concreto y constructivo que explora nuevos lenguajes, más cotidianos y cercanos, integrando el arte con elementos de la arquitectura, la ciencia, el diseño, el urbanismo, la literatura y la música.<br>       A través de esta exposición el Centro Cultural La Moneda ha querido reconocer y rescatar el ímpetu y la envergadura del movimiento de los artistas geométricos, abstractos, concretos y cinéticos, así como también agradecer a los coleccionistas privados que han resguardado parte de estas obras y que hoy comprenden la importancia de ponerlas en valor facilitando su exhibición en este Centro Cultural y para todos los chilenos. <br> Exposición curada por el doctor en Historia del Arte, Ramón Castillo.<br>        Obras imagen página anterior © Ramón Vergara Grez. Detalle de la obra Sin título, 1976 / Matilde Pérez. Detalle de obra Sin título, 1973."
+              )
+            : Parser(
+                "The great exhibition of national heritage that exhibits 214 works by 42 artists, made between the mid-twentieth century and the first decade of the current century, accounts for a fundamental part of the history of art in Chile and Latin America.<br/>An exclusive compilation realized between private and public collections, Chilean and foreign, that includes paintings, drawings, photographs and sculptures that rescue the expression of the movement of abstraction in Chile from its beginnings, with the simplification of the forms, until the development of a concrete and constructive art that explores new languages, more everyday and closer, integrating art with elements of architecture, science, design, urbanism, literature and music.<br/>Through this exhibition the Cultural Center La Moneda has wanted to recognize and rescue the impetus and the scope of the movement of geometric, abstract, concrete and kinetic artists, as well as to thank the private collectors who have protected part of these works and who today they understand the importance of putting them into value by facilitating their exhibition in this Cultural Center and for all Chileans.<br/>Exhibition curated by the doctor in History of Art, Ramón Castillo.<br/>Works image previous page © Ramón Vergara Grez. Detail of the work Untitled, 1976 / Matilde Pérez. Detail of work Untitled, 1973."
+              )}
+        </TextReading>
+      </RevContainer>
+    </Rev>
+
+    <NavEnd>
+      <LinkTo onClick={this.checkMobileNav} to="/artwork">
+        <ImageBlock
+          style={{
+            backgroundImage: "url(" + ArtistasPic + ")"
+          }}
+        >
+          {props.language === "es" ? "Obras" : "Artwork"}
+        </ImageBlock>
+      </LinkTo>
+      <LinkTo onClick={this.checkMobileNav} to="/artists">
+        <ImageBlock
+          style={{
+            backgroundImage: "url(" + ArtistasPic + ")"
+          }}
+        >
+          {props.language === "es" ? "Artistas" : "Artists"}
+        </ImageBlock>
+      </LinkTo>
+    </NavEnd>
   </HomeContainer>
 );
 

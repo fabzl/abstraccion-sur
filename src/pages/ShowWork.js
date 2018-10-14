@@ -133,6 +133,7 @@ const ArtDescription = styled.p`
   margin: 0;
   padding: 0;
   max-width: 60vw;
+  background: ${colors.white};
 `;
 
 const ArtTitle = styled.p`
