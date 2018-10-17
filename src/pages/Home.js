@@ -76,6 +76,10 @@ const ImageBlock = styled.div`
   background-position: cover;
   align-items: center;
   flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  color: ${colors.white};
+  text-decoration: none;
 `;
 
 const HomeContainer = styled.div`
