@@ -13,6 +13,7 @@ import Fade from "../components/Fade";
 import { stopVideo, playVideo } from "../redux/actions";
 
 import Parser from "html-react-parser";
+import PlayButton from "../img/play_button.svg";
 
 /////////////////// lets
 
@@ -21,20 +22,39 @@ let circleSizeHeight = "37vw";
 let gridInitialDistance = "2vw";
 let gridInitialDistanceRow = "1vw";
 let gridFinalDistance = "0";
-let activeCirclesDistance = "35vw";
+//let activeCirclesDistance = "35vw";
 
 const LinkTo = styled(Link)`
   text-decoration: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+
+  &.active {
+    height: auto;
+  }
 `;
 
 const CloseButton = styled.div`
-  position: absolute;
+  position: fixed;
   right: 2rem;
   top: 2rem;
-  z-index: 3000;
+  z-index: 3030;
   color: ${colors.white};
   &:hover {
     opacity: 0.5;
+  }
+`;
+
+const PlayButtonElement = styled.img`
+  width: 10vw;
+  height: 10vw;
+  opacity: 0;
+  transition: all 1.5s;
+  &.active {
+    opacity: 1;
   }
 `;
 
@@ -42,8 +62,15 @@ const VideoHolder = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${circleSize};
-  height: ${circleSizeHeight};
+  bottom: 0;
+  right: 0;
+  padding-top: 5vw;
+  background: ${colors.deepblack};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
   z-index: -10;
   transition: all 1s;
   /* transform: translate3d(0px, -100vh, 0); */
@@ -110,7 +137,7 @@ const ArtistsGrid = styled.li`
         ${Math.random()},
         ${Math.random() * 20}deg
       ); */
-     opacity: 0.3;
+     /* opacity: 0.3; */
   }
   &.active {
     /* transform: perspective(500px) translate3d(0px,0px,-10vmax); */
@@ -158,7 +185,7 @@ const ArtImg = styled.div`
   }
   &.passive {
     /* transform: perspective(500px) translate3d(0px, 0px, 0px); */
-    opacity: 0;
+    /* opacity: 0; */
   }
 `;
 
@@ -170,9 +197,7 @@ const goToId = id => {
 
 const PlayVideoBox = styled.div`
 
-  width: 0;
-  height: 0;
-  font-weight: 1em;
+  position: absolute;
   will-change: transform;
   transition: all 0.5s 0.7s;
   display: flex;
@@ -182,42 +207,28 @@ const PlayVideoBox = styled.div`
   margin: 0 auto;
   cursor: pointer;
   justify-content: center;
-  opacity:1;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  opacity:0;
+  width:100%;
+  height: 100%;
 
   &.active {
     /* transform: perspective(500px) translate3d(0, ${circleSizeHeight}, 0); */
-    width:100%;
-    height: 100%;
+  
     opacity:1;
     padding: 2vw;
-    grid-row-start: 2;
-    grid-row-end: 2;
-
-
-    color: ${colors.black};
-
- &.isEven {
-    grid-column-start: 1;
-    grid-column-end: 1;
-  }
-
-  &.isOdd {
-    
-    grid-column-start: 3;
-    grid-column-end: 3;
-
+    color: ${colors.white};
   }
 
 
-  }
   &.passive {
     /* transform: perspective(500px) translate3d(0px, 0px, 5vmax); */
   }
 `;
 
-const GotoCaveCircle = styled.div`
+const GotoArtistStudio = styled.div`
+
+
+  overflow: hidden;
   width: 0;
   height: 0;
   font-weight: 1em;
@@ -226,14 +237,21 @@ const GotoCaveCircle = styled.div`
   transition: all 0.5s 0.7s;
   display: flex;
   align-items: center;
-  color: transparent;
   text-align: center;
   cursor: pointer;
   justify-content: center;
   opacity:1;
-  grid-row-start: 3;
-  grid-row-end: 3;
 
+  color: ${colors.black};
+  font-weight: 400;
+  /* letter-spacing: 130%; */
+  line-height: 1em;
+  font-family: "Helvetica", "HelveticaNeue", "Verdana";
+  font-size: 2rem;
+  margin: auto;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   &.passive {
     /* transform: perspective(500px) translate3d(0, 0, 3vmax); */
@@ -243,24 +261,13 @@ const GotoCaveCircle = styled.div`
     width: 100%;
     height: 100%;
     color: ${colors.black};
-    grid-row-start: 3;
-    grid-row-end: 3;
+    /* grid-row-start: 3;
+    grid-row-end: 3; */
     opacity:1;
     padding: 2vw;
+ 
+ 
 
-
-
-&.isEven {
-    grid-column-start: 1;
-    grid-column-end: 1;
-  }
-
-  &.isOdd {
-    
-    grid-column-start: 3;
-    grid-column-end: 3;
-
-  }
 
   }
 `;
@@ -271,6 +278,7 @@ function isEven(value) {
 }
 
 const ArtDescription = styled.p`
+  position: relative;
   text-align: center;
   flex-direction: column;
   align-self: center;
@@ -284,7 +292,7 @@ const ArtDescription = styled.p`
   margin: 0;
   padding: 0;
   color: ${colors.red};
-  transition: all 2.5s;
+  transition: all 0.5s;
   z-index: 11;
   opacity: 1;
   width: 100%;
@@ -309,10 +317,10 @@ const ArtDescription = styled.p`
     /* grid-column-start: 2;
     grid-column-end: 4; */
     grid-row-start: 1;
-    grid-row-end: 1;
+    grid-row-end: 6;
   }
   &.passive {
-    opacity: 0;
+    /* opacity: 0; */
   }
 `;
 
@@ -390,6 +398,7 @@ class Artists extends React.Component {
     this.setState({ openVideo: false, videoPlaying: false });
     this.setState({ playerVisible: false });
   };
+
   displayVideo = () => {
     console.log("displayVideo");
     this.setState({ videoPlaying: true });
@@ -449,26 +458,10 @@ class Artists extends React.Component {
         >
           <ArtistsHolder
             id="artistHolder"
-            style={{
-              background: this.state.openArtist ? colorRandomFromArray() : ""
-            }}
-            className={[
-              (this.state.openArtist ? "active" : "") +
-                " " +
-                (this.state.openArtist && this.state.holderPositionX == 0
-                  ? "moveLeft"
-                  : "") +
-                " " +
-                (this.state.openArtist && this.state.holderPositionX == 1
-                  ? "moveCenter"
-                  : "") +
-                " " +
-                (this.state.openArtist && this.state.holderPositionX == 2
-                  ? "moveRight"
-                  : "") +
-                " " +
-                (this.state.openArtist && this.state.holderPositionY + "")
-            ]}
+            // style={{
+            //   background: this.state.openArtist ? colorRandomFromArray() : ""
+            // }}
+            className={[this.state.openArtist ? "active" : ""]}
           >
             {this.props.dataArtists.map((p, i) => (
               <ArtistsGrid
@@ -514,7 +507,34 @@ class Artists extends React.Component {
                   style={{
                     backgroundImage: "url(" + p.acf.fotoartista.url + ")"
                   }}
-                />
+                >
+                  <PlayVideoBox
+                    onClick={this.state.openArtist ? this.displayVideo : ""}
+                    className={[
+                      (this.state.openArtist && this.state.activeKey == i
+                        ? "active"
+                        : "") +
+                        " " +
+                        i +
+                        " " +
+                        (this.state.openArtist && this.state.activeKey != i
+                          ? "passive"
+                          : "") +
+                        " " +
+                        (isEven(i) ? "isOdd" : "isEven")
+                    ]}
+                  >
+                    <PlayButtonElement
+                      src={PlayButton}
+                      className={[
+                        this.state.openArtist && this.state.activeKey == i
+                          ? "active"
+                          : ""
+                      ]}
+                    />
+                    {translations.artists.video[language]}
+                  </PlayVideoBox>
+                </ArtImg>
                 <ArtDescription
                   className={[
                     (this.state.openArtist && this.state.activeKey == i
@@ -531,22 +551,8 @@ class Artists extends React.Component {
                   ]}
                 >
                   {p.acf.nombre}
-                </ArtDescription>
-                <LinkTo
-                  to={
-                    "/artists/" +
-                    p.acf.nombre
-                      .toLowerCase()
-                      .replace(/ /g, "-")
-                      .replace(/á/gi, "a")
-                      .replace(/é/gi, "e")
-                      .replace(/í/gi, "i")
-                      .replace(/ó/gi, "o")
-                      .replace(/ú/gi, "u")
-                      .replace(/ñ/gi, "n")
-                  }
-                >
-                  <GotoCaveCircle
+
+                  <LinkTo
                     className={[
                       (this.state.openArtist && this.state.activeKey == i
                         ? "active"
@@ -560,34 +566,41 @@ class Artists extends React.Component {
                         " " +
                         (isEven(i) ? "isOdd" : "isEven")
                     ]}
-                    style={{
-                      background: colorRandomFromArray()
-                    }}
+                    to={
+                      "/artists/" +
+                      p.acf.nombre
+                        .toLowerCase()
+                        .replace(/ /g, "-")
+                        .replace(/á/gi, "a")
+                        .replace(/é/gi, "e")
+                        .replace(/í/gi, "i")
+                        .replace(/ó/gi, "o")
+                        .replace(/ú/gi, "u")
+                        .replace(/ñ/gi, "n")
+                    }
                   >
-                    {translations.artists.cave[language]}
-                  </GotoCaveCircle>
-                </LinkTo>
-                <PlayVideoBox
-                  onClick={this.displayVideo}
-                  className={[
-                    (this.state.openArtist && this.state.activeKey == i
-                      ? "active"
-                      : "") +
-                      " " +
-                      i +
-                      " " +
-                      (this.state.openArtist && this.state.activeKey != i
-                        ? "passive"
-                        : "") +
-                      " " +
-                      (isEven(i) ? "isOdd" : "isEven")
-                  ]}
-                  style={{
-                    background: colorRandomFromArray()
-                  }}
-                >
-                  {translations.artists.video[language]}
-                </PlayVideoBox>
+                    <GotoArtistStudio
+                      className={[
+                        (this.state.openArtist && this.state.activeKey == i
+                          ? "active"
+                          : "") +
+                          " " +
+                          i +
+                          " " +
+                          (this.state.openArtist && this.state.activeKey != i
+                            ? "passive"
+                            : "") +
+                          " " +
+                          (isEven(i) ? "isOdd" : "isEven")
+                      ]}
+                      style={{
+                        background: colorRandomFromArray()
+                      }}
+                    >
+                      {translations.artists.cave[language]}
+                    </GotoArtistStudio>
+                  </LinkTo>
+                </ArtDescription>
               </ArtistsGrid>
             ))}
           </ArtistsHolder>
@@ -612,7 +625,7 @@ class Artists extends React.Component {
                 url={this.state.activeVideoToPlay}
                 playing={this.state.videoPlaying}
                 controls
-                width="100%"
+                width="100vw"
                 allow="autoplay; fullscreen"
                 height="100vh"
                 onReady={this.videoReady}
