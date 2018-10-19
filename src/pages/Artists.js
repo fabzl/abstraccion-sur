@@ -59,7 +59,7 @@ const PlayButtonElement = styled.img`
 `;
 
 const VideoHolder = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
@@ -375,7 +375,9 @@ class Artists extends React.Component {
     console.dir(element.offsetParent);
     if (this.state.openArtist) {
       this.closeArtist(currentKeyArtist);
-
+      if (this.state.currentKeyArtist != element.offsetParent) {
+        this.openArtist(currentKeyArtist);
+      }
       // console.log("closeartist");
     } else {
       this.openArtist(currentKeyArtist);
@@ -509,7 +511,11 @@ class Artists extends React.Component {
                   }}
                 >
                   <PlayVideoBox
-                    onClick={this.state.openArtist ? this.displayVideo : ""}
+                    onClick={
+                      this.state.openArtist && this.state.activeKey == i
+                        ? this.displayVideo
+                        : null
+                    }
                     className={[
                       (this.state.openArtist && this.state.activeKey == i
                         ? "active"

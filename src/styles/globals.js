@@ -10,7 +10,7 @@ export const colors = {
   deepblack: "#000"
 };
 
-const colorsForRandom = ["#ebc1b0", "#fcef97", "#7a7c99", "#badbdb", "#bfd49f"];
+const colorsForRandom = ["#ebc1b0", "#fcef97", "#badbdb", "#bfd49f"];
 
 export function colorRandomFromArray() {
   return colorsForRandom[Math.floor(Math.random() * colorsForRandom.length)];

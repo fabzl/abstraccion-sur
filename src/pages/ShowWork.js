@@ -11,10 +11,37 @@ import { Link } from "react-router-dom";
 // import { playVideo } from "../redux/actions";
 import ReactPlayer from "react-player";
 import Parser from "html-react-parser";
+import ArtistArrow from "../img/artists_arrow.svg";
+import BackArrow from "../img/back_arrow.svg";
+import NextArrow from "../img/next_arrow.svg";
 
+const BackArrowElement = styled.img`
+  width: 5vw;
+  height: 5vw;
+`;
+
+const NextArrowElement = styled.img`
+  width: 5vw;
+  height: 5vw;
+
+  & svg {
+    color: ${colors.black};
+  }
+`;
+
+const ArtistsArrowElement = styled.img`
+  width: 5vw;
+  height: 5vw;
+`;
+
+const AbstractLine = styled.div`
+  border-top: 3px solid ${colors.violet};
+  margin: 10vh auto;
+  width: 66vw;
+`;
 const LinkTo = styled(Link)``;
 
-let arrowSize = "8vh";
+let arrowSize = "2.5vh";
 
 const Arrow = styled(Link)`
   color: ${colors.black};
@@ -25,9 +52,14 @@ const Arrow = styled(Link)`
   position: fixed;
   cursor: pointer;
   justify-content: center;
-  border-radius: 50%;
-  left: 2rem;
-  top: 100px;
+  right: 4rem;
+  top: 10vh;
+  font-size: 1.5rem;
+  text-decoration: underline;
+  white-space: nowrap;
+  &.arrow-artists {
+    top: 22vh;
+  }
 
   & svg {
     transition: all 0.3s;
@@ -36,8 +68,8 @@ const Arrow = styled(Link)`
   }
 
   &.next {
-    right: 2rem;
-    left: auto;
+    left: 4rem;
+    right: auto;
   }
   & i {
     background-color: ${colors.black};
@@ -75,36 +107,41 @@ const Center = styled.div`
 `;
 
 const Artgrid = styled.div`
-  padding-top: 20vw;
+  margin-top: 20vw;
+  padding: 10vw;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
 `;
 
 const BlueSide = styled.div`
-  /* width: 35vw; */
-  /* margin-right: 5vw; */
-
+  padding-top: 5vh;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
   flex-direction: column;
-  background: ${colors.black};
-  /* position: absolute; */
-  padding-right: 2rem;
 `;
 
 const BigSide = styled.div`
   /* width: 60%; */
   flex-direction: column;
+  display: fleX;
 `;
 
-export const ArtHolder = styled.ul`
+export const ArtHolder = styled.div`
   display: flex;
   transition: all 0.3s;
-  /* border: 1px solid red; */
   padding-top: 10vh;
+  flex-direction: column;
 `;
 
 const ArtistName = styled.h1`
-  color: ${colors.white};
+  color: ${colors.black};
+  opacity: 1;
   font-weight: 700;
   letter-spacing: 130%;
   /* line-height: em; */
+  padding-right: 5vw;
   font-family: "FuturaBold", "Futura", "Verdana";
   font-size: 7rem;
   text-transform: uppercase;
@@ -113,19 +150,31 @@ const ArtistName = styled.h1`
 `;
 
 const ArtImg = styled.img`
-  height: 60vmin;
+  height: 60vw;
   width: auto;
   object-fit: cover;
+`;
+
+const WorkshopImage = styled.img`
+  object-fit: cover;
+  height: 46vw;
+  width: 100vw;
 `;
 
 const ArtistImage = styled.img`
   object-fit: cover;
   height: auto;
+  width: 75vw;
 `;
 
 export const ContainerCluster = styled.div`
-  padding: 10vw 0vw;
   background: ${colors.white};
+  width: 100vw;
+  &.videoHolder {
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+  }
 `;
 
 const ArtDescription = styled.p`
@@ -133,14 +182,14 @@ const ArtDescription = styled.p`
   margin: 0;
   padding: 0;
   max-width: 60vw;
-  background: ${colors.white};
 `;
 
 const ArtTitle = styled.p`
-  font-size: 6rem;
+  font-size: 3.2rem;
   margin: 0;
   padding: 0;
-  color: ${colors.black};
+  padding-top: 3vh;
+  color: ${colors.deepblack};
 `;
 
 const mainDivStyle = {
@@ -176,6 +225,7 @@ const ShowWork = props => {
     biography,
     fecha_de_nacimiento,
     fecha_de_fallecimiento,
+    tallerartista,
     fotoartista: { url },
     nombre,
     videomain,
@@ -227,9 +277,9 @@ const ShowWork = props => {
   //   exhibition,
   //   exposicion,
   //   fotos,
-  //   imagen_grande: { url_art_g },
-  //   imagen_mediana: { url_art_m },
-  //   imagen_pequena: { url_art_s },
+  //   imagen_grande: { urlart_g },
+  //   imagen_mediana: { urlart_m },
+  //   imagen_pequena: { urlart_s },
   //   tecnica,
   //   tecnique,
   //   titulo,
@@ -246,19 +296,26 @@ const ShowWork = props => {
 
   return (
     <div style={mainDivStyle}>
-      <Arrow className="arrow-white next" to={nextLink}>
-        previous artist
-        <i className="fas fa-chevron-right fa-4x" />
+      <Arrow className="arrow-white next" to={prevLink}>
+        <BackArrowElement src={BackArrow} />
+        {/* {language === "es" ? Parser(biografia) : Parser(biography)} */}
+        {/* <i className="fas fa-chevron-right fa-4x" /> */}
       </Arrow>
-      <Arrow className="arrow-white" to={prevLink}>
-        <i className="fas fa-chevron-left fa-4x" />
-        next artist
+      <Arrow className="arrow-artists arrow-white next" to={"/artists"}>
+        <ArtistsArrowElement src={ArtistArrow} />
+        {/* {language === "es" ? Parser(biografia) : Parser(biography)} */}
+        {/* <i className="fas fa-chevron-right fa-4x" /> */}
+      </Arrow>
+
+      <Arrow className="arrow-white" to={nextLink}>
+        {/* <i className="fas fa-chevron-left fa-4x" /> */}
+        <NextArrowElement src={NextArrow} />
       </Arrow>
       <BlueSide>
-        <ArtistImage src={url} alt={nombre} />
+        <WorkshopImage src={tallerartista.url} alt="artist studio" />
         <ArtistName> {Parser(nombre)}</ArtistName>
       </BlueSide>
-
+      <AbstractLine />
       {/* <Center>
           <Play onClick={() => props.playVideo(props.videomain)}>
             <i className="far fa-play-circle fa-10x" />
@@ -269,8 +326,9 @@ const ShowWork = props => {
           title={nombre}
           desc={language === "es" ? Parser(biografia) : Parser(biography)}
         />
-      </ContainerCluster>
 
+        <ArtistImage src={url} alt={nombre} />
+      </ContainerCluster>
       <ContainerCluster>
         <ArtHolder>
           {art.map(p => (
@@ -282,7 +340,7 @@ const ShowWork = props => {
               />
               <ArtTitle>{Parser(p.acf.titulo)}</ArtTitle>
               <ArtDescription>{Parser(p.acf.ano)}</ArtDescription>
-              <ArtDescription>{Parser(p.acf.artista + "")}</ArtDescription>
+              <ArtDescription>{Parser(p.acf.autor + "")}</ArtDescription>
               <ArtDescription>
                 {language === "es"
                   ? Parser(p.acf.tecnica)
@@ -293,13 +351,13 @@ const ShowWork = props => {
           ))}
         </ArtHolder>
       </ContainerCluster>
-      <ContainerCluster>
+      <ContainerCluster className="videoHolder">
         <ReactPlayer
           url={videomain}
           playing={false}
           controls
-          width="auto"
-          height="92vh"
+          width="80vw"
+          height="45vw"
           onEnded={this.videoEnd}
         />
       </ContainerCluster>
