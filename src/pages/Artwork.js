@@ -49,20 +49,21 @@ const LinkTo = styled(Link)`
 `;
 
 const TimelineContainer = styled.div`
-  width: auto;
-  height: 92vh;
-  top: 0;
+  width: 100vw;
+  height: auto;
+  top: 10vh;
   left: 0;
-  flex-direction: row;
+  flex-direction: column;
   display: flex;
-  background: ${colors.white};
+  background: ${colors.deepblack};
 `;
 const ArtWork = styled.div`
   padding-top: 10vh;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: auto;
   /* border: 1px solid red; */
   display: flex;
+  align-items: center;
 `;
 
 const YearHolder = styled.div`
@@ -76,20 +77,23 @@ const YearHolder = styled.div`
 `;
 
 const ArtImg = styled.img`
-  margin-top: 10vh;
-  margin-bottom: 5vh;
-  height: 50vh;
+  object-fit: contain;
   line-height: 0.4em;
+  height: auto;
+  position: relative;
+  width: 84vw;
+  margin-bottom: 3vh;
 `;
 
 const ArtObject = styled.div`
-  padding-right: 10vw;
+  padding: 8vw;
   display: flex;
   flex-direction: column;
+  object-fit: contain;
 `;
 
 const ArtDescription = styled.p`
-  font-size: 1.2rem;
+  font-size: 2rem;
   margin: 0;
   padding: 0;
   color: ${colors.black};
@@ -99,7 +103,7 @@ const YearTitle = styled.h3`
 `;
 
 const ArtTitle = styled.p`
-  font-size: 1.6rem;
+  font-size: 3.6rem;
   margin: 0;
   padding: 0;
   color: ${colors.black};
