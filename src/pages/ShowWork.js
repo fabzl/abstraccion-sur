@@ -41,7 +41,7 @@ const AbstractLine = styled.div`
 `;
 const LinkTo = styled(Link)``;
 
-let arrowSize = "2.5vh";
+let arrowSize = "2rem";
 
 const Arrow = styled(Link)`
   color: ${colors.black};
@@ -70,9 +70,6 @@ const Arrow = styled(Link)`
   &.next {
     left: 4rem;
     right: auto;
-  }
-  & i {
-    background-color: ${colors.black};
   }
 `;
 
