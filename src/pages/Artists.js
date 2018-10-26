@@ -266,9 +266,6 @@ const GotoArtistStudio = styled.div`
     opacity:1;
     padding: 2vw;
  
- 
-
-
   }
 `;
 

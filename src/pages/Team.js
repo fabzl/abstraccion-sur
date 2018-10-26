@@ -59,7 +59,7 @@ const H2 = styled.h2`
 
   text-align: center;
   font-size: 24px;
-  color: ${colors.violet};
+  color: ${colors.black};
   padding: 0 10%;
   margin-bottom: 10vw;
 
@@ -85,7 +85,7 @@ const H3 = styled.h3`
   padding: 0 10%;
 
   @media (min-width: 520px) {
-    font-size: 1.5rem
+    font-size: 1.5rem;
     padding: 0;
   }
   @media (min-width: 720px) {
@@ -97,7 +97,7 @@ const LogoParts = styled.div`
   display: block;
   position: relative;
   width: 18vmax;
-  height: 0;
+  height: 30vh;
   text-align: center;
   opacity: 1;
   z-index: 3001;
@@ -123,9 +123,7 @@ const Team = props => {
     padding-top: 10vh;
     padding-bottom: 10vh;
     position: relative;
-
-    background: gradient(linear, left top, right bottom, color-stop(1%, grey), color-stop(52%, grey), color-stop(52%, red), color-stop(52%, red), color-stop(100%, red));
-}
+    /* background: gradient(linear, left top, right bottom, color-stop(1%, grey), color-stop(52%, grey), color-stop(52%, red), color-stop(52%, red), color-stop(100%, red)); */
   `;
   const TextHolder = styled.div`
     position: relative;
@@ -164,52 +162,52 @@ const Team = props => {
 
           <H3>
             {props.language === "es"
-              ? "DIRECCIÓN GENERAL. (Ramón Castillo)"
-              : "GENERAL DIRECTION. (Ramón Castillo)"}
+              ? "DIRECCIÓN GENERAL. Ramón Castillo"
+              : "GENERAL DIRECTION. Ramón Castillo"}
           </H3>
 
           <H3>
             {props.language === "es"
-              ? "PRODUCCIÓN. (Olivia Guasch)"
-              : "PRODUCTION. (Olivia Guasch)"}
+              ? "PRODUCCIÓN. Olivia Guasch"
+              : "PRODUCTION. Olivia Guasch"}
+          </H3>
+
+          {/* <H3>
+            {props.language === "es"
+              ? "GUIONES. Ramón Castillo"
+              : "SCRIPTS. Ramón Castillo"}
+          </H3> */}
+
+          <H3>
+            {props.language === "es"
+              ? "CÁMARA. Rodrigo Avilés y Juan Millán"
+              : "CAMERA. Rodrigo Avilés y Juan Millán"}
           </H3>
 
           <H3>
             {props.language === "es"
-              ? "GUIONES. (Ramón Castillo)"
-              : "SCRIPTS. (Ramón Castillo)"}
+              ? "EDICIÓN Y MONTAJE. Manuela Piña"
+              : "VIDEO EDITING & POST PRODUCTION. Manuela Piña"}
           </H3>
 
           <H3>
             {props.language === "es"
-              ? "CÁMARA. (Rodrigo Avilés y Juan Millán)"
-              : "CAMERA. (Rodrigo Avilés y Juan Millán)"}
+              ? "SONIDO. Carlos Arias"
+              : "SOUND. Carlos Arias"}
           </H3>
 
           <H3>
             {props.language === "es"
-              ? "EDICIÓN Y MONTAJE. (Manuela Piña)"
-              : "VIDEO EDITING & POST PRODUCTION. (Manuela Piña)"}
+              ? "MÚSICA. Rodrigo Aros"
+              : "MUSIC. Rodrigo Aros"}
           </H3>
 
           <H3>
             {props.language === "es"
-              ? "SONIDO. (Carlos Arias)"
-              : "SOUND. (Carlos Arias)"}
+              ? "DISEÑO Y PROGRAMACIÓN. Fabián Andrade"
+              : "DESIGN & PROGRAMMING. Fabián Andrade"}
           </H3>
-
-          <H3>
-            {props.language === "es"
-              ? "MÚSICA. (Rodrigo Aros)"
-              : "MUSIC. (Rodrigo Aros)"}
-          </H3>
-
-          <H3>
-            {props.language === "es"
-              ? "DISEÑO Y PROGRAMACIÓN. (Fabián Andrade)"
-              : "DESIGN & PROGRAMMING. (Fabián Andrade)"}
-          </H3>
-          <H2>{language === "es" ? "ARTISTAS:" : "ARTISTS:"}</H2>
+          {/* <H2>{language === "es" ? "ARTISTAS:" : "ARTISTS:"}</H2>
           <H2>
             <ArtistUl>
               <ArtistList>Alejandro Siña</ArtistList>
@@ -218,38 +216,11 @@ const Team = props => {
               <ArtistList>Federico Assler</ArtistList>
               <ArtistList> Miguel Cosgrove</ArtistList>
               <ArtistList> Paz Olea </ArtistList>
-              <ArtistList> Ricardo Yrarrázabal</ArtistList>
+              <ArtistList> Ricardo Yrarrázaval</ArtistList>
               <ArtistList> Robinson Mora</ArtistList>
               <ArtistList> Sergio Berthoud</ArtistList>
             </ArtistUl>
-          </H2>
-          <H2>
-            {props.language === "es" ? "AGRADECIMIENTOS:" : "SPECIAL THANKS:"}
-          </H2>
-
-          <H3>
-            {props.language === "es"
-              ? "(Carlos Cruz) Jonus Bartholdson, Rita Hughes y David Huhhes *Gustavo Poblete"
-              : "(Carlos Cruz) Jonus Bartholdson, Rita Hughes y David Huhhes *Gustavo Poblete"}
-          </H3>
-
-          <H3>
-            {props.language === "es"
-              ? "(filmación taller) Centro Cultural Palacio La Moneda (CCPLM)"
-              : "(Workshop filming) Centro Cultural Palacio La Moneda (CCPLM)"}
-          </H3>
-
-          <H3>
-            {props.language === "es"
-              ? "Universidad Diego Portales (UDP)"
-              : "University Diego Portales (UDP)"}
-          </H3>
-
-          <H3>
-            {props.language === "es"
-              ? "Proyecto financiado por  el Ministerio de Cultura y las Artes de Chile (FONDART, 2018)"
-              : "Proyect funded by (FONDART, 2018)"}
-          </H3>
+          </H2> */}
         </TextHolder>
       </TeamParts>
       <div />

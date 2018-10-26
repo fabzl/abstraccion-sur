@@ -7,10 +7,13 @@ import { connect } from "react-redux";
 import translations from "../translations";
 import { colors } from "../styles/globals";
 
-import HomePic from "../img/james_smith.jpg";
-import ObrasPic from "../img/obras_artistas_placeholder.jpg";
-import ArtistasPic from "../img/obras_artistas_placeholder.jpg";
+// import HomePic from "../img/james_smith.jpg";
+// import ObrasPic from "../img/obras_artistas_placeholder.jpg";
 
+import RevDeLasFormas from "../img/la_rev_de_la_formas.jpg";
+import RevDeLasFormasMobile from "../img/la_rev_de_la_formas_mobile.jpg";
+
+import ArtistasPic from "../img/obras_artistas_placeholder.jpg";
 import { Link, NavLink } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { stopVideo, playVideo } from "../redux/actions";
@@ -34,6 +37,47 @@ import Triangulo from "../img/triangulo.svg";
 
 import Parser from "html-react-parser";
 
+const MenuHolder = styled.div`
+  top: 80vh;
+  display: flex;
+  justify-content: center;
+  /* background: rgba(255, 255, 255, 0.85); */
+`;
+
+const LogoParts = styled.div`
+  display: block;
+  top: 35vh;
+  position: relative;
+  width: 20vmax;
+  height: 30vh;
+  text-align: center;
+  opacity: 1;
+  transform: translate3d(0, -100%, 0);
+  transition: all 0.5;
+  margin: 0 auto;
+  img {
+    top: 0;
+    position: absolute;
+    transform: translateX(-50%);
+  }
+  &.active {
+    opacity: 1;
+    height: 20vmax;
+    transform: translate3d(0, 0, 0);
+  }
+`;
+const LogoContainer = styled.div`
+  margin-right: auto;
+  position: fixed;
+  top: 1.4rem;
+  left: 6rem;
+  transition: all 1s;
+  &.passive {
+    transform: translate3d(-30vw, 0, 0);
+    opacity: 0;
+  }
+`;
+
 const NavEnd = styled.div`
   width: 100vw;
   display: flex;
@@ -50,7 +94,49 @@ const VideoHolder = styled.div`
   /* transform: translate3d(0px, -100vh, 0); */
 `;
 
-const LinkTo = styled(NavLink)``;
+const Nav = styled.nav`
+  position: fixed;
+  align-items: center;
+  z-index: 900;
+  flex-direction: column;
+  display: flex;
+  width: 100vw;
+`;
+
+const LinkTo = styled(NavLink)`
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-indent: 0;
+  color: ${colors.black};
+  text-decoration: none;
+  /* display: flex; */
+  /* flex-direction: row; */
+  font-size: 1.6em;
+  letter-spacing: 130%;
+  align-items: center;
+  line-height: 1em;
+  text-transform: uppercase;
+  transition: 1s all;
+  background: transparent;
+  font-weight: 750;
+  width: 10vw;
+  padding: 1rem 2.5rem;
+  text-align: center;
+  font-family: "Helvetica";
+
+  &.menu {
+    border-right: 2px solid ${colors.black};
+    box-sizing: border-box;
+  }
+  &:last-child {
+    border-right: none;
+  }
+
+  &.active,
+  &:hover {
+    color: ${colors.black};
+  }
+`;
 
 const H3 = styled.h3`
   margin: 0;
@@ -102,6 +188,25 @@ const Intro = styled.div`
   flex-direction: column;
   justify-content: space-around;
   padding: 0 20%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position:relative;
+
+  background-image: url(${RevDeLasFormasMobile});
+
+  @media (min-width: 740px) {
+    background-image: url(${RevDeLasFormas});
+  }
+  &::after {
+    background-color: rgba(0, 0, 0, 0.37);
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    left: 0
+    top:0;
+  }
 `;
 
 const H2 = styled.h2`
@@ -123,7 +228,8 @@ const H2 = styled.h2`
 
 const H1 = styled.h1`
   display: flex;
-  color: ${colors.black};
+  z-index: 300;
+  color: ${colors.white};
   font-weight: 700;
   letter-spacing: 130%;
   line-height: 1.5em;
@@ -137,6 +243,19 @@ const H1 = styled.h1`
   text-align: center;
   margin: auto;
   margin-bottom: 0;
+
+  & span {
+    height: 2rem;
+    width: 2rem;
+    background-color: ${colors.gray};
+    border-radius: 50%;
+    display: inline-block;
+    display: flex;
+    align-self: center;
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
   @media (min-width: 740px) {
     font-size: 3.5rem;
   }
@@ -168,7 +287,7 @@ const RevContainer = styled.div`
 const TextDesc = styled.p`
   margin-top: 0;
   display: flex;
-  color: ${colors.black};
+  color: ${colors.white};
   font-weight: 700;
   letter-spacing: 130%;
   line-height: 1.5em;
@@ -177,6 +296,8 @@ const TextDesc = styled.p`
   margin: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  z-index: 300;
 
   &.description {
     /* margin-bottom: 5vh; */
@@ -231,32 +352,77 @@ const Button = styled.button`
   text-align: center;
 `;
 
+const StillHeader = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`;
+
 const Home = props => (
   <HomeContainer>
+    <StillHeader>
+      <LogoParts>
+        <img src={Triangulo} alt="triangulo" />
+        <img src={Linea} alt="linea" />
+        <img src={A01} alt="a" />
+        <img src={B02} alt="b" />
+        <img src={S03} alt="s" />
+        <img src={T04} alt="t" />
+        <img src={R05} alt="r" />
+        <img src={A06} alt="a" />
+        <img src={C07} alt="c" />
+        <img src={C08} alt="c" />
+        <img src={I09} alt="i" />
+        <img src={O10} alt="o" />
+        <img src={N11} alt="n" />
+        <img src={S12} alt="s" />
+        <img src={U13} alt="u" />
+        <img src={R14} alt="r" />
+      </LogoParts>
+      <MenuHolder>
+        <LinkTo className="menu" onClick={this.checkMobileNav} to="/">
+          {translations.header.home[props.language]}
+        </LinkTo>
+
+        <LinkTo className="menu" onClick={this.checkMobileNav} to="/artists">
+          {translations.header.artists[props.language]}
+        </LinkTo>
+
+        <LinkTo className="menu" onClick={this.checkMobileNav} to="/artwork">
+          {translations.header.timeline[props.language]}
+        </LinkTo>
+
+        <LinkTo className="menu" onClick={this.checkMobileNav} to="/team">
+          {translations.header.contact[props.language]}
+        </LinkTo>
+      </MenuHolder>
+    </StillHeader>
     <Intro>
       <H1 className="title">
         {props.language === "es"
-          ? "ARTISTAS, PROCESOS, TALLERES Y PERSISTENCIA EN EL CONSTRUCTIVISMO Y LA ABSTRACCIÓN GEOMÉTRICA"
-          : "ARTISTS, PROCESS, STUDIOS Y PERSISTENCE IN CONSTRUCTIVISM & GEOMETRIC ABSTRACTION"}
+          ? Parser("ARTISTAS  <span></span>  PROCESOS <span></span>  TALLERES")
+          : Parser("ARTISTS  <span></span>  PROCESS <span></span>  STUDIOS")}
       </H1>
       <TextDesc className="italic">
         {props.language === "es"
           ? Parser(
-              "Aproximación a la visualidad, pensamiento creativo e investigación material que formaron parte de la emergencia de la abstracción en Chile desde la segunda mitad del siglo XX."
+              "Aproximación a la visualidad, pensamiento creativo e investigación material de los que formaron parte del origen y desarrollo de la abstracción geométrica y constructiva en Chile desde la segunda mitad del siglo XX."
             )
           : Parser(
               "Approach to visuality, creative thinking and material research that formed part of the emergence of abstraction in Chile since the second half of the 20th century."
             )}
       </TextDesc>
     </Intro>
-    <ImageHome src={HomePic} />
+    {/* <ImageHome src={HomePic} /> */}
     <TextDesc className="description">
       {props.language === "es"
         ? Parser(
-            "Abstracción Sur es un portal de información en torno a procesos intelectuales, creativos, acontecimientos, protagonistas y archivos implicados en la construcción nueva narrativa que hace visible y articula el capítulo de la abstracción en Chile.</br> Veremos que hay varias  orientaciones, desde los artistas adscritos a manifiestos, así como de artistas que trabajan de manera independiente. La narrativa articula por una parte actores que estaban invisibilizados, y por otra explicita las relaciones de intercambio y trabajo colaborativo entre los artistas de Chile, Argentina, Uruguay y Brasil. La presentación de los artistas en su taller, contextualizado con su tiempo, nos permitirá ver su trabajo desde si mismos. La idea de la visita guiada es en función de cada artista es experto en su obra, y contienen las claves para iniciar una primera aproximación a su trabajo. Esta narrativa audio visual será una estructura relacional y circular, que irá del contexto, al artista, la obra, los archivos, las fotografías, los documentos y las exposiciones. Se parte de una obra se llega al artista, se avanza a una exposición y se llega a otro autor. Los documentos o las referencias duras sirven para situar las reflexiones y el contexto de época."
+            "Abstracción Sur es un portal de información en torno a los artistas chilenos que estuvieron implicados en el desarrollo y auge de la abstracción en Chile. Veremos desde los artistas adscritos a manifiestos, a los que trabajan de manera independiente. La narrativa articula por una parte actores que estaban invisibilizados, y por otra explicita las relaciones de intercambio y trabajo colaborativo entre hombres y mujeres de Chile, Argentina, Uruguay y Brasil.</br>La presentación de los artistas en su taller, nos permitirá ver su trabajo desde sí mismo. Como cada artista es experto en su obra en términos de procesos, y darán a conocer algunas claves y complejidades de su investigación y poética. Esta narrativa audio visual es una estructura relacional y circular, que va del contexto al artista, la obra, los archivos, las fotografías y las exposiciones. El viaje por cada autor acontece entre el taller, la obra y la exposición, como si se tratara de un circulo virtuoso y complementario."
           )
         : Parser(
-            "Abstracción Sur is a portal of information about intellectual, creative processes, events, protagonists and files involved in the new narrative construction that makes visible and articulates the chapter of abstraction in Chile. </ Br> We will see that there are several orientations, from the artists attached to manifestos, as well as artists who work independently. The narrative articulates, on the one hand, actors who were invisible, and on the other, explicit relationships of exchange and collaborative work between artists from Chile, Argentina, Uruguay and Brazil. The presentation of the artists in their workshop, contextualized with their time, will allow us to see their work from themselves. The idea of ​​the guided tour is based on each artist is expert in his work, and contain the keys to start a first approach to his work. This audio visual narrative will be a relational and circular structure, which will go from the context, to the artist, the work, the archives, the photographs, the documents and the exhibitions. Be part of a work you get to the artist, you advance to an exhibition and you get to another author. The documents or the hard references serve to situate the reflections and the context of the period."
+            "Abstracción Sur is a portal of information about intellectual, creative processes, events, protagonists and files involved in the new narrative construction that makes visible and articulates the chapter of abstraction in Chile. &lt;/ Br&gt; We will see that there are several orientations, from the artists attached to manifestos, as well as artists who work independently. The narrative articulates, on the one hand, actors who were invisible, and on the other, explicit relationships of exchange and collaborative work between artists from Chile, Argentina, Uruguay and Brazil. The presentation of the artists in their workshop, contextualized with their time, will allow us to see their work from themselves. The idea of ​​the guided tour is based on each artist is expert in his work, and contain the keys to start a first approach to his work. This audio visual narrative will be a relational and circular structure, which will go from the context, to the artist, the work, the archives, the photographs, the documents and the exhibitions. Be part of a work you get to the artist, you advance to an exhibition and you get to another author. The documents or the hard references serve to situate the reflections and the context of the period."
           )}
     </TextDesc>
 
