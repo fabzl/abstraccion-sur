@@ -54,54 +54,25 @@ const LinkTo = styled(Link)`
 `;
 
 const TimelineContainer = styled.div`
-  width: 95vw;
+  width: 100vw;
   margin: 10vh auto;
+  padding: 10vh 0;
   height: auto;
   flex-direction: auto-flow;
   display: grid;
   grid-template-columns: repeat(auto-fill, 1fr);
   position: relative;
   background: ${colors.deepblack};
-  grid-gap: 1rem;
+  grid-gap: 2rem;
   grid-auto-flow: dense;
 `;
-// const ArtWork = styled.div`
-//   padding-top: 10vh;
-//   width: 90%;
-//   height: auto;
-//   /* border: 1px solid red; */
-//   display: flex;
-//   align-items: center;
-// `;
-
-// const YearHolder = styled.div`
-//     display:flex;
-//     top: 0;
-//     left: 0;
-//     padding: 0;
-//     margin: 0;
-//     transition: all 0.3s;
-// }
-// `;
-
-// const ArtImg = styled.img`
-//   object-fit: contain;
-//   line-height: 0.4em;
-//   height: auto;
-//   position: relative;
-//   width: 84vw;
-//   margin-bottom: 3vh;
-// `;
 
 const ArtObject = styled.div`
   /* border: 1px solid green; */
   position: relative;
   height: auto;
-  margin: 0 auto;
-
-  & img {
-    object-fit: contain;
-  }
+  margin-bottom: 5vh;
+  text-align: center;
 `;
 
 const ArtDescription = styled.p`
@@ -109,79 +80,22 @@ const ArtDescription = styled.p`
   margin: 0;
   padding: 0;
   color: ${colors.black};
+  text-align: left;
+  padding-left: 20%;
 `;
-// const YearTitle = styled.h3`
-//   color: ${colors.blue};
-// `;
 
 const ArtTitle = styled.p`
   font-size: 1.8rem;
   margin: 0;
   padding: 0;
   color: ${colors.black};
+  text-align: left;
+  padding-left: 20%;
 `;
 
-// const ButtonYearIncrease = styled.button`
-//   position: fixed;
-//   top: 50%;
-//   right: 20%;
-//   background-color: ${colors.black};
-//   padding: 30px;
-//   z-index: 40;
-// `;
-
-// const ButtonYearDecrease = styled.button`
-//   position: fixed;
-//   top: 50%;
-//   left: 20%;
-//   background-color: ${colors.black};
-//   padding: 30px;
-//   z-index: 40;
-// `;
-
-// const Sliderboy = Slider;
-
-// const SliderHolder = styled.div`
-//   position: fixed;
-//   top: 70%;
-//   width: 100%;
-
-//   &.rc-slider-rail {
-//     opacity: 1;
-//     background: solid ${colors.red}!important;
-//   }
-//   &.rc-slider-track {
-//     height: 100vh;
-//   }
-//   &.rc-slider-handle {
-//   }
-
-//   &.rc-slider-step {
-//     background: solid ${colors.red}!important;
-//   }
-//   z-index: 500;
-// `;
-
-// const updateScrollPos = props => {
-//   console.log("upd");
-// };
-
-// let yearToIndex = 1912;
-
-// const isCurrentYear = (props, key) => {
-//   // hardcoded min Year (change if you change the min year .
-//   //  dont do this at home .
-//   let currentYear = yearToIndex;
-
-//   // console.log(
-//   //   key,
-//   //   currentYear.toString() == props.acf.ano,
-//   //   currentYear,
-//   //   props.acf.ano
-//   // );
-
-//   return currentYear == props.acf.ano;
-// };
+const openArtWork = props => {
+  console.log(props);
+};
 
 const createTimeline = props => {
   // filter data and return an array called art with the selected art.
@@ -194,20 +108,23 @@ const createTimeline = props => {
           backgroundColor: colorRandomFromArray(),
           objectFit: "contain",
           position: "relative",
-          transition: "all 1s"
+          transition: "all 1s",
+          minHeight: "20vh"
         }}
         src="large-image.jpg"
         placeholder="tiny-image.jpg"
       >
         {(src, loading) => (
           <img
+            onClick={openArtWork}
             style={{
               backgroundColor: colorRandomFromArray(),
               objectFit: "contain",
-              width: "100%"
+              width: "60%",
+              margin: "0 auto"
               // height: "100%"
             }}
-            src={p.acf.imagen_pequena.url}
+            src={p.acf.imagen_mediana.url}
             alt={p.acf.titulo}
           />
         )}

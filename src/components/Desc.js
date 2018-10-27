@@ -4,7 +4,9 @@ import translations from "../translations";
 import { colors } from "../styles/globals";
 import Parser from "html-react-parser";
 
-const Section = styled.div``;
+const Section = styled.div`
+  display: flex;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -14,7 +16,7 @@ const Container = styled.div`
   color: ${colors.black};
   font-size: 1.8rem;
   min-width: 40vw;
-  height: 92vh;
+  /* height: 92vh; */
   padding: 10vw;
   display: flex;
   justify-content: center;
@@ -33,14 +35,16 @@ const Description = styled.p`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
+  display: flex;
+  columns: 40vw 2;
 
   @media (min-width: 740px) {
     font-size: 2rem;
-    columns: 80vw 1;
+    columns: 40vw 2;
   }
   @media (min-width: 1048px) {
     font-size: 2.5rem;
-    columns: 40vw 2;
+    columns: 33vw 3;
   }
 
   @media (min-width: 1748px) {

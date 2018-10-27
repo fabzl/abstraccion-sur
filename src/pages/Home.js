@@ -137,17 +137,6 @@ const LogoParts = styled.div`
     transform: translate3d(0, 0, 0);
   }
 `;
-const LogoContainer = styled.div`
-  margin-right: auto;
-  position: fixed;
-  top: 1.4rem;
-  left: 6rem;
-  transition: all 1s;
-  &.passive {
-    transform: translate3d(-30vw, 0, 0);
-    opacity: 0;
-  }
-`;
 
 const NavEnd = styled.div`
   width: 100vw;
@@ -419,13 +408,14 @@ const TextReading = styled.p`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (min-width: 1048px) {
-    columns: 40vw 2;
-  }
+  columns: 40vw 2;
 
-  @media (min-width: 1748px) {
+  @media (min-width: 1048px) {
     columns: 30vw 3;
   }
+
+  /* @media (min-width: 1748px) {
+  } */
 `;
 
 const Button = styled.button`

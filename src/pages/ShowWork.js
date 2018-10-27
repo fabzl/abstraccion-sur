@@ -16,13 +16,13 @@ import BackArrow from "../img/back_arrow.svg";
 import NextArrow from "../img/next_arrow.svg";
 
 const BackArrowElement = styled.img`
-  width: 5vw;
-  height: 5vw;
+  width: 4rem;
+  height: 4rem;
 `;
 
 const NextArrowElement = styled.img`
-  width: 5vw;
-  height: 5vw;
+  width: 4rem;
+  height: 4rem;
 
   & svg {
     color: ${colors.black};
@@ -30,18 +30,18 @@ const NextArrowElement = styled.img`
 `;
 
 const ArtistsArrowElement = styled.img`
-  width: 5vw;
-  height: 5vw;
+  width: 5rem;
+  height: 5rem;
 `;
 
 const AbstractLine = styled.div`
   border-top: 3px solid ${colors.violet};
-  margin: 10vh auto;
+  /* margin: 10vh auto; */
   width: 66vw;
 `;
 const LinkTo = styled(Link)``;
 
-let arrowSize = "2rem";
+let arrowSize = "4rem";
 
 const Arrow = styled(Link)`
   color: ${colors.black};
@@ -53,7 +53,7 @@ const Arrow = styled(Link)`
   cursor: pointer;
   justify-content: center;
   right: 4rem;
-  top: 10vh;
+  top: 14vh;
   font-size: 1.5rem;
   text-decoration: underline;
   white-space: nowrap;
@@ -168,7 +168,7 @@ export const ContainerCluster = styled.div`
   background: ${colors.white};
   width: 100vw;
   &.videoHolder {
-    margin: 0 auto;
+    margin: 0 auto 5vh auto;
     justify-content: center;
     display: flex;
   }
@@ -323,7 +323,8 @@ const ShowWork = props => {
           title={nombre}
           desc={language === "es" ? Parser(biografia) : Parser(biography)}
         />
-
+      </ContainerCluster>
+      <ContainerCluster>
         <ArtistImage src={url} alt={nombre} />
       </ContainerCluster>
       <ContainerCluster>

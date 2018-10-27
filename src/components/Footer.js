@@ -50,10 +50,13 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: flex-end;
   z-index: 900;
-  flex-direction: row;
+  flex-direction: column;
   display: flex;
   margin-right: 3rem;
   height: 8vh;
+  @media (min-width: 740px) {
+    flex-direction: row;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -98,13 +101,18 @@ const GeneralLogos = styled.div`
   flex: 3;
   text-align: left;
   color: ${colors.white};
-  display: flex;
+
   justify-content: left;
   align-items: left;
   flex-direction: column;
   a > svg {
     vertical-align: middle;
     margin-right: 1rem;
+  }
+  display: none;
+
+  @media (min-width: 740px) {
+    display: flex;
   }
 `;
 
@@ -125,6 +133,7 @@ const LinkTo = styled(NavLink)`
   display: flex;
   text-transform: uppercase;
   font-family: "Helvetica", "HelveticaNeue", "Verdana";
+  letter-spacing: 130%;
 
   &:hover {
     color: ${colors.gray};
