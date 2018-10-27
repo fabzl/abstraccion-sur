@@ -188,30 +188,30 @@ const Footer = props => (
       <General>
         <Nav>
           <LinkTo to="/">
-            <span>
+            {/* <span>
               <img src={homeIcon} className="menuIcon" />
-            </span>
+            </span> */}
             {translations.header.home[props.language]}
           </LinkTo>
 
           <LinkTo to="/artwork">
-            <span>
+            {/* <span>
               <img src={squareIcon} className="menuIcon" />
-            </span>
+            </span> */}
             {translations.header.timeline[props.language]}
           </LinkTo>
 
           <LinkTo to="/artists">
-            <span>
+            {/* <span>
               <img src={triangleIcon} className="menuIcon" />
-            </span>
+            </span> */}
             {translations.header.artists[props.language]}
           </LinkTo>
 
           <LinkTo to="/team">
-            <span>
+            {/* <span>
               <img src={circleIcon} className="menuIcon" />
-            </span>
+            </span> */}
             {translations.header.contact[props.language]}
           </LinkTo>
         </Nav>
