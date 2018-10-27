@@ -15,14 +15,32 @@ import circleIcon from "../img/circle_icon.svg";
 import triangleIcon from "../img/triangle_icon.svg";
 // import { Link, NavLink } from "react-router-dom";
 
+import LogoUdp from "../img/udp-logo.png";
+import LogoCCLPM from "../img/cclpm-logo.png";
+import LogoFondart from "../img/fondart-logo.png";
+
+const Linea = styled.div`
+  width: 1px;
+  border-right: 1px solid ${colors.violet};
+  margin-top: 5vh;
+`;
+
 const LinkA = styled.a`
   font-weight: 500;
   color: ${colors.red};
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
   letter-spacing: 0.3rem;
   transition: 1s all;
   cursor: pointer;
+  font-family: "Helvetica", "HelveticaNeue", "Verdana";
+  margin: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  bottom: 2rem;
+  right: 4rem;
+
   color: ${colors.white};
   &:hover {
   }
@@ -76,7 +94,23 @@ const General = styled.div`
   }
 `;
 
+const GeneralLogos = styled.div`
+  flex: 3;
+  text-align: left;
+  color: ${colors.white};
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: column;
+  a > svg {
+    vertical-align: middle;
+    margin-right: 1rem;
+  }
+`;
+
 const LinkTo = styled(NavLink)`
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   cursor: pointer;
   font-weight: 500;
   color: ${colors.white};
@@ -90,6 +124,8 @@ const LinkTo = styled(NavLink)`
   transition: 0.3s all;
   display: flex;
   text-transform: uppercase;
+  font-family: "Helvetica", "HelveticaNeue", "Verdana";
+
   &:hover {
     color: ${colors.gray};
   }
@@ -98,6 +134,34 @@ const LinkTo = styled(NavLink)`
     display: inline-flex;
     &img {
       height: 5vh;
+    }
+  }
+`;
+
+const LogoImg = styled.img`
+  height: 7vh;
+`;
+
+const LinkLogo = styled.a`
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+  font-weight: 500;
+  color: ${colors.white};
+  text-decoration: none;
+  padding-left: 2rem;
+  padding-right: 1rem;
+  align-self: center;
+  flex-direction: row;
+  white-space: nowrap;
+  transition: 0.3s all;
+  display: flex;
+  height: 1vh;
+  &.menuIcon {
+    height: 8vh;
+  }
+  &span {
+    &img {
     }
   }
 `;
@@ -152,13 +216,33 @@ const Footer = props => (
           </LinkTo>
         </Nav>
       </General>
+      <Linea />
+      <GeneralLogos>
+        <Nav>
+          <LinkLogo target="_blank" href="https://www.ccplm.cl/sitio/">
+            <span>
+              <LogoImg src={LogoCCLPM} className="menuIcon" />
+            </span>
+          </LinkLogo>
+          <LinkLogo target="_blank" href="https://www.cultura.gob.cl/">
+            <span>
+              <LogoImg src={LogoFondart} className="menuIcon" />
+            </span>
+          </LinkLogo>
+          <LinkLogo target="_blank" href="https://www.udp.cl/">
+            <span>
+              <LogoImg src={LogoUdp} className="menuIcon" />
+            </span>
+          </LinkLogo>
+        </Nav>
+      </GeneralLogos>
       <LinkA
         className="footerNav"
         href={
           "mailto:info@abstraccionsur.com?subject=Contacto%20desde%20Abstraccion%20Sur"
         }
       >
-        info@abstraccionsur.com
+        info@abstraccionsur.com | &copy; {new Date().getFullYear()}
       </LinkA>
     </Content>
   </Wrap>
