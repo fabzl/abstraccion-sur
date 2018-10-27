@@ -51,14 +51,13 @@ const LogoContainer = styled.div`
 const H2 = styled.h2`
   font-weight: 700;
   letter-spacing: 130%;
-  line-height: 1em;
   margin-top: 10vw;
   margin-bottom: 10vw;
   font-family: "FuturaBold", "Futura", "Verdana";
   text-transform: uppercase;
 
   text-align: center;
-  font-size: 24px;
+  font-size: 2.4rem;
   color: ${colors.black};
   padding: 0 10%;
   margin-bottom: 10vw;
@@ -82,7 +81,17 @@ const H3 = styled.h3`
   text-align: center;
   font-size: 1.2rem;
   color: ${colors.black};
-  padding: 0 10%;
+  padding: 0 auto;
+  & span {
+    height: 1rem;
+    width: 1rem;
+    background-color: ${colors.deepgray};
+    border-radius: 50%;
+    display: inline-block;
+    align-self: center;
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
 
   @media (min-width: 520px) {
     font-size: 1.5rem;
@@ -156,57 +165,53 @@ const Team = props => {
         <TextHolder>
           <H2>
             {props.language === "es"
-              ? "EQUIPO MICRO-DOCUMENTALES ABSTRACCIÓN SUR"
-              : "ABSTRACCIÓN SUR MICRO-DOCUMENTARIES TEAM"}
+              ? Parser("EQUIPO MICRO-DOCUMENTALES<br/> ABSTRACCIÓN SUR")
+              : Parser("ABSTRACCIÓN SUR  <br/> MICRO-DOCUMENTARIES TEAM")}
           </H2>
 
           <H3>
             {props.language === "es"
-              ? "DIRECCIÓN GENERAL. Ramón Castillo"
-              : "GENERAL DIRECTION. Ramón Castillo"}
+              ? Parser("Dirección General  <span></span> Ramón Castillo")
+              : Parser("Team Lead  <span></span> Ramón Castillo")}
           </H3>
 
           <H3>
             {props.language === "es"
-              ? "PRODUCCIÓN. Olivia Guasch"
-              : "PRODUCTION. Olivia Guasch"}
-          </H3>
-
-          {/* <H3>
-            {props.language === "es"
-              ? "GUIONES. Ramón Castillo"
-              : "SCRIPTS. Ramón Castillo"}
-          </H3> */}
-
-          <H3>
-            {props.language === "es"
-              ? "CÁMARA. Rodrigo Avilés y Juan Millán"
-              : "CAMERA. Rodrigo Avilés y Juan Millán"}
+              ? Parser("Producción  <span></span> Olivia Guasch")
+              : Parser("Production  <span></span> Olivia Guasch")}
           </H3>
 
           <H3>
             {props.language === "es"
-              ? "EDICIÓN Y MONTAJE. Manuela Piña"
-              : "VIDEO EDITING & POST PRODUCTION. Manuela Piña"}
+              ? Parser("Cámara  <span></span>  Rodrigo Avilés y Juan Millán")
+              : Parser("Camera  <span></span>  Rodrigo Avilés y Juan Millán")}
           </H3>
 
           <H3>
             {props.language === "es"
-              ? "SONIDO. Carlos Arias"
-              : "SOUND. Carlos Arias"}
+              ? Parser("Edición y Montaje  <span></span> Manuela Piña")
+              : Parser(
+                  "Video Editing & Post production <span></span> Manuela Piña"
+                )}
+          </H3>
+          <H3>
+            {props.language === "es"
+              ? Parser("Diseñoy Programación <span></span>  Fabián Andrade")
+              : Parser("Design & Programming <span></span> Fabián Andrade")}
           </H3>
 
           <H3>
             {props.language === "es"
-              ? "MÚSICA. Rodrigo Aros"
-              : "MUSIC. Rodrigo Aros"}
+              ? Parser("Sonido <span></span> Carlos Arias")
+              : Parser("Sound  <span></span> Carlos Arias")}
           </H3>
 
           <H3>
             {props.language === "es"
-              ? "DISEÑO Y PROGRAMACIÓN. Fabián Andrade"
-              : "DESIGN & PROGRAMMING. Fabián Andrade"}
+              ? Parser("Música <span></span> Rodrigo Aros")
+              : Parser("Music  <span></span> Rodrigo Aros")}
           </H3>
+
           {/* <H2>{language === "es" ? "ARTISTAS:" : "ARTISTS:"}</H2>
           <H2>
             <ArtistUl>

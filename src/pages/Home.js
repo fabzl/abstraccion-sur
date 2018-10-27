@@ -181,7 +181,7 @@ const LinkTo = styled(NavLink)`
   transition: 1s all;
   background: transparent;
   font-weight: 750;
-  width: 10vw;
+  /* width: 10vw; */
   padding: 1rem 2.5rem;
   text-align: center;
   font-family: "Helvetica";
@@ -277,7 +277,7 @@ const H2 = styled.h2`
   color: ${colors.violet};
   text-transform: uppercase;
   text-align: center;
-  padding-top: 20vh;
+  padding-top: 4rem;
 
   &.title {
   }
@@ -408,10 +408,10 @@ const TextReading = styled.p`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  columns: 40vw 2;
+  /* columns: 40vw 2; */
+  columns: 30vw 3;
 
-  @media (min-width: 1048px) {
-    columns: 30vw 3;
+  @media (min-width: 600px) {
   }
 
   /* @media (min-width: 1748px) {
@@ -525,7 +525,8 @@ const Home = props => (
         >
           <ArtImg
             style={{
-              backgroundImage: "url(" + p.acf.fotoartista.url + ")"
+              backgroundImage:
+                "url(" + p.acf.fotoartista.sizes.medium_large + ")"
             }}
           />
           <ArtDescription>

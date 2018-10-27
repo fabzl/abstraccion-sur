@@ -9,10 +9,10 @@ import { Link, NavLink } from "react-router-dom";
 //import LanguageSelector from "./LanguageSelector";
 
 import logo from "../img/abs_footer.svg";
-import homeIcon from "../img/home_icon.svg";
-import squareIcon from "../img/square_icon.svg";
-import circleIcon from "../img/circle_icon.svg";
-import triangleIcon from "../img/triangle_icon.svg";
+// import homeIcon from "../img/home_icon.svg";
+// import squareIcon from "../img/square_icon.svg";
+// import circleIcon from "../img/circle_icon.svg";
+// import triangleIcon from "../img/triangle_icon.svg";
 // import { Link, NavLink } from "react-router-dom";
 
 import LogoUdp from "../img/udp-logo.png";
@@ -50,12 +50,11 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: flex-end;
   z-index: 900;
-  flex-direction: column;
+  flex-direction: row;
   display: flex;
   margin-right: 3rem;
   height: 8vh;
   @media (min-width: 740px) {
-    flex-direction: row;
   }
 `;
 
