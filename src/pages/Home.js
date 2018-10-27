@@ -246,13 +246,6 @@ const HomeContainer = styled.div`
   text-align: center;
   margin: 0 auto;
 `;
-const GridBG = styled.div`
-  /* background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  ); */
-`;
 
 const Intro = styled.div`
   width: 100vw;
@@ -288,17 +281,16 @@ const H2 = styled.h2`
   color: ${colors.red};
   font-weight: 700;
   letter-spacing: 130%;
-  line-height: 2.2rem;
+  line-height: 3rem;
   font-family: "FuturaBold", "Futura", "Verdana";
-  font-size: 2.2rem;
+  font-size: 2.6rem;
   font-weight: 800;
   color: ${colors.violet};
   text-transform: uppercase;
   text-align: center;
-  margin: auto;
-  margin-bottom: 0;
+  padding-top: 20vh;
+
   &.title {
-    grid-column-start: 1;
   }
 `;
 
@@ -360,8 +352,13 @@ const Rev = styled.div`
   /* flex-direction: row; */
 `;
 
+/* grid-template-columns: repeat(12, [col-start] 1fr); */
+/* grid-gap: 2rem; */
 const RevContainer = styled.div`
-  display: grid;
+  display: flex;
+  min-height: 60vh;
+  flex-flow: column wrap;
+  align-content: flex-start;
 `;
 const TextDesc = styled.p`
   margin-top: 0;
@@ -409,7 +406,7 @@ const TextDesc = styled.p`
 
 const TextReading = styled.p`
   margin-top: 0;
-  display: flex;
+  /* display: flex; */
   color: ${colors.black};
   font-weight: 400;
   /* letter-spacing: 130%; */
@@ -418,9 +415,17 @@ const TextReading = styled.p`
   font-family: "Helvetica", "HelveticaNeue", "Verdana";
   font-size: 2rem;
   margin: auto;
-  text-align: left;
+  text-align: justify;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media (min-width: 1048px) {
+    columns: 40vw 2;
+  }
+
+  @media (min-width: 1748px) {
+    columns: 30vw 3;
+  }
 `;
 
 const Button = styled.button`
@@ -503,7 +508,7 @@ const Home = props => (
     <TextDesc className="description">
       {props.language === "es"
         ? Parser(
-            "Este portal despliega a 12 artistas que de manera colectiva e individual, integrando grupos o de forma independiente, desarrollaron en Chile, entre 1955 y la actualidad, una visualidad crítica de la figuración tradicional, y por lo tanto, se orientaron hacia una modernidad abstracta y utópica en sus distintas variantes: geométrica, constructiva, óptica y cinética.<br/><br/>Hubo varios factores que permitieron esta vanguardia artística, tanto a nivel de estudiantes como de profesores: crisis y renovación de la enseñanza universitaria (1930, 1945 y 1970); información, intercambios y viajes a Europa y EEUU de los artistas chilenos; la llegada de exposiciones internacionales (De Manet a nuestros días en 1950 y De Cezanne a Miró en 1968, entre otras), y la residencia temporal o permanente de artistas y teóricos extranjeros a nuestro país.<br/><br/>En medio de este contexto creativo, durante varias décadas los artistas chilenos permanecieron en el silencio, rumor y rigor de largas jornadas creativas en las aulas universitarias y en sus talleres, y no siempre fueron suficientemente comprendidos y valorados a nivel de la crítica oficial, el público, las instituciones y los coleccionistas. Hubo obras, manifiestos, exposiciones en Chile, intercambios con Argentina, Uruguay y Brasil, y sin embargo, quedaron circunscritas a un circuito especializado del arte. Las obras no tuvieron espectadores en su tiempo histórico, y por consiguiente, tardaron muchos años en ser conocidas.<br/>Abstracción Sur propone desde la actualidad, dar visibilidad, no sólo a una galería de autores, obras y de espacios de diversos formatos y escalas, sino que es una invitación a conocer desde el propio taller del artista, desde su propia voz, los procesos materiales y el sistema de pensamiento y las poéticas en las que han permanecido realizando obras hasta nuestros días."
+            "Este portal despliega a 12 artistas que de manera colectiva e individual, integrando grupos o de forma independiente, desarrollaron en Chile, entre 1955 y la actualidad, una visualidad crítica de la figuración tradicional, y por lo tanto, se orientaron hacia una modernidad abstracta y utópica en sus distintas variantes: geométrica, constructiva, óptica y cinética. <br/><br/>Hubo varios factores que permitieron esta vanguardia artística, tanto a nivel de estudiantes como de profesores: crisis y renovación de la enseñanza universitaria (1930, 1945 y 1970); información, intercambios y viajes a Europa y EEUU de los artistas chilenos; la llegada de exposiciones internacionales (De Manet a nuestros días en 1950 y De Cezanne a Miró en 1968, entre otras), y la residencia temporal o permanente de artistas y teóricos extranjeros a nuestro país.<br/><br/>En medio de este contexto creativo, durante varias décadas los artistas chilenos permanecieron en el silencio, rumor y rigor de largas jornadas creativas en las aulas universitarias y en sus talleres, y no siempre fueron suficientemente comprendidos y valorados a nivel de la crítica oficial, el público, las instituciones y los coleccionistas. Hubo obras, manifiestos, exposiciones en Chile, intercambios con Argentina, Uruguay y Brasil, y sin embargo, quedaron circunscritas a un circuito especializado del arte. Las obras no tuvieron espectadores en su tiempo histórico, y por consiguiente, tardaron muchos años en ser conocidas.<br/>Abstracción Sur propone desde la actualidad, dar visibilidad, no sólo a una galería de autores, obras y de espacios de diversos formatos y escalas, sino que es una invitación a conocer desde el propio taller del artista, desde su propia voz, los procesos materiales y el sistema de pensamiento y las poéticas en las que han permanecido realizando obras hasta nuestros días."
           )
         : Parser(
             "This portal portraits 12 artists who collectively and individually, integrating groups or independently, developed in Chile, between 1955 and today, a critical vision of traditional figuration, and therefore, are oriented towards an abstract and utopian modernity in its different variants: geometric, constructive, optical and kinetic.<br/><br/>There were several factors that allowed this artistic avant-garde, both at the level of students and teachers: crisis and renewal of university education (1930, 1945 and 1970); Information, exchanges and trips to Europe and the USA of Chilean artists; The arrival of international exhibitions (De Manet to our days in 1950 and De Cezanne to Miró in 1968, among others), and the temporary or permanent residence of foreign artists and theoreticians to our country.<br/><br/>In the middle of this creative context, for several decades the artists remained in silence, the rumor and the rigor of the long creative days in the university classrooms and in their workshops, and they were not always sufficiently understood and valued at the level of the official criticism, the Public, institutions and collectors. There were works, manifestos, exhibitions in Chile, exchanges with Argentina, Uruguay and Brazil, and nevertheless, they were circumscribed in a specialized circuit of art. The works have no spectators in their historical time, and therefore, it took many years to be known.<br/><br/>Abstraction South proposes, from the present, the visibility, not only a gallery of authors, works and spaces of diverse formats and scales, but it is an invitation to know from the own workshop, from its own voice, the material processes and the system of thought and the poetics in which the works remain to this day."
@@ -556,15 +561,15 @@ const Home = props => (
     </ArtistsHolder>
 
     <RevContainer>
-      <H2 className="title">
-        {props.language === "es"
-          ? "Una exposición emblemática y una historia circular"
-          : "An emblematic exhibition and a circular history"}
-      </H2>
       <TextReading className="italic">
+        <H2 className="title">
+          {props.language === "es"
+            ? "Una exposición emblemática y una historia circular"
+            : "An emblematic exhibition and a circular history"}
+        </H2>
         {props.language === "es"
           ? Parser(
-              '"La Revolución de las formas: 60 años de arte abstracto en Chile” fue una exposición que desplegó 42 artistas a través de 214 obras de realizadas desde mediados las primeras décadas del siglo XX, de los años 50 y hasta los años 2000, dando cuenta de una parte fundamental de la historia del arte en Chile y su permanente diálogo con Latinoamérica. <br/><br/> Una histórica recopilación en colecciones privadas y públicas permitió mostrar por primera vez dibujos, fotografías y esculturas que rescatan la expresión del movimiento de la abstracción en Chile.<br/><br/> A través de esta exposición ocurrida en el Centro Cultural La Moneda se ha reconocido y rescatado el ímpetu y la envergadura del movimiento de los artistas geométricos, abstractos, concretos y cinéticos. <br/><br/> En la exposición se realizó la primera pieza audiovisual que muestra el conjunto de las obras y a sus autores en general. A través del portal Abstracción Sur se podrá conocer y profundizar en cada uno de los artistas a través de microdocumentales y una galería de obras que nos llevará desde el taller a la exposición La revolución de las formas. Documental La revolución de las formas, Director: Andrés Mardones, Montaje: Martín Hernández. Microdocumentales Abstracción Sur, Director: Ramón Castillo, Montaje: Manuela Piña y música original Rodrigo “Chino” Aros.'
+              '"La Revolución de las formas: 60 años de arte abstracto en Chile" fue una exposición que desplegó 42 artistas a través de 214 obras de realizadas desde mediados las primeras décadas del siglo XX, de los años 50 y hasta los años 2000, dando cuenta de una parte fundamental de la historia del arte en Chile y su permanente diálogo con Latinoamérica. <br/><br/> Una histórica recopilación en colecciones privadas y públicas permitió mostrar por primera vez dibujos, fotografías y esculturas que rescatan la expresión del movimiento de la abstracción en Chile.<br/><br/> A través de esta exposición ocurrida en el Centro Cultural La Moneda se ha reconocido y rescatado el ímpetu y la envergadura del movimiento de los artistas geométricos, abstractos, concretos y cinéticos. <br/><br/> En la exposición se realizó la primera pieza audiovisual que muestra el conjunto de las obras y a sus autores en general. A través del portal Abstracción Sur se podrá conocer y profundizar en cada uno de los artistas a través de microdocumentales y una galería de obras que nos llevará desde el taller a la exposición La revolución de las formas. Documental La revolución de las formas, Director: Andrés Mardones, Montaje: Martín Hernández. Microdocumentales Abstracción Sur, Director: Ramón Castillo, Montaje: Manuela Piña y música original Rodrigo “Chino” Aros.'
             )
           : Parser(
               "The great exhibition of national heritage that exhibits 214 works by 42 artists, made between the mid-twentieth century and the first decade of the current century, accounts for a fundamental part of the history of art in Chile and Latin America.<br/>An exclusive compilation realized between private and public collections, Chilean and foreign, that includes paintings, drawings, photographs and sculptures that rescue the expression of the movement of abstraction in Chile from its beginnings, with the simplification of the forms, until the development of a concrete and constructive art that explores new languages, more everyday and closer, integrating art with elements of architecture, science, design, urbanism, literature and music.<br/>Through this exhibition the Cultural Center La Moneda has wanted to recognize and rescue the impetus and the scope of the movement of geometric, abstract, concrete and kinetic artists, as well as to thank the private collectors who have protected part of these works and who today they understand the importance of putting them into value by facilitating their exhibition in this Cultural Center and for all Chileans.<br/>Exhibition curated by the doctor in History of Art, Ramón Castillo.<br/>Works image previous page © Ramón Vergara Grez. Detail of the work Untitled, 1976 / Matilde Pérez. Detail of work Untitled, 1973."
