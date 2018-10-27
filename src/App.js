@@ -69,7 +69,7 @@ class App extends Component {
         <Router>
           <div style={{ display: "flex", flex: 1 }}>
             <Header />
-            {/* <Footer /> */}
+
             <div style={{ flex: 1 }}>
               <Route exact path="/" component={Home} />
               <Route exact path="/home" component={Home} />
@@ -77,6 +77,7 @@ class App extends Component {
               <Route exact path="/artwork" component={Artwork} />
               <Route exact path="/artists/:link" component={ShowWork} />
               <Route exact path="/team" component={Team} />
+              <Footer />
             </div>
           </div>
         </Router>

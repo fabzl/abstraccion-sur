@@ -288,15 +288,18 @@ const H2 = styled.h2`
   color: ${colors.red};
   font-weight: 700;
   letter-spacing: 130%;
-  line-height: 1em;
+  line-height: 2.2rem;
   font-family: "FuturaBold", "Futura", "Verdana";
-  font-size: 4rem;
+  font-size: 2.2rem;
   font-weight: 800;
   color: ${colors.violet};
   text-transform: uppercase;
   text-align: center;
   margin: auto;
   margin-bottom: 0;
+  &.title {
+    grid-column-start: 1;
+  }
 `;
 
 const H1 = styled.h1`
@@ -344,17 +347,21 @@ const H1 = styled.h1`
 `;
 
 const Rev = styled.div`
-  margin-top: 10vh;
+  
+  
+  background: ${colors.white};
+  width: 100vw;
+  margin: 0 auto;
+  justify-content: center;
   padding: 5vw;
-  margin: 0 3vw;
-  border-top: 2px solid ${colors.violet};
-  border-bottom: 2px solid ${colors.violet};
-  display: flex;
-  flex-direction: row;
+  /* border-top: 2px solid ${colors.violet};
+  border-bottom: 2px solid ${colors.violet}; */
+  display: grid;
+  /* flex-direction: row; */
 `;
 
 const RevContainer = styled.div`
-  width: 50vw;
+  display: grid;
 `;
 const TextDesc = styled.p`
   margin-top: 0;
@@ -548,15 +555,31 @@ const Home = props => (
       ))}
     </ArtistsHolder>
 
+    <RevContainer>
+      <H2 className="title">
+        {props.language === "es"
+          ? "Una exposición emblemática y una historia circular"
+          : "An emblematic exhibition and a circular history"}
+      </H2>
+      <TextReading className="italic">
+        {props.language === "es"
+          ? Parser(
+              '"La Revolución de las formas: 60 años de arte abstracto en Chile” fue una exposición que desplegó 42 artistas a través de 214 obras de realizadas desde mediados las primeras décadas del siglo XX, de los años 50 y hasta los años 2000, dando cuenta de una parte fundamental de la historia del arte en Chile y su permanente diálogo con Latinoamérica. <br/><br/> Una histórica recopilación en colecciones privadas y públicas permitió mostrar por primera vez dibujos, fotografías y esculturas que rescatan la expresión del movimiento de la abstracción en Chile.<br/><br/> A través de esta exposición ocurrida en el Centro Cultural La Moneda se ha reconocido y rescatado el ímpetu y la envergadura del movimiento de los artistas geométricos, abstractos, concretos y cinéticos. <br/><br/> En la exposición se realizó la primera pieza audiovisual que muestra el conjunto de las obras y a sus autores en general. A través del portal Abstracción Sur se podrá conocer y profundizar en cada uno de los artistas a través de microdocumentales y una galería de obras que nos llevará desde el taller a la exposición La revolución de las formas. Documental La revolución de las formas, Director: Andrés Mardones, Montaje: Martín Hernández. Microdocumentales Abstracción Sur, Director: Ramón Castillo, Montaje: Manuela Piña y música original Rodrigo “Chino” Aros.'
+            )
+          : Parser(
+              "The great exhibition of national heritage that exhibits 214 works by 42 artists, made between the mid-twentieth century and the first decade of the current century, accounts for a fundamental part of the history of art in Chile and Latin America.<br/>An exclusive compilation realized between private and public collections, Chilean and foreign, that includes paintings, drawings, photographs and sculptures that rescue the expression of the movement of abstraction in Chile from its beginnings, with the simplification of the forms, until the development of a concrete and constructive art that explores new languages, more everyday and closer, integrating art with elements of architecture, science, design, urbanism, literature and music.<br/>Through this exhibition the Cultural Center La Moneda has wanted to recognize and rescue the impetus and the scope of the movement of geometric, abstract, concrete and kinetic artists, as well as to thank the private collectors who have protected part of these works and who today they understand the importance of putting them into value by facilitating their exhibition in this Cultural Center and for all Chileans.<br/>Exhibition curated by the doctor in History of Art, Ramón Castillo.<br/>Works image previous page © Ramón Vergara Grez. Detail of the work Untitled, 1976 / Matilde Pérez. Detail of work Untitled, 1973."
+            )}
+      </TextReading>
+    </RevContainer>
     <Rev>
       <ReactPlayer
         id="react-player"
         url="https://www.youtube.com/watch?v=fuUhYr64Pqw"
         playing={false}
         controls
-        width="50%"
+        width="80vw"
+        height="45vw"
         allow="autoplay; fullscreen"
-        height="28vw"
         onReady={this.videoReady}
         wrapper={VideoHolder}
         onEnded={this.videoEnd}
@@ -567,26 +590,9 @@ const Home = props => (
           }
         }}
       />
-
-      <RevContainer>
-        <H2 className="title">
-          {props.language === "es"
-            ? "Una exposición emblemática y una historia circular"
-            : "An emblematic exhibition and a circular history"}
-        </H2>
-        <TextReading className="italic">
-          {props.language === "es"
-            ? Parser(
-                '"La Revolución de las formas: 60 años de arte abstracto en Chile” fue una exposición que desplegó 42 artistas a través de 214 obras de realizadas desde mediados las primeras décadas del siglo XX, de los años 50 y hasta los años 2000, dando cuenta de una parte fundamental de la historia del arte en Chile y su permanente diálogo con Latinoamérica. <br/><br/> Una histórica recopilación en colecciones privadas y públicas permitió mostrar por primera vez dibujos, fotografías y esculturas que rescatan la expresión del movimiento de la abstracción en Chile.<br/><br/> A través de esta exposición ocurrida en el Centro Cultural La Moneda se ha reconocido y rescatado el ímpetu y la envergadura del movimiento de los artistas geométricos, abstractos, concretos y cinéticos. <br/><br/> En la exposición se realizó la primera pieza audiovisual que muestra el conjunto de las obras y a sus autores en general. A través del portal Abstracción Sur se podrá conocer y profundizar en cada uno de los artistas a través de microdocumentales y una galería de obras que nos llevará desde el taller a la exposición La revolución de las formas. Documental La revolución de las formas, Director: Andrés Mardones, Montaje: Martín Hernández. Microdocumentales Abstracción Sur, Director: Ramón Castillo, Montaje: Manuela Piña y música original Rodrigo “Chino” Aros.'
-              )
-            : Parser(
-                "The great exhibition of national heritage that exhibits 214 works by 42 artists, made between the mid-twentieth century and the first decade of the current century, accounts for a fundamental part of the history of art in Chile and Latin America.<br/>An exclusive compilation realized between private and public collections, Chilean and foreign, that includes paintings, drawings, photographs and sculptures that rescue the expression of the movement of abstraction in Chile from its beginnings, with the simplification of the forms, until the development of a concrete and constructive art that explores new languages, more everyday and closer, integrating art with elements of architecture, science, design, urbanism, literature and music.<br/>Through this exhibition the Cultural Center La Moneda has wanted to recognize and rescue the impetus and the scope of the movement of geometric, abstract, concrete and kinetic artists, as well as to thank the private collectors who have protected part of these works and who today they understand the importance of putting them into value by facilitating their exhibition in this Cultural Center and for all Chileans.<br/>Exhibition curated by the doctor in History of Art, Ramón Castillo.<br/>Works image previous page © Ramón Vergara Grez. Detail of the work Untitled, 1976 / Matilde Pérez. Detail of work Untitled, 1973."
-              )}
-        </TextReading>
-      </RevContainer>
     </Rev>
 
-    <NavEnd>
+    {/* <NavEnd>
       <LinkTo onClick={this.checkMobileNav} to="/artwork">
         <ImageBlock
           style={{
@@ -605,7 +611,7 @@ const Home = props => (
           {props.language === "es" ? "Artistas" : "Artists"}
         </ImageBlock>
       </LinkTo>
-    </NavEnd>
+    </NavEnd> */}
   </HomeContainer>
 );
 

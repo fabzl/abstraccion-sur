@@ -8,11 +8,25 @@ import { colors } from "../styles/globals";
 import { Link, NavLink } from "react-router-dom";
 //import LanguageSelector from "./LanguageSelector";
 
+import logo from "../img/abs_footer.svg";
 import homeIcon from "../img/home_icon.svg";
 import squareIcon from "../img/square_icon.svg";
 import circleIcon from "../img/circle_icon.svg";
 import triangleIcon from "../img/triangle_icon.svg";
 // import { Link, NavLink } from "react-router-dom";
+
+const LinkA = styled.a`
+  font-weight: 500;
+  color: ${colors.red};
+  text-decoration: none;
+  font-size: 1rem;
+  letter-spacing: 0.3rem;
+  transition: 1s all;
+  cursor: pointer;
+  color: ${colors.white};
+  &:hover {
+  }
+`;
 
 const Nav = styled.nav`
   align-items: center;
@@ -30,7 +44,7 @@ const LogoContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  height: 6vh;
+  /* height: 6vh; */
   /* max-width: 15vmax; */
 `;
 
@@ -38,11 +52,9 @@ const Wrap = styled.footer`
   z-index: 500;
   padding: 0.4rem;
   display: block;
-  position: fixed;
+  position: relative;
   width: 100vw;
-  height: 8vh;
-  bottom: 0;
-  /* background-color: ${colors.black}; */
+  background-color: ${colors.deepblack};
 `;
 
 const Content = styled.div`
@@ -67,7 +79,7 @@ const General = styled.div`
 const LinkTo = styled(NavLink)`
   cursor: pointer;
   font-weight: 500;
-  color: ${colors.violet};
+  color: ${colors.white};
   text-decoration: none;
   padding-left: 2rem;
   padding-right: 1rem;
@@ -79,7 +91,7 @@ const LinkTo = styled(NavLink)`
   display: flex;
   text-transform: uppercase;
   &:hover {
-    color: ${colors.violet};
+    color: ${colors.gray};
   }
   &span {
     font-size: 0.5rem;
@@ -104,12 +116,11 @@ export const smoothScroll = () => {
 const Footer = props => (
   <Wrap>
     <Content>
-      {/* <LogoContainer>
+      <LogoContainer>
         <LinkTo to="/">
           <Logo src={logo} />
         </LinkTo>
-      </LogoContainer> */}
-
+      </LogoContainer>
       <General>
         <Nav>
           <LinkTo to="/">
@@ -141,6 +152,14 @@ const Footer = props => (
           </LinkTo>
         </Nav>
       </General>
+      <LinkA
+        className="footerNav"
+        href={
+          "mailto:info@abstraccionsur.com?subject=Contacto%20desde%20Abstraccion%20Sur"
+        }
+      >
+        info@abstraccionsur.com
+      </LinkA>
     </Content>
   </Wrap>
 );
