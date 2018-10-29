@@ -109,7 +109,6 @@ const LogoParts = styled.div`
   height: 30vh;
   text-align: center;
   opacity: 1;
-  z-index: 3001;
   transition: all 0.5;
   img {
     top: 0;

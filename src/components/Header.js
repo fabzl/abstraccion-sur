@@ -24,7 +24,7 @@ import U13 from "../img/13_u.svg";
 import R14 from "../img/14_r.svg";
 import Linea from "../img/linea.svg";
 import Triangulo from "../img/triangulo.svg";
-// import Grid from "./GridArt";
+import Grid from "./GridArt";
 
 const MenuHolder = styled.div`
   display: flex;

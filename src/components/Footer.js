@@ -22,7 +22,9 @@ import LogoFondart from "../img/fondart-logo.png";
 const Linea = styled.div`
   width: 1px;
   border-right: 1px solid ${colors.violet};
-  margin-top: 5vh;
+  transform: translateY(5vh);
+  height: 30rem;
+  position: absolute;
 `;
 
 const LinkA = styled.a`
@@ -33,28 +35,32 @@ const LinkA = styled.a`
   letter-spacing: 0.3rem;
   transition: 1s all;
   cursor: pointer;
+
   font-family: "Helvetica", "HelveticaNeue", "Verdana";
-  margin: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  position: absolute;
-  bottom: 2rem;
-  right: 4rem;
+  position: relative;
+  text-align: center;
 
   color: ${colors.white};
+  @media (min-width: 740px) {
+    text-align: right;
+  }
   &:hover {
   }
 `;
 
 const Nav = styled.nav`
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   z-index: 900;
   flex-direction: row;
   display: flex;
-  margin-right: 3rem;
   height: 8vh;
+  position: relative;
   @media (min-width: 740px) {
+    margin-right: 0rem;
+    justify-content: flex-end;
+  }
+  &.navLogos {
   }
 `;
 
@@ -71,19 +77,26 @@ const Logo = styled.img`
 const Wrap = styled.footer`
   z-index: 500;
   padding: 0.4rem;
+  padding-bottom: 2rem;
   display: block;
   position: relative;
   width: 100vw;
+  overflow: hidden;
   background-color: ${colors.deepblack};
 `;
 
 const Content = styled.div`
   display: flex;
   flex: 1;
+  justify-content: center;
+  flex-direction: column;
+
+  @media (min-width: 740px) {
+    flex-direction: row;
+  }
 `;
 
 const General = styled.div`
-  flex: 3;
   text-align: left;
   color: ${colors.white};
   display: flex;
@@ -97,21 +110,13 @@ const General = styled.div`
 `;
 
 const GeneralLogos = styled.div`
-  flex: 3;
-  text-align: left;
-  color: ${colors.white};
-
-  justify-content: left;
-  align-items: left;
   flex-direction: column;
-  a > svg {
-    vertical-align: middle;
-    margin-right: 1rem;
-  }
-  display: none;
+  display: flex;
+  margin-right: 0;
+  margin-left: auto;
 
   @media (min-width: 740px) {
-    display: flex;
+    margin-right: 3rem;
   }
 `;
 
@@ -147,7 +152,10 @@ const LinkTo = styled(NavLink)`
 `;
 
 const LogoImg = styled.img`
-  height: 7vh;
+  height: 5rem;
+  @media (min-width: 740px) {
+    height: 6rem;
+  }
 `;
 
 const LinkLogo = styled.a`
@@ -164,10 +172,7 @@ const LinkLogo = styled.a`
   white-space: nowrap;
   transition: 0.3s all;
   display: flex;
-  height: 1vh;
-  &.menuIcon {
-    height: 8vh;
-  }
+
   &span {
     &img {
     }
@@ -193,40 +198,41 @@ const Footer = props => (
           <Logo src={logo} />
         </LinkTo>
       </LogoContainer>
-      <General>
-        <Nav>
-          <LinkTo to="/">
-            {/* <span>
-              <img src={homeIcon} className="menuIcon" />
-            </span> */}
-            {translations.header.home[props.language]}
-          </LinkTo>
-
-          <LinkTo to="/artwork">
-            {/* <span>
-              <img src={squareIcon} className="menuIcon" />
-            </span> */}
-            {translations.header.timeline[props.language]}
-          </LinkTo>
-
-          <LinkTo to="/artists">
-            {/* <span>
-              <img src={triangleIcon} className="menuIcon" />
-            </span> */}
-            {translations.header.artists[props.language]}
-          </LinkTo>
-
-          <LinkTo to="/team">
-            {/* <span>
-              <img src={circleIcon} className="menuIcon" />
-            </span> */}
-            {translations.header.contact[props.language]}
-          </LinkTo>
-        </Nav>
-      </General>
       <Linea />
       <GeneralLogos>
-        <Nav>
+        <General>
+          <Nav>
+            <LinkTo to="/">
+              {/* <span>
+              <img src={homeIcon} className="menuIcon" />
+            </span> */}
+              {translations.header.home[props.language]}
+            </LinkTo>
+
+            <LinkTo to="/artwork">
+              {/* <span>
+              <img src={squareIcon} className="menuIcon" />
+            </span> */}
+              {translations.header.timeline[props.language]}
+            </LinkTo>
+
+            <LinkTo to="/artists">
+              {/* <span>
+              <img src={triangleIcon} className="menuIcon" />
+            </span> */}
+              {translations.header.artists[props.language]}
+            </LinkTo>
+
+            <LinkTo to="/team">
+              {/* <span>
+              <img src={circleIcon} className="menuIcon" />
+            </span> */}
+              {translations.header.contact[props.language]}
+            </LinkTo>
+          </Nav>
+        </General>
+
+        <Nav className="navLogos">
           <LinkLogo target="_blank" href="https://www.ccplm.cl/sitio/">
             <span>
               <LogoImg src={LogoCCLPM} className="menuIcon" />
@@ -243,15 +249,15 @@ const Footer = props => (
             </span>
           </LinkLogo>
         </Nav>
+        <LinkA
+          className="footerNav"
+          href={
+            "mailto:info@abstraccionsur.com?subject=Contacto%20desde%20Abstraccion%20Sur"
+          }
+        >
+          info@abstraccionsur.com | &copy; {new Date().getFullYear()}
+        </LinkA>
       </GeneralLogos>
-      <LinkA
-        className="footerNav"
-        href={
-          "mailto:info@abstraccionsur.com?subject=Contacto%20desde%20Abstraccion%20Sur"
-        }
-      >
-        info@abstraccionsur.com | &copy; {new Date().getFullYear()}
-      </LinkA>
     </Content>
   </Wrap>
 );
