@@ -67,7 +67,7 @@ const CloseButton = styled.div`
   position: fixed;
   right: 2rem;
   top: 2rem;
-  z-index: 3030;
+  z-index: 4030;
   color: ${colors.white};
   &:hover {
     opacity: 0.5;
@@ -89,7 +89,6 @@ const ArtDescription = styled.p`
   transition: all 0.5s;
   z-index: 11;
   opacity: 1;
-
 `;
 
 const ArtistsHolder = styled.ul`

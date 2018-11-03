@@ -210,6 +210,8 @@ const PlayVideoBox = styled.div`
   opacity:0;
   width:100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.37);
+
 
   &.active {
     /* transform: perspective(500px) translate3d(0, ${circleSizeHeight}, 0); */
@@ -226,21 +228,27 @@ const PlayVideoBox = styled.div`
 `;
 
 const GotoArtistStudio = styled.div`
+
+
   overflow: hidden;
   width: 0;
   height: 0;
   font-weight: 1em;
   will-change: transform;
+  /* position: absolute; */
   transition: all 0.5s 0.7s;
   display: flex;
   align-items: center;
   text-align: center;
   cursor: pointer;
   justify-content: center;
-  opacity: 0;
-  color: ${colors.deepgray};
+  opacity:1;
+
+  color: ${colors.black};
   font-weight: 400;
+  /* letter-spacing: 130%; */
   line-height: 1em;
+  font-family: "Helvetica", "HelveticaNeue", "Verdana";
   font-size: 2rem;
   margin: auto;
   text-align: left;
@@ -248,14 +256,18 @@ const GotoArtistStudio = styled.div`
   -moz-osx-font-smoothing: grayscale;
 
   &.passive {
+    /* transform: perspective(500px) translate3d(0, 0, 3vmax); */
   }
   &.active {
+    /* transform: translate3d(50vw, ${circleSizeHeight}, 0); */
     width: 100%;
     height: 100%;
+    color: ${colors.black};
     /* grid-row-start: 3;
     grid-row-end: 3; */
-    opacity: 1;
+    opacity:1;
     padding: 2vw;
+ 
   }
 `;
 
@@ -283,7 +295,7 @@ const ArtDescription = styled.p`
   z-index: 11;
   opacity: 1;
   width: 100%;
-  height: 50%;
+  height: 100%;
   overflow: hidden;
   grid-row-start: 1;
   grid-row-end: 6;
@@ -298,8 +310,13 @@ const ArtDescription = styled.p`
     grid-column-end: 1;
   }
   &.active {
-    transform: translateY(100%);
+    /* transform: perspective(500px) translate3d(20vh, -35vh, 0); */
     opacity: 1;
+    width: auto;
+    /* grid-column-start: 2;
+    grid-column-end: 4; */
+    grid-row-start: 1;
+    grid-row-end: 6;
   }
   &.passive {
     /* opacity: 0; */
@@ -615,7 +632,7 @@ class Artists extends React.Component {
                 controls
                 width="100vw"
                 allow="autoplay; fullscreen"
-                height="100vh"
+                height="95vh"
                 onReady={this.videoReady}
                 wrapper={VideoHolder}
                 onEnded={this.videoEnd}
