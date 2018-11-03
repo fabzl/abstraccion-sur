@@ -25,6 +25,10 @@ const Linea = styled.div`
   transform: translateY(5vh);
   height: 30rem;
   position: absolute;
+  padding-left: 2rem;
+  @media (min-width: 740px) {
+    padding-left: 0;
+  }
 `;
 
 const LinkA = styled.a`
@@ -35,7 +39,7 @@ const LinkA = styled.a`
   letter-spacing: 0.3rem;
   transition: 1s all;
   cursor: pointer;
-
+  margin-top: 3rem;
   font-family: "Helvetica", "HelveticaNeue", "Verdana";
   position: relative;
   text-align: center;

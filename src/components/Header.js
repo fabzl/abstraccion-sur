@@ -26,6 +26,9 @@ import Linea from "../img/linea.svg";
 import Triangulo from "../img/triangulo.svg";
 import Grid from "./GridArt";
 
+let lastScrollY = 0;
+let ticking = false;
+
 const MenuHolder = styled.div`
   display: flex;
   width: 100vw;
@@ -228,13 +231,49 @@ const NavContainer = styled.div`
 
 class Header extends React.Component {
   state = {
-    openMenu: false
+    openMenu: false,
+    scrollOn: false
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  nav = React.createRef();
+
+  handleScroll = () => {
+    lastScrollY = window.scrollY;
+
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        this.nav.current.style.top = `${lastScrollY}px`;
+        ticking = false;
+        console.log("tick");
+      });
+      console.log("ticktrue", lastScrollY);
+      ticking = true;
+      this.setState({ scrollOn: true });
+    }
+  };
+
+  // myVar = setInterval(myTimer, 1000);
+
+  // function myTimer() {
+  //     var d = new Date();
+  //     var t = d.toLocaleTimeString();
+  //     document.getElementById("demo").innerHTML = t;
+  // }
+
+  // function myStopFunction() {
+  //     clearInterval(myVar);
+  // }
 
   openMenu = () => {
     this.setState({ openMenu: !this.state.openMenu });
+    this.setState({ scrollOn: false });
   };
 
   closeMenu = () => {
@@ -252,7 +291,12 @@ class Header extends React.Component {
     const { language } = this.props;
     return (
       <Nav>
-        <LogoContainer className={this.state.openMenu ? "passive" : ""}>
+        <nav ref={this.nav} />
+        <LogoContainer
+          className={
+            this.state.openMenu || this.state.scrollOn ? "passive" : ""
+          }
+        >
           <LinkTo to="/">
             <Logo src={logo} />
           </LinkTo>

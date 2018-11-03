@@ -122,7 +122,7 @@ const ArtistsGrid = styled.li`
   font-size: 2.9rem;
   font-family:  "FuturaBold", "Futura","Verdana";
   text-transform: uppercase;
-  color: ${colors.violet};
+  color: ${colors.deepgray};
   justify-content: flex-start;
   align-content: center;
   transition: all 0.7s ease-in-out;
@@ -137,7 +137,7 @@ const ArtistsGrid = styled.li`
         ${Math.random()},
         ${Math.random() * 20}deg
       ); */
-     /* opacity: 0.3; */
+     opacity: 0.3;
   }
   &.active {
     /* transform: perspective(500px) translate3d(0px,0px,-10vmax); */
