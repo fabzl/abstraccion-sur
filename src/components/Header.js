@@ -98,7 +98,7 @@ const LinkTo = styled(NavLink)`
   text-decoration: none;
   /* display: flex; */
   /* flex-direction: row; */
-  font-size: 1.6em;
+  font-size: 1.2em;
   letter-spacing: 130%;
   align-items: center;
   line-height: 1em;

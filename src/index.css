@@ -43,19 +43,6 @@ body {
   /* font: 400 1.4em/1.4 Helvetica, Arial, sans-serif; */
 }
 
-html {
-  font-size: 10px;
-}
-
-*, :after, :before {
-  /* position: relative; */
-  box-sizing: border-box;
-  /* margin: 0;
-  padding: 0;
-  border: 0;
-  vertical-align: baseline; */
-
-}
 
 h2 {
   font-size: 3.6rem;

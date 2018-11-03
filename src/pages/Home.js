@@ -17,6 +17,7 @@ import ArtistasPic from "../img/obras_artistas_placeholder.jpg";
 import { Link, NavLink } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { stopVideo, playVideo } from "../redux/actions";
+import PlayButton from "../img/play_button.svg";
 
 import A01 from "../img/01_a.svg";
 import B02 from "../img/02_b.svg";
@@ -40,6 +41,28 @@ import Parser from "html-react-parser";
 let ArtistSize = "30vw";
 let gridInitialDistance = "2vw";
 
+const PlayVideoBox = styled.div`
+  /* position: absolute; */
+  will-change: transform;
+  transition: all 0.5s 0.7s;
+  display: flex;
+  align-items: center;
+  color: transparent;
+  text-align: center;
+  margin: 0 auto;
+  cursor: pointer;
+  justify-content: center;
+
+  &.active {
+    opacity: 1;
+    color: ${colors.white};
+  }
+
+  &.passive {
+    /* transform: perspective(500px) translate3d(0px, 0px, 5vmax); */
+  }
+`;
+
 const CloseButton = styled.div`
   position: fixed;
   right: 2rem;
@@ -50,44 +73,6 @@ const CloseButton = styled.div`
     opacity: 0.5;
   }
 `;
-
-const GotoArtistStudio = styled.div`
-  overflow: hidden;
-  width: 0;
-  height: 0;
-  font-weight: 1em;
-  will-change: transform;
-  /* position: absolute; */
-  transition: all 0.5s 0.7s;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  justify-content: center;
-  opacity: 1;
-
-  color: ${colors.black};
-  font-weight: 400;
-  /* letter-spacing: 130%; */
-  line-height: 1em;
-  font-family: "Helvetica", "HelveticaNeue", "Verdana";
-  font-size: 2rem;
-  margin: auto;
-  text-align: left;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  &.passive {
-  }
-  &.active {
-    width: 100%;
-    height: 100%;
-    color: ${colors.black};
-    opacity: 1;
-    padding: 2vw;
-  }
-`;
-
 const ArtDescription = styled.p`
   position: relative;
   text-align: center;
@@ -95,35 +80,34 @@ const ArtDescription = styled.p`
   align-self: center;
   justify-content: center;
   display: flex;
-  background-color: ${colors.white};
-  padding-left: 2vw;
-  bottom: 0;
-  font-size: 4rem;
-  line-height: 8.5rem;
+  font-size: 3rem;
+  line-height: 5rem;
   margin: 0;
   padding: 0;
-  color: ${colors.red};
+  margin-bottom: 2rem;
+  color: ${colors.white};
   transition: all 0.5s;
   z-index: 11;
   opacity: 1;
-  width: ${ArtistSize};
-  height: ${ArtistSize};
-  overflow: hidden;
+
 `;
 
 const ArtistsHolder = styled.ul`
-  width: 100vw;
   list-style: none;
   transition: all 0.9s ease-in-out;
   flex-flow: row wrap;
   justify-content: center;
   background-color: ${colors.deepblack};
-
   display: flex;
-  padding: 5vmin;
+
+  margin: 0;
+  padding: 0;
+  padding-bottom: 10rem;
+  padding-top: 10rem;
 `;
 
 const ArtistsGrid = styled.li`
+  position: relative;
   overflow: hidden;
   margin: 0;
   padding: 0;
@@ -134,7 +118,6 @@ const ArtistsGrid = styled.li`
   font-size: 2.9rem;
   font-family: "FuturaBold", "Futura", "Verdana";
   text-transform: uppercase;
-  color: ${colors.violet};
   justify-content: flex-start;
   align-content: center;
   transition: all 0.7s ease-in-out;
@@ -157,10 +140,9 @@ const ArtImg = styled.div`
 `;
 
 const MenuHolder = styled.div`
-  top: 80vh;
   display: flex;
   justify-content: center;
-  /* background: rgba(255, 255, 255, 0.85); */
+  flex-wrap: wrap;
 `;
 
 const LogoParts = styled.div`
@@ -233,8 +215,48 @@ const Nav = styled.nav`
   display: flex;
   width: 100vw;
 `;
+
 const LinkToArtist = styled(NavLink)`
   margin: 1rem;
+  color: ${colors.white};
+  font-size: 1.6rem;
+`;
+
+const ArtistOver = styled.div`
+  overflow: hidden;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.37);
+  color: ${colors.white};
+  /* mix-blend-mode: multiply; */
+  transition: all 0.5s 0.7s;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+  opacity: 1;
+  flex-direction: column;
+  font-weight: 700;
+  line-height: 1em;
+  font-family: "FuturaBold", "Futura", "Verdana";
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin: auto;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateY(-100%);
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+
+  &.passive {
+    /* transform: perspective(500px) translate3d(0, 0, 3vmax); */
+  }
+  &.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
 `;
 
 const LinkTo = styled(NavLink)`
@@ -247,12 +269,12 @@ const LinkTo = styled(NavLink)`
   font-family: "Helvetica", "HelveticaNeue", "Verdana";
   /* display: flex; */
   /* flex-direction: row; */
-  font-size: 1.6em;
+  font-size: 1.2em;
   letter-spacing: 130%;
   align-items: center;
   line-height: 1em;
   text-transform: uppercase;
-  transition: 1s all;
+  transition: 0.3s all;
   background: transparent;
   font-weight: 750;
   /* width: 10vw; */
@@ -307,11 +329,11 @@ const ImageBlock = styled.div`
 const HomeContainer = styled.div`
   color: ${colors.black};
   text-align: center;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  width: 100vw;
 `;
 
 const Intro = styled.div`
-  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -404,7 +426,6 @@ const H1 = styled.h1`
 
 const Rev = styled.div`
   background: ${colors.white};
-  width: 100vw;
   margin: 0 auto;
   justify-content: center;
   padding: 5vw;
@@ -418,6 +439,13 @@ const RevContainer = styled.div`
   min-height: 60vh;
   flex-flow: column wrap;
   align-content: flex-start;
+`;
+
+const TextContainer = styled.div`
+  padding: 20rem 10vw;
+  columns: auto 2;
+  column-gap: 2vw;
+  text-align: left;
 `;
 const TextDesc = styled.p`
   margin-top: 0;
@@ -436,9 +464,9 @@ const TextDesc = styled.p`
   z-index: 300;
 
   &.description {
-    padding: 20%;
     text-align: justify;
     font-size: 2.4rem;
+    font-weight: 500;
   }
   &.italic {
     font-style: italic;
@@ -463,10 +491,9 @@ const TextDesc = styled.p`
 `;
 
 const TextReading = styled.p`
-  margin-top: 0;
   color: ${colors.black};
   font-weight: 400;
-  line-height: 1em;
+  line-height: 3rem;
   padding: 5vh 10vw;
   font-family: "Helvetica", "HelveticaNeue", "Verdana";
   font-size: 2rem;
@@ -475,23 +502,20 @@ const TextReading = styled.p`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   columns: 30vw 3;
-
-  @media (min-width: 600px) {
-  }
 `;
 
-const Button = styled.button`
-  color: ${colors.gray};
-  color: ${colors.black};
-  border-radius: 25px;
-  padding: 12px 35px;
-  margin: 20px auto;
-  letter-spacing: 0.07em;
-  font-family: "FuturaBold", "Futura", "Verdana";
-  border: none;
-  display: block;
-  text-align: center;
-`;
+// const Button = styled.button`
+//   color: ${colors.gray};
+
+//   border-radius: 25px;
+//   padding: 12px 35px;
+//   margin: 20px auto;
+//   letter-spacing: 0.07em;
+//   font-family: "FuturaBold", "Futura", "Verdana";
+//   border: none;
+//   display: block;
+//   text-align: center;
+// `;
 
 const StillHeader = styled.div`
   width: 100vw;
@@ -499,6 +523,16 @@ const StillHeader = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+`;
+
+const PlayButtonElement = styled.img`
+  width: 5rem;
+  height: 5rem;
+  opacity: 0;
+  transition: all 1.5s;
+  &.active {
+    opacity: 1;
+  }
 `;
 
 class Home extends React.Component {
@@ -518,6 +552,8 @@ class Home extends React.Component {
     this.setState({ openArtist: false });
     // console.log("close Menu");
   };
+
+  //////
 
   onArtistClicked = e => {
     let element = e.target;
@@ -653,20 +689,18 @@ class Home extends React.Component {
                 )}
           </TextDesc>
         </Intro>
-        {/* <ImageHome src={HomePic} /> */}
-        <TextDesc className="description">
-          {this.props.language === "es"
-            ? Parser(
-                "Este portal despliega a 12 artistas que de manera colectiva e individual, integrando grupos o de forma independiente, desarrollaron en Chile, entre 1955 y la actualidad, una visualidad crítica de la figuración tradicional, y por lo tanto, se orientaron hacia una modernidad abstracta y utópica en sus distintas variantes: geométrica, constructiva, óptica y cinética. <br/><br/>Hubo varios factores que permitieron esta vanguardia artística, tanto a nivel de estudiantes como de profesores: crisis y renovación de la enseñanza universitaria (1930, 1945 y 1970); información, intercambios y viajes a Europa y EEUU de los artistas chilenos; la llegada de exposiciones internacionales (De Manet a nuestros días en 1950 y De Cezanne a Miró en 1968, entre otras), y la residencia temporal o permanente de artistas y teóricos extranjeros a nuestro país.<br/><br/>En medio de este contexto creativo, durante varias décadas los artistas chilenos permanecieron en el silencio, rumor y rigor de largas jornadas creativas en las aulas universitarias y en sus talleres, y no siempre fueron suficientemente comprendidos y valorados a nivel de la crítica oficial, el público, las instituciones y los coleccionistas. Hubo obras, manifiestos, exposiciones en Chile, intercambios con Argentina, Uruguay y Brasil, y sin embargo, quedaron circunscritas a un circuito especializado del arte. Las obras no tuvieron espectadores en su tiempo histórico, y por consiguiente, tardaron muchos años en ser conocidas.<br/>Abstracción Sur propone desde la actualidad, dar visibilidad, no sólo a una galería de autores, obras y de espacios de diversos formatos y escalas, sino que es una invitación a conocer desde el propio taller del artista, desde su propia voz, los procesos materiales y el sistema de pensamiento y las poéticas en las que han permanecido realizando obras hasta nuestros días."
-              )
-            : Parser(
-                "This portal portraits 12 artists who collectively and individually, integrating groups or independently, developed in Chile, between 1955 and today, a critical vision of traditional figuration, and therefore, are oriented towards an abstract and utopian modernity in its different variants: geometric, constructive, optical and kinetic.<br/><br/>There were several factors that allowed this artistic avant-garde, both at the level of students and teachers: crisis and renewal of university education (1930, 1945 and 1970); Information, exchanges and trips to Europe and the USA of Chilean artists; The arrival of international exhibitions (De Manet to our days in 1950 and De Cezanne to Miró in 1968, among others), and the temporary or permanent residence of foreign artists and theoreticians to our country.<br/><br/>In the middle of this creative context, for several decades the artists remained in silence, the rumor and the rigor of the long creative days in the university classrooms and in their workshops, and they were not always sufficiently understood and valued at the level of the official criticism, the Public, institutions and collectors. There were works, manifestos, exhibitions in Chile, exchanges with Argentina, Uruguay and Brazil, and nevertheless, they were circumscribed in a specialized circuit of art. The works have no spectators in their historical time, and therefore, it took many years to be known.<br/><br/>Abstraction South proposes, from the present, the visibility, not only a gallery of authors, works and spaces of diverse formats and scales, but it is an invitation to know from the own workshop, from its own voice, the material processes and the system of thought and the poetics in which the works remain to this day."
-              )}
-        </TextDesc>
-
-        <ArtistsHolder
-        // id="artistHolder"
-        >
+        <TextContainer>
+          <TextDesc className="description">
+            {this.props.language === "es"
+              ? Parser(
+                  "Este portal despliega a 12 artistas que de manera colectiva e individual, integrando grupos o de forma independiente, desarrollaron en Chile, entre 1955 y la actualidad, una visualidad crítica de la figuración tradicional, y por lo tanto, se orientaron hacia una modernidad abstracta y utópica en sus distintas variantes: geométrica, constructiva, óptica y cinética. <br/><br/>Hubo varios factores que permitieron esta vanguardia artística, tanto a nivel de estudiantes como de profesores: crisis y renovación de la enseñanza universitaria (1930, 1945 y 1970); información, intercambios y viajes a Europa y EEUU de los artistas chilenos; la llegada de exposiciones internacionales (De Manet a nuestros días en 1950 y De Cezanne a Miró en 1968, entre otras), y la residencia temporal o permanente de artistas y teóricos extranjeros a nuestro país.<br/><br/>En medio de este contexto creativo, durante varias décadas los artistas chilenos permanecieron en el silencio, rumor y rigor de largas jornadas creativas en las aulas universitarias y en sus talleres, y no siempre fueron suficientemente comprendidos y valorados a nivel de la crítica oficial, el público, las instituciones y los coleccionistas. Hubo obras, manifiestos, exposiciones en Chile, intercambios con Argentina, Uruguay y Brasil, y sin embargo, quedaron circunscritas a un circuito especializado del arte. Las obras no tuvieron espectadores en su tiempo histórico, y por consiguiente, tardaron muchos años en ser conocidas.<br/>Abstracción Sur propone desde la actualidad, dar visibilidad, no sólo a una galería de autores, obras y de espacios de diversos formatos y escalas, sino que es una invitación a conocer desde el propio taller del artista, desde su propia voz, los procesos materiales y el sistema de pensamiento y las poéticas en las que han permanecido realizando obras hasta nuestros días."
+                )
+              : Parser(
+                  "This portal portraits 12 artists who collectively and individually, integrating groups or independently, developed in Chile, between 1955 and today, a critical vision of traditional figuration, and therefore, are oriented towards an abstract and utopian modernity in its different variants: geometric, constructive, optical and kinetic.<br/><br/>There were several factors that allowed this artistic avant-garde, both at the level of students and teachers: crisis and renewal of university education (1930, 1945 and 1970); Information, exchanges and trips to Europe and the USA of Chilean artists; The arrival of international exhibitions (De Manet to our days in 1950 and De Cezanne to Miró in 1968, among others), and the temporary or permanent residence of foreign artists and theoreticians to our country.<br/><br/>In the middle of this creative context, for several decades the artists remained in silence, the rumor and the rigor of the long creative days in the university classrooms and in their workshops, and they were not always sufficiently understood and valued at the level of the official criticism, the Public, institutions and collectors. There were works, manifestos, exhibitions in Chile, exchanges with Argentina, Uruguay and Brazil, and nevertheless, they were circumscribed in a specialized circuit of art. The works have no spectators in their historical time, and therefore, it took many years to be known.<br/><br/>Abstraction South proposes, from the present, the visibility, not only a gallery of authors, works and spaces of diverse formats and scales, but it is an invitation to know from the own workshop, from its own voice, the material processes and the system of thought and the poetics in which the works remain to this day."
+                )}
+          </TextDesc>
+        </TextContainer>
+        <ArtistsHolder>
           {this.props.dataArtists.map((p, i) => (
             <ArtistsGrid
               key={p.id}
@@ -682,22 +716,51 @@ class Home extends React.Component {
               onClick={this.onArtistClicked}
               className={[i]}
             >
-              <LinkToArtist
-                onClick={this.onArtistClicked}
-                to={
-                  "/artists/" +
-                  p.acf.nombre
-                    .toLowerCase()
-                    .replace(/ /g, "-")
-                    .replace(/á/gi, "a")
-                    .replace(/é/gi, "e")
-                    .replace(/í/gi, "i")
-                    .replace(/ó/gi, "o")
-                    .replace(/ú/gi, "u")
-                    .replace(/ñ/gi, "n")
-                }
+              <ArtImg
+                style={{
+                  backgroundImage:
+                    "url(" + p.acf.fotoartista.sizes.medium_large + ")"
+                }}
+              />
+
+              <ArtistOver
+                className={[
+                  (this.state.openArtist && this.state.activeKey == i
+                    ? "active"
+                    : "") +
+                    " " +
+                    i +
+                    " " +
+                    (this.state.openArtist && this.state.activeKey != i
+                      ? "passive"
+                      : "")
+                ]}
               >
-                <GotoArtistStudio
+                <ArtDescription>{p.acf.nombre}</ArtDescription>
+
+                <LinkToArtist
+                  onClick={this.onArtistClicked}
+                  to={
+                    "/artists/" +
+                    p.acf.nombre
+                      .toLowerCase()
+                      .replace(/ /g, "-")
+                      .replace(/á/gi, "a")
+                      .replace(/é/gi, "e")
+                      .replace(/í/gi, "i")
+                      .replace(/ó/gi, "o")
+                      .replace(/ú/gi, "u")
+                      .replace(/ñ/gi, "n")
+                  }
+                >
+                  {translations.artists.cave[language]}
+                </LinkToArtist>
+                <PlayVideoBox
+                  onClick={
+                    this.state.openArtist && this.state.activeKey == i
+                      ? this.displayVideo
+                      : null
+                  }
                   className={[
                     (this.state.openArtist && this.state.activeKey == i
                       ? "active"
@@ -709,18 +772,18 @@ class Home extends React.Component {
                         ? "passive"
                         : "")
                   ]}
-                  style={{
-                    background: colorRandomFromArray()
-                  }}
-                />
-                <ArtImg
-                  style={{
-                    backgroundImage:
-                      "url(" + p.acf.fotoartista.sizes.medium_large + ")"
-                  }}
-                />
-                <ArtDescription>{p.acf.nombre}</ArtDescription>
-              </LinkToArtist>
+                >
+                  <PlayButtonElement
+                    src={PlayButton}
+                    className={[
+                      this.state.openArtist && this.state.activeKey == i
+                        ? "active"
+                        : ""
+                    ]}
+                  />
+                  {translations.artists.video[language]}
+                </PlayVideoBox>
+              </ArtistOver>
             </ArtistsGrid>
           ))}
         </ArtistsHolder>
