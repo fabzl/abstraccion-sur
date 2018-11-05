@@ -17,8 +17,8 @@ const H2 = styled.div`
   padding-top: 0.8rem;
   transition: 0.7s all;
   position: fixed;
-  top: 2rem;
-  right: 2rem;
+  top: 14vh;
+  right: 4rem;
 
   &:hover {
     background-color: ${colors.black};

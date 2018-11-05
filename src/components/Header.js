@@ -5,7 +5,8 @@ import { Link, NavLink } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
 
 import translations from "../translations";
-import logo from "../img/logo_header.svg";
+import logo from "../img/logo_header_abs.svg";
+import logoSur from "../img/logo_header_sur.svg";
 import { colors } from "../styles/globals";
 
 import A01 from "../img/01_a.svg";
@@ -59,19 +60,31 @@ const LogoParts = styled.div`
 const LogoContainer = styled.div`
   margin-right: auto;
   position: fixed;
-  top: 1.4rem;
-  left: 6rem;
+  top: 5vh;
+  left: 4rem;
   transition: all 1s;
-  &.passive {
+  /* &.passive {
     transform: translate3d(-30vw, 0, 0);
     opacity: 0;
-  }
+  } */
 `;
 
-const Logo = styled.img`
-  /* max-width: 15vmax; */
-  height: 8rem;
+const LogoContainerSur = styled.div`
+  position: fixed;
+  top: 4vh;
+  right: 0;
+  transition: all 1s;
+  border-bottom: 4px solid ${colors.black};
+  padding: 0 2rem 1rem 0;
+  /* &.passive {
+    transform: translate3d(-30vw, 0, 0);
+    opacity: 0;
+  } */
 `;
+
+const LogoSur = styled.img``;
+
+const Logo = styled.img``;
 
 const Circle = styled.div`
   border-radius: 50%;
@@ -96,8 +109,6 @@ const LinkTo = styled(NavLink)`
   text-indent: 0;
   color: ${colors.black};
   text-decoration: none;
-  /* display: flex; */
-  /* flex-direction: row; */
   font-size: 1.2em;
   letter-spacing: 130%;
   align-items: center;
@@ -106,10 +117,26 @@ const LinkTo = styled(NavLink)`
   transition: 1s all;
   background: transparent;
   font-weight: 750;
-  width: 10vw;
   padding: 1rem 2.5rem;
   text-align: center;
   font-family: "Helvetica";
+  &.logo-abs {
+    padding: 0;
+    width: 4rem;
+    display: block;
+    & img {
+      width: 100%;
+    }
+  }
+    &.logo-sur {
+      /* height: 2rem;
+      display: block; */
+      padding: 0;
+      & img {
+        height: 4rem;
+      }
+    }
+  }
 
   &.menu {
     border-right: 2px solid ${colors.black};
@@ -182,10 +209,11 @@ const BackToTop = styled.div`
 const BurgerLink = styled.a`
   z-index: 50000;
   fill: ${colors.white};
-  margin: 2rem 2rem;
   position: absolute;
-  top: 0;
-  left: 2rem;
+  top: 60vh;
+  left: 0;
+  padding: 2rem 0rem 2rem 4rem;
+  border-bottom: 4px solid ${colors.black};
 
   rect {
     transition: 0.5s all;
@@ -296,10 +324,20 @@ class Header extends React.Component {
             this.state.openMenu || this.state.scrollOn ? "passive" : ""
           }
         >
-          <LinkTo to="/">
+          <LinkTo className="logo-abs" to="/">
             <Logo src={logo} />
           </LinkTo>
         </LogoContainer>
+
+        <LogoContainerSur
+          className={
+            this.state.openMenu || this.state.scrollOn ? "passive" : ""
+          }
+        >
+          <LinkTo className="logo-sur" to="/">
+            <LogoSur src={logoSur} />
+          </LinkTo>
+        </LogoContainerSur>
 
         <NavContainer className={this.state.openMenu && "active"}>
           <LogoParts className={this.state.openMenu ? "active" : ""}>
