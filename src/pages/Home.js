@@ -1,14 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-//import { Link } from "react-router-dom";
 
-// import VideoHome from "../components/VideoHome";
 import translations from "../translations";
-import { colors, colorRandomFromArray } from "../styles/globals";
-
-// import HomePic from "../img/james_smith.jpg";
-// import ObrasPic from "../img/obras_artistas_placeholder.jpg";
+import { colors } from "../styles/globals";
 
 import RevDeLasFormas from "../img/la_rev_de_la_formas.jpg";
 import RevDeLasFormasMobile from "../img/la_rev_de_la_formas_mobile.jpg";
@@ -38,11 +33,9 @@ import Triangulo from "../img/triangulo.svg";
 
 import Parser from "html-react-parser";
 
-let ArtistSize = "30vw";
-let gridInitialDistance = "2vw";
+let ArtistSize = "26.666vw";
 
 const PlayVideoBox = styled.div`
-  /* position: absolute; */
   will-change: transform;
   transition: all 0.5s 0.7s;
   display: flex;
@@ -59,7 +52,6 @@ const PlayVideoBox = styled.div`
   }
 
   &.passive {
-    /* transform: perspective(500px) translate3d(0px, 0px, 5vmax); */
   }
 `;
 
@@ -98,7 +90,6 @@ const ArtistsHolder = styled.ul`
   justify-content: center;
   background-color: ${colors.deepblack};
   display: flex;
-
   margin: 0;
   padding: 0;
   padding-bottom: 10rem;
@@ -123,8 +114,6 @@ const ArtistsGrid = styled.li`
   opacity: 1;
   cursor: pointer;
 `;
-
-// translate3d(tx, ty, tz)
 
 const ArtImg = styled.div`
   transform-style: preserve-3d;
@@ -279,7 +268,6 @@ const LinkTo = styled(NavLink)`
   /* width: 10vw; */
   padding: 1rem 2.5rem;
   text-align: center;
-  font-family: "Helvetica";
 
   &.menu {
     border-right: 2px solid ${colors.black};
@@ -303,26 +291,6 @@ const H3 = styled.h3`
   font-size: 2.9rem;
   font-family: "FuturaBold", "Futura", "Verdana";
   text-transform: uppercase;
-`;
-const ImageHome = styled.img`
-  width: 100vw;
-`;
-
-const ImageBlock = styled.div`
-  margin-top: 10vh;
-  width: 30vw;
-  height: 30vw;
-  margin: 5vh;
-  font-size: 4rem;
-  display: flex;
-  color: ${colors.violet};
-  background-position: cover;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  color: ${colors.white};
-  text-decoration: none;
 `;
 
 const HomeContainer = styled.div`
@@ -502,19 +470,6 @@ const TextReading = styled.p`
   -moz-osx-font-smoothing: grayscale;
   columns: 30vw 3;
 `;
-
-// const Button = styled.button`
-//   color: ${colors.gray};
-
-//   border-radius: 25px;
-//   padding: 12px 35px;
-//   margin: 20px auto;
-//   letter-spacing: 0.07em;
-//   font-family: "FuturaBold", "Futura", "Verdana";
-//   border: none;
-//   display: block;
-//   text-align: center;
-// `;
 
 const StillHeader = styled.div`
   width: 100vw;

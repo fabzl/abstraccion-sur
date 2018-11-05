@@ -86,25 +86,20 @@ const ArtistsHolder = styled.ul`
   list-style: none;
   /* background: linear-gradient(to bottom, rgba(6,0,51,1) 0%,rgba(255,255,255,0) 55%);  */
   margin: 0;
-  padding : 0;
+  padding: 0;
   display: inline-grid;
   margin-top: 15vh;
   padding-top: 5vh;
   padding-bottom: 5vh;
-  /* padding-left: ${gridInitialDistance}; */
-  /* grid-template-columns: 1fr; */
-  /* grid-template-rows: 1fr 1fr 1fr 1fr; */
   transition: all 0.9s ease-in-out;
-  grid-row-gap: ${gridInitialDistance};
-  grid-column-gap: ${gridInitialDistanceRow};
-  flex-flow: row wrap; 
+  flex-flow: row wrap;
   justify-content: center;
-  background-color:${colors.deepblack};
+  background-color: ${colors.deepblack};
 
   &.active {
     grid-row-gap: ${gridFinalDistance};
     grid-column-gap: ${gridFinalDistance};
-  } 
+  }
 `;
 
 const ArtistsGrid = styled.li`
@@ -196,7 +191,6 @@ const goToId = id => {
 };
 
 const PlayVideoBox = styled.div`
-
   position: absolute;
   will-change: transform;
   transition: all 0.5s 0.7s;
@@ -207,23 +201,20 @@ const PlayVideoBox = styled.div`
   margin: 0 auto;
   cursor: pointer;
   justify-content: center;
-  opacity:0;
-  width:100%;
+  opacity: 0;
+  width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.37);
-
+  transform: perspective(500px) translate3d(-100%, 0, 0);
 
   &.active {
-    /* transform: perspective(500px) translate3d(0, ${circleSizeHeight}, 0); */
-  
-    opacity:1;
+    opacity: 1;
     padding: 2vw;
     color: ${colors.white};
+    transform: perspective(500px) translate3d(0, 0, 0);
   }
 
-
   &.passive {
-    /* transform: perspective(500px) translate3d(0px, 0px, 5vmax); */
   }
 `;
 
@@ -287,7 +278,7 @@ const ArtDescription = styled.p`
   padding-left: 2vw;
   bottom: 0;
   font-size: 4rem;
-  line-height: 8.5rem;
+  line-height: 5.5rem;
   margin: 0;
   padding: 0;
   color: ${colors.red};
@@ -368,16 +359,19 @@ class Artists extends React.Component {
     let currentKeyArtist = element.parentNode.className
       .toString()
       .replace(/\D+/g, "");
-    // console.log("currentKeyArtist :", currentKeyArtist);
+    console.log("currentKeyArtist :", currentKeyArtist);
+    console.log("activeKeyArtist :", this.state.activeKey);
     // goToId(element);
     console.log("el");
     console.dir(element.offsetParent);
+
     if (this.state.openArtist) {
       this.closeArtist(currentKeyArtist);
-      if (this.state.currentKeyArtist != element.offsetParent) {
+
+      if (this.state.currentKeyArtist != this.state.activeKey) {
         this.openArtist(currentKeyArtist);
+        console.log("clicked on guy next to me");
       }
-      // console.log("closeartist");
     } else {
       this.openArtist(currentKeyArtist);
     }
@@ -459,9 +453,6 @@ class Artists extends React.Component {
         >
           <ArtistsHolder
             id="artistHolder"
-            // style={{
-            //   background: this.state.openArtist ? colorRandomFromArray() : ""
-            // }}
             className={[this.state.openArtist ? "active" : ""]}
           >
             {this.props.dataArtists.map((p, i) => (
@@ -478,7 +469,9 @@ class Artists extends React.Component {
                   .replace(/ñ/gi, "n")}
                 onClick={this.onArtistClicked}
                 className={[
-                  (this.state.openArtist && this.state.activeKey == i
+                  (this.state.openArtist &&
+                  this.state.activeKey == i &&
+                  this.state.activeKey == i
                     ? "active"
                     : "") +
                     " " +

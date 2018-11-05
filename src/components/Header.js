@@ -127,9 +127,9 @@ const LinkTo = styled(NavLink)`
 
 const Burger = () => (
   <svg width="3rem" height="3rem" fill={colors.black}>
-    <rect y="7" width="30" height="2" />
-    <rect y="15" width="30" height="2" />
-    <rect y="23" width="30" height="2" />
+    <rect y="0.7rem" width="3rem" height="2" />
+    <rect y="1.5rem" width="3rem" height="2" />
+    <rect y="2.3rem" width="3rem" height="2" />
   </svg>
 );
 
@@ -251,9 +251,9 @@ class Header extends React.Component {
       window.requestAnimationFrame(() => {
         this.nav.current.style.top = `${lastScrollY}px`;
         ticking = false;
-        console.log("tick");
+        // console.log("tick");
       });
-      console.log("ticktrue", lastScrollY);
+      // console.log("ticktrue", lastScrollY);
       ticking = true;
       this.setState({ scrollOn: true });
     }

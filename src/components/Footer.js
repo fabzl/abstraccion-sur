@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import translations from "../translations";
 import { colors } from "../styles/globals";
 
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 //import LanguageSelector from "./LanguageSelector";
 
 import logo from "../img/abs_footer.svg";
@@ -40,6 +40,7 @@ const LinkA = styled.a`
   transition: 1s all;
   cursor: pointer;
   margin-top: 3rem;
+  margin-right: 1rem;
   font-family: "Helvetica", "HelveticaNeue", "Verdana";
   position: relative;
   text-align: center;
@@ -71,11 +72,11 @@ const Nav = styled.nav`
 const LogoContainer = styled.div`
   margin-right: auto;
   margin-top: 1vh;
+  height: 100%;
 `;
 
 const Logo = styled.img`
-  /* height: 6vh; */
-  /* max-width: 15vmax; */
+  height: 100%;
 `;
 
 const Wrap = styled.footer`
@@ -206,31 +207,17 @@ const Footer = props => (
       <GeneralLogos>
         <General>
           <Nav>
-            <LinkTo to="/">
-              {/* <span>
-              <img src={homeIcon} className="menuIcon" />
-            </span> */}
-              {translations.header.home[props.language]}
-            </LinkTo>
+            <LinkTo to="/">{translations.header.home[props.language]}</LinkTo>
 
             <LinkTo to="/artwork">
-              {/* <span>
-              <img src={squareIcon} className="menuIcon" />
-            </span> */}
               {translations.header.timeline[props.language]}
             </LinkTo>
 
             <LinkTo to="/artists">
-              {/* <span>
-              <img src={triangleIcon} className="menuIcon" />
-            </span> */}
               {translations.header.artists[props.language]}
             </LinkTo>
 
             <LinkTo to="/team">
-              {/* <span>
-              <img src={circleIcon} className="menuIcon" />
-            </span> */}
               {translations.header.contact[props.language]}
             </LinkTo>
           </Nav>
