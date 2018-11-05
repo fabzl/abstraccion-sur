@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import translations from "../translations";
 // import VideoPlayer from "../components/VideoPlayer";
 
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import ReactPlayer from "react-player";
 import Fade from "../components/Fade";
 import { stopVideo, playVideo } from "../redux/actions";
@@ -247,8 +247,8 @@ const ArtDescription = styled.p`
   background-color: ${colors.white};
   padding-left: 2vw;
   bottom: 0;
-  font-size: 4rem;
-  line-height: 5.5rem;
+  font-size: 2rem;
+  line-height: 2.5rem;
   margin: 0;
   padding: 0;
   color: ${colors.red};
@@ -260,6 +260,9 @@ const ArtDescription = styled.p`
   overflow: hidden;
   grid-row-start: 1;
   grid-row-end: 6;
+  @media (min-width: 740px) {
+    line-height: 3.5rem;
+  }
 
   &.isOdd {
     grid-column-start: 3;
@@ -325,11 +328,11 @@ class Artists extends React.Component {
     console.dir(element.offsetParent);
 
     if (this.state.openArtist) {
-      this.closeArtist(currentKeyArtist);
-
       if (this.state.currentKeyArtist != this.state.activeKey) {
         this.openArtist(currentKeyArtist);
         console.log("clicked on guy next to me");
+      } else {
+        this.closeArtist(currentKeyArtist);
       }
     } else {
       this.openArtist(currentKeyArtist);

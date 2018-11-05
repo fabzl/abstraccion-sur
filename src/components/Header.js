@@ -223,7 +223,6 @@ const NavContainer = styled.div`
   &.active {
     height: 50vh;
     position: fixed;
-    width: 100vw;
     z-index: 3000;
     background: rgba(255, 255, 255, 0.85);
   }
