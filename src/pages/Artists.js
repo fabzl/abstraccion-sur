@@ -17,10 +17,8 @@ import PlayButton from "../img/play_button.svg";
 
 /////////////////// lets
 
-let circleSize = "66vw";
-let circleSizeHeight = "37vw";
-let gridInitialDistance = "2vw";
-let gridInitialDistanceRow = "1vw";
+let circleSize = "53vw";
+let circleSizeHeight = "30vw";
 let gridFinalDistance = "0";
 //let activeCirclesDistance = "35vw";
 
@@ -77,20 +75,17 @@ const VideoHolder = styled.div`
   &.active {
     top: 0vh;
     /* transform: translate3d(0, 0, 0); */
-    z-index: 1000;
+    z-index: 99999;
   }
 `;
 
 const ArtistsHolder = styled.ul`
-  width: 100vw;
+  width: 80vw;
   list-style: none;
-  /* background: linear-gradient(to bottom, rgba(6,0,51,1) 0%,rgba(255,255,255,0) 55%);  */
   margin: 0;
-  padding: 0;
+  padding: 5vw 10vw;
   display: inline-grid;
   margin-top: 15vh;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
   transition: all 0.9s ease-in-out;
   flex-flow: row wrap;
   justify-content: center;
@@ -103,52 +98,38 @@ const ArtistsHolder = styled.ul`
 `;
 
 const ArtistsGrid = styled.li`
-
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  overflow:hidden;
+  overflow: hidden;
   margin: 0;
-  padding : 0;
+  padding: 0;
   width: ${circleSize};
   height: ${circleSizeHeight};
   font-weight: 700;
   line-height: 1.2em;
   font-size: 2.9rem;
-  font-family:  "FuturaBold", "Futura","Verdana";
+  font-family: "FuturaBold", "Futura", "Verdana";
   text-transform: uppercase;
   color: ${colors.deepgray};
   justify-content: flex-start;
   align-content: center;
   transition: all 0.7s ease-in-out;
   opacity: 1;
-  cursor:pointer;
-  width: 100vw;
+  cursor: pointer;
+  width: 80vw;
 
   &.passive {
-    /* transform: perspective(500px) translate3d(0px,0px,-30vmax)  rotate3d(
-        ${Math.random()},
-        ${Math.random()},
-        ${Math.random()},
-        ${Math.random() * 20}deg
-      ); */
-     opacity: 0.3;
+    opacity: 0.3;
   }
   &.active {
-    /* transform: perspective(500px) translate3d(0px,0px,-10vmax); */
     z-index: 10;
     height: 50vw;
 
-
     &.isOdd {
-        /* transform: perspective(500px) translate3d(${circleSize},0,0); */
-        
     }
   }
-
 `;
-
-// translate3d(tx, ty, tz)
 
 const ArtImg = styled.div`
   transform-style: preserve-3d;
@@ -205,11 +186,10 @@ const PlayVideoBox = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.37);
-  transform: perspective(500px) translate3d(-100%, 0, 0);
+  transform: perspective(500px) translate3d(-30%, 0, 0);
 
   &.active {
     opacity: 1;
-    padding: 2vw;
     color: ${colors.white};
     transform: perspective(500px) translate3d(0, 0, 0);
   }
@@ -219,25 +199,20 @@ const PlayVideoBox = styled.div`
 `;
 
 const GotoArtistStudio = styled.div`
-
-
   overflow: hidden;
   width: 0;
   height: 0;
   font-weight: 1em;
   will-change: transform;
-  /* position: absolute; */
   transition: all 0.5s 0.7s;
   display: flex;
   align-items: center;
   text-align: center;
   cursor: pointer;
   justify-content: center;
-  opacity:1;
-
+  opacity: 1;
   color: ${colors.black};
   font-weight: 400;
-  /* letter-spacing: 130%; */
   line-height: 1em;
   font-family: "Helvetica", "HelveticaNeue", "Verdana";
   font-size: 2rem;
@@ -247,18 +222,13 @@ const GotoArtistStudio = styled.div`
   -moz-osx-font-smoothing: grayscale;
 
   &.passive {
-    /* transform: perspective(500px) translate3d(0, 0, 3vmax); */
   }
   &.active {
-    /* transform: translate3d(50vw, ${circleSizeHeight}, 0); */
     width: 100%;
     height: 100%;
     color: ${colors.black};
-    /* grid-row-start: 3;
-    grid-row-end: 3; */
-    opacity:1;
-    padding: 2vw;
- 
+    opacity: 1;
+    padding: 2vw 0vw;
   }
 `;
 
@@ -301,16 +271,12 @@ const ArtDescription = styled.p`
     grid-column-end: 1;
   }
   &.active {
-    /* transform: perspective(500px) translate3d(20vh, -35vh, 0); */
     opacity: 1;
     width: auto;
-    /* grid-column-start: 2;
-    grid-column-end: 4; */
     grid-row-start: 1;
     grid-row-end: 6;
   }
   &.passive {
-    /* opacity: 0; */
   }
 `;
 
@@ -326,16 +292,9 @@ class Artists extends React.Component {
     holderPositionY: 1,
     activeVideoToPlay: "https://vimeo.com/168777320"
   };
-  // "https://vimeo.com/168777320"
-  //  https://www.youtube.com/watch?v=013lbJ-Iehg"
 
   componentDidMount() {
     this.setTotalArtistAmount();
-    //var iframe = document.querySelector("iframe");
-    // var player = new Vimeo.Player(iframe);
-
-    // console.log(iframe, player);
-
     this.fadeIn();
   }
 

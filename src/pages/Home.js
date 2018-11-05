@@ -351,9 +351,9 @@ const H1 = styled.h1`
   z-index: 300;
   color: ${colors.white};
   letter-spacing: 130%;
-  line-height: 1.6rem;
+  line-height: 2rem;
   font-family: "FuturaBold", "Futura", "Verdana";
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 600;
   justify-content: center;
   -webkit-font-smoothing: antialiased;

@@ -71,7 +71,6 @@ const Nav = styled.nav`
 
 const LogoContainer = styled.div`
   margin-right: auto;
-  margin-top: 1vh;
   height: 100%;
 `;
 
@@ -144,6 +143,12 @@ const LinkTo = styled(NavLink)`
   font-family: "Helvetica", "HelveticaNeue", "Verdana";
   letter-spacing: 130%;
 
+  &.footer-logo {
+    height: 100%;
+    display: block;
+    position: absolute;
+  }
+
   &:hover {
     color: ${colors.gray};
   }
@@ -199,7 +204,7 @@ const Footer = props => (
   <Wrap>
     <Content>
       <LogoContainer>
-        <LinkTo to="/">
+        <LinkTo className="footer-logo" to="/">
           <Logo src={logo} />
         </LinkTo>
       </LogoContainer>

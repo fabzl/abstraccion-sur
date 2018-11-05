@@ -84,7 +84,7 @@ const Circle = styled.div`
 const Nav = styled.nav`
   position: fixed;
   align-items: center;
-  z-index: 99999;
+  z-index: 99998;
   flex-direction: column;
   display: flex;
   width: 100vw;
