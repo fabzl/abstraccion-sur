@@ -304,8 +304,7 @@ const Intro = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
- 
+  justify-content: space-evenly;
   background-size: cover;
   background-repeat: no-repeat;
   position:relative;
@@ -351,12 +350,11 @@ const H1 = styled.h1`
   display: flex;
   z-index: 300;
   color: ${colors.white};
-  font-weight: 700;
   letter-spacing: 130%;
-  line-height: 1.5em;
+  line-height: 1.6rem;
   font-family: "FuturaBold", "Futura", "Verdana";
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-size: 1.6rem;
+  font-weight: 600;
   justify-content: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -365,8 +363,8 @@ const H1 = styled.h1`
   margin-bottom: 0;
 
   & span {
-    height: 2rem;
-    width: 2rem;
+    height: 1rem;
+    width: 1rem;
     background-color: ${colors.gray};
     border-radius: 50%;
     display: inline-block;
@@ -374,20 +372,6 @@ const H1 = styled.h1`
     align-self: center;
     margin-left: 3rem;
     margin-right: 3rem;
-  }
-
-  @media (min-width: 740px) {
-    font-size: 2.5rem;
-  }
-  @media (min-width: 1048px) {
-    font-size: 4rem;
-  }
-
-  @media (min-width: 1540px) {
-    font-size: 5rem;
-  }
-  @media (min-width: 2000px) {
-    font-size: 7rem;
   }
 `;
 
@@ -439,16 +423,16 @@ const TextDesc = styled.p`
     font-style: italic;
     font-weight: 500;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 2rem;
     line-height: auto;
     color: ${colors.white};
     margin: 0 20%;
 
     @media (min-width: 740px) {
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
     @media (min-width: 1048px) {
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
 
     @media (min-width: 1748px) {
@@ -624,15 +608,6 @@ class Home extends React.Component {
           </MenuHolder>
         </StillHeader>
         <Intro>
-          <H1 className="title">
-            {this.props.language === "es"
-              ? Parser(
-                  "ARTISTAS  <span></span>  PROCESOS <span></span>  TALLERES"
-                )
-              : Parser(
-                  "ARTISTS  <span></span>  PROCESS <span></span>  STUDIOS"
-                )}
-          </H1>
           <TextDesc className="italic">
             {this.props.language === "es"
               ? Parser(
@@ -642,6 +617,15 @@ class Home extends React.Component {
                   "Approach to visuality, creative thinking and material research that formed part of the emergence of abstraction in Chile since the second half of the 20th century."
                 )}
           </TextDesc>
+          <H1 className="title">
+            {this.props.language === "es"
+              ? Parser(
+                  "ARTISTAS  <span></span>  PROCESOS <span></span>  TALLERES"
+                )
+              : Parser(
+                  "ARTISTS  <span></span>  PROCESS <span></span>  STUDIOS"
+                )}
+          </H1>
         </Intro>
         <TextContainer>
           <TextDesc className="description">
@@ -741,7 +725,6 @@ class Home extends React.Component {
             </ArtistsGrid>
           ))}
         </ArtistsHolder>
-
         <RevContainer>
           <TextReading className="italic">
             <H2 className="title">
@@ -761,7 +744,7 @@ class Home extends React.Component {
         <Rev>
           <ReactPlayer
             id="react-player"
-            url="https://www.youtube.com/watch?v=fuUhYr64Pqw"
+            url="https://www.youtube.com/watch?v=fuUhYr64Pqw?wmode=opaque"
             playing={false}
             controls
             width="80vw"
