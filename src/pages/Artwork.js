@@ -42,6 +42,21 @@ import {
 //   margin: 12px 60px;
 // `;
 
+const ArtworkWrapper = styled.div`
+  background: ${colors.deepblack};
+`;
+
+const CloseButton = styled.div`
+  position: fixed;
+  right: 2rem;
+  top: 2rem;
+  z-index: 3030;
+  color: ${colors.white};
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
 const LinkTo = styled(Link)`
   color: ${colors.violet};
   text-decoration: none;
@@ -54,25 +69,61 @@ const LinkTo = styled(Link)`
 `;
 
 const TimelineContainer = styled.div`
-  width: 100vw;
-  margin: 10vh auto;
-  padding: 10vh 0;
-  height: auto;
-  flex-direction: auto-flow;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 1fr);
+  width: 80vw;
+  margin: 0 auto;
+  height: auto;
+
+  max-width: 1200px;
+  grid-template-columns: repeat(1, 1fr);
+  grid-auto-rows: minmax(40vw, auto);
+  grid-gap: 2rem;
+
+  @media (min-width: 740px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(30vw, auto);
+    grid-gap: 4rem;
+  }
+  @media (min-width: 1240px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(26.66vw, auto);
+    grid-gap: 6rem;
+  }
+
   position: relative;
   background: ${colors.deepblack};
-  grid-gap: 2rem;
-  grid-auto-flow: dense;
+  grid-template-areas:
+    "header"
+    "main main"
+    "section"
+    "section section section section"
+    "footer footer footer footer";
 `;
 
+const ModalArt = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: ${colors.deepblack};
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  display: none;
+
+  &.active {
+    display: block;
+    transition: all 3s;
+    opacity: 1;
+  }
+`;
 const ArtObject = styled.div`
-  /* border: 1px solid green; */
+  align-self: flex-end;
   position: relative;
   height: auto;
   margin-bottom: 5vh;
   text-align: center;
+  min-width: 30vh;
 `;
 
 const ArtDescription = styled.p`
@@ -93,13 +144,11 @@ const ArtTitle = styled.p`
   padding-left: 20%;
 `;
 
-const openArtWork = props => {
-  console.log(props);
-};
-
 const createTimeline = props => {
   // filter data and return an array called art with the selected art.
   // and return mapped objects
+  // var points = [40, 100, 1, 5, 25, 10];
+  // points.sort(function(a, b){return b-a});
 
   let artObjects = props.dataArtwork.map(p => (
     <ArtObject key={p.id}>
@@ -109,18 +158,21 @@ const createTimeline = props => {
           objectFit: "contain",
           position: "relative",
           transition: "all 1s",
-          minHeight: "20vh"
+          minHeight: "20vh",
+          padding: "10vh"
         }}
-        src="large-image.jpg"
+        src="imagen_mediana"
+        srcBig="large-image.jpg"
         placeholder="tiny-image.jpg"
       >
         {(src, loading) => (
           <img
-            onClick={openArtWork}
+            onClick={this.openArtworkFunction}
             style={{
+              cursor: "pointer",
               backgroundColor: colorRandomFromArray(),
               objectFit: "contain",
-              width: "60%",
+              width: "100%",
               margin: "0 auto"
               // height: "100%"
             }}
@@ -148,13 +200,8 @@ const createTimeline = props => {
 
 class Timeline extends React.Component {
   state = {
-    sliderSpeed: 300,
-    value: 0,
-    startYear: this.props.timeline.minYear,
-    endYear: this.props.timeline.maxYear,
-    currentYear: this.props.timeline.currentYear,
-    timeLinePosition:
-      this.props.timeline.currentYear - this.props.timeline.minYear
+    openArtwork: false,
+    bigImageIndex: 0
   };
 
   componentDidUpdate() {
@@ -162,12 +209,30 @@ class Timeline extends React.Component {
     // console.dir(Sliderboy);
   }
 
+  openArtworkFunction = key => {
+    this.setState({ openArtwork: !this.state.openArtwork });
+    this.setState({ activeKey: key });
+    console.log("key", key);
+  };
+
+  closeArtwork = () => {
+    this.setState({ openArtwork: false });
+    // console.log("close Menu");
+  };
+
   render() {
     const { width } = this.props;
 
     return (
       // const  = props => (
-      <TimelineContainer>{createTimeline(this.props)}</TimelineContainer>
+      <ArtworkWrapper>
+        <TimelineContainer>{createTimeline(this.props)}</TimelineContainer>
+        <ModalArt className={this.state.openArtWork ? "active" : ""}>
+          <CloseButton onClick={this.closeVideo}>
+            <i className="fas fa-times fa-3x" />
+          </CloseButton>
+        </ModalArt>
+      </ArtworkWrapper>
     );
   }
 }

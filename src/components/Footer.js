@@ -132,15 +132,15 @@ const LinkTo = styled(NavLink)`
   color: ${colors.white};
   text-decoration: none;
   padding-left: 2rem;
-  padding-right: 1rem;
+  padding-right: 1.3rem;
   align-self: center;
   flex-direction: row;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   white-space: nowrap;
   transition: 0.3s all;
   display: flex;
   text-transform: uppercase;
-  font-family: "Helvetica", "HelveticaNeue", "Verdana";
+  /* font-family: "Helvetica", "HelveticaNeue", "Verdana"; */
   letter-spacing: 130%;
 
   &.footer-logo {
@@ -231,17 +231,17 @@ const Footer = props => (
         <Nav className="navLogos">
           <LinkLogo target="_blank" href="https://www.ccplm.cl/sitio/">
             <span>
-              <LogoImg src={LogoCCLPM} className="menuIcon" />
+              <LogoImg src={LogoCCLPM} />
             </span>
           </LinkLogo>
           <LinkLogo target="_blank" href="https://www.cultura.gob.cl/">
             <span>
-              <LogoImg src={LogoFondart} className="menuIcon" />
+              <LogoImg src={LogoFondart} />
             </span>
           </LinkLogo>
           <LinkLogo target="_blank" href="https://www.udp.cl/">
             <span>
-              <LogoImg src={LogoUdp} className="menuIcon" />
+              <LogoImg src={LogoUdp} />
             </span>
           </LinkLogo>
         </Nav>

@@ -15,7 +15,7 @@ import { stopVideo, playVideo } from "../redux/actions";
 import Parser from "html-react-parser";
 import PlayButton from "../img/play_button.svg";
 
-/////////////////// lets
+/////////////////// let
 
 let circleSize = "53vw";
 let circleSizeHeight = "30vw";

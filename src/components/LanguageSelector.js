@@ -17,7 +17,7 @@ const H2 = styled.div`
   padding-top: 0.8rem;
   transition: 0.7s all;
   position: fixed;
-  top: 14vh;
+  top: 66vh;
   right: 4rem;
 
   &:hover {
