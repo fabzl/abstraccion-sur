@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import translations from "../translations";
+// import translations from "../translations";
 import { colors, colorRandomFromArray } from "../styles/globals";
 
-import ReactDOM from "react-dom";
-import Slider, { Range } from "rc-slider";
+// import ReactDOM from "react-dom";
+// import Slider, { Range } from "rc-slider";
 // We can just import Slider or Range to reduce bundle size
 // import Slider from 'rc-slider/lib/Slider';
 // import Range from 'rc-slider/lib/Range';
@@ -25,25 +25,20 @@ import {
   endTimeline
 } from "../redux/actions";
 
-// const ArtworkHolder = styled.div`
-//   display: grid;
-// `;
+const ArtDescriptionHolder = styled.div`
+  width: 50%;
+`;
 
-// const CurrentYearHolder = styled.h3`
-//   font-weight: 700;
-//   line-height: 1.2em;
-//   font-size: 2.9rem;
-//   font-family: "FuturaBold", "Futura", "Verdana";
-//   text-transform: uppercase;
-//   color: ${colors.black};
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   margin: 12px 60px;
-// `;
+const ShortLine = styled.div`
+  border: 2px solid ${colors.white};
+  width: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+`;
 
 const ArtworkWrapper = styled.div`
   background: ${colors.deepblack};
+  padding-top: 33vh;
 `;
 
 const CloseButton = styled.div`
@@ -125,23 +120,46 @@ const ArtObject = styled.div`
   text-align: center;
   min-width: 30vh;
 `;
+const SectionTitle = styled.h2`
+  color: ${colors.black};
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid ${colors.black};
+  text-align: left;
+  position: fixed;
+  right: 0;
+  width: 10rem;
+  top: 33vh;
+  transform: rotateX("90deg");
+`;
+
+const ArtTitle = styled.p`
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 1rem 0;
+  padding: 0;
+  color: ${colors.white};
+  text-align: left;
+`;
 
 const ArtDescription = styled.p`
   font-size: 1.4rem;
   margin: 0;
   padding: 0;
-  color: ${colors.black};
+  color: ${colors.white};
   text-align: left;
-  padding-left: 20%;
-`;
 
-const ArtTitle = styled.p`
-  font-size: 1.8rem;
-  margin: 0;
-  padding: 0;
-  color: ${colors.black};
-  text-align: left;
-  padding-left: 20%;
+  &.autor {
+    font-size: 1.8rem;
+  }
+  &.ano {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+  &.tecnica {
+  }
+  &.dimensiones {
+  }
 `;
 
 const createTimeline = props => {
@@ -181,11 +199,18 @@ const createTimeline = props => {
           />
         )}
       </ProgressiveImage>
-      <ArtTitle>{p.acf.titulo + " - " + p.acf.autor}</ArtTitle>
-      <ArtDescription>{p.acf.ano}</ArtDescription>
-      <ArtDescription>{p.acf.autor}</ArtDescription>
-      <ArtDescription>{p.acf.tecnica}</ArtDescription>
-      <ArtDescription>{p.acf.dimensiones}</ArtDescription>
+      <ArtDescriptionHolder>
+        <ArtTitle>{Parser(p.acf.titulo)}</ArtTitle>
+        <ShortLine />
+        <ArtDescription className="autor">{Parser(p.acf.autor)}</ArtDescription>
+        <ArtDescription className="tecnica">
+          {Parser(p.acf.tecnica)}
+        </ArtDescription>
+        <ArtDescription className="dimensiones">
+          {p.acf.dimensiones}
+        </ArtDescription>
+        <ArtDescription className="ano">{Parser(p.acf.ano)}</ArtDescription>
+      </ArtDescriptionHolder>
     </ArtObject>
   ));
 
@@ -221,11 +246,12 @@ class Timeline extends React.Component {
   };
 
   render() {
-    const { width } = this.props;
+    const { language } = this.props;
 
     return (
       // const  = props => (
       <ArtworkWrapper>
+        <SectionTitle>Artistas</SectionTitle>
         <TimelineContainer>{createTimeline(this.props)}</TimelineContainer>
         <ModalArt className={this.state.openArtWork ? "active" : ""}>
           <CloseButton onClick={this.closeVideo}>
@@ -237,10 +263,6 @@ class Timeline extends React.Component {
   }
 }
 function isSelectedPage(data, slug) {
-  // // console.log(data.slug, "data found", slug);
-  // if (data.slug === slug) {
-  //   console.log("isSelected: ", slug, data.slug === slug);
-  // }
   return data.slug === slug;
 }
 

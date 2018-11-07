@@ -107,6 +107,7 @@ const General = styled.div`
   justify-content: left;
   align-items: left;
   flex-direction: column;
+
   a > svg {
     vertical-align: middle;
     margin-right: 1rem;
@@ -173,7 +174,7 @@ const LinkLogo = styled.a`
   -moz-osx-font-smoothing: grayscale;
   cursor: pointer;
   font-weight: 500;
-  color: ${colors.white};
+  color: ${colors.gray};
   text-decoration: none;
   padding-left: 2rem;
   padding-right: 1rem;
