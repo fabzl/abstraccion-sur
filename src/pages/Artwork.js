@@ -42,6 +42,8 @@ const ArtworkWrapper = styled.div`
 `;
 
 const CloseButton = styled.div`
+  cursor:pointer;
+
   position: fixed;
   right: 2rem;
   top: 2rem;
@@ -98,18 +100,21 @@ const TimelineContainer = styled.div`
 const ModalArt = styled.div`
   position: fixed;
   width: 100vw;
-  height: 40vh;
-  background: ${colors.gray};
+  height: 100vh;
+  background: ${colors.deepblack};
   z-index: 99999;
   top: 0;
-  left: 0;
-  opacity: 0.5;
-  /* display: none; */
+  left: 0;   
+  transition: all 1.2s;
+  transform:translateY(-100%);
+  opacity: 0;
+  display:block;
+     width: 100vw;
 
   &.active {
     display: flex;
-    transition: all 3s;
     opacity: 1;
+    transform:translateY(0);
   }
 `;
 const ArtObject = styled.div`
@@ -119,6 +124,11 @@ const ArtObject = styled.div`
   margin-bottom: 5vh;
   text-align: center;
   min-width: 30vh;
+  &.big {
+    padding-top:5vh;
+    width: 100vw;
+    align-self: center;
+  }
 `;
 const SectionTitle = styled.h2`
   color: ${colors.black};
@@ -167,8 +177,12 @@ const createTimeline = (props, thisGuy) => {
   // var points = [40, 100, 1, 5, 25, 10];
   // points.sort(function(a, b){return b-a});
 
-  let artObjects = props.dataArtwork.map(p => (
-    <ArtObject key={p.id} onClick={thisGuy.openArtworkFunction}>
+  let artObjects = props.dataArtwork.map((p, i) => (
+    <ArtObject
+      key={p.id}
+      className={i + ""}
+      onClick={thisGuy.openArtworkFunction}
+    >
       <ProgressiveImage
         style={{
           backgroundColor: colorRandomFromArray(),
@@ -212,29 +226,39 @@ const createTimeline = (props, thisGuy) => {
     </ArtObject>
   ));
 
-  console.log("art:", artObjects);
+  // console.log("art:", artObjects);
   return artObjects;
 };
-
-//  const checkSliderPos = props => {
-//    console.log("check");
-//  };
-//  <ul>{props.dataArtwork.map(p => <li key={p.id}>{p.name}</li>)}</ul>;
 
 class Timeline extends React.Component {
   state = {
     openArtwork: false,
-    bigImageIndex: 0
+    bigImageIndex: 0,
+    selectedURL: "",
+    selectedTitulo: "",
+    selectedAutor: "",
+    selectedDimensiones: "",
+    selectedTecnica: "",
+    selectedAno: ""
   };
 
   componentDidUpdate() {
     // console.log("soy component did update : ", this.props.timeline.currentYear);
   }
 
-  openArtworkFunction = key => {
+  openArtworkFunction = e => {
     this.setState({ openArtwork: true });
-    // this.setState({ activeKey: key });
-    console.log("openArtworkFunction", this.state.openArtwork);
+
+    let element = e.currentTarget;
+    let artKey = element.className.toString().replace(/\D+/g, "");
+    let artOBj = this.props.dataArtwork[artKey];
+   
+    this.setState({ selectedURL: artOBj.acf.imagen_grande.url });
+    this.setState({ selectedTitle: artOBj.acf.titulo });
+    this.setState({ selectedAutor: artOBj.acf.autor });
+    this.setState({ selectedDimensiones: artOBj.acf.dimensiones });
+    this.setState({ selectedTecnica: artOBj.acf.tecnica });
+    this.setState({ selectedAno: artOBj.acf.ano });
   };
 
   closeArtwork = () => {
@@ -250,11 +274,56 @@ class Timeline extends React.Component {
         <TimelineContainer>
           {createTimeline(this.props, this)}
         </TimelineContainer>
-        <ModalArt className={[this.state.openArtwork ? "active" : "popo"]}>
-          {console.log(this.state.openArtwork)}
+        <ModalArt className={[this.state.openArtwork ? "active" : ""]}>
           <CloseButton onClick={this.closeArtwork}>
             <i className="fas fa-times fa-3x" />
           </CloseButton>
+
+          <ArtObject className="big">
+            <ProgressiveImage
+              style={{
+                backgroundColor: colorRandomFromArray(),
+                objectFit: "contain",
+                position: "relative",
+                transition: "all 1s",
+               
+                maxWidth: "80vw"
+              }}
+              src="large-image.jpg"
+              placeholder="tiny-image.jpg"
+            >
+              {(src, loading) => (
+                <img
+                  style={{
+                    cursor: "pointer",
+                    backgroundColor: colorRandomFromArray(),
+                    objectFit: "contain",
+                    maxWidth: "80vw",
+                    maxHeight: "80vh",
+                    margin: "0 auto"
+                  }}
+                  src={Parser(this.state.selectedURL)}
+                  alt={Parser(this.state.selectedTitulo)}
+                />
+              )}
+            </ProgressiveImage>
+            <ArtDescriptionHolder>
+              <ArtTitle>{Parser(this.state.selectedTitulo)}</ArtTitle>
+              <ShortLine />
+              <ArtDescription className="autor">
+                {Parser(this.state.selectedAutor)}
+              </ArtDescription>
+              <ArtDescription className="tecnica">
+                {Parser(this.state.selectedTecnica)}
+              </ArtDescription>
+              <ArtDescription className="dimensiones">
+                {Parser(this.state.selectedDimensiones)}
+              </ArtDescription>
+              <ArtDescription className="ano">
+                {Parser(this.state.selectedAno)}
+              </ArtDescription>
+            </ArtDescriptionHolder>
+          </ArtObject>
         </ModalArt>
       </ArtworkWrapper>
     );
