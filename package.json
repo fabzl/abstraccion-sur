@@ -24,7 +24,8 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "styled-components": "^3.1.6",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "yarn": "^1.12.1"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/scss -o src/style.css",

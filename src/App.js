@@ -61,7 +61,7 @@ class App extends Component {
     return (
       <Wrap {...this.props}>
         {this.setToDestroy()}
-        {this.generativeEngine()}
+        {/* {this.generativeEngine()} */}
         <Loader />
         {/* <Fade in={true}>
           <Modal />

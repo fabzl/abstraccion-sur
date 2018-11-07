@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
-// import translations from "../translations";
+import translations from "../translations";
 import { colors, colorRandomFromArray } from "../styles/globals";
 
 // import ReactDOM from "react-dom";
@@ -38,7 +37,8 @@ const ShortLine = styled.div`
 
 const ArtworkWrapper = styled.div`
   background: ${colors.deepblack};
-  padding-top: 33vh;
+  padding-top: 22vh;
+  padding-bottom: 10vh;
 `;
 
 const CloseButton = styled.div`
@@ -98,16 +98,16 @@ const TimelineContainer = styled.div`
 const ModalArt = styled.div`
   position: fixed;
   width: 100vw;
-  height: 100vh;
-  background: ${colors.deepblack};
+  height: 40vh;
+  background: ${colors.gray};
   z-index: 99999;
   top: 0;
   left: 0;
-  opacity: 0;
-  display: none;
+  opacity: 0.5;
+  /* display: none; */
 
   &.active {
-    display: block;
+    display: flex;
     transition: all 3s;
     opacity: 1;
   }
@@ -130,7 +130,6 @@ const SectionTitle = styled.h2`
   right: 0;
   width: 10rem;
   top: 33vh;
-  transform: rotateX("90deg");
 `;
 
 const ArtTitle = styled.p`
@@ -162,14 +161,14 @@ const ArtDescription = styled.p`
   }
 `;
 
-const createTimeline = props => {
+const createTimeline = (props, thisGuy) => {
   // filter data and return an array called art with the selected art.
   // and return mapped objects
   // var points = [40, 100, 1, 5, 25, 10];
   // points.sort(function(a, b){return b-a});
 
   let artObjects = props.dataArtwork.map(p => (
-    <ArtObject key={p.id}>
+    <ArtObject key={p.id} onClick={thisGuy.openArtworkFunction}>
       <ProgressiveImage
         style={{
           backgroundColor: colorRandomFromArray(),
@@ -185,7 +184,6 @@ const createTimeline = props => {
       >
         {(src, loading) => (
           <img
-            onClick={this.openArtworkFunction}
             style={{
               cursor: "pointer",
               backgroundColor: colorRandomFromArray(),
@@ -231,30 +229,30 @@ class Timeline extends React.Component {
 
   componentDidUpdate() {
     // console.log("soy component did update : ", this.props.timeline.currentYear);
-    // console.dir(Sliderboy);
   }
 
   openArtworkFunction = key => {
-    this.setState({ openArtwork: !this.state.openArtwork });
-    this.setState({ activeKey: key });
-    console.log("key", key);
+    this.setState({ openArtwork: true });
+    // this.setState({ activeKey: key });
+    console.log("openArtworkFunction", this.state.openArtwork);
   };
 
   closeArtwork = () => {
     this.setState({ openArtwork: false });
-    // console.log("close Menu");
+    console.log("close Menu");
   };
 
   render() {
     const { language } = this.props;
-
     return (
-      // const  = props => (
       <ArtworkWrapper>
-        <SectionTitle>Artistas</SectionTitle>
-        <TimelineContainer>{createTimeline(this.props)}</TimelineContainer>
-        <ModalArt className={this.state.openArtWork ? "active" : ""}>
-          <CloseButton onClick={this.closeVideo}>
+        <SectionTitle> {translations.header.timeline[language]}</SectionTitle>
+        <TimelineContainer>
+          {createTimeline(this.props, this)}
+        </TimelineContainer>
+        <ModalArt className={[this.state.openArtwork ? "active" : "popo"]}>
+          {console.log(this.state.openArtwork)}
+          <CloseButton onClick={this.closeArtwork}>
             <i className="fas fa-times fa-3x" />
           </CloseButton>
         </ModalArt>
@@ -292,4 +290,4 @@ export default connect(
     decreaseYear,
     endTimeline
   }
-)(Timeline);
+)(Timeline, SectionTitle);

@@ -22,6 +22,18 @@ let circleSizeHeight = "30vw";
 let gridFinalDistance = "0";
 //let activeCirclesDistance = "35vw";
 
+const SectionTitle = styled.h2`
+  color: ${colors.black};
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid ${colors.black};
+  text-align: left;
+  position: fixed;
+  right: 0;
+  width: 10rem;
+  top: 33vh;
+`;
+
 const LinkTo = styled(Link)`
   text-decoration: none;
   position: absolute;
@@ -413,6 +425,8 @@ class Artists extends React.Component {
             width: "100vw"
           }}
         >
+          <SectionTitle> {translations.header.artists[language]}</SectionTitle>
+
           <ArtistsHolder
             id="artistHolder"
             className={[this.state.openArtist ? "active" : ""]}

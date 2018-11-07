@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-
-//import translations from "../translations";
-
+import translations from "../translations";
 import { colors } from "../styles/globals";
 import Parser from "html-react-parser";
 
@@ -23,6 +21,18 @@ import U13 from "../img/13_u.svg";
 import R14 from "../img/14_r.svg";
 import Linea from "../img/linea.svg";
 import Triangulo from "../img/triangulo.svg";
+
+const SectionTitle = styled.h2`
+  color: ${colors.black};
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid ${colors.black};
+  text-align: left;
+  position: fixed;
+  right: 0;
+  width: 10rem;
+  top: 33vh;
+`;
 
 const ArtistList = styled.li`
   list-style-type: none;
@@ -140,6 +150,8 @@ const Team = props => {
 
   return (
     <div>
+      <SectionTitle> {translations.header.contact[language]}</SectionTitle>
+
       <TeamParts>
         <LogoContainer>
           <LogoParts>
