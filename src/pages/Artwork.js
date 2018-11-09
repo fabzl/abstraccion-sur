@@ -216,7 +216,9 @@ const createTimeline = (props, thisGuy) => {
         <ShortLine />
         <ArtDescription className="autor">{Parser(p.acf.autor)}</ArtDescription>
         <ArtDescription className="tecnica">
-          {Parser(p.acf.tecnica)}
+           {props.language === "es"
+                ? Parser(p.acf.tecnica)
+                : Parser(p.acf.tecnique)} 
         </ArtDescription>
         <ArtDescription className="dimensiones">
           {p.acf.dimensiones}
@@ -239,6 +241,7 @@ class Timeline extends React.Component {
     selectedAutor: "",
     selectedDimensiones: "",
     selectedTecnica: "",
+    selectedTecnique: "",
     selectedAno: ""
   };
 
@@ -258,6 +261,8 @@ class Timeline extends React.Component {
     this.setState({ selectedAutor: artOBj.acf.autor });
     this.setState({ selectedDimensiones: artOBj.acf.dimensiones });
     this.setState({ selectedTecnica: artOBj.acf.tecnica });
+
+    this.setState({ selectedTecnica: artOBj.acf.tecnique });
     this.setState({ selectedAno: artOBj.acf.ano });
   };
 
@@ -314,7 +319,10 @@ class Timeline extends React.Component {
                 {Parser(this.state.selectedAutor)}
               </ArtDescription>
               <ArtDescription className="tecnica">
-                {Parser(this.state.selectedTecnica)}
+            
+                {this.props.language === "es"
+                ? Parser(this.state.selectedTecnica)
+                : Parser(this.state.selectedTecnique)}
               </ArtDescription>
               <ArtDescription className="dimensiones">
                 {Parser(this.state.selectedDimensiones)}
