@@ -21,6 +21,7 @@ import U13 from "../img/13_u.svg";
 import R14 from "../img/14_r.svg";
 import Linea from "../img/linea.svg";
 import Triangulo from "../img/triangulo.svg";
+import TeamDeco from "../img/team_deco.svg";
 
 const SectionTitle = styled.h2`
   color: ${colors.black};
@@ -32,6 +33,14 @@ const SectionTitle = styled.h2`
   right: 0;
   width: 10rem;
   top: 33vh;
+`;
+
+const ShortLine = styled.div`
+  border: 2px solid ${colors.black};
+  width: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+  margin: 0 auto;
 `;
 
 const ArtistList = styled.li`
@@ -61,54 +70,68 @@ const LogoContainer = styled.div`
 const H2 = styled.h2`
   font-weight: 700;
   letter-spacing: 130%;
-  margin-top: 10vw;
-  margin-bottom: 10vw;
+  padding-left: 15vw;
+
   font-family: "FuturaBold", "Futura", "Verdana";
   text-transform: uppercase;
 
   text-align: center;
-  font-size: 2.4rem;
+  font-size: 2.7rem;
   color: ${colors.black};
   padding: 0 10%;
-  margin-bottom: 10vw;
+  &.margin {
+    margin-bottom: 10vw;
+  }
+  span {
+    margin-bottom: 0;
+    margin-top: 10vw;
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 500;
+    text-align: center;
+    line-height: auto;
+    margin: 0 auto;
+  }
 
   @media (min-width: 520px) {
-    font-size: 32px;
-    padding: 0;
   }
   @media (min-width: 720px) {
-    font-size: 36px;
   }
 `;
 
-const H3 = styled.h3`
-  line-height: 1em;
-  margin-bottom: 10vw;
-  font-weight: 400;
+const TeamName = styled.p`
   letter-spacing: 130%;
-  font-family: "Helvetica", "HelveticaNeue", "Verdana";
-  margin: 2rem 0 0.6em;
-  text-align: center;
-  font-size: 1.2rem;
+  padding-left: 15vw;
+
+  font-family: "FuturaBold", "Futura", "Verdana";
+  text-transform: uppercase;
+
+  text-align: left;
+  padding-left: 15vw;
+
   color: ${colors.black};
-  padding: 0 auto;
-  & span {
-    height: 1rem;
-    width: 1rem;
-    background-color: ${colors.deepgray};
-    border-radius: 50%;
-    display: inline-block;
-    align-self: center;
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
+  margin-bottom: 5vw;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: auto;
+  margin: 0 auto;
+`;
+
+const H3 = styled.h3`
+  padding-left: 15vw;
+  letter-spacing: 130%;
+  text-align: left;
+  font-family: "FuturaBold", "Futura", "Verdana";
+  text-transform: uppercase;
+  color: ${colors.black};
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: auto;
 
   @media (min-width: 520px) {
     font-size: 1.5rem;
-    padding: 0;
-  }
-  @media (min-width: 720px) {
-    font-size: 2.5rem;
   }
 `;
 
@@ -134,6 +157,14 @@ const Image = styled.div`
   background-size: cover;
 `;
 
+const Background = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+`;
+
 const Team = props => {
   const { data, language } = props;
 
@@ -141,102 +172,97 @@ const Team = props => {
     padding-top: 10vh;
     padding-bottom: 10vh;
     position: relative;
-    /* background: gradient(linear, left top, right bottom, color-stop(1%, grey), color-stop(52%, grey), color-stop(52%, red), color-stop(52%, red), color-stop(100%, red)); */
+    background: "url(" + ${TeamDeco}+ ")";
   `;
   const TextHolder = styled.div`
     position: relative;
     margin-top: 30vh;
+    columns: auto 2;
+    column-gap: 2vw;
   `;
 
   return (
     <div>
+      {/* <Background>
+        <img src={TeamDeco} />
+      </Background> */}
       <SectionTitle> {translations.header.contact[language]}</SectionTitle>
 
+      <LogoContainer>
+        <LogoParts>
+          <img src={Triangulo} alt="triangulo" />
+          <img src={Linea} alt="linea" />
+          <img src={A01} alt="a" />
+          <img src={B02} alt="b" />
+          <img src={S03} alt="s" />
+          <img src={T04} alt="t" />
+          <img src={R05} alt="r" />
+          <img src={A06} alt="a" />
+          <img src={C07} alt="c" />
+          <img src={C08} alt="c" />
+          <img src={I09} alt="i" />
+          <img src={O10} alt="o" />
+          <img src={N11} alt="n" />
+          <img src={S12} alt="s" />
+          <img src={U13} alt="u" />
+          <img src={R14} alt="r" />
+        </LogoParts>
+      </LogoContainer>
       <TeamParts>
-        <LogoContainer>
-          <LogoParts>
-            <img src={Triangulo} alt="triangulo" />
-            <img src={Linea} alt="linea" />
-            <img src={A01} alt="a" />
-            <img src={B02} alt="b" />
-            <img src={S03} alt="s" />
-            <img src={T04} alt="t" />
-            <img src={R05} alt="r" />
-            <img src={A06} alt="a" />
-            <img src={C07} alt="c" />
-            <img src={C08} alt="c" />
-            <img src={I09} alt="i" />
-            <img src={O10} alt="o" />
-            <img src={N11} alt="n" />
-            <img src={S12} alt="s" />
-            <img src={U13} alt="u" />
-            <img src={R14} alt="r" />
-          </LogoParts>
-        </LogoContainer>
         <TextHolder>
           <H2>
             {props.language === "es"
-              ? Parser("EQUIPO MICRO-DOCUMENTALES<br/> ABSTRACCIÓN SUR")
-              : Parser("ABSTRACCIÓN SUR  <br/> MICRO-DOCUMENTARIES TEAM")}
+              ? Parser("<span>EQUIPO MICRO-DOCUMENTALES</span>")
+              : Parser("<span>MICRO-DOCUMENTARIES TEAM</span>")}
           </H2>
+          <ShortLine />
+          <H2 className="margin">ABSTRACCIÓN SUR</H2>
 
           <H3>
             {props.language === "es"
-              ? Parser("Dirección General  <span></span> Ramón Castillo")
-              : Parser("Team Lead  <span></span> Ramón Castillo")}
+              ? Parser("Dirección General ")
+              : Parser("Team Lead")}
           </H3>
+          <TeamName>Ramón Castillo</TeamName>
 
           <H3>
             {props.language === "es"
-              ? Parser("Producción  <span></span> Olivia Guasch")
-              : Parser("Production  <span></span> Olivia Guasch")}
+              ? Parser("Producción Olivia Guasch")
+              : Parser("Production Olivia Guasch")}
           </H3>
-
+          <TeamName>Olivia Guasch</TeamName>
+          <H3>
+            {props.language === "es" ? Parser("Cámara") : Parser("Camera")}
+          </H3>
+          <TeamName>Rodrigo Avilés y Juan Millán</TeamName>
           <H3>
             {props.language === "es"
-              ? Parser("Cámara  <span></span>  Rodrigo Avilés y Juan Millán")
-              : Parser("Camera  <span></span>  Rodrigo Avilés y Juan Millán")}
+              ? Parser("Edición y Montaje")
+              : Parser("Video Editing & Post production")}
           </H3>
-
+          <TeamName>Manuela Piña</TeamName>
           <H3>
             {props.language === "es"
-              ? Parser("Edición y Montaje  <span></span> Manuela Piña")
-              : Parser(
-                  "Video Editing & Post production <span></span> Manuela Piña"
-                )}
+              ? Parser("Diseño y Programación ")
+              : Parser("Design & Programming")}
           </H3>
-          <H3>
-            {props.language === "es"
-              ? Parser("Diseñoy Programación <span></span>  Fabián Andrade")
-              : Parser("Design & Programming <span></span> Fabián Andrade")}
-          </H3>
+          <TeamName> Fabián Andrade</TeamName>
 
           <H3>
-            {props.language === "es"
-              ? Parser("Sonido <span></span> Carlos Arias")
-              : Parser("Sound  <span></span> Carlos Arias")}
+            {props.language === "es" ? Parser("Sonido") : Parser("Sound")}
           </H3>
+          <TeamName>Carlos Arias</TeamName>
 
           <H3>
-            {props.language === "es"
-              ? Parser("Música <span></span> Rodrigo Aros")
-              : Parser("Music  <span></span> Rodrigo Aros")}
+            {props.language === "es" ? Parser("Música") : Parser("Music")}
           </H3>
-
-          {/* <H2>{language === "es" ? "ARTISTAS:" : "ARTISTS:"}</H2>
-          <H2>
-            <ArtistUl>
-              <ArtistList>Alejandro Siña</ArtistList>
-              <ArtistList>Claudio Román</ArtistList>
-              <ArtistList>Elsa Bolívar</ArtistList>
-              <ArtistList>Federico Assler</ArtistList>
-              <ArtistList> Miguel Cosgrove</ArtistList>
-              <ArtistList> Paz Olea </ArtistList>
-              <ArtistList> Ricardo Yrarrázaval</ArtistList>
-              <ArtistList> Robinson Mora</ArtistList>
-              <ArtistList> Sergio Berthoud</ArtistList>
-            </ArtistUl>
-          </H2> */}
+          <TeamName> Rodrigo Aros</TeamName>
+          <H3>
+            {props.language === "es"
+              ? Parser("Asesoría visual")
+              : Parser("Visual consultant")}
+          </H3>
+          <TeamName>Micchela Messone</TeamName>
         </TextHolder>
       </TeamParts>
       <div />

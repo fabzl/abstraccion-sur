@@ -63,7 +63,7 @@ const Loader = props => {
   `;
   return (
     <LoaderContent>
-      <img src={Triangulo} alt="triangulo" />
+      {/* <img src={Triangulo} alt="triangulo" />
       <img src={Linea} alt="linea" />
       <img src={A01} alt="a" />
       <img src={B02} alt="b" />
@@ -78,7 +78,7 @@ const Loader = props => {
       <img src={N11} alt="n" />
       <img src={S12} alt="s" />
       <img src={U13} alt="u" />
-      <img src={R14} alt="r" />
+      <img src={R14} alt="r" /> */}
     </LoaderContent>
   );
 };

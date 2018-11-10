@@ -58,7 +58,7 @@ const PlayVideoBox = styled.div`
 const CloseButton = styled.div`
   position: fixed;
   right: 2rem;
-  cursor:pointer;
+  cursor: pointer;
 
   top: 2rem;
   z-index: 4030;
